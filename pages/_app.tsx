@@ -8,6 +8,7 @@ import "../assets/styles/globals.css";
 const MobileWrapper = styled.a`
   width: 100%;
   height: 100%;
+  background-color: #fcfcff;
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {

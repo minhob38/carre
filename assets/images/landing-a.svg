@@ -1,0 +1,20 @@
+<svg width="85" height="107" viewBox="0 0 85 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M57.9546 71.692H77.2728" stroke="#8BC248" stroke-width="2.57576" stroke-linecap="round"/>
+<path d="M8.58545 9.44452H50.2269" stroke="#7552DE" stroke-width="2.57576" stroke-linecap="round"/>
+<path d="M8.58545 18.4597H50.2269" stroke="#EFD051" stroke-width="2.57576" stroke-linecap="round"/>
+<path d="M57.9546 80.2778H77.2728" stroke="#EC554A" stroke-width="2.57576" stroke-linecap="round"/>
+<path d="M57.9546 88.8637H77.2728" stroke="#64B5F6" stroke-width="2.57576" stroke-linecap="round"/>
+<path d="M57.9546 97.4494H77.2728" stroke="#F4D836" stroke-width="2.57576" stroke-linecap="round"/>
+<path d="M13.9521 35.2021C13.9521 34.3723 14.6248 33.6996 15.4547 33.6996H21.0355C21.8653 33.6996 22.538 34.3723 22.538 35.2021V59.6718C22.538 60.5016 21.8653 61.1743 21.0355 61.1743H15.4547C14.6248 61.1743 13.9521 60.5016 13.9521 59.6718V35.2021Z" stroke="#F4D836" stroke-width="2.14647"/>
+<rect x="29.8354" y="43.5733" width="8.58586" height="17.601" rx="1.50253" stroke="#8BC248" stroke-width="2.14647"/>
+<rect x="46.5776" y="33.2702" width="8.58586" height="27.904" rx="1.50253" stroke="#EC554A" stroke-width="2.14647"/>
+<rect x="62.4624" y="38.4217" width="8.58586" height="22.7525" rx="1.50253" stroke="#64B5F6" stroke-width="2.14647"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.58768 84.5707C8.58768 92.8689 15.3147 99.596 23.6129 99.596C31.9111 99.596 38.6382 92.8689 38.6382 84.5707L23.6129 84.5707L23.6129 69.5455C15.3147 69.5455 8.58768 76.2725 8.58768 84.5707Z" fill="#7552DE"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M40.7832 82.4244C40.7832 74.1261 34.0562 67.3991 25.758 67.3991L25.758 82.4244L40.7832 82.4244Z" fill="#EFD051"/>
+<circle cx="51.9442" cy="71.692" r="1.71717" fill="#B4BBC5"/>
+<circle cx="51.9442" cy="80.2778" r="1.71717" fill="#B4BBC5"/>
+<circle cx="51.9442" cy="88.8637" r="1.71717" fill="#B4BBC5"/>
+<circle cx="51.9442" cy="97.4495" r="1.71717" fill="#B4BBC5"/>
+<rect x="1.28788" y="1.28788" width="82.4242" height="104.318" rx="5.58081" stroke="#B5BFCB" stroke-width="2.57576"/>
+<path d="M6.86914 60.9596H78.1318" stroke="#B4BBC5" stroke-width="2.57576" stroke-linecap="round"/>
+</svg>
