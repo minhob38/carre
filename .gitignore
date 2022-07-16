@@ -1,66 +1,41 @@
-### react
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-react-template/node_modules
-react-template/.pnp
-react-template/.pnp.js
-
-# testing
-react-template/coverage
-
-# production
-react-template/build
-
-# misc
-react-template/.DS_Store
-react-template/.env.local
-react-template/.env.development.local
-react-template/.env.test.local
-react-template/.env.production.local
-
-react-template/npm-debug.log*
-react-template/yarn-debug.log*
-react-template/yarn-error.log*
-
 ### next
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-next-template/node_modules
-next-template/.pnp
-next-template/.pnp.js
+node_modules
+.pnp
+.pnp.js
 
 # testing
-next-template/coverage
+coverage
 
 # next.js
-next-template/.next/
-next-template/out/
+.next/
+out/
 
 # production
-next-template/build
+build
 
 # misc
-next-template/.DS_Store
-next-template/*.pem
+.DS_Store
+*.pem
 
 # debug
-next-template/npm-debug.log*
-next-template/yarn-debug.log*
-next-template/yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # local env files
-next-template/.env.local
-next-template/.env.development.local
-next-template/.env.test.local
-next-template/.env.production.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
-next-template/.vercel
+.vercel
 
 # typescript
-next-template/*.tsbuildinfo
+*.tsbuildinfo
 
 ### server
 server/node_modules
