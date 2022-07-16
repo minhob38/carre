@@ -43,15 +43,16 @@ const Description = styled.div`
   white-space: pre;
 `;
 
-const InfoBoxA: React.FC = () => {
+const InfoBoxA: React.FC<{ data: any }> = ({ data }) => {
+  const { image, title, description } = data;
   return (
     <Wrapper>
       <ImageContainer>
-        <Image src={landingA} alt="landing-a" width={85} height={107} />
+        <Image src={image} alt="info-box" />
       </ImageContainer>
       <TextContainer>
-        <Title>{`검증된 데이터를 통한 \n신뢰성 있는 추천`}</Title>
-        <Description>{`구축된 데이터 베이스를 통해 \n전문 분석된 차량을 추천합니다.`}</Description>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
       </TextContainer>
     </Wrapper>
   );
