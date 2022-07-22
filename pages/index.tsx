@@ -10,6 +10,7 @@ import infoBoxAImg from '@assets/images/info-box-a.svg';
 import infoBoxCImg from '@assets/images/info-box-c.svg';
 import InfoBoxA from '@components/InfoBoxA';
 import BottomTabNavigator from '@components/BottomTabNavigator';
+import Scroll from '@components/Scroll';
 
 const A = styled.a`
   all: unset;
@@ -44,10 +45,19 @@ const InfoBoxDataC = {
 
 const Index: NextPage = () => {
   return (
-    <>
-      <InfoBoxA data={InfoBoxDataA} />
-      <InfoBoxA data={InfoBoxDataB} />
-      <InfoBoxA data={InfoBoxDataC} />
+    <div>
+      <Scroll direction="x">
+        <InfoBoxA data={InfoBoxDataA} />
+        <InfoBoxA data={InfoBoxDataB} />
+        <InfoBoxA data={InfoBoxDataC} />
+        <InfoBoxA data={InfoBoxDataC} />
+        <InfoBoxA data={InfoBoxDataC} />
+        <InfoBoxA data={InfoBoxDataC} />
+        <InfoBoxA data={InfoBoxDataC} />
+        <InfoBoxA data={InfoBoxDataC} />
+        <InfoBoxA data={InfoBoxDataC} />
+        <InfoBoxA data={InfoBoxDataC} />
+      </Scroll>
       <BottomTabNavigator />
       {/* <Home />
       <Button />
@@ -55,7 +65,7 @@ const Index: NextPage = () => {
         <A>/plane 링크 📌</A>
       </Link>
       <Link href="/train">/train 링크 📌</Link> */}
-    </>
+    </div>
   );
 };
 
