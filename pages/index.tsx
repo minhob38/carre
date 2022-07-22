@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import type { NextPage } from "next";
-import Link from "next/link";
-import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-import Image from "next/image";
-import Home from "../components/Home";
-import Button from "../components/Button";
-import infoBoxAImg from "../assets/images/info-box-a.svg";
-import infoBoxCImg from "../assets/images/info-box-c.svg";
-import InfoBoxA from "../components/InfoBoxA";
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import Image from 'next/image';
+import Home from '../components/Home';
+import Button from '../components/Button';
+import infoBoxAImg from '../assets/images/info-box-a.svg';
+import infoBoxCImg from '../assets/images/info-box-c.svg';
+import InfoBoxA from '../components/InfoBoxA';
 
 const A = styled.a`
   all: unset;
