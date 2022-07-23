@@ -89,61 +89,73 @@ const Label = styled.label`
   color: #7a7979;
 `;
 
+const YearContainer = styled.div`
+  margin: 0 35px 0 0;
+`;
+
+const GenderContainer = styled.div``;
+
 const Plane: NextPage = () => {
   return (
     <>
       <Title>나의 정보 입력</Title>
       <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
-      <div>
-        <SubTitle>출생연도</SubTitle>
-        <SelectContainer>
-          <Select>
-            <option value="1970">1970</option>
-          </Select>
-          <ArrowBox>
-            <div
-              css={css`
-                box-sizing: border-box;
-                width: 8px;
-                height: 8px;
-                border-top: 2px solid #7a7979;
-                border-right: 2px solid #7a7979;
-                transform: rotate(135deg);
-              `}
-            />
-          </ArrowBox>
-        </SelectContainer>
-      </div>
-      <div>
-        <SubTitle>성별</SubTitle>
-        <FieldSet>
-          <Label>
-            남자
-            <input
-              type="radio"
-              name="gender"
-              id="male"
-              value="male"
-              css={css`
-                all: unset;
-              `}
-              onChange={() => console.log('!!!')}
-            />
-          </Label>
-          <Label>
-            여자
-            <input
-              type="radio"
-              name="gender"
-              id="female"
-              value="female"
-              css={css`
-                all: unset;
-              `}
-              onChange={() => console.log('@@@')}
-            />
-          </Label>
-        </FieldSet>
+      <div
+        css={css`
+          display: flex;
+        `}
+      >
+        <YearContainer>
+          <SubTitle>출생연도</SubTitle>
+          <SelectContainer>
+            <Select>
+              <option value="1970">1970</option>
+            </Select>
+            <ArrowBox>
+              <div
+                css={css`
+                  box-sizing: border-box;
+                  width: 8px;
+                  height: 8px;
+                  border-top: 2px solid #7a7979;
+                  border-right: 2px solid #7a7979;
+                  transform: rotate(135deg);
+                `}
+              />
+            </ArrowBox>
+          </SelectContainer>
+        </YearContainer>
+        <GenderContainer>
+          <SubTitle>성별</SubTitle>
+          <FieldSet>
+            <Label>
+              남자
+              <input
+                type="radio"
+                name="gender"
+                id="male"
+                value="male"
+                css={css`
+                  all: unset;
+                `}
+                onChange={() => console.log('!!!')}
+              />
+            </Label>
+            <Label>
+              여자
+              <input
+                type="radio"
+                name="gender"
+                id="female"
+                value="female"
+                css={css`
+                  all: unset;
+                `}
+                onChange={() => console.log('@@@')}
+              />
+            </Label>
+          </FieldSet>
+        </GenderContainer>
       </div>
       <SubTitle>용도</SubTitle>
       <select name="year">
