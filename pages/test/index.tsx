@@ -228,10 +228,3 @@ const Test: NextPage = () => {
 };
 
 export default Test;
-{
-  /* <select name="year">
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-      </select> */
-}
