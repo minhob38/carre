@@ -132,7 +132,6 @@ const Test: NextPage = () => {
               title="여자"
               type="radio"
               name="gender"
-              id="female"
               value="female"
               onChange={() => console.log('여자')}
             />
@@ -140,7 +139,6 @@ const Test: NextPage = () => {
               title="남자"
               type="radio"
               name="gender"
-              id="male"
               value="male"
               onChange={() => console.log('남자')}
             />
@@ -149,22 +147,47 @@ const Test: NextPage = () => {
       </div>
       <div>
         <SubTitle>용도</SubTitle>
-        <div>
-          <label>
-            <input type="checkbox" />
-          </label>
+        <div
+          css={css`
+            display: flex;
+            flex-flow: row wrap;
+          `}
+        >
+          <InputLabel
+            title="출퇴근용"
+            type="checkbox"
+            name="purpose"
+            value="work-commuting"
+            onChange={() => console.log('출퇴근용')}
+          />
+          <InputLabel
+            title="캠핑/레저"
+            type="checkbox"
+            name="purpose"
+            value="outdoor"
+            onChange={() => console.log('캠핑/레저')}
+          />
+          <InputLabel
+            title="등/하교"
+            type="checkbox"
+            name="purpose"
+            value="school-commuting"
+            onChange={() => console.log('등하교')}
+          />
+          <InputLabel
+            title="영업"
+            type="checkbox"
+            name="purpose"
+            value="sales"
+            onChange={() => console.log('영업')}
+          />
         </div>
       </div>
-      <select name="year">
+      {/* <select name="year">
         <option value="1970">1970</option>
         <option value="1970">1970</option>
         <option value="1970">1970</option>
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-      </select>
+      </select> */}
     </>
   );
 };
