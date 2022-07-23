@@ -130,7 +130,6 @@ const Test: NextPage = () => {
                 type: 'radio',
                 name: 'gender',
                 value: 'female',
-                onChange: () => console.log('여자'),
               }}
               style={{
                 width: '100px',
@@ -144,7 +143,6 @@ const Test: NextPage = () => {
                 type: 'radio',
                 name: 'gender',
                 value: 'male',
-                onChange: () => console.log('남자'),
               }}
               style={{
                 width: '100px',
@@ -170,7 +168,6 @@ const Test: NextPage = () => {
               type: 'checkbox',
               name: 'purpose',
               value: 'work-commuting',
-              onChange: () => console.log('남자'),
             }}
             style={{
               width: '163px',
@@ -184,7 +181,6 @@ const Test: NextPage = () => {
               type: 'checkbox',
               name: 'purpose',
               value: 'outdoor',
-              onChange: () => console.log('캠핑/레저'),
             }}
             style={{
               width: '163px',
@@ -198,7 +194,6 @@ const Test: NextPage = () => {
               type: 'checkbox',
               name: 'purpose',
               value: 'school-commuting',
-              onChange: () => console.log('등하교'),
             }}
             style={{
               width: '163px',
@@ -213,7 +208,6 @@ const Test: NextPage = () => {
               type: 'checkbox',
               name: 'purpose',
               value: 'sales',
-              onChange: () => console.log('영업'),
             }}
             style={{
               width: '163px',

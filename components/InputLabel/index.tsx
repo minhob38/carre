@@ -12,9 +12,7 @@ interface IProps {
     title: string;
     type: 'radio' | 'checkbox';
     name: string;
-    id?: string;
     value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
   };
 
   style: Omit<IStyleProps, 'checked'>;
