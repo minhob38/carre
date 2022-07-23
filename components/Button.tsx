@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
-import { useDispatch } from "react-redux";
-import { css } from "@emotion/react";
-import { actions } from "../store/slices/appSlice";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { css } from '@emotion/react';
+import { actions } from '../store/slices/appSlice';
 
 const buttonCss = css`
   all: unset;

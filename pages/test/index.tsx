@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
-import kfx from '../../assets/images/kfx.jpeg';
+import InputLabel from '@components/InputLabel';
 
 const CSS = css`
   font: normal normal 16px / 30px Noto Sans CJK KR;
@@ -95,7 +95,7 @@ const YearContainer = styled.div`
 
 const GenderContainer = styled.div``;
 
-const Plane: NextPage = () => {
+const Test: NextPage = () => {
   return (
     <>
       <Title>나의 정보 입력</Title>
@@ -128,36 +128,33 @@ const Plane: NextPage = () => {
         <GenderContainer>
           <SubTitle>성별</SubTitle>
           <FieldSet>
-            <Label>
-              남자
-              <input
-                type="radio"
-                name="gender"
-                id="male"
-                value="male"
-                css={css`
-                  all: unset;
-                `}
-                onChange={() => console.log('!!!')}
-              />
-            </Label>
-            <Label>
-              여자
-              <input
-                type="radio"
-                name="gender"
-                id="female"
-                value="female"
-                css={css`
-                  all: unset;
-                `}
-                onChange={() => console.log('@@@')}
-              />
-            </Label>
+            <InputLabel
+              title="여자"
+              type="radio"
+              name="gender"
+              id="female"
+              value="female"
+              onChange={() => console.log('여자')}
+            />
+            <InputLabel
+              title="남자"
+              type="radio"
+              name="gender"
+              id="male"
+              value="male"
+              onChange={() => console.log('남자')}
+            />
           </FieldSet>
         </GenderContainer>
       </div>
-      <SubTitle>용도</SubTitle>
+      <div>
+        <SubTitle>용도</SubTitle>
+        <div>
+          <label>
+            <input type="checkbox" />
+          </label>
+        </div>
+      </div>
       <select name="year">
         <option value="1970">1970</option>
         <option value="1970">1970</option>
@@ -172,4 +169,4 @@ const Plane: NextPage = () => {
   );
 };
 
-export default Plane;
+export default Test;
