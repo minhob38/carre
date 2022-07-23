@@ -31,6 +31,7 @@ const Title = styled.div`
 `;
 
 const Description = styled.div`
+  margin: 0 0 35px 0;
   font: normal 400 14.5px / 20px roboto;
   color: rgba(65, 65, 65, 0.8);
 `;
@@ -70,34 +71,23 @@ const ArrowBox = styled.div`
   width: 40px;
 `;
 
-const FieldSet = styled.fieldset`
-  display: flex;
-  width: 215px;
-  justify-content: space-between;
-`;
-
-const Label = styled.label`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 48px;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
-  font: normal 500 16.5px / 23px roboto;
-  color: #7a7979;
-`;
-
 const YearContainer = styled.div`
   margin: 0 35px 0 0;
 `;
 
 const GenderContainer = styled.div``;
 
+const PurposeContainer = styled.div`
+  margin: 40px 0 0 0;
+`;
+
 const Test: NextPage = () => {
   return (
-    <>
+    <div
+      css={css`
+        margin: 0 0 0 20px;
+      `}
+    >
       <Title>나의 정보 입력</Title>
       <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
       <div
@@ -127,7 +117,13 @@ const Test: NextPage = () => {
         </YearContainer>
         <GenderContainer>
           <SubTitle>성별</SubTitle>
-          <FieldSet>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row nowrap;
+              gap: 0 15px;
+            `}
+          >
             <InputLabel
               input={{
                 title: '여자',
@@ -156,15 +152,16 @@ const Test: NextPage = () => {
                 font: 'normal 500 16.5px / 23px roboto',
               }}
             />
-          </FieldSet>
+          </div>
         </GenderContainer>
       </div>
-      <div>
+      <PurposeContainer>
         <SubTitle>용도</SubTitle>
         <div
           css={css`
             display: flex;
             flex-flow: row wrap;
+            gap: 19px 24px;
           `}
         >
           <InputLabel
@@ -225,14 +222,16 @@ const Test: NextPage = () => {
             }}
           />
         </div>
-      </div>
-      {/* <select name="year">
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-        <option value="1970">1970</option>
-      </select> */}
-    </>
+      </PurposeContainer>
+    </div>
   );
 };
 
 export default Test;
+{
+  /* <select name="year">
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+      </select> */
+}
