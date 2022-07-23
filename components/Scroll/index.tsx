@@ -1,11 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import Image from 'next/image';
-import bookmarkImage from '@assets/images/bookmark.svg';
-import historyImage from '@assets/images/history.svg';
-import myImage from '@assets/images/my.svg';
-import testImage from '@assets/images/test.svg';
 
 interface IProps {
   direction: 'x' | 'y';

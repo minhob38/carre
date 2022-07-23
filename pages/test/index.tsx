@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import InputLabel from '@components/InputLabel';
 import NextButton from '@components/NextButton';
+import Canvas from '@components/Canvas';
 
 const Title = styled.div`
   margin: 0 0 5px 0;
@@ -65,11 +66,7 @@ const PurposeContainer = styled.div`
 const Test: NextPage = () => {
   return (
     <>
-      <div
-        css={css`
-          margin: 0 0 0 20px;
-        `}
-      >
+      <Canvas>
         <Title>나의 정보 입력</Title>
         <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
         <div
@@ -198,7 +195,7 @@ const Test: NextPage = () => {
             />
           </div>
         </PurposeContainer>
-      </div>
+      </Canvas>
       <NextButton />
     </>
   );
