@@ -129,18 +129,32 @@ const Test: NextPage = () => {
           <SubTitle>성별</SubTitle>
           <FieldSet>
             <InputLabel
-              title="여자"
-              type="radio"
-              name="gender"
-              value="female"
-              onChange={() => console.log('여자')}
+              input={{
+                title: '여자',
+                type: 'radio',
+                name: 'gender',
+                value: 'female',
+                onChange: () => console.log('여자'),
+              }}
+              style={{
+                width: '100px',
+                height: '48px',
+                font: 'normal 500 16.5px / 23px roboto',
+              }}
             />
             <InputLabel
-              title="남자"
-              type="radio"
-              name="gender"
-              value="male"
-              onChange={() => console.log('남자')}
+              input={{
+                title: '남자',
+                type: 'radio',
+                name: 'gender',
+                value: 'male',
+                onChange: () => console.log('남자'),
+              }}
+              style={{
+                width: '100px',
+                height: '48px',
+                font: 'normal 500 16.5px / 23px roboto',
+              }}
             />
           </FieldSet>
         </GenderContainer>
@@ -154,32 +168,61 @@ const Test: NextPage = () => {
           `}
         >
           <InputLabel
-            title="출퇴근용"
-            type="checkbox"
-            name="purpose"
-            value="work-commuting"
-            onChange={() => console.log('출퇴근용')}
+            input={{
+              title: '출퇴근용',
+              type: 'checkbox',
+              name: 'purpose',
+              value: 'work-commuting',
+              onChange: () => console.log('남자'),
+            }}
+            style={{
+              width: '163px',
+              height: '48px',
+              font: 'normal 400 16.5px / 23px roboto',
+            }}
           />
           <InputLabel
-            title="캠핑/레저"
-            type="checkbox"
-            name="purpose"
-            value="outdoor"
-            onChange={() => console.log('캠핑/레저')}
+            input={{
+              title: '캠핑/레저',
+              type: 'checkbox',
+              name: 'purpose',
+              value: 'outdoor',
+              onChange: () => console.log('캠핑/레저'),
+            }}
+            style={{
+              width: '163px',
+              height: '48px',
+              font: 'normal 400 16.5px / 23px roboto',
+            }}
           />
           <InputLabel
-            title="등/하교"
-            type="checkbox"
-            name="purpose"
-            value="school-commuting"
-            onChange={() => console.log('등하교')}
+            input={{
+              title: '등/하교',
+              type: 'checkbox',
+              name: 'purpose',
+              value: 'school-commuting',
+              onChange: () => console.log('등하교'),
+            }}
+            style={{
+              width: '163px',
+              height: '48px',
+              font: 'normal 400 16.5px / 23px roboto',
+            }}
           />
+
           <InputLabel
-            title="영업"
-            type="checkbox"
-            name="purpose"
-            value="sales"
-            onChange={() => console.log('영업')}
+            input={{
+              title: '영업',
+              type: 'checkbox',
+              name: 'purpose',
+              value: 'sales',
+              onChange: () => console.log('영업'),
+            }}
+            style={{
+              width: '163px',
+              height: '48px',
+              font: 'normal 400 16.5px / 23px roboto',
+            }}
           />
         </div>
       </div>
