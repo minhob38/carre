@@ -1,12 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import Image from 'next/image';
-import Home from '@components/Home';
-import Button from '@components/Button';
 import infoBoxAImg from '@assets/images/info-box-a.svg';
+import infoBoxBImg from '@assets/images/info-box-b.svg';
 import infoBoxCImg from '@assets/images/info-box-c.svg';
 import InfoBoxA from '@components/InfoBoxA';
 import BottomTabNavigator from '@components/BottomTabNavigator';
@@ -32,7 +28,7 @@ const InfoBoxDataA = {
 };
 
 const InfoBoxDataB = {
-  image: infoBoxAImg,
+  image: infoBoxBImg,
   title: `고객의 우선순위 및 \n디테일한 취향 반영`,
   description: `840여개 고객 유형을 통해 \n나의 우선순위와 취향을 반영합니다.`,
 };
@@ -49,13 +45,6 @@ const Index: NextPage = () => {
       <Scroll direction="x">
         <InfoBoxA data={InfoBoxDataA} />
         <InfoBoxA data={InfoBoxDataB} />
-        <InfoBoxA data={InfoBoxDataC} />
-        <InfoBoxA data={InfoBoxDataC} />
-        <InfoBoxA data={InfoBoxDataC} />
-        <InfoBoxA data={InfoBoxDataC} />
-        <InfoBoxA data={InfoBoxDataC} />
-        <InfoBoxA data={InfoBoxDataC} />
-        <InfoBoxA data={InfoBoxDataC} />
         <InfoBoxA data={InfoBoxDataC} />
       </Scroll>
       <BottomTabNavigator />
