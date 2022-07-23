@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import styled from "@emotion/styled";
-import { wrapper } from "../store";
-import "../assets/styles/globals.css";
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import styled from '@emotion/styled';
+import { wrapper } from '../store';
+import '../assets/styles/globals.css';
 
-const MobileWrapper = styled.a`
+const MobileWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: #fcfcff;
