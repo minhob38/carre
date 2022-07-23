@@ -1,20 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-import Image from "next/image";
-import landingA from "../assets/images/landing-a.svg";
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import Image from 'next/image';
+import landingA from '../assets/images/landing-a.svg';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 0 0 0 20px;
+  margin: 0 0 20px 20px;
   width: calc(100% - 20px);
   height: 194px;
   background: #ffffff;
   box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.04);
   border-radius: 20px 0px 0px 20px;
   filter: drop-shadow(0px 2px 13px rgba(122, 93, 232, 0.04));
+  &:hover {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  }
+  cursor: pointer;
 `;
 
 const ImageContainer = styled.div`

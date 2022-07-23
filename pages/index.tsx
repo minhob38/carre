@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import infoBoxAImg from '@assets/images/info-box-a.svg';
 import infoBoxBImg from '@assets/images/info-box-b.svg';
 import infoBoxCImg from '@assets/images/info-box-c.svg';
