@@ -24,73 +24,100 @@ const A = styled.a`
   cursor: pointer;
 `;
 
+const Title = styled.div`
+  margin: 0 0 5px 0;
+  font: normal 700 21px / 28px roboto;
+  color: #515151;
+`;
+
+const Description = styled.div`
+  font: normal 400 14.5px / 20px roboto;
+  color: rgba(65, 65, 65, 0.8);
+`;
+
+const SubTitle = styled.div`
+  margin: 0 0 12px 0;
+  font: normal 600 17px / 26px roboto;
+  color: #515151;
+`;
+
+const SelectContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 48px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
+`;
+
+const Select = styled.select`
+  all: unset;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+  font: normal 500 15px / 21px roboto;
+  color: #7a7979;
+`;
+
+const ArrowBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+`;
+
+const FieldSet = styled.fieldset`
+  display: flex;
+  width: 215px;
+  justify-content: space-between;
+`;
+
+const Label = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 48px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
+  font: normal 500 16.5px / 23px roboto;
+  color: #7a7979;
+`;
+
 const Plane: NextPage = () => {
   return (
     <>
-      <div
-        css={css`
-          font: normal 700 21px / 28px roboto;
-          color: #515151;
-          margin: 0 0 5px 0;
-        `}
-      >
-        나의 정보 입력
-      </div>
-      <div
-        css={css`
-          font: normal 400 14.5px / 20px roboto;
-          color: rgba(65, 65, 65, 0.8);
-        `}
-      >
-        차량 구매에 필요한 나의 정보를 입력해요
+      <Title>나의 정보 입력</Title>
+      <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
+      <div>
+        <SubTitle>출생연도</SubTitle>
+        <SelectContainer>
+          <Select>
+            <option value="1970">1970</option>
+          </Select>
+          <ArrowBox>
+            <div
+              css={css`
+                box-sizing: border-box;
+                width: 8px;
+                height: 8px;
+                border-top: 2px solid #7a7979;
+                border-right: 2px solid #7a7979;
+                transform: rotate(135deg);
+              `}
+            />
+          </ArrowBox>
+        </SelectContainer>
       </div>
       <div>
-        <div
-          css={css`
-            font: normal 600 17px / 26px roboto;
-            color: #515151;
-          `}
-        >
-          출생연도
-        </div>
-        <select name="year">
-          <option value="1970">1970</option>
-          <option value="1971">1971</option>
-          <option value="1972">1972</option>
-          <option value="1973">1973</option>
-        </select>
-      </div>
-      <div>
-        <div
-          css={css`
-            margin: 0 0 12px 0;
-            font: normal 600 17px / 26px roboto;
-            color: #515151;
-          `}
-        >
-          성별
-        </div>
-        <fieldset
-          css={css`
-            display: flex;
-            width: 215px;
-            justify-content: space-between;
-          `}
-        >
-          <label
-            css={css`
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: 100px;
-              height: 48px;
-              border-radius: 20px;
-              background: #ffffff;
-              box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
-              font: normal 500 16.5px / 23px roboto;
-              color: #7a7979;
-            `}
-          >
+        <SubTitle>성별</SubTitle>
+        <FieldSet>
+          <Label>
             남자
             <input
               type="radio"
@@ -102,24 +129,8 @@ const Plane: NextPage = () => {
               `}
               onChange={() => console.log('!!!')}
             />
-          </label>
-          <label
-            css={css`
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: 100px;
-              height: 48px;
-              border-radius: 20px;
-              background: #ffffff;
-              box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
-              font: normal 500 16.5px / 23px roboto;
-              color: #7a7979;
-              &:checked {
-                background-color: yellow;
-              }
-            `}
-          >
+          </Label>
+          <Label>
             여자
             <input
               type="radio"
@@ -131,10 +142,20 @@ const Plane: NextPage = () => {
               `}
               onChange={() => console.log('@@@')}
             />
-          </label>
-        </fieldset>
+          </Label>
+        </FieldSet>
       </div>
-      <div>용도</div>
+      <SubTitle>용도</SubTitle>
+      <select name="year">
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+        <option value="1970">1970</option>
+      </select>
     </>
   );
 };
