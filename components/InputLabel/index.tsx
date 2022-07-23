@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import type { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -42,8 +41,8 @@ const Wrapper = styled.label`
     props.checked ? 'rgba(122, 93, 232, 1)' : '#7a7979'};
 `;
 
-const InputLabel: NextPage<IProps> = ({ input, style }) => {
-  const { title, type, name, id, value, onChange } = input;
+const InputLabel: React.FC<IProps> = ({ input, style }) => {
+  const { title, type, name, value } = input;
   const { width, height, font } = style;
 
   const dispatch = useTypedDispatch();
@@ -86,7 +85,6 @@ const InputLabel: NextPage<IProps> = ({ input, style }) => {
       <input
         type={type}
         name={name}
-        id={id}
         value={value}
         css={css`
           all: unset;
