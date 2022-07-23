@@ -5,9 +5,11 @@ import styled from '@emotion/styled';
 import InputLabel from '@components/InputLabel';
 import NextButton from '@components/NextButton';
 import Canvas from '@components/Canvas';
+import Header from '@components/Header';
+import Arrow from '@components/Arrow';
 
 const Title = styled.div`
-  margin: 0 0 5px 0;
+  margin: 12px 0 5px 0;
   font: normal 700 21px / 28px roboto;
   color: #515151;
 `;
@@ -66,6 +68,7 @@ const PurposeContainer = styled.div`
 const Test: NextPage = () => {
   return (
     <>
+      <Header />
       <Canvas>
         <Title>나의 정보 입력</Title>
         <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
@@ -81,15 +84,12 @@ const Test: NextPage = () => {
                 <option value="1970">1970</option>
               </Select>
               <ArrowBox>
-                <div
-                  css={css`
-                    box-sizing: border-box;
-                    width: 8px;
-                    height: 8px;
-                    border-top: 2px solid #7a7979;
-                    border-right: 2px solid #7a7979;
-                    transform: rotate(135deg);
-                  `}
+                <Arrow
+                  length="8px"
+                  width="2px"
+                  color="#7a7979"
+                  direction="bottom"
+                  calibration="2.5px"
                 />
               </ArrowBox>
             </SelectContainer>
