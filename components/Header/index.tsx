@@ -3,6 +3,9 @@ import styled from '@emotion/styled';
 import Arrow from '@components/Arrow';
 import { css } from '@emotion/react';
 
+const STAGE_COUNT = 5;
+const STAGE = 4;
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -10,6 +13,29 @@ const Wrapper = styled.div`
   height: 38px;
   padding: 0 0 0 20px;
   position: relative;
+`;
+
+const ProgressBar = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 77px - 77px);
+  height: 4px;
+  background-color: #e6e3f1;
+  border-radius: 100px;
+  margin: auto;
+`;
+
+const CurrentStage = styled.div`
+  position: absolute;
+  transform: translate(calc(100% * ${STAGE - 1}), 0);
+  width: calc(100% / ${STAGE_COUNT});
+  height: 4px;
+  background-color: #a289ff;
+  border-radius: 100px;
+  margin: auto;
+  z-index: 1000;
 `;
 
 const Header: React.FC = () => {
@@ -22,19 +48,9 @@ const Header: React.FC = () => {
         direction="left"
         calibration="2.5px"
       />
-      <div
-        css={css`
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: calc(100% - 77px - 77px);
-          height: 4px;
-          background-color: #e6e3f1;
-          border-radius: 100px;
-          margin: auto;
-        `}
-      />
+      <ProgressBar>
+        <CurrentStage />
+      </ProgressBar>
     </Wrapper>
   );
 };
