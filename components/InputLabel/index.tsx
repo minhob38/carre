@@ -61,6 +61,27 @@ const InputLabel: NextPage<IProps> = ({ input, style }) => {
     }
   }, [inputState.gender, name, value, type]);
 
+  const handleChange = (ev) => {
+    if (type === 'checkbox') {
+      if (ev.target.checked) {
+        dispatch(actions.addCheckBoxItem(ev.target));
+        setChecked(true);
+        return;
+      }
+
+      dispatch(actions.deleteCheckBoxItem(ev.target));
+      setChecked(false);
+    }
+
+    if (type === 'radio') {
+      if (ev.target.checked) {
+        dispatch(actions.setRadioBoxValue(ev.target));
+        setChecked(true);
+        return;
+      }
+    }
+  };
+
   return (
     <Wrapper checked={checked} width={width} height={height} font={font}>
       {title}
@@ -72,10 +93,7 @@ const InputLabel: NextPage<IProps> = ({ input, style }) => {
         css={css`
           all: unset;
         `}
-        onChange={(ev) => {
-          dispatch(actions.changeInput(ev.target));
-          setChecked(ev.target.checked);
-        }}
+        onChange={handleChange}
         checked={checked}
       />
     </Wrapper>

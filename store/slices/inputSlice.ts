@@ -18,20 +18,32 @@ const inputSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    changeInput: (
+    setRadioBoxValue: (
       state,
       action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
     ) => {
       const { name, value } = action.payload;
-
-      if (name === 'purpose') {
-        const set = new Set(state.purpose);
-        set.add(value);
-        state.purpose = [...set];
-        return;
-      }
-
       state[name] = value;
+    },
+    addCheckBoxItem: (
+      state,
+      action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
+    ) => {
+      const { name, value, type } = action.payload;
+      const set = new Set(state.purpose);
+      set.add(value);
+      state[name] = [...set];
+      return;
+    },
+    deleteCheckBoxItem: (
+      state,
+      action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
+    ) => {
+      const { name, value, type } = action.payload;
+      const set = new Set(state.purpose);
+      set.delete(value);
+      state.purpose = [...set];
+      return;
     },
   },
 });
