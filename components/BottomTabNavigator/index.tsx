@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import Link from 'next/link';
 import Image from 'next/image';
 import bookmarkImage from '@assets/images/bookmark.svg';
 import historyImage from '@assets/images/history.svg';
@@ -35,9 +35,11 @@ const BottomTabNavigator: React.FC = () => {
   return (
     <Wrapper>
       <IconContainer>
-        <IconBox>
-          <Image src={testImage} alt="test" layout="intrinsic" width="57px" />
-        </IconBox>
+        <Link href="/test" passHref={true}>
+          <IconBox>
+            <Image src={testImage} alt="test" layout="intrinsic" width="57px" />
+          </IconBox>
+        </Link>
         <IconBox>
           <Image
             src={bookmarkImage}

@@ -1,8 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
-interface IProps {
+interface Props extends StyleProps {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+interface StyleProps {
   length: string;
   width: string;
   color: string;
@@ -14,9 +17,9 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   width: ${(props) => props.length};
   height: ${(props) => props.length};
-  border-top: ${(props: IProps) => `${props.width} solid ${props.color}`};
-  border-right: ${(props: IProps) => `${props.width} solid ${props.color}`};
-  transform: ${(props: IProps) => {
+  border-top: ${(props: StyleProps) => `${props.width} solid ${props.color}`};
+  border-right: ${(props: StyleProps) => `${props.width} solid ${props.color}`};
+  transform: ${(props: StyleProps) => {
     if (props.direction === 'left') {
       return 'rotate(225deg)';
     } else if (props.direction === 'right') {
@@ -31,7 +34,8 @@ const Wrapper = styled.div`
   left: ${(props) => props.calibration};
 `;
 
-const Arrow: React.FC<IProps> = ({
+const Arrow: React.FC<Props> = ({
+  onClick,
   length,
   width,
   color,
@@ -45,6 +49,7 @@ const Arrow: React.FC<IProps> = ({
       color={color}
       direction={direction}
       calibration={calibration}
+      onClick={onClick}
     />
   );
 };

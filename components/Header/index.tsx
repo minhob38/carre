@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import Arrow from '@components/Arrow';
-import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 
 const STAGE_COUNT = 5;
 const STAGE = 4;
@@ -39,6 +39,9 @@ const CurrentStage = styled.div`
 `;
 
 const Header: React.FC = () => {
+  const router = useRouter();
+  const handleArrorClick = () => router.back();
+
   return (
     <Wrapper>
       <Arrow
@@ -47,6 +50,7 @@ const Header: React.FC = () => {
         color="rgba(204, 210, 227, 1)"
         direction="left"
         calibration="2.5px"
+        onClick={handleArrorClick}
       />
       <ProgressBar>
         <CurrentStage />
