@@ -6,8 +6,9 @@ import InputLabel from '@components/InputLabel';
 import NextButton from '@components/NextButton';
 import Canvas from '@components/Canvas';
 import Header from '@components/Header';
-import Image from 'next/image';
+import Image from '@components/Image';
 import dollarImage from '@assets/images/dollar.svg';
+import checkImage from '@assets/images/check.svg';
 
 const Title = styled.div`
   margin: 12px 0 5px 0;
@@ -89,9 +90,7 @@ const Test: NextPage = () => {
             align-items: center;
           `}
         >
-          <ImageContainer>
-            <Image src={dollarImage} alt="dollar" layout="fill" />
-          </ImageContainer>
+          <Image src={dollarImage} alt="dollar" width="35px" height="35px" />
           <div
             css={css`
               margin: 0 0 0 9px;
@@ -113,6 +112,24 @@ const Test: NextPage = () => {
             >
               가격의 스펙트럼을 변경해요
             </div>
+          </div>
+        </div>
+        <div
+          css={css`
+            display: flex;
+            margin: 0 0 0 18px;
+          `}
+        >
+          <Image src={checkImage} alt="check" width="24px" height="24px" />
+          <div
+            css={css`
+              font: normal 400 14.5px / 20px roboto;
+              color: rgba(65, 65, 65, 0.8);
+              white-space: pre;
+              margin: 0 0 0 10px;
+            `}
+          >
+            {`이 구간에 밖에 있더라도 \n구간의 양 꼭짓점과 비슷한 차량도 함께 보기 \n(워딩 수정)`}
           </div>
         </div>
       </Canvas>
