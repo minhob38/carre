@@ -4,3 +4,4 @@ export const BLACK2 = '#4c4c4c';
 export const GRAY1 = '#999999';
 export const WHITE1 = '#ffffff';
 export const WHITE2 = '#fafafa';
+export const YELLOW1 = '#f3bc4e';

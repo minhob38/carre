@@ -32,12 +32,14 @@ const Wrapper = styled.label`
   align-items: center;
   width: ${(props: IStyleProps) => props.width};
   height: ${(props: IStyleProps) => props.height};
+  border: ${(props: IStyleProps) =>
+    props.checked
+      ? `2px solid ${colors.YELLOW1}`
+      : `2px solid ${colors.WHITE1}`};
   border-radius: 8px;
-  border: 2px solid ${colors.WHITE1};
   background-color: ${colors.WHITE1};
   font: ${(props: IStyleProps) => props.font};
-  color: ${(props: IStyleProps) =>
-    props.checked ? 'rgba(122, 93, 232, 1)' : `${colors.BLACK2}`};
+  color: ${colors.BLACK2};
 `;
 
 const InputLabel: React.FC<IProps> = ({ input, style }) => {
