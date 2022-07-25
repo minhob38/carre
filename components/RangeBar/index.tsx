@@ -5,6 +5,8 @@ import * as colors from '@constants/colors';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 
+const SIDE_MARGIN = 37;
+
 interface IProps {
   minBudgetX: number;
   maxBudgetX: number;
@@ -18,7 +20,7 @@ const Wrapper = styled.div`
 
 const Bar = styled.div`
   position: relative;
-  width: calc(100% - 37px - 37px);
+  width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
   height: 12px;
   background-color: ${colors.GRAY2};
   border-radius: 100px;
@@ -58,7 +60,9 @@ const RangeBar: React.FC = () => {
         <LeftBall
           minBudgetX={minBudgetX}
           onTouchMove={(ev) => {
-            dispatch(actions.moveMinBudgetX(ev.changedTouches[0].pageX - 37));
+            dispatch(
+              actions.moveMinBudgetX(ev.changedTouches[0].pageX - SIDE_MARGIN),
+            );
           }}
         />
         <RightBall
@@ -66,7 +70,8 @@ const RangeBar: React.FC = () => {
           onTouchMove={(ev) => {
             dispatch(
               actions.moveMaxBudgetX(
-                Math.abs(-window.innerWidth + ev.changedTouches[0].pageX) - 37,
+                Math.abs(-window.innerWidth + ev.changedTouches[0].pageX) -
+                  SIDE_MARGIN,
               ),
             );
           }}
