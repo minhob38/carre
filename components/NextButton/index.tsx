@@ -2,6 +2,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import * as colors from '@constants/colors';
+import Link from 'next/link';
+
+interface IProps {
+  path: string;
+}
 
 const Wrapper = styled.div`
   position: fixed;
@@ -17,8 +22,12 @@ const Wrapper = styled.div`
   box-shadow: 0px 4.43038px 17.7215px rgba(96, 100, 112, 0.07);
 `;
 
-const NextButton: React.FC = () => {
-  return <Wrapper>다음</Wrapper>;
+const NextButton: React.FC<IProps> = ({ path }) => {
+  return (
+    <Link href={path} passHref={true}>
+      <Wrapper>다음</Wrapper>
+    </Link>
+  );
 };
 
 export default NextButton;
