@@ -1,11 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import type { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
-import { css } from '@emotion/react';
+import React from 'react';
 import styled from '@emotion/styled';
-import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
-import { actions } from '@store/slices/inputSlice';
-import { shallowEqual } from 'react-redux';
+import * as colors from '@constants/colors';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -14,12 +10,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80px;
-  border-radius: 20px 20px 0px 0px;
-  font: 'normal 400 15.5px / 20px roboto';
+  height: 72px;
+  font: 'normal 400 20px / 32px roboto'; // TODO: 'WefontGothic(OTF)'?
   color: rgba(255, 255, 255, 0.84);
-  background-color: #1536ff;
-  opacity: 0.8;
+  background-color: ${colors.BLACK1};
   box-shadow: 0px 4.43038px 17.7215px rgba(96, 100, 112, 0.07);
 `;
 

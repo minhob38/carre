@@ -114,6 +114,27 @@ const Test: NextPage = () => {
             </div>
           </div>
         </div>
+
+        <input
+          placeholder="4000만원"
+          type="number"
+          name="min-budget"
+          css={css`
+            all: 'unset';
+            width: 107px;
+            height: 36px;
+            background: #ffffff;
+            border: 1px solid #7a5de8;
+            box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.04);
+            border-radius: 100px;
+            font: normal 500 13.5px / 18px roboto;
+            text-align: center;
+            &::placeholder {
+              color: rgba(176, 173, 173, 0.6);
+            }
+          `}
+        />
+
         <div
           css={css`
             display: flex;
@@ -133,7 +154,7 @@ const Test: NextPage = () => {
           </div>
         </div>
       </Canvas>
-      <NextButton />
+      {/* <NextButton nextPage="/test/1" /> */}
     </>
   );
 };

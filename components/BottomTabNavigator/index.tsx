@@ -35,7 +35,7 @@ const BottomTabNavigator: React.FC = () => {
   return (
     <Wrapper>
       <IconContainer>
-        <Link href="/test" passHref={true}>
+        <Link href="/test/1" passHref={true}>
           <IconBox>
             <Image src={testImage} alt="test" layout="intrinsic" width="57px" />
           </IconBox>

@@ -2,6 +2,7 @@
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 import InputLabel from '@components/InputLabel';
 import NextButton from '@components/NextButton';
 import Canvas from '@components/Canvas';
@@ -196,7 +197,9 @@ const Test: NextPage = () => {
           </div>
         </PurposeContainer>
       </Canvas>
-      <NextButton />
+      <Link href={'/page/2'} passHref={true}>
+        <NextButton />
+      </Link>
     </>
   );
 };
