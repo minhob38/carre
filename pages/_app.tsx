@@ -2,13 +2,14 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import styled from '@emotion/styled';
-import { wrapper } from '../store';
-import '../assets/styles/globals.css';
+import { wrapper } from '@store/index';
+import '@assets/styles/globals.css';
+import * as colors from '@constants/colors';
 
 const MobileWrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #fcfcff;
+  background-color: ${colors.WHITE2};
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {

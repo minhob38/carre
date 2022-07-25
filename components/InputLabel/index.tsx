@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { shallowEqual } from 'react-redux';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
-import { shallowEqual } from 'react-redux';
+import * as colors from '@constants/colors';
 
 interface IProps {
   input: {
@@ -25,20 +26,18 @@ interface IStyleProps {
 }
 
 const Wrapper = styled.label`
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${(props: IStyleProps) => props.width};
   height: ${(props: IStyleProps) => props.height};
-  border-radius: 20px;
-  border: ${(props: IStyleProps) =>
-    props.checked ? 'solid 2px rgba(122, 93, 232, 1)' : 'none'};
-  border-color: 'red';
-  background: '#ffffff';
-  box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
+  border-radius: 8px;
+  border: 2px solid ${colors.WHITE1};
+  background-color: ${colors.WHITE1};
   font: ${(props: IStyleProps) => props.font};
   color: ${(props: IStyleProps) =>
-    props.checked ? 'rgba(122, 93, 232, 1)' : '#7a7979'};
+    props.checked ? 'rgba(122, 93, 232, 1)' : `${colors.BLACK2}`};
 `;
 
 const InputLabel: React.FC<IProps> = ({ input, style }) => {

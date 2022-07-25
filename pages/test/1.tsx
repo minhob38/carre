@@ -8,62 +8,54 @@ import NextButton from '@components/NextButton';
 import Canvas from '@components/Canvas';
 import Header from '@components/Header';
 import Arrow from '@components/Arrow';
+import * as colors from '@constants/colors';
 
 const Title = styled.div`
-  margin: 12px 0 5px 0;
-  font: normal 700 21px / 28px roboto;
-  color: #515151;
+  margin: 30px 0 2px 0;
+  font: normal 700 20px / 32px roboto;
+  color: ${colors.BLACK1};
 `;
 
 const Description = styled.div`
-  margin: 0 0 35px 0;
-  font: normal 400 14.5px / 20px roboto;
-  color: rgba(65, 65, 65, 0.8);
+  margin: 0 0 30px 0;
+  font: normal 400 14px / 23px roboto;
+  color: ${colors.GRAY1};
 `;
 
 const SubTitle = styled.div`
   margin: 0 0 12px 0;
-  font: normal 600 17px / 26px roboto;
-  color: #515151;
+  font: normal 400 16px / 27px roboto;
+  color: ${colors.BLACK2};
 `;
 
 const SelectContainer = styled.div`
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
+  width: 80px;
   height: 48px;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
+  border-radius: 8px;
+  background: ${colors.WHITE1};
+  border: 2px solid ${colors.WHITE1};
 `;
 
 const Select = styled.select`
   all: unset;
   flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  text-align: right;
-  font: normal 500 15px / 21px roboto;
-  color: #7a7979;
-`;
-
-const ArrowBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
+  text-align: center;
+  font: normal 400 12px / 26px roboto;
+  color: ${colors.BLACK2};
 `;
 
 const YearContainer = styled.div`
-  margin: 0 35px 0 0;
+  margin: 0 42px 0 10px;
 `;
 
 const GenderContainer = styled.div``;
 
 const PurposeContainer = styled.div`
-  margin: 40px 0 0 0;
+  margin: 40px 0 0 10px;
 `;
 
 const Test: NextPage = () => {
@@ -84,15 +76,6 @@ const Test: NextPage = () => {
               <Select>
                 <option value="1970">1970</option>
               </Select>
-              <ArrowBox>
-                <Arrow
-                  length="8px"
-                  width="2px"
-                  color="#7a7979"
-                  direction="bottom"
-                  calibration="2.5px"
-                />
-              </ArrowBox>
             </SelectContainer>
           </YearContainer>
           <GenderContainer>
@@ -101,7 +84,7 @@ const Test: NextPage = () => {
               css={css`
                 display: flex;
                 flex-flow: row nowrap;
-                gap: 0 15px;
+                gap: 0 33px;
               `}
             >
               <InputLabel
@@ -112,9 +95,9 @@ const Test: NextPage = () => {
                   value: 'female',
                 }}
                 style={{
-                  width: '100px',
+                  width: '75px',
                   height: '48px',
-                  font: 'normal 500 16.5px / 23px roboto',
+                  font: 'normal 400 12px / 26px roboto',
                 }}
               />
               <InputLabel
@@ -125,9 +108,9 @@ const Test: NextPage = () => {
                   value: 'male',
                 }}
                 style={{
-                  width: '100px',
+                  width: '75px',
                   height: '48px',
-                  font: 'normal 500 16.5px / 23px roboto',
+                  font: 'normal 400 12px / 26px roboto',
                 }}
               />
             </div>
@@ -139,7 +122,7 @@ const Test: NextPage = () => {
             css={css`
               display: flex;
               flex-flow: row wrap;
-              gap: 19px 24px;
+              gap: 19px 12px;
             `}
           >
             <InputLabel
@@ -150,9 +133,9 @@ const Test: NextPage = () => {
                 value: 'work-commuting',
               }}
               style={{
-                width: '163px',
+                width: '159px',
                 height: '48px',
-                font: 'normal 400 16.5px / 23px roboto',
+                font: 'normal 400 12px / 26px roboto',
               }}
             />
             <InputLabel
@@ -163,9 +146,9 @@ const Test: NextPage = () => {
                 value: 'outdoor',
               }}
               style={{
-                width: '163px',
+                width: '159px',
                 height: '48px',
-                font: 'normal 400 16.5px / 23px roboto',
+                font: 'normal 400 12px / 26px roboto',
               }}
             />
             <InputLabel
@@ -176,9 +159,9 @@ const Test: NextPage = () => {
                 value: 'school-commuting',
               }}
               style={{
-                width: '163px',
+                width: '159px',
                 height: '48px',
-                font: 'normal 400 16.5px / 23px roboto',
+                font: 'normal 400 12px / 26px roboto',
               }}
             />
             <InputLabel
@@ -189,9 +172,9 @@ const Test: NextPage = () => {
                 value: 'sales',
               }}
               style={{
-                width: '163px',
+                width: '159px',
                 height: '48px',
-                font: 'normal 400 16.5px / 23px roboto',
+                font: 'normal 400 12px / 26px roboto',
               }}
             />
           </div>
