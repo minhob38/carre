@@ -9,11 +9,13 @@ interface IProps {
 const STAGE_COUNT = 3;
 
 const Wrapper = styled.div`
-  position: relative;
+  position: fixed;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  bottom: 92px;
+  transform: translate(0, -50%);
 `;
 
 const Bar = styled.div`
