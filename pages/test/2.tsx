@@ -1,31 +1,40 @@
 /** @jsxImportSource @emotion/react */
+import { useState } from 'react';
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import InputLabel from '@components/InputLabel';
 import NextButton from '@components/NextButton';
+import ProgressBar from '@components/ProgressBar';
 import Canvas from '@components/Canvas';
 import Header from '@components/Header';
 import Image from '@components/Image';
-import dollarImage from '@assets/images/dollar.svg';
 import checkImage from '@assets/images/check.svg';
+import * as colors from '@constants/colors';
+import RangeBar from '@components/RangeBar';
 
 const Title = styled.div`
-  margin: 12px 0 5px 0;
-  font: normal 700 21px / 28px roboto;
-  color: #515151;
+  margin: 30px 0 2px 0;
+  font: normal 700 20px / 32px roboto;
+  color: ${colors.BLACK1};
 `;
 
 const Description = styled.div`
-  margin: 0 0 35px 0;
-  font: normal 400 14.5px / 20px roboto;
-  color: rgba(65, 65, 65, 0.8);
+  margin: 0 0 20px 0;
+  font: normal 400 14px / 23px roboto;
+  color: ${colors.GRAY1};
 `;
 
 const SubTitle = styled.div`
-  margin: 0 0 12px 0;
-  font: normal 600 17px / 26px roboto;
-  color: #515151;
+  margin: 0;
+  font: normal 400 16px / 27px roboto;
+  color: ${colors.BLACK2};
+`;
+
+const SubDescription = styled.div`
+  margin: 0 0 30px 0;
+  font: normal 400 12px / 20px roboto;
+  color: ${colors.GRAY1};
 `;
 
 const SelectContainer = styled.div`
@@ -77,44 +86,17 @@ const ImageContainer = styled.div`
 `;
 
 const Test: NextPage = () => {
+  const [touchBudgetX, setTouchBudgetX] = useState<number>(0);
+  const [budgetX, setBudgetX] = useState<number>(55);
+  console.log('render');
   return (
     <>
-      <Header />
+      <Header title="나의 정보 입력" />
       <Canvas>
         <Title>나의 구매 필수 조건 입력</Title>
         <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>
-
-        <div
-          css={css`
-            display: flex;
-            align-items: center;
-          `}
-        >
-          <Image src={dollarImage} alt="dollar" width="35px" height="35px" />
-          <div
-            css={css`
-              margin: 0 0 0 9px;
-            `}
-          >
-            <div
-              css={css`
-                font: normal 700 17px / 23px roboto;
-                color: #515151;
-              `}
-            >
-              가격설정
-            </div>
-            <div
-              css={css`
-                font: normal 400 11.5px / 16px roboto;
-                color: #8a99b5;
-              `}
-            >
-              가격의 스펙트럼을 변경해요
-            </div>
-          </div>
-        </div>
-
+        <SubTitle>가격설정</SubTitle>
+        <SubDescription>가격의 스펙트럼을 변경해요</SubDescription>
         <input
           placeholder="4000만원"
           type="number"
@@ -154,7 +136,9 @@ const Test: NextPage = () => {
           </div>
         </div>
       </Canvas>
-      {/* <NextButton nextPage="/test/1" /> */}
+      <RangeBar />
+      <ProgressBar stage={2} />
+      <NextButton path={'/test/3'} />
     </>
   );
 };

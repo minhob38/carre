@@ -6,3 +6,4 @@ export const GRAY2 = '#f2f2f2';
 export const WHITE1 = '#ffffff';
 export const WHITE2 = '#fafafa';
 export const YELLOW1 = '#f3bc4e';
+export const YELLOW2 = '#e4813a';

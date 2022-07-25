@@ -184,21 +184,7 @@ const Test: NextPage = () => {
           </div>
         </PurposeContainer>
       </Canvas>
-      {/* <div
-        css={css`
-          position: fixed;
-          bottom: 50px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 47px;
-          width: 100%;
-          bottom: 72px;
-          left: 0;
-        `}
-      > */}
       <ProgressBar stage={1} />
-      {/* </div> */}
       <NextButton path={'/test/2'} />
     </div>
   );
