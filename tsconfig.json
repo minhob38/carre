@@ -21,6 +21,7 @@
       "@assets/*": ["assets/*"],
       "@store/*": ["store/*"],
       "@hooks/*": ["hooks/*"],
+      "@constants/*": ["constants/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
