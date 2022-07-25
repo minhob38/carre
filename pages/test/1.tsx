@@ -8,6 +8,7 @@ import NextButton from '@components/NextButton';
 import Canvas from '@components/Canvas';
 import Header from '@components/Header';
 import Arrow from '@components/Arrow';
+import ProgressBar from '@components/ProgressBar';
 import * as colors from '@constants/colors';
 
 const Title = styled.div`
@@ -180,6 +181,7 @@ const Test: NextPage = () => {
           </div>
         </PurposeContainer>
       </Canvas>
+      <ProgressBar stage={2} />
       <Link href={'/page/2'} passHref={true}>
         <NextButton />
       </Link>
