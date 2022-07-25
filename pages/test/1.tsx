@@ -60,7 +60,11 @@ const PurposeContainer = styled.div`
 
 const Test: NextPage = () => {
   return (
-    <>
+    <div
+      css={css`
+        position: relative;
+      `}
+    >
       <Header title="나의 정보 입력" />
       <Canvas>
         <Title>나의 정보 입력</Title>
@@ -180,9 +184,23 @@ const Test: NextPage = () => {
           </div>
         </PurposeContainer>
       </Canvas>
-      <ProgressBar stage={1} />
+      <div
+        css={css`
+          position: fixed;
+          bottom: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 47px;
+          width: 100%;
+          bottom: 72px;
+          left: 0;
+        `}
+      >
+        <ProgressBar stage={1} />
+      </div>
       <NextButton path={'/test/2'} />
-    </>
+    </div>
   );
 };
 
