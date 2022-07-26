@@ -6,8 +6,8 @@ interface IState {
   year: string | null;
   gender: string | null;
   purpose: string[];
-  minBudgetX: number;
-  maxBudgetX: number;
+  minBudgetOffsetX: number;
+  maxBudgetOffsetX: number;
 }
 
 const initialState: IState = {
@@ -15,8 +15,8 @@ const initialState: IState = {
   gender: null,
   purpose: [],
   /* budger range bar 안에 있는 ball의 초기 위치*/
-  minBudgetX: 55,
-  maxBudgetX: 55,
+  minBudgetOffsetX: 55,
+  maxBudgetOffsetX: 55,
 };
 
 const inputSlice = createSlice({
@@ -51,13 +51,13 @@ const inputSlice = createSlice({
       return;
     },
     moveMinBudgetX: (state, action: PayloadAction<number>) => {
-      const minBudgetX = action.payload;
-      state.minBudgetX = minBudgetX;
+      const minBudgetOffsetX = action.payload;
+      state.minBudgetOffsetX = minBudgetOffsetX;
       return;
     },
     moveMaxBudgetX: (state, action: PayloadAction<number>) => {
-      const maxBudgetX = action.payload;
-      state.maxBudgetX = maxBudgetX;
+      const maxBudgetOffsetX = action.payload;
+      state.maxBudgetOffsetX = maxBudgetOffsetX;
       return;
     },
   },

@@ -11,7 +11,7 @@ import Header from '@components/Header';
 import Image from '@components/Image';
 import checkImage from '@assets/images/check.svg';
 import * as colors from '@constants/colors';
-import RangeBar from '@components/RangeBar';
+import Budget from '@components/Budget';
 
 const Title = styled.div`
   margin: 30px 0 2px 0;
@@ -97,25 +97,6 @@ const Test: NextPage = () => {
         <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>
         <SubTitle>가격설정</SubTitle>
         <SubDescription>가격의 스펙트럼을 변경해요</SubDescription>
-        <input
-          placeholder="4000만원"
-          type="number"
-          name="min-budget"
-          css={css`
-            all: 'unset';
-            width: 107px;
-            height: 36px;
-            background: #ffffff;
-            border: 1px solid #7a5de8;
-            box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.04);
-            border-radius: 100px;
-            font: normal 500 13.5px / 18px roboto;
-            text-align: center;
-            &::placeholder {
-              color: rgba(176, 173, 173, 0.6);
-            }
-          `}
-        />
 
         <div
           css={css`
@@ -123,8 +104,8 @@ const Test: NextPage = () => {
             margin: 0 0 0 18px;
           `}
         >
-          <Image src={checkImage} alt="check" width="24px" height="24px" />
-          <div
+          {/* <Image src={checkImage} alt="check" width="24px" height="24px" /> */}
+          {/* <div
             css={css`
               font: normal 400 14.5px / 20px roboto;
               color: rgba(65, 65, 65, 0.8);
@@ -133,10 +114,10 @@ const Test: NextPage = () => {
             `}
           >
             {`이 구간에 밖에 있더라도 \n구간의 양 꼭짓점과 비슷한 차량도 함께 보기 \n(워딩 수정)`}
-          </div>
+          </div> */}
         </div>
+        <Budget />
       </Canvas>
-      <RangeBar />
       <ProgressBar stage={2} />
       <NextButton path={'/test/3'} />
     </>
