@@ -14,6 +14,7 @@ const initialState: IState = {
   year: null,
   gender: null,
   purpose: [],
+  /* budger range bar 안에 있는 ball의 초기 위치*/
   minBudgetX: 55,
   maxBudgetX: 55,
 };
@@ -51,12 +52,12 @@ const inputSlice = createSlice({
     },
     moveMinBudgetX: (state, action: PayloadAction<number>) => {
       const minBudgetX = action.payload;
-      state.minBudgetX = Math.max(minBudgetX, 0);
+      state.minBudgetX = minBudgetX;
       return;
     },
     moveMaxBudgetX: (state, action: PayloadAction<number>) => {
       const maxBudgetX = action.payload;
-      state.maxBudgetX = Math.max(maxBudgetX, 0);
+      state.maxBudgetX = maxBudgetX;
       return;
     },
   },

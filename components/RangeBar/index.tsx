@@ -68,10 +68,16 @@ const RangeBar: React.FC = () => {
         <RightBall
           maxBudgetX={maxBudgetX}
           onTouchMove={(ev) => {
+            console.log(
+              -window.innerWidth + ev.changedTouches[0].pageX + SIDE_MARGIN,
+            );
             dispatch(
               actions.moveMaxBudgetX(
-                Math.abs(-window.innerWidth + ev.changedTouches[0].pageX) -
-                  SIDE_MARGIN,
+                -(
+                  -window.innerWidth +
+                  ev.changedTouches[0].pageX +
+                  SIDE_MARGIN
+                ),
               ),
             );
           }}
