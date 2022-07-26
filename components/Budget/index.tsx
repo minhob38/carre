@@ -17,9 +17,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   width: 310px;
   height: 116px;
+  margin: auto;
 `;
 
 const Bar = styled.div`

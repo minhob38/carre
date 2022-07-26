@@ -103,21 +103,27 @@ const Test: NextPage = () => {
             display: flex;
             margin: 0 0 0 18px;
           `}
-        >
-          {/* <Image src={checkImage} alt="check" width="24px" height="24px" /> */}
-          {/* <div
-            css={css`
-              font: normal 400 14.5px / 20px roboto;
-              color: rgba(65, 65, 65, 0.8);
-              white-space: pre;
-              margin: 0 0 0 10px;
-            `}
-          >
-            {`이 구간에 밖에 있더라도 \n구간의 양 꼭짓점과 비슷한 차량도 함께 보기 \n(워딩 수정)`}
-          </div> */}
-        </div>
-        <Budget />
+        ></div>
       </Canvas>
+      <Budget />
+      <div
+        css={css`
+          display: flex;
+          align-items: center;
+          margin: 15px 0 0 35px;
+        `}
+      >
+        <Image src={checkImage} alt="check" width="18px" height="18px" />
+        <div
+          css={css`
+            font: normal 400 13px / 26px roboto;
+            color: ${colors.GRAY1};
+            margin: 0 0 0 16px;
+          `}
+        >
+          비슷한 가격대 차량도 함께 보기
+        </div>
+      </div>
       <ProgressBar stage={2} />
       <NextButton path={'/test/3'} />
     </>
