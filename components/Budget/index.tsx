@@ -122,6 +122,7 @@ const Budget: React.FC = () => {
         <Input
           placeholder="4000만원"
           type="number"
+          pattern="[0-9]*"
           name="min-budget"
           value={Math.floor((minBudgetOffsetX - 55) * 40 + 4000)}
           onChange={(ev) => {
@@ -132,6 +133,7 @@ const Budget: React.FC = () => {
         <Input
           placeholder="8000만원"
           type="number"
+          pattern="[0-9]*"
           name="max-budget"
           value={Math.floor(-(maxBudgetOffsetX - 55) * 40 + 8000)}
           onChange={(ev) => {
