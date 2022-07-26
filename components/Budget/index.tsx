@@ -105,11 +105,40 @@ const Budget: React.FC = () => {
 
   // TODO: ball이 bar를 안 넘어가게 처리
   // TODO: 말풍선 기준으로 드래그
+  /* bar길이 - 말풍선 연동 수식
+  - preset min 설정: m (e.g 4000만원)
+  - preset max 설정: n (e.g 8000만원)
+  - preset min / max 설정 및 구간 계산: p (e.g 8000만원 - 4000만원 : 4000만원)
+  - preset min / max bar 길이: q  (e.g 200px)
+  - preset min / max 초기 위치(왼쪽/오른쪽으로부터) 계산: r (e.g 55px)
+  - min budget offset = p/q(x - r) + m
+  - max budget offset = -p/q(x - r) + m
+  (x는 min / max offset (왼쪽/오른쪽으로부터))
+  */
   return (
     <Wrapper>
       <InputContainer>
-        <Input placeholder="4000만원" type="number" name="max-budget" />
-        <Input placeholder="1억2000만원" type="number" name="max-budget" />
+        <Input
+          placeholder="4000만원"
+          type="number"
+          name="min-budget"
+          value={Math.floor((minBudgetOffsetX - 55) * 40 + 4000)}
+          onChange={(ev) => {
+            const value = ev.target.value;
+            dispatch(actions.moveMinBudgetX(parseInt(value) / 40 - 45));
+          }}
+        />
+        <Input
+          placeholder="8000만원"
+          type="number"
+          name="max-budget"
+          value={Math.floor(-(maxBudgetOffsetX - 55) * 40 + 8000)}
+          onChange={(ev) => {
+            const value = ev.target.value;
+            console.log(-(parseInt(value) / 40) + 75);
+            dispatch(actions.moveMaxBudgetX(-(parseInt(value) / 40) + 255));
+          }}
+        />
       </InputContainer>
       <Bar>
         <LeftBall
