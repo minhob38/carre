@@ -10,6 +10,10 @@ import brandImage from '@assets/images/brand.svg';
 
 interface IProps {
   title: string;
+  src: any;
+  alt: string;
+  width: string;
+  height: string;
 }
 
 interface IStyleProps {
@@ -53,13 +57,20 @@ const ItemContainer = styled.div`
   padding: 14px 0;
 `;
 
-const DropDown: React.FC<IProps> = ({ children, title }) => {
+const DropDown: React.FC<IProps> = ({
+  children,
+  title,
+  src,
+  alt,
+  width,
+  height,
+}) => {
   const [isDown, setIsDown] = useState<boolean>(false);
 
   return (
     <Wrapper isDown={isDown}>
       <Header isDown={isDown}>
-        <Image src={brandImage} alt="brand" width="30px" height="30px" />
+        <Image src={src} alt={alt} width={width} height={height} />
         <Title>{title}</Title>
         <div
           css={css`
