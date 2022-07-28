@@ -28,7 +28,7 @@ const Description = styled.div`
 `;
 
 const Test: NextPage = () => {
-  const [touchBudgetX, setTouchBudgetX] = useState<number>(0);
+  const [isBrandDown, setIsBrandDown] = useState<boolean>(false);
   const [budgetX, setBudgetX] = useState<number>(55);
   console.log(brands);
   const Brands = brands.map((brand) => {
@@ -75,7 +75,7 @@ const Test: NextPage = () => {
               display: flex;
               align-items: center;
               width: calc(100% - 20px - 20px);
-              height: 62px;
+              height: 70px;
               margin: auto;
               border-bottom: solid 1px ${colors.GRAY3};
             `}
@@ -99,9 +99,9 @@ const Test: NextPage = () => {
               length="14px"
               width="2px"
               color={colors.BLACK2}
-              direction="top"
+              direction={isBrandDown ? 'bottom' : 'top'}
               calibrationY="2.5px"
-              // onClick={handleArrowClick}
+              onClick={() => setIsBrandDown(!isBrandDown)}
             />
             <div
               css={css`
@@ -109,27 +109,20 @@ const Test: NextPage = () => {
               `}
             />
           </div>
-          <div
-            css={css`
-              height: 14px;
-            `}
-          />
+
           <div
             css={css`
               display: flex;
+              display: ${isBrandDown ? 'flex' : 'none'};
               flex-flow: row wrap;
               justify-content: center;
               align-items: center;
               gap: 9px 14px;
+              padding: 14px 0;
             `}
           >
             {Brands}
           </div>
-          <div
-            css={css`
-              height: 14px;
-            `}
-          />
         </div>
       </div>
       <ProgressBar stage={3} />
