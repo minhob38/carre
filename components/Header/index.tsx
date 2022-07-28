@@ -5,14 +5,13 @@ import { useRouter } from 'next/router';
 import * as colors from '@constants/colors';
 
 const Wrapper = styled.div`
-  position: sticky;
+  position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   width: 100%;
   height: 55px;
   padding: 0 0 0 20px;
-  position: relative;
-  top: 0;
 `;
 
 const Title = styled.div`
