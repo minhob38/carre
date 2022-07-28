@@ -35,7 +35,7 @@ const Header: React.FC<{ title: string }> = ({ title }) => {
         width="2px"
         color={colors.GRAY1}
         direction="left"
-        calibration="2.5px"
+        calibrationX="2.5px"
         onClick={handleArrowClick}
       />
       <Title>{title}</Title>

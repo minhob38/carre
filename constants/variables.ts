@@ -1,11 +1,11 @@
 export {};
 
-interface IBrands {
+interface IBrand {
   title: string;
   value: string;
 }
 
-const brands: IBrands[] = [
+export const brands: IBrand[] = [
   {
     title: '현대',
     value: 'hyundai',
