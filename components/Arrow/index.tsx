@@ -10,7 +10,8 @@ interface StyleProps {
   width: string;
   color: string;
   direction: 'left' | 'right' | 'top' | 'bottom';
-  calibration: string;
+  calibrationX?: string;
+  calibrationY?: string;
 }
 
 const Wrapper = styled.div`
@@ -31,7 +32,8 @@ const Wrapper = styled.div`
     }
   }};
   position: relative;
-  left: ${(props) => props.calibration};
+  left: ${(props) => props.calibrationX};
+  top: ${(props) => props.calibrationY};
 `;
 
 const Arrow: React.FC<Props> = ({
@@ -40,7 +42,8 @@ const Arrow: React.FC<Props> = ({
   width,
   color,
   direction,
-  calibration,
+  calibrationX,
+  calibrationY,
 }) => {
   return (
     <Wrapper
@@ -48,7 +51,8 @@ const Arrow: React.FC<Props> = ({
       width={width}
       color={color}
       direction={direction}
-      calibration={calibration}
+      calibrationX={calibrationX}
+      calibrationY={calibrationY}
       onClick={onClick}
     />
   );
