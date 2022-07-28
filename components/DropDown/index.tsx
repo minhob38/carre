@@ -24,6 +24,8 @@ const Wrapper = styled.div`
   width: calc(100% - 20px - 20px);
   border-radius: 8px;
   background-color: ${colors.GRAY2};
+  background-color: ${(props: IStyleProps) =>
+    props.isDown ? colors.GRAY2 : colors.WHITE1};
 `;
 
 const Header = styled.div`
@@ -32,7 +34,8 @@ const Header = styled.div`
   width: calc(100% - 20px - 20px);
   height: 70px;
   margin: auto;
-  border-bottom: solid 1px ${colors.GRAY3};
+  border-bottom: ${(props: IStyleProps) =>
+    props.isDown ? `solid 1px ${colors.GRAY3}` : 'none'};
 `;
 
 const Title = styled.div`
@@ -54,8 +57,8 @@ const DropDown: React.FC<IProps> = ({ children, title }) => {
   const [isDown, setIsDown] = useState<boolean>(false);
 
   return (
-    <Wrapper>
-      <Header>
+    <Wrapper isDown={isDown}>
+      <Header isDown={isDown}>
         <Image src={brandImage} alt="brand" width="30px" height="30px" />
         <Title>{title}</Title>
         <div

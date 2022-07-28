@@ -28,6 +28,13 @@ const Description = styled.div`
   color: ${colors.GRAY1};
 `;
 
+const DropDownContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 20px;
+`;
+
 const Test: NextPage = () => {
   const [isBrandDown, setIsBrandDown] = useState<boolean>(false);
 
@@ -56,7 +63,11 @@ const Test: NextPage = () => {
         <Title>추가 선택 조건 선택</Title>
         <Description>꼭 원하는 조건이 있다면선택해주세요</Description>
       </Canvas>
-      <DropDown title="브랜드">{Brands}</DropDown>
+      <DropDownContainer>
+        <DropDown title="브랜드">{Brands}</DropDown>
+        <DropDown title="연료">{Brands}</DropDown>
+        <DropDown title="차종">{Brands}</DropDown>
+      </DropDownContainer>
       <ProgressBar stage={3} />
       <NextButton path={'/test/3'} />
     </>
