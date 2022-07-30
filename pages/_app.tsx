@@ -7,9 +7,11 @@ import '@assets/styles/globals.css';
 import * as colors from '@constants/colors';
 
 const MobileWrapper = styled.div`
+  padding-top: 55px;
   width: 100vw;
   height: 100vh;
   background-color: ${colors.WHITE2};
+  overflow: hidden;
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -60,7 +60,7 @@ const Test: NextPage = () => {
       <Header title="나의 정보 입력" />
       <Title>추가 선택 조건 선택</Title>
       <Description>꼭 원하는 조건이 있다면선택해주세요</Description>
-      <Scroll direction="y">
+      <Scroll direction="y" height="calc(100% - 250px)">
         <DropDownContainer>
           <DropDown
             title="브랜드"

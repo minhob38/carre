@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Arrow from '@components/Arrow';
 import { useRouter } from 'next/router';
 import * as colors from '@constants/colors';
+import { css } from '@emotion/react';
 
 const Wrapper = styled.div`
   position: fixed;
