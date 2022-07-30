@@ -3,25 +3,28 @@ import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { shallowEqual } from 'react-redux';
+import Image from '@components/Image';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import * as colors from '@constants/colors';
 
 interface IProps {
   input: {
-    title: string;
     type: 'radio' | 'checkbox';
     name: string;
     value: string;
   };
   style: Omit<IStyleProps, 'checked'>;
+  image: {
+    src: any;
+    alt: string;
+  };
 }
 
 interface IStyleProps {
   checked: boolean;
   width: string;
   height: string;
-  font: string;
 }
 
 const Wrapper = styled.label`
@@ -37,13 +40,12 @@ const Wrapper = styled.label`
       : `2px solid ${colors.WHITE1}`};
   border-radius: 8px;
   background-color: ${colors.WHITE1};
-  font: ${(props: IStyleProps) => props.font};
-  color: ${colors.BLACK2};
 `;
 
-const InputLabel: React.FC<IProps> = ({ input, style }) => {
-  const { title, type, name, value } = input;
-  const { width, height, font } = style;
+const ImageLabel: React.FC<IProps> = ({ input, style, image }) => {
+  const { type, name, value } = input;
+  const { width, height } = style;
+  const { src, alt } = image;
 
   const dispatch = useTypedDispatch();
   const inputState = useTypedSelector(
@@ -80,8 +82,8 @@ const InputLabel: React.FC<IProps> = ({ input, style }) => {
   };
 
   return (
-    <Wrapper checked={checked} width={width} height={height} font={font}>
-      {title}
+    <Wrapper checked={checked} width={width} height={height}>
+      <Image src={src} alt={alt} width={width} height={height} />
       <input
         type={type}
         name={name}
@@ -96,4 +98,4 @@ const InputLabel: React.FC<IProps> = ({ input, style }) => {
   );
 };
 
-export default InputLabel;
+export default ImageLabel;
