@@ -38,7 +38,7 @@ const SubDescription = styled.div`
 const Test: NextPage = () => {
   return (
     <>
-      <Header title="나의 정보 입력" />
+      <Header title="나의 정보 입력" backPath="/test/1" />
       <Content top="55px" bottom="0">
         <Title>나의 구매 필수 조건 입력</Title>
         <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>

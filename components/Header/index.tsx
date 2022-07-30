@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 import Arrow from '@components/Arrow';
 import { useRouter } from 'next/router';
 import * as colors from '@constants/colors';
-import { css } from '@emotion/react';
+
+interface IProps {
+  title: string;
+  backPath: string;
+}
 
 const Wrapper = styled.div`
   position: fixed;
@@ -27,9 +31,9 @@ const Title = styled.div`
   text-align: center;
 `;
 
-const Header: React.FC<{ title: string }> = ({ title }) => {
+const Header: React.FC<IProps> = ({ title, backPath }) => {
   const router = useRouter();
-  const handleArrowClick = () => router.back();
+  const handleArrowClick = () => router.push(backPath);
 
   return (
     <Wrapper>
