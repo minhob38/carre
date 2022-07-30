@@ -8,6 +8,9 @@ interface IState {
   purpose: string[];
   minBudgetOffsetX: number;
   maxBudgetOffsetX: number;
+  brands: string[];
+  fuels: string[];
+  cas: string[]; // category?
 }
 
 const initialState: IState = {
@@ -17,6 +20,9 @@ const initialState: IState = {
   /* budger range bar 안에 있는 ball의 초기 위치*/
   minBudgetOffsetX: 55,
   maxBudgetOffsetX: 55,
+  brands: [],
+  fuels: [],
+  cas: [],
 };
 
 const inputSlice = createSlice({
@@ -35,7 +41,7 @@ const inputSlice = createSlice({
       action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
     ) => {
       const { name, value, type } = action.payload;
-      const set = new Set(state.purpose);
+      const set = new Set(state[name]);
       set.add(value);
       state[name] = [...set];
       return;
@@ -45,9 +51,9 @@ const inputSlice = createSlice({
       action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
     ) => {
       const { name, value, type } = action.payload;
-      const set = new Set(state.purpose);
+      const set = new Set(state[name]);
       set.delete(value);
-      state.purpose = [...set];
+      state[name] = [...set];
       return;
     },
     moveMinBudgetX: (state, action: PayloadAction<number>) => {

@@ -13,7 +13,6 @@ import { brands } from '@constants/variables';
 import brandImage from '@assets/images/brand.svg';
 import carImage from '@assets/images/car.svg';
 import fuelImage from '@assets/images/fuel.svg';
-
 import DropDown from '@components/DropDown';
 
 const Title = styled.div`
@@ -43,7 +42,7 @@ const Test: NextPage = () => {
         input={{
           title: brand.title,
           type: 'checkbox',
-          name: 'brand',
+          name: 'brands',
           value: brand.value,
         }}
         style={{
