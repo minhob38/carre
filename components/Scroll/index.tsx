@@ -12,7 +12,6 @@ const Wrapper = styled.div`
     props.direction === 'x' ? 'auto' : 'hidden'};
   overflow-y: ${(props: IProps) =>
     props.direction === 'y' ? 'auto' : 'hidden'};
-  background-color: red;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
 `;

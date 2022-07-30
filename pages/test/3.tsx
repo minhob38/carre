@@ -18,7 +18,7 @@ import fuelImage from '@assets/images/fuel.svg';
 import DropDown from '@components/DropDown';
 
 const Title = styled.div`
-  margin: 30px 0 2px 20px;
+  margin: 85px 0 2px 20px;
   font: normal 700 20px / 32px roboto;
   color: ${colors.BLACK1};
 `;
@@ -60,7 +60,7 @@ const Test: NextPage = () => {
       <Header title="나의 정보 입력" />
       <Title>추가 선택 조건 선택</Title>
       <Description>꼭 원하는 조건이 있다면선택해주세요</Description>
-      <Scroll direction="y" height="calc(100% - 250px)">
+      <Scroll direction="y" height="calc(100vh - 300px)">
         <DropDownContainer>
           <DropDown
             title="브랜드"
