@@ -10,7 +10,7 @@ interface IState {
   maxBudgetOffsetX: number;
   brands: string[];
   fuels: string[];
-  cas: string[]; // category?
+  categories: string[]; // category?
 }
 
 const initialState: IState = {
@@ -22,7 +22,7 @@ const initialState: IState = {
   maxBudgetOffsetX: 55,
   brands: [],
   fuels: [],
-  cas: [],
+  categories: [],
 };
 
 const inputSlice = createSlice({

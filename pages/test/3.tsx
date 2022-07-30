@@ -9,9 +9,9 @@ import Header from '@components/Header';
 import Scroll from '@components/Scroll';
 import Content from '@components/Content';
 import * as colors from '@constants/colors';
-import { brands } from '@constants/variables';
+import { brands, fuels, categories } from '@constants/variables';
 import brandImage from '@assets/images/brand.svg';
-import carImage from '@assets/images/car.svg';
+import categoryImage from '@assets/images/category.svg';
 import fuelImage from '@assets/images/fuel.svg';
 import DropDown from '@components/DropDown';
 
@@ -53,9 +53,48 @@ const Test: NextPage = () => {
       />
     );
   });
+
+  const Fuels = fuels.map((fuel) => {
+    return (
+      <InputLabel
+        key={uuid4()}
+        input={{
+          title: fuel.title,
+          type: 'checkbox',
+          name: 'fuels',
+          value: fuel.value,
+        }}
+        style={{
+          width: '95px',
+          height: '48px',
+          font: 'normal 400 12px / 26px roboto',
+        }}
+      />
+    );
+  });
+
+  const Categories = categories.map((category) => {
+    return (
+      <InputLabel
+        key={uuid4()}
+        input={{
+          title: category.title,
+          type: 'checkbox',
+          name: 'categories',
+          value: category.value,
+        }}
+        style={{
+          width: '95px',
+          height: '48px',
+          font: 'normal 400 12px / 26px roboto',
+        }}
+      />
+    );
+  });
+
   return (
     <>
-      <Header title="나의 정보 입력" />
+      <Header title="나의 정보 입력" backPath="/test/2" />
       <Content top="55px" bottom="99px">
         <Title>추가 선택 조건 선택</Title>
         <Description>꼭 원하는 조건이 있다면선택해주세요</Description>
@@ -77,16 +116,16 @@ const Test: NextPage = () => {
               width="30px"
               height="30px"
             >
-              {Brands}
+              {Fuels}
             </DropDown>
             <DropDown
               title="차종"
-              src={carImage}
-              alt="car"
+              src={categoryImage}
+              alt="category"
               width="30px"
               height="30px"
             >
-              {Brands}
+              {Categories}
             </DropDown>
           </DropDownContainer>
         </Scroll>
