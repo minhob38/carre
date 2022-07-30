@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+
 import type { NextPage } from 'next';
 import styled from '@emotion/styled';
 import Header from '@components/Header';
@@ -30,6 +31,7 @@ const QuetsionContainer = styled.div`
 `;
 
 const Test: NextPage = () => {
+  let i = 0;
   return (
     <>
       <Header title="차량 성향 테스트" />
@@ -54,21 +56,24 @@ const Test: NextPage = () => {
               alt: 'question1-1',
             }}
           />
-          <ImageLabel
-            input={{
-              type: 'checkbox',
-              name: 'purpose',
-              value: 'sales',
-            }}
-            style={{
-              width: '330px',
-              height: '258px',
-            }}
-            image={{
-              src: q1_2Image,
-              alt: 'question1-2',
-            }}
-          />
+
+          <div onClick={() => console.log(i++)}>
+            <ImageLabel
+              input={{
+                type: 'checkbox',
+                name: 'purpose',
+                value: 'sales',
+              }}
+              style={{
+                width: '330px',
+                height: '258px',
+              }}
+              image={{
+                src: q1_2Image,
+                alt: 'question1-2',
+              }}
+            />
+          </div>
         </QuetsionContainer>
       </Content>
     </>
