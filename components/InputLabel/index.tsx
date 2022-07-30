@@ -53,23 +53,29 @@ const InputLabel: React.FC<IProps> = ({ input, style }) => {
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (type === 'radio' && name === 'gender' && inputState.gender !== value) {
-      setChecked(false);
-    }
-  }, [inputState.gender, name, value, type]);
-
-  const purpose = inputState.purpose;
-
-  useEffect(() => {
     if (type === 'checkbox') {
       for (const key in inputState) {
-        if (key === name) {
-          if (!Array.isArray(inputState[key])) return;
-          const hasName = inputState[key].indexOf(value) !== -1;
-          console.log(hasName, inputState[key], value);
-          if (!hasName) return;
+        if (key !== name) continue;
+        if (!Array.isArray(inputState[key])) continue;
+        const hasName = inputState[key].indexOf(value) !== -1;
+        if (hasName) {
           setChecked(true);
+          continue;
         }
+        setChecked(false);
+      }
+    }
+
+    if (type === 'radio') {
+      for (const key in inputState) {
+        if (key !== name) continue;
+        if (Array.isArray(inputState[key])) continue;
+        const isName = inputState[key] === value;
+        if (isName) {
+          setChecked(true);
+          continue;
+        }
+        setChecked(false);
       }
     }
   }, [inputState, type, name, value]);
