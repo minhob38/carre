@@ -1,7 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
 import type { NextPage } from 'next';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import InputLabel from '@components/InputLabel';

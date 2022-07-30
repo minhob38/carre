@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: ${(props: IProps) => props.top};
   right: ${(props: IProps) => props.right};
   bottom: ${(props: IProps) => props.bottom};
