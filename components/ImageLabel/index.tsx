@@ -19,6 +19,7 @@ interface IProps {
     src: any;
     alt: string;
   };
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
 }
 
 interface IStyleProps {
@@ -42,11 +43,10 @@ const Wrapper = styled.label`
   background-color: ${colors.WHITE1};
 `;
 
-const ImageLabel: React.FC<IProps> = ({ input, style, image }) => {
+const ImageLabel: React.FC<IProps> = ({ input, style, image, onClick }) => {
   const { type, name, value } = input;
   const { width, height } = style;
   const { src, alt } = image;
-
   const dispatch = useTypedDispatch();
   const inputState = useTypedSelector(
     (state) => state.rootReducer.inputReducer,
@@ -55,10 +55,32 @@ const ImageLabel: React.FC<IProps> = ({ input, style, image }) => {
   const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (type === 'radio' && name === 'gender' && inputState.gender !== value) {
-      setChecked(false);
+    if (type === 'checkbox') {
+      for (const key in inputState) {
+        if (key !== name) continue;
+        if (!Array.isArray(inputState[key])) continue;
+        const hasName = inputState[key].indexOf(value) !== -1;
+        if (hasName) {
+          setChecked(true);
+          continue;
+        }
+        setChecked(false);
+      }
     }
-  }, [inputState.gender, name, value, type]);
+
+    if (type === 'radio') {
+      for (const key in inputState) {
+        if (key !== name) continue;
+        if (Array.isArray(inputState[key])) continue;
+        const isName = inputState[key] === value;
+        if (isName) {
+          setChecked(true);
+          continue;
+        }
+        setChecked(false);
+      }
+    }
+  }, [inputState, type, name, value]);
 
   const handleChange = (ev) => {
     if (type === 'checkbox') {
@@ -75,9 +97,9 @@ const ImageLabel: React.FC<IProps> = ({ input, style, image }) => {
     if (type === 'radio') {
       if (ev.target.checked) {
         dispatch(actions.setRadioBoxValue(ev.target));
-        setChecked(true);
-        return;
+        return setChecked(true);
       }
+      setChecked(false);
     }
   };
 
@@ -92,6 +114,7 @@ const ImageLabel: React.FC<IProps> = ({ input, style, image }) => {
           all: unset;
         `}
         onChange={handleChange}
+        onClick={onClick}
         checked={checked}
       />
     </Wrapper>

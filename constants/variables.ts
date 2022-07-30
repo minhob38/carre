@@ -1,8 +1,18 @@
 export {};
 
+import question1_1_Image from '@assets/images/questions/1-1.svg';
+import question1_2_Image from '@assets/images/questions/1-2.svg';
+
 interface IInput {
   title: string;
   value: string;
+}
+
+interface IImageInput {
+  name: string;
+  value: string;
+  src: any;
+  alt: string;
 }
 
 export const brands: IInput[] = [
@@ -30,4 +40,77 @@ export const fuels: IInput[] = [
 export const categories: IInput[] = [
   { title: '세단?', value: 'sedan' },
   { title: 'SUV?', value: 'suc' },
+];
+
+export const questions: [IImageInput, IImageInput][] = [
+  [
+    {
+      name: 'question-1',
+      value: '1',
+      src: question1_1_Image,
+      alt: 'question1-1',
+    },
+    {
+      name: 'question-1',
+      value: '2',
+      src: question1_2_Image,
+      alt: 'question1-2',
+    },
+  ],
+  [
+    {
+      name: 'question-2',
+      value: '1',
+      src: question1_2_Image,
+      alt: 'question2-1',
+    },
+    {
+      name: 'question-2',
+      value: '2',
+      src: question1_2_Image,
+      alt: 'question2-2',
+    },
+  ],
+  [
+    {
+      name: 'question-3',
+      value: '1',
+      src: question1_1_Image,
+      alt: 'question3-1',
+    },
+    {
+      name: 'question-3',
+      value: '2',
+      src: question1_1_Image,
+      alt: 'question3-2',
+    },
+  ],
+  [
+    {
+      name: 'question-4',
+      value: '1',
+      src: question1_2_Image,
+      alt: 'question4-1',
+    },
+    {
+      name: 'question-4',
+      value: '2',
+      src: question1_2_Image,
+      alt: 'question4-2',
+    },
+  ],
+  [
+    {
+      name: 'question-5',
+      value: '1',
+      src: question1_2_Image,
+      alt: 'question5-1',
+    },
+    {
+      name: 'question-5',
+      value: '2',
+      src: question1_2_Image,
+      alt: 'question5-2',
+    },
+  ],
 ];

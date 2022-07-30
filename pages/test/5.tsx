@@ -1,26 +1,20 @@
 /** @jsxImportSource @emotion/react */
-
+import { useState } from 'react';
 import type { NextPage } from 'next';
 import styled from '@emotion/styled';
+import { v4 as uuid4 } from 'uuid';
 import Header from '@components/Header';
 import Content from '@components/Content';
-import LinkButton from '@components/LinkButton';
 import ImageLabel from '@components/ImageLabel';
-import q1_1Image from '@assets/images/questions/1-1.svg';
-import q1_2Image from '@assets/images/questions/1-2.svg';
 import * as colors from '@constants/colors';
+import { questions } from '@constants/variables';
+import { css } from '@emotion/react';
 
-const Question = styled.div`
+const Description = styled.div`
   margin: 0 0 16px 30px;
   font: normal 400 16px / 27px roboto;
   color: ${colors.BLACK1};
   white-space: pre;
-`;
-
-const Description = styled.div`
-  margin: 2px 0 16px 0;
-  font: normal 400 14px / 23px roboto;
-  color: ${colors.GRAY1};
 `;
 
 const QuetsionContainer = styled.div`
@@ -31,50 +25,45 @@ const QuetsionContainer = styled.div`
 `;
 
 const Test: NextPage = () => {
-  let i = 0;
+  const [page, setPage] = useState<number>(0);
+  const handleImageClick = async (ev) => {
+    await new Promise((resolve, reject) => {
+      setTimeout(() => resolve(''), 1500);
+    });
+    setPage(page + 1);
+  };
+
+  const Questions = questions[page].map((question) => {
+    return (
+      <ImageLabel
+        key={uuid4()}
+        input={{
+          type: 'radio',
+          name: question.name,
+          value: question.value,
+        }}
+        style={{
+          width: '330px',
+          height: '258px',
+        }}
+        image={{
+          src: question.src,
+          alt: question.alt,
+        }}
+        onClick={handleImageClick}
+      />
+    );
+  });
+
   return (
     <>
-      <Header title="차량 성향 테스트" />
+      <Header title="차량 성향 테스트" backPath="/test/4" />
       <Content top="55px" bottom="0">
         {/* <Container> */}
-        <Question>
+        <Description>
           {`다음 두 가지의 상황 중 자신에게 더 잘 맞다고 \n느껴지는 상황을 선택해주세요.`}
-        </Question>
-        <QuetsionContainer>
-          <ImageLabel
-            input={{
-              type: 'checkbox',
-              name: 'purpose',
-              value: 'sales',
-            }}
-            style={{
-              width: '330px',
-              height: '258px',
-            }}
-            image={{
-              src: q1_1Image,
-              alt: 'question1-1',
-            }}
-          />
-
-          <div onClick={() => console.log(i++)}>
-            <ImageLabel
-              input={{
-                type: 'checkbox',
-                name: 'purpose',
-                value: 'sales',
-              }}
-              style={{
-                width: '330px',
-                height: '258px',
-              }}
-              image={{
-                src: q1_2Image,
-                alt: 'question1-2',
-              }}
-            />
-          </div>
-        </QuetsionContainer>
+        </Description>
+        <QuetsionContainer>{Questions}</QuetsionContainer>
       </Content>
     </>
   );

@@ -28,7 +28,7 @@ const Container = styled.div`
 const Test: NextPage = () => {
   return (
     <>
-      <Header title="차량 성향 테스트" />
+      <Header title="차량 성향 테스트" backPath="/test/3" />
       <Content top="55px" bottom="0">
         <Container>
           <Title>차량 성향 테스트하기</Title>
