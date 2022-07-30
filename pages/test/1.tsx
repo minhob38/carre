@@ -69,7 +69,6 @@ const Test: NextPage = () => {
     { title: '등/하교', value: 'school-commuting' },
     { title: '캠핑/레저', value: 'outdoor' },
     { title: '영업', value: 'sales' },
-    { title: '영업', value: 'sales' },
   ];
 
   const GenderLabels = genderLabels.map((label) => {

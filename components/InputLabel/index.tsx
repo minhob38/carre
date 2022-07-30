@@ -58,6 +58,22 @@ const InputLabel: React.FC<IProps> = ({ input, style }) => {
     }
   }, [inputState.gender, name, value, type]);
 
+  const purpose = inputState.purpose;
+
+  useEffect(() => {
+    if (type === 'checkbox') {
+      for (const key in inputState) {
+        if (key === name) {
+          if (!Array.isArray(inputState[key])) return;
+          const hasName = inputState[key].indexOf(value) !== -1;
+          console.log(hasName, inputState[key], value);
+          if (!hasName) return;
+          setChecked(true);
+        }
+      }
+    }
+  }, [inputState, type, name, value]);
+
   const handleChange = (ev) => {
     if (type === 'checkbox') {
       if (ev.target.checked) {

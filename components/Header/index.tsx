@@ -6,7 +6,7 @@ import * as colors from '@constants/colors';
 
 interface IProps {
   title: string;
-  backPath: string;
+  backPath?: string;
 }
 
 const Wrapper = styled.div`
@@ -33,7 +33,10 @@ const Title = styled.div`
 
 const Header: React.FC<IProps> = ({ title, backPath }) => {
   const router = useRouter();
-  const handleArrowClick = () => router.push(backPath);
+  const handleArrowClick = () => {
+    if (!backPath) return;
+    router.push(backPath);
+  };
 
   return (
     <Wrapper>
