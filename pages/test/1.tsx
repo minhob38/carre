@@ -111,7 +111,7 @@ const Test: NextPage = () => {
 
   return (
     <div>
-      <Header title="나의 정보 입력" />
+      <Header title="나의 정보 입력" backPath="/test" />
       <Content top="55px" bottom="0">
         <Title>나의 정보 입력</Title>
         <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>

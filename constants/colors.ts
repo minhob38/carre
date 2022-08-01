@@ -3,6 +3,7 @@ export const PRIMARY = '#b8f5f5';
 export const BLACK1 = '#1a1a1a';
 export const BLACK2 = '#4c4c4c';
 export const BLACK3 = '#3f3f3f';
+export const BLACK4 = '#616161';
 
 export const GRAY1 = '#999999';
 export const GRAY2 = '#f2f2f2';

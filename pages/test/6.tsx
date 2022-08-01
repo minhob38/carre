@@ -72,6 +72,7 @@ const Test: NextPage = () => {
         <Description>선호하는 차량 스타일을 선택해주세요.</Description>
         <StyleContainer>{Questions}</StyleContainer>
       </Content>
+      {/* test 결과로 보내기 */}
       <NextButton path={'/test/4'} />
     </>
   );
