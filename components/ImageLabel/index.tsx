@@ -7,6 +7,8 @@ import Image from '@components/Image';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import * as colors from '@constants/colors';
+import activeCheckImage from '@assets/images/active-check.svg';
+import inactiveCheckImage from '@assets/images/inactive-check.svg';
 
 interface IProps {
   input: {
@@ -29,6 +31,7 @@ interface IStyleProps {
 }
 
 const Wrapper = styled.label`
+  position: relative;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -41,6 +44,12 @@ const Wrapper = styled.label`
       : `2px solid ${colors.WHITE1}`};
   border-radius: 8px;
   background-color: ${colors.WHITE1};
+`;
+
+const ImageContainer = styled.div`
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
 `;
 
 const ImageLabel: React.FC<IProps> = ({ input, style, image, onClick }) => {
@@ -117,6 +126,14 @@ const ImageLabel: React.FC<IProps> = ({ input, style, image, onClick }) => {
         onClick={onClick}
         checked={checked}
       />
+      <ImageContainer>
+        <Image
+          src={checked ? activeCheckImage : inactiveCheckImage}
+          alt={checked ? 'activeCheckImage' : 'inactiveCheckImage'}
+          width="30px"
+          height="30px"
+        />
+      </ImageContainer>
     </Wrapper>
   );
 };
