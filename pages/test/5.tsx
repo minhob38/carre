@@ -28,8 +28,9 @@ const BarContainer = styled.div`
 const QuetsionContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px 0;
+  margin: 0 0 0 30px;
 `;
 
 const Page = styled.div`

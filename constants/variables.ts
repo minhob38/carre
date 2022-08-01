@@ -3,6 +3,12 @@ export {};
 import question1_1_Image from '@assets/images/questions/1-1.svg';
 import question1_2_Image from '@assets/images/questions/1-2.svg';
 
+import style1Image from '@assets/images/style-1.svg';
+import style2Image from '@assets/images/style-2.svg';
+import style3Image from '@assets/images/style-3.svg';
+import style4Image from '@assets/images/style-4.svg';
+import style5Image from '@assets/images/style-5.svg';
+
 interface IInput {
   title: string;
   value: string;
@@ -113,4 +119,12 @@ export const questions: [IImageInput, IImageInput][] = [
       alt: 'question5-2',
     },
   ],
+];
+
+export const styles = [
+  { name: 'style', value: '1', src: style1Image, alt: 'style-1' },
+  { name: 'style', value: '2', src: style2Image, alt: 'style-2' },
+  { name: 'style', value: '3', src: style3Image, alt: 'style-3' },
+  { name: 'style', value: '4', src: style4Image, alt: 'style-4' },
+  { name: 'style', value: '5', src: style5Image, alt: 'style-5' },
 ];
