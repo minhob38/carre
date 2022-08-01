@@ -4,9 +4,8 @@ import * as colors from '@constants/colors';
 
 interface IProps {
   stage: number;
+  total: number;
 }
-
-const STAGE_COUNT = 21;
 
 const Bar = styled.div`
   position: relative;
@@ -18,8 +17,9 @@ const Bar = styled.div`
 
 const CurrentStage = styled.div`
   position: absolute;
-  transform: ${(props: IProps) => `translate(calc(100% * ${props.stage}), 0)`};
-  width: calc(100% / ${STAGE_COUNT});
+  transform: ${(props: IProps) =>
+    `translate(calc(100% * ${props.stage - 1}), 0)`};
+  width: ${(props: IProps) => `calc(100% / ${props.total})`};
   height: 7px;
   background-color: ${colors.YELLOW1};
   border-radius: 100px;
@@ -27,10 +27,10 @@ const CurrentStage = styled.div`
   z-index: 1;
 `;
 
-const QuestionProgressBar: React.FC<IProps> = ({ stage }) => {
+const QuestionProgressBar: React.FC<IProps> = ({ stage, total }) => {
   return (
     <Bar>
-      <CurrentStage stage={stage} />
+      <CurrentStage stage={stage} total={total} />
     </Bar>
   );
 };

@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import Header from '@components/Header';
@@ -9,7 +10,6 @@ import ImageLabel from '@components/ImageLabel';
 import * as colors from '@constants/colors';
 import { questions } from '@constants/variables';
 import QuestionProgressBar from '@components/QuestionProgressBar';
-import { css } from '@emotion/react';
 
 const Description = styled.div`
   margin: 0 0 16px 30px;
@@ -43,16 +43,22 @@ const Page = styled.div`
 `;
 
 const Test: NextPage = () => {
-  const MAX_PAGE = 21;
-  const [page, setPage] = useState<number>(0);
+  const TOTAL_PAGE = 5;
+  const [page, setPage] = useState<number>(1);
+  const router = useRouter();
+
   const handleImageClick = async (ev) => {
     await new Promise((resolve, reject) => {
       setTimeout(() => resolve(''), 1500);
     });
+
+    if (page >= TOTAL_PAGE) {
+      return router.push('/test/6');
+    }
     setPage(page + 1);
   };
 
-  const Questions = questions[page].map((question) => {
+  const Questions = questions[page - 1].map((question) => {
     return (
       <ImageLabel
         key={uuid4()}
@@ -79,9 +85,9 @@ const Test: NextPage = () => {
       <Header title="차량 성향 테스트" backPath="/test/4" />
       <Content top="55px" bottom="0">
         <BarContainer>
-          <QuestionProgressBar stage={page} />
+          <QuestionProgressBar stage={page} total={TOTAL_PAGE} />
         </BarContainer>
-        <Page>{`${page + 1}/${MAX_PAGE} 문항`}</Page>
+        <Page>{`${page}/${TOTAL_PAGE} 문항`}</Page>
         <Description>
           {`다음 두 가지의 상황 중 자신에게 더 잘 맞다고 \n느껴지는 상황을 선택해주세요.`}
         </Description>
