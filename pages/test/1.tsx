@@ -84,7 +84,7 @@ const Test: NextPage = () => {
         style={{
           width: '75px',
           height: '48px',
-          font: 'normal 400 12px / 26px roboto',
+          font: normal 400 12px / 26px roboto,
         }}
       />
     );
