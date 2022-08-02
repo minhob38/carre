@@ -8,6 +8,8 @@ import infoBoxCImg from '@assets/images/info-box-c.svg';
 import InfoBoxA from '@components/InfoBoxA';
 import BottomTabNavigator from '@components/BottomTabNavigator';
 import Scroll from '@components/Scroll';
+import Content from '@components/Content';
+import TopNavigator from '@components/TopNavigator';
 
 const A = styled.a`
   all: unset;
@@ -43,18 +45,8 @@ const InfoBoxDataC = {
 const Index: NextPage = () => {
   return (
     <div>
-      <Scroll direction="x">
-        <InfoBoxA data={InfoBoxDataA} />
-        <InfoBoxA data={InfoBoxDataB} />
-        <InfoBoxA data={InfoBoxDataC} />
-      </Scroll>
-      <BottomTabNavigator />
-      {/* <Home />
-      <Button />
-      <Link href="/plane" passHref={true}>
-        <A>/plane 링크 📌</A>
-      </Link>
-      <Link href="/train">/train 링크 📌</Link> */}
+      <TopNavigator />
+      <Content top="97px" bottom="0"></Content>
     </div>
   );
 };
