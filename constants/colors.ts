@@ -10,6 +10,7 @@ export const BLACK6 = '#2a2a2a';
 export const GRAY1 = '#999999';
 export const GRAY2 = '#f2f2f2';
 export const GRAY3 = '#dfdfdf';
+export const GRAY4 = '#d6d5d5';
 
 export const WHITE1 = '#ffffff';
 export const WHITE2 = '#fafafa';
