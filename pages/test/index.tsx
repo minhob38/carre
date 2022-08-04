@@ -40,7 +40,7 @@ const Test: NextPage = () => {
 
   return (
     <div>
-      <Header title="차량 구매 성향 테스트" />
+      <Header title="차량 구매 성향 테스트" backPath="/" />
       <Content top="55px" bottom="0">
         {/* TODO: 변수로 사용자 이름 넣기 */}
         <Title>성능과 안전 두마리 토끼를 잡으려는 카레님</Title>
