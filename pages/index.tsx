@@ -110,7 +110,7 @@ const BannerDescription = styled.div`
 
 const Index: NextPage = () => {
   return (
-    <div>
+    <>
       <TopNavigator />
       <Content top="97px" bottom="0">
         <Scroll direction="y" height={`calc(100%)`}>
@@ -218,7 +218,7 @@ const Index: NextPage = () => {
           </BannerContainer>
         </Scroll>
       </Content>
-    </div>
+    </>
   );
 };
 

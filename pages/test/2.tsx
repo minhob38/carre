@@ -110,7 +110,7 @@ const Test: NextPage = () => {
   });
 
   return (
-    <div>
+    <>
       <Header title="나의 정보 입력" backPath="/test/1" />
       <Content top="55px" bottom="0">
         <Title>나의 정보 입력</Title>
@@ -156,7 +156,7 @@ const Test: NextPage = () => {
       </Content>
       <ProgressBar stage={1} />
       <NextButton title="다음" path={'/test/3'} />
-    </div>
+    </>
   );
 };
 

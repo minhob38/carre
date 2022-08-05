@@ -37,7 +37,7 @@ const Test: NextPage = () => {
   ];
 
   return (
-    <div>
+    <>
       <Header title="차량 구매 성향 테스트" backPath="/test" />
       <Content top="55px" bottom="0">
         {/* TODO: 변수로 사용자 이름 넣기 */}
@@ -61,7 +61,7 @@ const Test: NextPage = () => {
           </Link>
         </div>
       </Content>
-    </div>
+    </>
   );
 };
 
