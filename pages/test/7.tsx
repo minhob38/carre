@@ -73,7 +73,7 @@ const Test: NextPage = () => {
         <StyleContainer>{Questions}</StyleContainer>
       </Content>
       {/* test 결과로 보내기 */}
-      <NextButton title="다음" path={'/test/4'} />
+      <NextButton title="다음" path={'/result'} />
     </>
   );
 };
