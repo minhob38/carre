@@ -6,6 +6,7 @@ interface IProps {
   right?: string;
   bottom: string;
   left?: string;
+  backgroudColor?: string;
 }
 
 const Wrapper = styled.div`
@@ -15,6 +16,7 @@ const Wrapper = styled.div`
   bottom: ${(props: IProps) => props.bottom};
   left: ${(props: IProps) => props.left};
   overflow: hidden;
+  background-color: ${(props: IProps) => props.backgroudColor};
 `;
 
 const Content: React.FC<IProps> = ({
@@ -23,9 +25,16 @@ const Content: React.FC<IProps> = ({
   right = '0',
   bottom,
   left = '0',
+  backgroudColor = 'transparent',
 }) => {
   return (
-    <Wrapper top={top} right={right} bottom={bottom} left={left}>
+    <Wrapper
+      top={top}
+      right={right}
+      bottom={bottom}
+      left={left}
+      backgroudColor={backgroudColor}
+    >
       {children}
     </Wrapper>
   );
