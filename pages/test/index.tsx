@@ -3,13 +3,14 @@ import type { NextPage } from 'next';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import Content from '@components/Content';
-import * as colors from '@constants/colors';
-import Link from 'next/link';
 import Banner from '@components/Banner';
 import Scroll from '@components/Scroll';
+import NextButton from '@components/NextButton';
+import Image from '@components/Image';
+import * as colors from '@constants/colors';
 import bannerAImage from '@assets/images/banner-a.svg';
 import bannerBImage from '@assets/images/banner-b.svg';
-import NextButton from '@components/NextButton';
+import testMainImage from '@assets/images/test-main.svg';
 
 const Title = styled.div`
   margin: 45px 0 0 20px;
@@ -36,6 +37,13 @@ const BannerContainer = styled.div`
   gap: 20px 0;
   align-items: center;
   margin: 48px 0 0 0;
+`;
+
+const ImageContainer = styled.div`
+  position: absolute;
+  top: 96px;
+  left: 180px;
+  z-index: -1;
 `;
 
 const Test: NextPage = () => {
@@ -70,6 +78,14 @@ const Test: NextPage = () => {
     <>
       <Content top="0" bottom="72px">
         <Scroll direction="y" height="100%">
+          <ImageContainer>
+            <Image
+              src={testMainImage}
+              alt={'test-main'}
+              width={'213px'}
+              height={'189px'}
+            />
+          </ImageContainer>
           <Title>
             {`내 성향을 분석해서 \n나에게 딱 맞는 차를 찾아주는 \n똑똑한 차량 추천 서비스`}
           </Title>

@@ -8,6 +8,7 @@ interface IProps {
 }
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-grow: 0;
   flex-flow: ${(props: IProps) =>
