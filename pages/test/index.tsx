@@ -9,6 +9,7 @@ import Banner from '@components/Banner';
 import Scroll from '@components/Scroll';
 import bannerAImage from '@assets/images/banner-a.svg';
 import bannerBImage from '@assets/images/banner-b.svg';
+import NextButton from '@components/NextButton';
 
 const Title = styled.div`
   margin: 45px 0 0 20px;
@@ -66,20 +67,23 @@ const Test: NextPage = () => {
   });
 
   return (
-    <Content top="0" bottom="72px">
-      <Scroll direction="y" height="100%">
-        <Title>
-          {`내 성향을 분석해서 \n나에게 딱 맞는 차를 찾아주는 \n똑똑한 차량 추천 서비스`}
-        </Title>
-        <DescriptionContainer>
-          <Description>#내 차량 구매 성향 분석</Description>
-          <Description>#나에게 Fit한 차량 추천</Description>
-          <Description>#내게 맞는 차량 검색</Description>
-          <Description>#전문 딜러에게 간단 견적요청</Description>
-        </DescriptionContainer>
-        <BannerContainer>{Banners}</BannerContainer>
-      </Scroll>
-    </Content>
+    <>
+      <Content top="0" bottom="72px">
+        <Scroll direction="y" height="100%">
+          <Title>
+            {`내 성향을 분석해서 \n나에게 딱 맞는 차를 찾아주는 \n똑똑한 차량 추천 서비스`}
+          </Title>
+          <DescriptionContainer>
+            <Description>#내 차량 구매 성향 분석</Description>
+            <Description>#나에게 Fit한 차량 추천</Description>
+            <Description>#내게 맞는 차량 검색</Description>
+            <Description>#전문 딜러에게 간단 견적요청</Description>
+          </DescriptionContainer>
+          <BannerContainer>{Banners}</BannerContainer>
+        </Scroll>
+      </Content>
+      <NextButton title="성향 분석해보기" path={'/test/1'} />
+    </>
   );
 };
 

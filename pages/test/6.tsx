@@ -53,7 +53,7 @@ const Test: NextPage = () => {
     });
 
     if (page >= TOTAL_PAGE) {
-      return router.push('/test/6');
+      return router.push('/test/7');
     }
     setPage(page + 1);
   };

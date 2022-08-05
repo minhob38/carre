@@ -70,7 +70,7 @@ const Test: NextPage = () => {
           </div>
         </div>
         <ProgressBar stage={2} />
-        <NextButton path={'/test/3'} />
+        <NextButton title="다음" path={'/test/4'} />
       </Content>
     </>
   );

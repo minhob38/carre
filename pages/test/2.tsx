@@ -155,7 +155,7 @@ const Test: NextPage = () => {
         </PurposeContainer>
       </Content>
       <ProgressBar stage={1} />
-      <NextButton path={'/test/2'} />
+      <NextButton title="다음" path={'/test/3'} />
     </div>
   );
 };

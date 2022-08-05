@@ -34,7 +34,7 @@ const Test: NextPage = () => {
           <Title>차량 성향 테스트하기</Title>
           <Description>당신에게 맞는 차량을 전문 분석해 알려드려요</Description>
           <LinkButton
-            path="/test/5"
+            path="/test/6"
             title="시작하기"
             width="275px"
             height="48px"

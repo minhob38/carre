@@ -5,6 +5,7 @@ import * as colors from '@constants/colors';
 import Link from 'next/link';
 
 interface IProps {
+  title: string;
   path: string;
 }
 
@@ -22,10 +23,10 @@ const Wrapper = styled.div`
   box-shadow: 0px 4.43038px 17.7215px rgba(96, 100, 112, 0.07);
 `;
 
-const NextButton: React.FC<IProps> = ({ path }) => {
+const NextButton: React.FC<IProps> = ({ path, title }) => {
   return (
     <Link href={path} passHref={true}>
-      <Wrapper>다음</Wrapper>
+      <Wrapper>{title}</Wrapper>
     </Link>
   );
 };

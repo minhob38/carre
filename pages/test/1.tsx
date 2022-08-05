@@ -47,7 +47,7 @@ const Test: NextPage = () => {
             margin: 0 0 0 20px;
           `}
         >
-          <Link href="/test/1" passHref={true}>
+          <Link href="/test/2" passHref={true}>
             <TestItemContainer>
               <ItemText>테스트하러가기</ItemText>
               <Arrow
