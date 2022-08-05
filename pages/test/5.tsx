@@ -1,97 +1,45 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { v4 as uuid4 } from 'uuid';
 import Header from '@components/Header';
 import Content from '@components/Content';
-import ImageLabel from '@components/ImageLabel';
+import LinkButton from '@components/LinkButton';
 import * as colors from '@constants/colors';
-import { questions } from '@constants/variables';
-import QuestionProgressBar from '@components/QuestionProgressBar';
+
+const Title = styled.div`
+  margin: 212px 0 0 0;
+  font: normal 400 20px / 32px roboto;
+  color: ${colors.BLACK1};
+`;
 
 const Description = styled.div`
-  margin: 0 0 16px 30px;
-  font: normal 400 16px / 27px roboto;
-  color: ${colors.BLACK1};
-  white-space: pre;
+  margin: 2px 0 16px 0;
+  font: normal 400 14px / 23px roboto;
+  color: ${colors.GRAY1};
 `;
 
-const BarContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0 0 0;
-`;
-
-const QuetsionContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  align-items: flex-start;
-  gap: 12px 0;
-  margin: 0 0 0 30px;
-`;
-
-const Page = styled.div`
-  display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  font: normal 400 12px / 26px roboto;
-  margin: 2px 0 7px 32px;
-  color: ${colors.BLACK2};
 `;
 
 const Test: NextPage = () => {
-  const TOTAL_PAGE = 5;
-  const [page, setPage] = useState<number>(1);
-  const router = useRouter();
-
-  const handleImageClick = async (ev) => {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => resolve(''), 1500);
-    });
-
-    if (page >= TOTAL_PAGE) {
-      return router.push('/test/6');
-    }
-    setPage(page + 1);
-  };
-
-  const Questions = questions[page - 1].map((question) => {
-    return (
-      <ImageLabel
-        key={uuid4()}
-        input={{
-          type: 'radio',
-          name: question.name,
-          value: question.value,
-        }}
-        style={{
-          width: '330px',
-          height: '258px',
-        }}
-        image={{
-          src: question.src,
-          alt: question.alt,
-        }}
-        onClick={handleImageClick}
-      />
-    );
-  });
-
   return (
     <>
       <Header title="차량 성향 테스트" backPath="/test/4" />
       <Content top="55px" bottom="0">
-        <BarContainer>
-          <QuestionProgressBar stage={page} total={TOTAL_PAGE} />
-        </BarContainer>
-        <Page>{`${page}/${TOTAL_PAGE} 문항`}</Page>
-        <Description>
-          {`다음 두 가지의 상황 중 자신에게 더 잘 맞다고 \n느껴지는 상황을 선택해주세요.`}
-        </Description>
-        <QuetsionContainer>{Questions}</QuetsionContainer>
+        <Container>
+          <Title>차량 성향 테스트하기</Title>
+          <Description>당신에게 맞는 차량을 전문 분석해 알려드려요</Description>
+          <LinkButton
+            path="/test/5"
+            title="시작하기"
+            width="275px"
+            height="48px"
+          />
+        </Container>
       </Content>
     </>
   );

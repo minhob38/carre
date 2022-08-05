@@ -2,8 +2,6 @@
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { v4 as uuid4 } from 'uuid';
-import InputLabel from '@components/InputLabel';
 import Header from '@components/Header';
 import Content from '@components/Content';
 import * as colors from '@constants/colors';
@@ -40,7 +38,7 @@ const Test: NextPage = () => {
 
   return (
     <div>
-      <Header title="차량 구매 성향 테스트" backPath="/" />
+      <Header title="차량 구매 성향 테스트" backPath="/test" />
       <Content top="55px" bottom="0">
         {/* TODO: 변수로 사용자 이름 넣기 */}
         <Title>성능과 안전 두마리 토끼를 잡으려는 카레님</Title>

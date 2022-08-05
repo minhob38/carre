@@ -2,60 +2,32 @@
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { v4 as uuid4 } from 'uuid';
-import InputLabel from '@components/InputLabel';
-import NextButton from '@components/NextButton';
 import Header from '@components/Header';
 import Content from '@components/Content';
-import ProgressBar from '@components/ProgressBar';
 import * as colors from '@constants/colors';
+import Arrow from '@components/Arrow';
+import Link from 'next/link';
 
 const Title = styled.div`
-  margin: 30px 0 2px 20px;
-  font: normal 700 20px / 32px roboto;
+  margin: 24px 0 34px 27px;
+  font: normal 400 20px / 31px roboto;
+  color: ${colors.BLACK4};
+`;
+
+const ItemText = styled.div`
+  font: 'normal 400 18px / 20px roboto';
   color: ${colors.BLACK1};
 `;
 
-const Description = styled.div`
-  margin: 0 0 30px 20px;
-  font: normal 400 14px / 23px roboto;
-  color: ${colors.GRAY1};
-`;
-
-const SubTitle = styled.div`
-  margin: 0 0 12px 0px;
-  font: normal 400 16px / 27px roboto;
-  color: ${colors.BLACK2};
-`;
-
-const SelectContainer = styled.div`
-  box-sizing: border-box;
+const TestItemContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 80px;
-  height: 48px;
+  width: 350px;
+  height: 78px;
   border-radius: 8px;
-  background: ${colors.WHITE1};
-  border: 2px solid ${colors.WHITE1};
-`;
-
-const Select = styled.select`
-  all: unset;
-  flex: 1;
-  text-align: center;
-  font: normal 400 12px / 26px roboto;
-  color: ${colors.BLACK2};
-`;
-
-const YearContainer = styled.div`
-  margin: 0 42px 0 30px;
-`;
-
-const GenderContainer = styled.div``;
-
-const PurposeContainer = styled.div`
-  margin: 40px 0 0 30px;
+  background-color: ${colors.YELLOW1};
+  padding: 0 23px;
 `;
 
 const Test: NextPage = () => {
@@ -64,98 +36,31 @@ const Test: NextPage = () => {
     { title: '남자', value: 'male' },
   ];
 
-  const purposeLabels: { title: string; value: string }[] = [
-    { title: '출퇴근용', value: 'work-commuting' },
-    { title: '등/하교', value: 'school-commuting' },
-    { title: '캠핑/레저', value: 'outdoor' },
-    { title: '영업', value: 'sales' },
-  ];
-
-  const GenderLabels = genderLabels.map((label) => {
-    return (
-      <InputLabel
-        key={uuid4()}
-        input={{
-          title: label.title,
-          type: 'radio',
-          name: 'gender',
-          value: label.value,
-        }}
-        style={{
-          width: '75px',
-          height: '48px',
-          font: 'normal 400 12px / 26px roboto',
-        }}
-      />
-    );
-  });
-
-  const PurposeLabels = purposeLabels.map((label) => {
-    return (
-      <InputLabel
-        key={uuid4()}
-        input={{
-          title: label.title,
-          type: 'checkbox',
-          name: 'purpose',
-          value: label.value,
-        }}
-        style={{
-          width: '159px',
-          height: '48px',
-          font: 'normal 400 12px / 26px roboto',
-        }}
-      />
-    );
-  });
-
   return (
     <div>
-      <Header title="나의 정보 입력" backPath="/test" />
+      <Header title="차량 구매 성향 테스트" backPath="/test" />
       <Content top="55px" bottom="0">
-        <Title>나의 정보 입력</Title>
-        <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
+        {/* TODO: 변수로 사용자 이름 넣기 */}
+        <Title>성능과 안전 두마리 토끼를 잡으려는 카레님</Title>
         <div
           css={css`
-            display: flex;
+            margin: 0 0 0 20px;
           `}
         >
-          <YearContainer>
-            <SubTitle>출생연도</SubTitle>
-            <SelectContainer>
-              <Select>
-                <option value="1970">1970</option>
-              </Select>
-            </SelectContainer>
-          </YearContainer>
-          <GenderContainer>
-            <SubTitle>성별</SubTitle>
-            <div
-              css={css`
-                display: flex;
-                flex-flow: row nowrap;
-                gap: 0 33px;
-              `}
-            >
-              {GenderLabels}
-            </div>
-          </GenderContainer>
+          <Link href="/test/1" passHref={true}>
+            <TestItemContainer>
+              <ItemText>테스트하러가기</ItemText>
+              <Arrow
+                length="7px"
+                width="2px"
+                color={colors.BLACK2}
+                direction="right"
+                calibrationX="2.5px"
+              />
+            </TestItemContainer>
+          </Link>
         </div>
-        <PurposeContainer>
-          <SubTitle>용도</SubTitle>
-          <div
-            css={css`
-              display: flex;
-              flex-flow: row wrap;
-              gap: 19px 12px;
-            `}
-          >
-            {PurposeLabels}
-          </div>
-        </PurposeContainer>
       </Content>
-      <ProgressBar stage={1} />
-      <NextButton path={'/test/2'} />
     </div>
   );
 };

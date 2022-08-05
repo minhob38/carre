@@ -2,13 +2,12 @@
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { v4 as uuid4 } from 'uuid';
+import InputLabel from '@components/InputLabel';
 import NextButton from '@components/NextButton';
-import ProgressBar from '@components/ProgressBar';
 import Header from '@components/Header';
 import Content from '@components/Content';
-import Image from '@components/Image';
-import Budget from '@components/Budget';
-import checkImage from '@assets/images/check.svg';
+import ProgressBar from '@components/ProgressBar';
 import * as colors from '@constants/colors';
 
 const Title = styled.div`
@@ -18,61 +17,146 @@ const Title = styled.div`
 `;
 
 const Description = styled.div`
-  margin: 0 0 20px 20px;
+  margin: 0 0 30px 20px;
   font: normal 400 14px / 23px roboto;
   color: ${colors.GRAY1};
 `;
 
 const SubTitle = styled.div`
-  margin: 0 0 0 20px;
+  margin: 0 0 12px 0px;
   font: normal 400 16px / 27px roboto;
   color: ${colors.BLACK2};
 `;
 
-const SubDescription = styled.div`
-  margin: 0 0 30px 20px;
-  font: normal 400 12px / 20px roboto;
-  color: ${colors.GRAY1};
+const SelectContainer = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 48px;
+  border-radius: 8px;
+  background: ${colors.WHITE1};
+  border: 2px solid ${colors.WHITE1};
+`;
+
+const Select = styled.select`
+  all: unset;
+  flex: 1;
+  text-align: center;
+  font: normal 400 12px / 26px roboto;
+  color: ${colors.BLACK2};
+`;
+
+const YearContainer = styled.div`
+  margin: 0 42px 0 30px;
+`;
+
+const GenderContainer = styled.div``;
+
+const PurposeContainer = styled.div`
+  margin: 40px 0 0 30px;
 `;
 
 const Test: NextPage = () => {
+  const genderLabels: { title: string; value: string }[] = [
+    { title: '여자', value: 'female' },
+    { title: '남자', value: 'male' },
+  ];
+
+  const purposeLabels: { title: string; value: string }[] = [
+    { title: '출퇴근용', value: 'work-commuting' },
+    { title: '등/하교', value: 'school-commuting' },
+    { title: '캠핑/레저', value: 'outdoor' },
+    { title: '영업', value: 'sales' },
+  ];
+
+  const GenderLabels = genderLabels.map((label) => {
+    return (
+      <InputLabel
+        key={uuid4()}
+        input={{
+          title: label.title,
+          type: 'radio',
+          name: 'gender',
+          value: label.value,
+        }}
+        style={{
+          width: '75px',
+          height: '48px',
+          font: 'normal 400 12px / 26px roboto',
+        }}
+      />
+    );
+  });
+
+  const PurposeLabels = purposeLabels.map((label) => {
+    return (
+      <InputLabel
+        key={uuid4()}
+        input={{
+          title: label.title,
+          type: 'checkbox',
+          name: 'purpose',
+          value: label.value,
+        }}
+        style={{
+          width: '159px',
+          height: '48px',
+          font: 'normal 400 12px / 26px roboto',
+        }}
+      />
+    );
+  });
+
   return (
-    <>
+    <div>
       <Header title="나의 정보 입력" backPath="/test/1" />
       <Content top="55px" bottom="0">
-        <Title>나의 구매 필수 조건 입력</Title>
-        <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>
-        <SubTitle>가격설정</SubTitle>
-        <SubDescription>가격의 스펙트럼을 변경해요</SubDescription>
+        <Title>나의 정보 입력</Title>
+        <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
         <div
           css={css`
             display: flex;
-            margin: 0 0 0 18px;
-          `}
-        ></div>
-        <Budget />
-        <div
-          css={css`
-            display: flex;
-            align-items: center;
-            margin: 15px 0 0 35px;
           `}
         >
-          <Image src={checkImage} alt="check" width="18px" height="18px" />
+          <YearContainer>
+            <SubTitle>출생연도</SubTitle>
+            <SelectContainer>
+              <Select>
+                <option value="1970">1970</option>
+              </Select>
+            </SelectContainer>
+          </YearContainer>
+          <GenderContainer>
+            <SubTitle>성별</SubTitle>
+            <div
+              css={css`
+                display: flex;
+                flex-flow: row nowrap;
+                gap: 0 33px;
+              `}
+            >
+              {GenderLabels}
+            </div>
+          </GenderContainer>
+        </div>
+        <PurposeContainer>
+          <SubTitle>용도</SubTitle>
           <div
             css={css`
-              font: normal 400 13px / 26px roboto;
-              color: ${colors.GRAY1};
-              margin: 0 0 0 16px;
+              display: flex;
+              flex-flow: row wrap;
+              gap: 19px 12px;
             `}
           >
-            비슷한 가격대 차량도 함께 보기
+            {PurposeLabels}
           </div>
-        </div>
-        <ProgressBar stage={2} />
-        <NextButton path={'/test/3'} />
+        </PurposeContainer>
       </Content>
-    </>
+      <ProgressBar stage={1} />
+      <NextButton path={'/test/2'} />
+    </div>
   );
 };
 
