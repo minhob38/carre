@@ -1,7 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import * as colors from '@constants/colors';
 import { v4 as uuid4 } from 'uuid';
+import * as colors from '@constants/colors';
+
+interface IProps {
+  totalScore: number;
+  score: number;
+  criterionScore: number;
+}
 
 interface IStyleProps {
   position?: 'start' | 'middle' | 'end';
@@ -19,9 +25,9 @@ const Block = styled.div`
   position: relative;
   width: ${(props: IStyleProps) => {
     if (props.position === 'end') {
-      return `${45 - LineWidth}px`; // 45px - LineWidth
+      return `${49 - LineWidth}px`;
     } else {
-      return '45px';
+      return '49px';
     }
   }};
   height: 10px;
@@ -47,43 +53,39 @@ const Line = styled.div`
   opacity: ${(props: IStyleProps) => props.opacity};
 `;
 
-const ResultBar: React.FC = () => {
-  const SCORE = 3;
-  const TOTAL_SCORE = 5;
+const ResultBar: React.FC<IProps> = ({ score, totalScore, criterionScore }) => {
   const _: number[] = [];
 
-  for (let i = 0; i < TOTAL_SCORE; i++) {
+  for (let i = 0; i < totalScore; i++) {
     _.push(i + 1);
   }
 
-  const CRITERION_SCORE = 3;
-  const blockScoreColor =
-    SCORE > CRITERION_SCORE ? colors.RED1 : colors.YELLOW1;
+  const blockScoreColor = score > criterionScore ? colors.RED1 : colors.YELLOW1;
   const noScoreColor = colors.GRAY2;
   const lineScoreColor = colors.YELLOW4;
   const lineNoScoreColor = colors.WHITE1;
 
   const Blocks = _.map((item, index) => {
-    if (index === 0 && item <= SCORE) {
+    if (index === 0 && item <= score) {
       return (
         <Block
           key={uuid4()}
           position="start"
-          backgroundColor={item <= SCORE ? blockScoreColor : noScoreColor}
+          backgroundColor={item <= score ? blockScoreColor : noScoreColor}
         >
           <Line
-            backgroundColor={item <= SCORE ? lineScoreColor : lineNoScoreColor}
-            opacity={item <= SCORE ? 0.6 : 1}
+            backgroundColor={item <= score ? lineScoreColor : lineNoScoreColor}
+            opacity={item === score ? 1 : 0.6}
           />
         </Block>
       );
     }
-    if (index === TOTAL_SCORE - 1) {
+    if (index === totalScore - 1) {
       return (
         <Block
           key={uuid4()}
           position="end"
-          backgroundColor={item <= SCORE ? blockScoreColor : noScoreColor}
+          backgroundColor={item <= score ? blockScoreColor : noScoreColor}
         />
       );
     }
@@ -91,11 +93,11 @@ const ResultBar: React.FC = () => {
       <Block
         key={uuid4()}
         position="middle"
-        backgroundColor={item <= SCORE ? blockScoreColor : noScoreColor}
+        backgroundColor={item <= score ? blockScoreColor : noScoreColor}
       >
         <Line
-          backgroundColor={item <= SCORE ? lineScoreColor : lineNoScoreColor}
-          opacity={item <= SCORE ? 0.6 : 1}
+          backgroundColor={item <= score ? lineScoreColor : lineNoScoreColor}
+          opacity={item === score ? 1 : 0.6}
         />
       </Block>
     );
