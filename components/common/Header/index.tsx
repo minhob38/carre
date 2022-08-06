@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import Arrow from '@components/Arrow';
+import Arrow from '@components/common/Arrow';
 import { useRouter } from 'next/router';
 import * as colors from '@constants/colors';
 

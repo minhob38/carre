@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import Image from '@components/Image';
+import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 
 const Wrapper = styled.div`

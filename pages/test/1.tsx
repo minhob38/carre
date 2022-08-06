@@ -2,10 +2,10 @@
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import Header from '@components/Header';
-import Content from '@components/Content';
+import Header from '@components/common/Header';
+import Content from '@components/common/Content';
 import * as colors from '@constants/colors';
-import Arrow from '@components/Arrow';
+import Arrow from '@components/common/Arrow';
 import Link from 'next/link';
 
 const Title = styled.div`

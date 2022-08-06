@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
 import styled from '@emotion/styled';
-import Header from '@components/Header';
-import Content from '@components/Content';
-import LinkButton from '@components/LinkButton';
+import Header from '@components/common/Header';
+import Content from '@components/common/Content';
+import LinkButton from '@components/common/LinkButton';
 import * as colors from '@constants/colors';
 
 const Title = styled.div`

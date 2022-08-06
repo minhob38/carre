@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import Image from '@components/Image';
-import Arrow from '@components/Arrow';
+import Image from '@components/common/Image';
+import Arrow from '@components/common/Arrow';
 import * as colors from '@constants/colors';
 import brandImage from '@assets/images/brand.svg';
 

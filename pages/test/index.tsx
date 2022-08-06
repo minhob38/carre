@@ -2,11 +2,11 @@
 import type { NextPage } from 'next';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
-import Content from '@components/Content';
-import Banner from '@components/Banner';
-import Scroll from '@components/Scroll';
-import NextButton from '@components/NextButton';
-import Image from '@components/Image';
+import Content from '@components/common/Content';
+import Banner from '@components/test/Banner';
+import Scroll from '@components/common/Scroll';
+import NextButton from '@components/common/NextButton';
+import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import bannerAImage from '@assets/images/banner-a.svg';
 import bannerBImage from '@assets/images/banner-b.svg';

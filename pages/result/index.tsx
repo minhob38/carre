@@ -3,9 +3,9 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import { v4 as uuid4 } from 'uuid';
 import styled from '@emotion/styled';
-import Header from '@components/Header';
-import Content from '@components/Content';
-import ResultBar from '@components/ResultBar';
+import Header from '@components/common/Header';
+import Content from '@components/common/Content';
+import ResultBar from '@components/result/ResultBar';
 import * as colors from '@constants/colors';
 
 interface IStyleProps {

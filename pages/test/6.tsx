@@ -4,12 +4,12 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
-import Header from '@components/Header';
-import Content from '@components/Content';
-import ImageLabel from '@components/ImageLabel';
+import Header from '@components/common/Header';
+import Content from '@components/common/Content';
+import ImageLabel from '@components/common/ImageLabel';
 import * as colors from '@constants/colors';
 import { questions } from '@constants/variables';
-import QuestionProgressBar from '@components/QuestionProgressBar';
+import QuestionProgressBar from '@components/test/QuestionProgressBar';
 
 const Description = styled.div`
   margin: 0 0 16px 30px;

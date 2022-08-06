@@ -3,11 +3,11 @@ import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
-import InputLabel from '@components/InputLabel';
-import NextButton from '@components/NextButton';
-import Header from '@components/Header';
-import Content from '@components/Content';
-import ProgressBar from '@components/ProgressBar';
+import InputLabel from '@components/common/InputLabel';
+import NextButton from '@components/common/NextButton';
+import Header from '@components/common/Header';
+import Content from '@components/common/Content';
+import ProgressBar from '@components/test/ProgressBar';
 import * as colors from '@constants/colors';
 
 const Title = styled.div`

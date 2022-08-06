@@ -2,18 +2,18 @@
 import type { NextPage } from 'next';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
-import InputLabel from '@components/InputLabel';
-import NextButton from '@components/NextButton';
-import ProgressBar from '@components/ProgressBar';
-import Header from '@components/Header';
-import Scroll from '@components/Scroll';
-import Content from '@components/Content';
+import InputLabel from '@components/common/InputLabel';
+import NextButton from '@components/common/NextButton';
+import ProgressBar from '@components/test/ProgressBar';
+import Header from '@components/common/Header';
+import Scroll from '@components/common/Scroll';
+import Content from '@components/common/Content';
 import * as colors from '@constants/colors';
 import { brands, fuels, categories } from '@constants/variables';
 import brandImage from '@assets/images/brand.svg';
 import categoryImage from '@assets/images/category.svg';
 import fuelImage from '@assets/images/fuel.svg';
-import DropDown from '@components/DropDown';
+import DropDown from '@components/test/DropDown';
 
 const Title = styled.div`
   margin: 30px 0 2px 20px;

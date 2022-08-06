@@ -1,41 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import type { NextPage } from 'next';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import Header from '@components/common/Header';
-import Content from '@components/common/Content';
-import Scroll from '@components/common/Scroll';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import Arrow from '@components/common/Arrow';
 import Link from 'next/link';
 import casperImage from '@assets/images/casper.svg';
 import infoImage from '@assets/images/info.svg';
-import ResultCard from '@components/result/ResultCard';
 
-const Title = styled.div`
-  margin: 24px 0 20px 20px;
-  font: normal 400 20px / 26px roboto;
-  color: ${colors.BLACK1};
-`;
-
-const ItemText = styled.div`
-  font: 'normal 400 18px / 20px roboto';
-  color: ${colors.BLACK1};
-`;
-
-const TestItemContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 350px;
-  height: 78px;
-  border-radius: 8px;
-  background-color: ${colors.YELLOW1};
-  padding: 0 23px;
-`;
-
-const RecommendationCard = styled.div`
+const Wrapper = styled.div`
   padding: 16px 22px 0 22px;
   width: 324px;
   height: 534px;
@@ -140,18 +112,59 @@ const Price = styled.div`
   color: ${colors.BLACK2};
 `;
 
-const Test: NextPage = () => {
+const ResultCard: React.FC = () => {
   return (
     <>
-      <Header title="나의 추천 차량" backPath="/test" />
-      <Content top="55px" bottom="0">
-        <Title>성능과 안전 두마리 토끼를 잡으려는 당신!</Title>
-        <Scroll direction="x" width="100%">
-          <ResultCard />
-        </Scroll>
-      </Content>
+      <Wrapper>
+        <RankContainer>
+          <Rank>1순위</Rank>
+          <CarName>현대 캐스퍼 밴</CarName>
+        </RankContainer>
+        <Description>
+          지프 그랜드 체로키는 성능이 어쭈구 좋고 안전은 또 이렇게 막 이렇게
+          좋은 대표 차량입니다.
+        </Description>
+        <ImageContainer>
+          <Image src={casperImage} alt="casper" width="271px" height="170px" />
+        </ImageContainer>
+        <DetailContainer>
+          <Detail>차량 상세보기</Detail>
+          <Arrow
+            length="8.5px"
+            width="1px"
+            color={colors.BLACK2}
+            direction="right"
+            calibrationX="2.5px"
+          />
+        </DetailContainer>
+        <TermContainer>
+          <Image src={infoImage} alt="info" width="12px" height="12px" />
+          <Term>차량 용어 바로 알아보기</Term>
+        </TermContainer>
+        <TrimContainer>
+          <TrimTitle>트림</TrimTitle>
+          <Trim>
+            <div>스마트</div>
+            <div>모던</div>
+            <div>인스퍼레이션</div>
+          </Trim>
+        </TrimContainer>
+        <OptionContainer>
+          <OptionTitle>옵션</OptionTitle>
+          <Option>
+            <div>캐스퍼액티브</div>
+            <div>선루프</div>
+            <div>에센셜 풀</div>
+            <div>스마트팩</div>
+          </Option>
+        </OptionContainer>
+        <PriceContainer>
+          <PriceTitle>총 차량 가격</PriceTitle>
+          <Price>44,580,000원</Price>
+        </PriceContainer>
+      </Wrapper>
     </>
   );
 };
 
-export default Test;
+export default ResultCard;

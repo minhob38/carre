@@ -2,12 +2,12 @@
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import NextButton from '@components/NextButton';
-import ProgressBar from '@components/ProgressBar';
-import Header from '@components/Header';
-import Content from '@components/Content';
-import Image from '@components/Image';
-import Budget from '@components/Budget';
+import NextButton from '@components/common/NextButton';
+import ProgressBar from '@components/test/ProgressBar';
+import Header from '@components/common/Header';
+import Content from '@components/common/Content';
+import Image from '@components/common/Image';
+import Budget from '@components/test/Budget';
 import checkImage from '@assets/images/check.svg';
 import * as colors from '@constants/colors';
 

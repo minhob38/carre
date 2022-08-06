@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { shallowEqual } from 'react-redux';
-import Image from '@components/Image';
+import Image from '@components/common/Image';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import * as colors from '@constants/colors';
