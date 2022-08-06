@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
 import { css } from '@emotion/react';
+import { v4 as uuid4 } from 'uuid';
 import styled from '@emotion/styled';
 import Header from '@components/Header';
 import Content from '@components/Content';
 import * as colors from '@constants/colors';
 import Arrow from '@components/Arrow';
 import Link from 'next/link';
+import ResultBar from '@components/ResultBar';
 
 const Title = styled.div`
   margin: 39px 0 0 0;
@@ -63,6 +65,7 @@ const Result: NextPage = () => {
         <Link href="/result" passHref={true}>
           <NextButton>내 취향의 차량 보기</NextButton>
         </Link>
+        <ResultBar />
       </Content>
     </>
   );

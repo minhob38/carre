@@ -18,3 +18,6 @@ export const WHITE2 = '#fafafa';
 export const YELLOW1 = '#f3bc4e';
 export const YELLOW2 = '#e4813a';
 export const YELLOW3 = '#f7ca54';
+export const YELLOW4 = '#fffce9';
+
+export const RED1 = '#f57038';
