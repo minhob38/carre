@@ -123,7 +123,7 @@ const Result: NextPage = () => {
         <Description>
           당신은 안전과 편의성을 중시하며 실속을 챙기는 합리적인 실속파입니다.
         </Description>
-        <Link href="/result" passHref={true}>
+        <Link href="/result/1" passHref={true}>
           <NextButton>내 취향의 차량 보기</NextButton>
         </Link>
       </Content>

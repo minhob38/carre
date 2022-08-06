@@ -31,6 +31,7 @@ const Title = styled.div`
   text-align: center;
 `;
 
+// TODO: x, <, 없음 세개로 만들기
 const Header: React.FC<IProps> = ({ title, backPath }) => {
   const router = useRouter();
   const handleArrowClick = () => {

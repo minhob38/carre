@@ -10,7 +10,8 @@ interface IProps {
 const Wrapper = styled.div`
   position: relative;
   display: flex;
-  flex-grow: 0;
+  /* flex-grow: 0;
+  flex-shrink: 0; */
   flex-flow: ${(props: IProps) =>
     props.direction === 'x' ? 'row nowrap' : 'column nowrap'};
   overflow-x: ${(props: IProps) =>
