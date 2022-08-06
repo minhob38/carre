@@ -33,17 +33,31 @@ const Description = styled.div`
   margin: 0 0 0 20px;
 `;
 
-const ImageContainer = styled.div`
+const Card = styled.div`
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-shrink: 0;
+  width: 314px;
+  height: 180px;
+  margin: 0 14px 0 0;
+  border-radius: 8px;
+  background: ${colors.WHITE1};
+  box-shadow: 0px 2px 16px rgba(96, 100, 112, 0.12);
 `;
 
 const CarName = styled.div`
   position: absolute;
-  top: 27px;
-  left: 36px;
+  top: 12px;
+  left: 16px;
   font: normal 400 18px / 27px roboto;
   color: ${colors.BLACK6};
   z-index: 1;
+`;
+
+const ImageContainer = styled.div`
+  margin: 0 16px 22px 0;
 `;
 
 const TagContainer = styled.div`
@@ -119,34 +133,40 @@ const Index: NextPage = () => {
             <Description>
               MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!
             </Description>
-            <Scroll direction="x" width="100%" height="212px">
-              <ImageContainer>
-                <CarName>캐스퍼</CarName>
-                <Image
-                  src={casperImage}
-                  alt="casper"
-                  width="346px"
-                  height="212px"
-                />
-              </ImageContainer>
-              <ImageContainer>
-                <CarName>캐스퍼</CarName>
-                <Image
-                  src={casperImage}
-                  alt="casper"
-                  width="346px"
-                  height="212px"
-                />
-              </ImageContainer>
-              <ImageContainer>
-                <CarName>캐스퍼</CarName>
-                <Image
-                  src={casperImage}
-                  alt="casper"
-                  width="346px"
-                  height="212px"
-                />
-              </ImageContainer>
+            <Scroll direction="x" width="100vw" height="212px">
+              <Card>
+                <CarName>현대 캐스퍼</CarName>
+                <ImageContainer>
+                  <Image
+                    src={casperImage}
+                    alt="casper"
+                    width="205px"
+                    height="129px"
+                  />
+                </ImageContainer>
+              </Card>
+              <Card>
+                <CarName>현대 캐스퍼</CarName>
+                <ImageContainer>
+                  <Image
+                    src={casperImage}
+                    alt="casper"
+                    width="205px"
+                    height="129px"
+                  />
+                </ImageContainer>
+              </Card>
+              <Card>
+                <CarName>현대 캐스퍼</CarName>
+                <ImageContainer>
+                  <Image
+                    src={casperImage}
+                    alt="casper"
+                    width="205px"
+                    height="129px"
+                  />
+                </ImageContainer>
+              </Card>
             </Scroll>
             <div
               css={css`
