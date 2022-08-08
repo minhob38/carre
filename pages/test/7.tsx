@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import Header from '@components/common/Header';
-import NextButton from '@components/NextButton';
+import NextButton from '@components/common/NextButton';
 import Content from '@components/common/Content';
 import ImageLabel from '@components/common/ImageLabel';
 import * as colors from '@constants/colors';
