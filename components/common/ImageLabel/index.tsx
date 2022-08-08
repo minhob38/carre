@@ -7,8 +7,8 @@ import Image from '@components/common/Image';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import * as colors from '@constants/colors';
-import activeCheckImage from '@assets/images/active-check.svg';
-import inactiveCheckImage from '@assets/images/inactive-check.svg';
+import activeCheckImage from '@assets/images/icons/active-check.svg';
+import inactiveCheckImage from '@assets/images/icons/inactive-check.svg';
 
 interface IProps {
   input: {
@@ -38,18 +38,14 @@ const Wrapper = styled.label`
   align-items: center;
   width: ${(props: IStyleProps) => props.width};
   height: ${(props: IStyleProps) => props.height};
-  border: ${(props: IStyleProps) =>
-    props.checked
-      ? `2px solid ${colors.YELLOW1}`
-      : `2px solid ${colors.WHITE1}`};
   border-radius: 8px;
-  background-color: ${colors.WHITE1};
+  box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
 `;
 
 const ImageContainer = styled.div`
   position: absolute;
-  bottom: 16px;
-  right: 16px;
+  bottom: 10px;
+  right: 10px;
 `;
 
 const ImageLabel: React.FC<IProps> = ({ input, style, image, onClick }) => {
