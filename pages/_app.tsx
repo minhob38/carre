@@ -23,9 +23,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1,  minimum-scale=1.0, user-scalable=no, shrink-to-fit=no"
         />
         <link
-          rel="stylesheet preload"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.0/dist/web/static/pretendard-dynamic-subset.css"
-          type="text/css"
+          rel="stylesheet"
+          as="style"
+          crossOrigin="true"
+          href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.5/variable/pretendardvariable.css"
         />
       </Head>
       <Component {...pageProps} />
