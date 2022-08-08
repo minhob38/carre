@@ -22,6 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1,  minimum-scale=1.0, user-scalable=no, shrink-to-fit=no"
         />
+        <link
+          rel="stylesheet preload"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.0/dist/web/static/pretendard-dynamic-subset.css"
+          type="text/css"
+        />
       </Head>
       <Component {...pageProps} />
     </MobileWrapper>
