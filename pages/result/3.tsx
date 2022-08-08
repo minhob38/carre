@@ -8,8 +8,7 @@ import Scroll from '@components/common/Scroll';
 import ResultCard from '@components/result/ResultCard';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
-import DropDown from '@components/result/DropDown';
-import DealerButton from '@components/result/DealerButton';
+import NextButton from '@components/common/NextButton';
 import StyleCheckBoxes from '@components/common/StyleCheckBoxes';
 
 const Title = styled.div`
@@ -32,7 +31,7 @@ const Result: NextPage = () => {
   return (
     <>
       <Header title="검사 결과 조절" backPath="/result" />
-      <Content top="55px" bottom="112px">
+      <Content top="55px" bottom="72px">
         <Scroll direction="y" height="100%">
           <Title>차량 스타일 변경</Title>
           <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
@@ -41,7 +40,7 @@ const Result: NextPage = () => {
           </StyleCheckBoxesContainer>
         </Scroll>
       </Content>
-      <DealerButton />
+      <NextButton title="다음" path="/result" />
     </>
   );
 };

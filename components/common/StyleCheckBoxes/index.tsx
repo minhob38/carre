@@ -4,19 +4,6 @@ import { styles } from '@constants/variables';
 import ImageLabel from '@components/common/ImageLabel';
 import { v4 as uuid4 } from 'uuid';
 
-interface Props extends StyleProps {
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-}
-
-interface StyleProps {
-  length: string;
-  width: string;
-  color: string;
-  direction: 'left' | 'right' | 'top' | 'bottom';
-  calibrationX?: string;
-  calibrationY?: string;
-}
-
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;

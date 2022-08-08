@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import styled from '@emotion/styled';
-import * as colors from '@constants/colors';
 import Link from 'next/link';
+import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
 
 interface IProps {
   title: string;
@@ -17,10 +18,9 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 72px;
-  font: 'normal 400 20px / 32px roboto'; // TODO: 'WefontGothic(OTF)'?
-  color: rgba(255, 255, 255, 0.84);
-  background-color: ${colors.BLACK1};
-  box-shadow: 0px 4.43038px 17.7215px rgba(96, 100, 112, 0.07);
+  font: ${fonts.BUTTON_1};
+  color: ${colors.SECONDARY_REAL_WHITE};
+  background-color: ${colors.SECONDARY_500};
 `;
 
 const NextButton: React.FC<IProps> = ({ path, title }) => {
