@@ -1,48 +1,80 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+import * as fonts from '@constants/fonts';
 import * as colors from '@constants/colors';
+import Link from 'next/link';
+
+interface IStyleProps {
+  isCurrent: boolean;
+}
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 97px;
   position: fixed;
   top: 0;
+  width: 100%;
+  height: 105px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: space-between;
   background-color: #ffffff;
   box-shadow: 0px 1px 10px 1px rgba(96, 100, 112, 0.06);
 `;
 
 const Title = styled.div`
-  font: normal 400 24px / 27px roboto;
-  margin: 18px 0 15px 31px;
-  color: ${colors.YELLOW1};
+  display: flex;
+  align-items: center;
+  font: ${fonts.TITLE_T1};
+  width: 100%;
+  height: 61px;
+  padding: 0 0 0 30px;
+  color: ${colors.PRIMARY_400};
 `;
 
 const MenuContainer = styled.div`
   display: flex;
-  width: calc(100% - 35px - 35px);
+  width: calc(100% - 40px - 40px);
+  height: 46px;
   justify-content: space-between;
-  align-items: center;
-  margin: auto;
+  align-items: flex-end;
+  margin: 0 auto;
 `;
 
 const Menu = styled.div`
-  font: normal 400 18px / 27px roboto;
-  color: ${colors.BLACK5};
-  border-bottom: solid 2.5px ${colors.BLACK5}; ;
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_REAL_BLACK};
+  color: ${(props: IStyleProps) => {
+    return props.isCurrent
+      ? `${colors.SECONDARY_REAL_BLACK}`
+      : `${colors.SECONDARY_250}`;
+  }};
+  border-bottom: ${(props: IStyleProps) => {
+    return props.isCurrent
+      ? `solid 2.5px ${colors.SECONDARY_REAL_BLACK}`
+      : 'none';
+  }};
 `;
 
 const TopNavigator: React.FC = () => {
+  const router = useRouter();
+  const pathname = router.pathname;
+
   return (
     <Wrapper>
       <Title>CARRE</Title>
       <MenuContainer>
-        <Menu>홈</Menu>
-        <Menu>히스토리</Menu>
-        <Menu>찜</Menu>
-        <Menu>MY</Menu>
+        <Link href={'/'} passHref={true}>
+          <Menu isCurrent={pathname === '/'}>홈</Menu>
+        </Link>
+        <Link href={'/history'} passHref={true}>
+          <Menu isCurrent={pathname === '/history'}>히스토리</Menu>
+        </Link>
+        <Link href={'/bookmark'} passHref={true}>
+          <Menu isCurrent={pathname === '/bookmark'}>찜</Menu>
+        </Link>
+        <Link href={'/my'} passHref={true}>
+          <Menu isCurrent={pathname === '/my'}>MY</Menu>
+        </Link>
       </MenuContainer>
     </Wrapper>
   );
