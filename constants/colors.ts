@@ -21,3 +21,24 @@ export const YELLOW3 = '#f7ca54';
 export const YELLOW4 = '#fffce9';
 
 export const RED1 = '#f57038';
+
+/* desgin system */
+export const PRIMARY_500 = '#e4813a';
+export const PRIMARY_400 = '#f3bc4e';
+export const PRIMARY_350 = '#f7ca54';
+export const PRIMARY_300 = '#f9d658';
+export const PRIMARY_250 = '#fce480';
+export const PRIMARY_200 = '#fdf1a6';
+export const PRIMARY_100 = '#fffce9';
+
+export const SECONDARY_REAL_BLACK = '#000000';
+export const SECONDARY_500 = '#1a1a1a';
+export const SECONDARY_400 = '#4c4c4c';
+export const SECONDARY_300 = '#999999';
+export const SECONDARY_250 = '#b5b5b5';
+export const SECONDARY_200 = '#d6d5d5';
+export const SECONDARY_100 = '#f2f2f2';
+export const SECONDARY_REAL_WHITE = '#ffffff';
+
+export const BACKGROUND = '#fafafa';
+export const ERROR_RED = '#ee5050';
