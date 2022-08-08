@@ -5,13 +5,15 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import Scroll from '@components/common/Scroll';
 import Content from '@components/common/Content';
-import TopNavigator from '@components/TopNavigator';
+import TopNavigator from '@components/common/TopNavigator';
 import Image from '@components/common/Image';
 import Arrow from '@components/common/Arrow';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
 import casperImage from '@assets/images/casper.svg';
 import tendencyBannerImage from '@assets/images/tendency-banner.svg';
 import dealerBannerImage from '@assets/images/dealer-banner.svg';
+import Card from '@components/home/Card';
 
 interface IStyleProps {
   backgroundColor?: string;
@@ -22,42 +24,15 @@ interface IStyleProps {
 const Recommendation = styled.div``;
 
 const Title = styled.div`
-  font: normal 400 20px / 27px roboto;
-  color: ${colors.BLACK6};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_REAL_BLACK};
   margin: 30px 3px 0 20px;
 `;
 
 const Description = styled.div`
-  font: normal 400 12px / 20px roboto;
-  color: ${colors.GRAY1};
-  margin: 0 0 0 20px;
-`;
-
-const Card = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-shrink: 0;
-  width: 314px;
-  height: 180px;
-  margin: 0 14px 0 0;
-  border-radius: 8px;
-  background: ${colors.WHITE1};
-  box-shadow: 0px 2px 16px rgba(96, 100, 112, 0.12);
-`;
-
-const CarName = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  font: normal 400 18px / 27px roboto;
-  color: ${colors.BLACK6};
-  z-index: 1;
-`;
-
-const ImageContainer = styled.div`
-  margin: 0 16px 22px 0;
+  font: ${fonts.SUBTITLE_T2};
+  color: ${colors.SECONDARY_300};
+  margin: 0 0 20px 20px;
 `;
 
 const TagContainer = styled.div`
@@ -122,6 +97,11 @@ const BannerDescription = styled.div`
   white-space: pre;
 `;
 
+const CardContainer = styled.div`
+  display: flex;
+  gap: 0 14px;
+`;
+
 const Index: NextPage = () => {
   return (
     <>
@@ -133,40 +113,18 @@ const Index: NextPage = () => {
             <Description>
               MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!
             </Description>
-            <Scroll direction="x" width="100vw" height="212px">
-              <Card>
-                <CarName>현대 캐스퍼</CarName>
-                <ImageContainer>
-                  <Image
-                    src={casperImage}
-                    alt="casper"
-                    width="205px"
-                    height="129px"
-                  />
-                </ImageContainer>
-              </Card>
-              <Card>
-                <CarName>현대 캐스퍼</CarName>
-                <ImageContainer>
-                  <Image
-                    src={casperImage}
-                    alt="casper"
-                    width="205px"
-                    height="129px"
-                  />
-                </ImageContainer>
-              </Card>
-              <Card>
-                <CarName>현대 캐스퍼</CarName>
-                <ImageContainer>
-                  <Image
-                    src={casperImage}
-                    alt="casper"
-                    width="205px"
-                    height="129px"
-                  />
-                </ImageContainer>
-              </Card>
+            <Scroll
+              direction="x"
+              width="calc(100% - 20px - 20px)"
+              height="212px"
+            >
+              <CardContainer>
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+              </CardContainer>
             </Scroll>
             <div
               css={css`
