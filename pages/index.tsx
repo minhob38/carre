@@ -57,35 +57,37 @@ const Index: NextPage = () => {
     <>
       <TopNavigator />
       <Content top="105px" bottom="0">
-        <Scroll direction="y" height={`calc(100%)`}>
-          <Title>20대 여성들이 많이 타는차</Title>
-          <Description>
-            MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!
-          </Description>
-          <Scroll
-            direction="x"
-            width={`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`}
-            height="190px"
-          >
-            <CardContainer>
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-            </CardContainer>
-          </Scroll>
-          <SubContainer>
-            <TagContainer>
-              <Tag># 20대</Tag>
-              <Tag># 여성</Tag>
-            </TagContainer>
-            <MbtiButton />
-          </SubContainer>
-          <BannerContainer>
-            <Banner type="test" />
-            <Banner type="dealer" />
-          </BannerContainer>
+        <Scroll direction="y" height="100%">
+          <div>
+            <Title>20대 여성들이 많이 타는차</Title>
+            <Description>
+              MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!
+            </Description>
+            <Scroll
+              direction="x"
+              width={`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`}
+              height="190px"
+            >
+              <CardContainer>
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+              </CardContainer>
+            </Scroll>
+            <SubContainer>
+              <TagContainer>
+                <Tag># 20대</Tag>
+                <Tag># 여성</Tag>
+              </TagContainer>
+              <MbtiButton />
+            </SubContainer>
+            <BannerContainer>
+              <Banner type="test" />
+              <Banner type="dealer" />
+            </BannerContainer>
+          </div>
         </Scroll>
       </Content>
     </>
