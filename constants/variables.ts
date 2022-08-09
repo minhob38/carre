@@ -128,3 +128,8 @@ export const styles = [
   { name: 'style', value: '4', src: style4Image, alt: 'style-4' },
   { name: 'style', value: '5', src: style5Image, alt: 'style-5' },
 ];
+
+/* 출생년도 select 설정*/
+export const MIN_YEAR = 1941;
+export const MAX_YEAR = 2004;
+export const DEFAULT_YEAR = 1997;

@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
+import { NEXT_BUTTON_HEIGHT } from '@constants/size';
 
 interface IProps {
   title: string;
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 72px;
+  height: ${NEXT_BUTTON_HEIGHT};
   font: ${fonts.BUTTON_1};
   color: ${colors.SECONDARY_REAL_WHITE};
   background-color: ${colors.SECONDARY_500};

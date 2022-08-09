@@ -11,7 +11,8 @@ import ProgressBar from '@components/test/ProgressBar';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import { HEADER_HEIGHT } from '@constants/size';
+import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { MIN_YEAR, MAX_YEAR, DEFAULT_YEAR } from '@constants/variables';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -44,8 +45,6 @@ const SelectContainer = styled.div`
 
 const Select = styled.select`
   all: unset;
-  flex: 1;
-  text-align: center;
   font: ${fonts.BODY_REGULAR_1};
   color: ${colors.SECONDARY_400};
 `;
@@ -103,10 +102,22 @@ const Test: NextPage = () => {
     );
   });
 
+  const years: number[] = [];
+  for (let i = MIN_YEAR; i < MAX_YEAR; i++) {
+    years.push(i);
+  }
+
+  const Options = years.map((year) => {
+    return (
+      <option key={uuid4()} value={year}>
+        {year}
+      </option>
+    );
+  });
   return (
     <>
       <Header title="나의 정보 입력" type="close" closePath="/" />
-      <Content top={HEADER_HEIGHT} bottom="0">
+      <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>나의 정보 입력</Title>
         <Description>차량 구매에 필요한 나의 정보를 입력해요.</Description>
         <div
@@ -117,28 +128,7 @@ const Test: NextPage = () => {
           <YearContainer>
             <SubTitle>출생연도</SubTitle>
             <SelectContainer>
-              <Select>
-                <option value="1980">1980</option>
-                <option value="1981">1981</option>
-                <option value="1982">1982</option>
-                <option value="1983">1983</option>
-                <option value="1984">1984</option>
-                <option value="1985">1985</option>
-                <option value="1986">1986</option>
-                <option value="1987">1987</option>
-                <option value="1988">1988</option>
-                <option value="1989">1989</option>
-                <option value="1990">1990</option>
-                <option value="1991">1991</option>
-                <option value="1992">1992</option>
-                <option value="1993">1993</option>
-                <option value="1994">1994</option>
-                <option value="1995">1995</option>
-                <option value="1996">1996</option>
-                <option value="1997" selected={true}>
-                  1997
-                </option>
-              </Select>
+              <Select defaultValue={DEFAULT_YEAR}>{Options}</Select>
             </SelectContainer>
           </YearContainer>
           <GenderContainer>
