@@ -35,7 +35,6 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: calc(100% - 77px - 77px); */
   font: ${fonts.TITLE_T2};
   color: ${colors.SECONDARY_500};
 `;
