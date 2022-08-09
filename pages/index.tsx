@@ -15,6 +15,7 @@ import tendencyBannerImage from '@assets/images/tendency-banner.svg';
 import dealerBannerImage from '@assets/images/dealer-banner.svg';
 import Card from '@components/home/Card';
 import Tag from '@components/home/Tag';
+import MbtiButton from '@components/home/MbtiButton';
 
 interface IStyleProps {
   backgroundColor?: string;
@@ -41,19 +42,6 @@ const TagContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0 6px;
-`;
-
-const MbtiButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 184px;
-  height: 36px;
-  border-radius: 8px;
-  background-color: ${colors.YELLOW3};
-`;
-const MbtiText = styled.div`
-  margin: 0 14px 0 0;
 `;
 
 const BannerContainer = styled.div`
@@ -124,23 +112,14 @@ const Index: NextPage = () => {
                 display: flex;
                 justify-content: space-between;
                 width: calc(100% - 20px - 20px);
-                margin: 20px 20px 0 20px;
+                margin: 20px auto 40px auto;
               `}
             >
               <TagContainer>
                 <Tag># 20대</Tag>
                 <Tag># 여성</Tag>
               </TagContainer>
-              <MbtiButton>
-                <MbtiText>나의 MBTI 적용하기</MbtiText>
-                <Arrow
-                  length="8.5px"
-                  width="1.5px"
-                  color={colors.BLACK1}
-                  direction="right"
-                  calibrationX="1.5px"
-                />
-              </MbtiButton>
+              <MbtiButton />
             </div>
           </Recommendation>
           <BannerContainer>
