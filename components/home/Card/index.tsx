@@ -1,18 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import type { NextPage } from 'next';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import Link from 'next/link';
-import Scroll from '@components/common/Scroll';
-import Content from '@components/common/Content';
-import TopNavigator from '@components/common/TopNavigator';
 import Image from '@components/common/Image';
-import Arrow from '@components/common/Arrow';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import casperImage from '@assets/images/casper.svg';
-import tendencyBannerImage from '@assets/images/tendency-banner.svg';
-import dealerBannerImage from '@assets/images/dealer-banner.svg';
 
 interface IStyleProps {
   backgroundColor?: string;

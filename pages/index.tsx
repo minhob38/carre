@@ -10,6 +10,7 @@ import Image from '@components/common/Image';
 import Arrow from '@components/common/Arrow';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
 import casperImage from '@assets/images/casper.svg';
 import tendencyBannerImage from '@assets/images/tendency-banner.svg';
 import dealerBannerImage from '@assets/images/dealer-banner.svg';
@@ -28,13 +29,13 @@ const Recommendation = styled.div``;
 const Title = styled.div`
   font: ${fonts.TITLE_T2};
   color: ${colors.SECONDARY_REAL_BLACK};
-  margin: 30px 3px 0 20px;
+  margin: 30px 3px 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const Description = styled.div`
   font: ${fonts.SUBTITLE_T2};
   color: ${colors.SECONDARY_300};
-  margin: 0 0 20px 20px;
+  margin: 0 0 20px ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const TagContainer = styled.div`
@@ -48,7 +49,7 @@ const BannerContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   gap: 20px 0;
-  margin: 40px 0 0 20px;
+  margin: 40px 0 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const BannerBox = styled.div`
@@ -96,7 +97,7 @@ const Index: NextPage = () => {
             </Description>
             <Scroll
               direction="x"
-              width="calc(100% - 20px - 20px)"
+              width={`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`}
               height="212px"
             >
               <CardContainer>
@@ -111,7 +112,7 @@ const Index: NextPage = () => {
               css={css`
                 display: flex;
                 justify-content: space-between;
-                width: calc(100% - 20px - 20px);
+                width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
                 margin: 20px auto 40px auto;
               `}
             >
