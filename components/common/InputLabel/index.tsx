@@ -6,6 +6,7 @@ import { shallowEqual } from 'react-redux';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
 
 interface IProps {
   input: {
@@ -14,14 +15,11 @@ interface IProps {
     name: string;
     value: string;
   };
-  style: Omit<IStyleProps, 'checked'>;
+  size: 'narrow' | 'long';
 }
 
-interface IStyleProps {
+interface IStyleProps extends Pick<IProps, 'size'> {
   checked: boolean;
-  width: string;
-  height: string;
-  font: string;
 }
 
 const Wrapper = styled.label`
@@ -29,21 +27,24 @@ const Wrapper = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${(props: IStyleProps) => props.width};
-  height: ${(props: IStyleProps) => props.height};
+  width: ${(props: IStyleProps) => {
+    if (props.size === 'narrow') {
+      return '80px';
+    } else if (props.size === 'long') {
+      return '159px';
+    }
+  }};
+  height: 48px;
   border: ${(props: IStyleProps) =>
-    props.checked
-      ? `2px solid ${colors.YELLOW1}`
-      : `2px solid ${colors.WHITE1}`};
+    props.checked ? `2px solid ${colors.PRIMARY_400}` : `none`};
   border-radius: 8px;
-  background-color: ${colors.WHITE1};
-  font: ${(props: IStyleProps) => props.font};
-  color: ${colors.BLACK2};
+  background-color: ${colors.SECONDARY_REAL_WHITE};
+  font: ${fonts.BODY_REGULAR_1};
+  color: ${colors.SECONDARY_400};
 `;
 
-const InputLabel: React.FC<IProps> = ({ input, style }) => {
+const InputLabel: React.FC<IProps> = ({ input, size }) => {
   const { title, type, name, value } = input;
-  const { width, height, font } = style;
 
   const dispatch = useTypedDispatch();
   const inputState = useTypedSelector(
@@ -102,7 +103,7 @@ const InputLabel: React.FC<IProps> = ({ input, style }) => {
   };
 
   return (
-    <Wrapper checked={checked} width={width} height={height} font={font}>
+    <Wrapper checked={checked} size={size}>
       {title}
       <input
         type={type}

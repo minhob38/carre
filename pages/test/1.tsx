@@ -1,12 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import Link from 'next/link';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import TestStartButton from '@components/home/TestStartButton';
-import Arrow from '@components/common/Arrow';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
