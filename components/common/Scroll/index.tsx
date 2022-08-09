@@ -20,7 +20,7 @@ const Wrapper = styled.div`
     props.direction === 'y' ? 'auto' : 'hidden'};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  margin: auto;
+  margin: 0 auto;
 `;
 
 const Scroll: React.FC<IProps> = ({
