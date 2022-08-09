@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import * as colors from '@constants/colors';
 import Arrow from '@components/common/Arrow';
-import Link from 'next/link';
+import { HEADER_HEIGHT } from '@constants/size';
 
 const Title = styled.div`
   margin: 24px 0 34px 27px;
@@ -38,8 +39,8 @@ const Test: NextPage = () => {
 
   return (
     <>
-      <Header title="차량 구매 성향 테스트" backPath="/test" />
-      <Content top="55px" bottom="0">
+      <Header type="close" title="차량 구매 성향 테스트" backPath="/test" />
+      <Content top={HEADER_HEIGHT} bottom="0">
         {/* TODO: 변수로 사용자 이름 넣기 */}
         <Title>성능과 안전 두마리 토끼를 잡으려는 카레님</Title>
         <div

@@ -1,12 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import Arrow from '@components/common/Arrow';
 import { useRouter } from 'next/router';
+import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import backImage from '@assets/images/icons/back.svg';
+import closeImage from '@assets/images/icons/close.svg';
+import { HEADER_HEIGHT } from '@constants/size';
 
 interface IProps {
   title: string;
+  type: 'back' | 'close';
   backPath?: string;
+  closePath?: string;
 }
 
 const Wrapper = styled.div`
@@ -15,9 +21,10 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 55px;
+  height: ${HEADER_HEIGHT};
   padding: 0 0 0 20px;
   box-shadow: 0px 1px 10px 1px rgba(96, 100, 112, 0.06);
+  background-color: ${colors.SECONDARY_REAL_WHITE};
 `;
 
 const Title = styled.div`
@@ -25,30 +32,48 @@ const Title = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: calc(100% - 77px - 77px);
-  font: normal 400 18px / 28px roboto;
-  color: ${colors.BLACK1};
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: calc(100% - 77px - 77px); */
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_500};
 `;
 
-// TODO: x, <, 없음 세개로 만들기
-const Header: React.FC<IProps> = ({ title, backPath }) => {
+const ImageContainer = styled.div``;
+
+const Header: React.FC<IProps> = ({
+  title,
+  type,
+  backPath = '/',
+  closePath = '/',
+}) => {
   const router = useRouter();
-  const handleArrowClick = () => {
-    if (!backPath) return;
-    router.push(backPath);
+
+  let src: any;
+  let alt: 'back' | 'close';
+  let path: string;
+
+  if (type === 'back') {
+    src = backImage;
+    alt = 'back';
+    path = backPath;
+  } else {
+    src = closeImage;
+    alt = 'close';
+    path = closePath;
+  }
+
+  const handleClick = () => {
+    if (!path) return;
+    router.push(path);
   };
 
   return (
     <Wrapper>
-      <Arrow
-        length="13.5px"
-        width="2px"
-        color={colors.GRAY1}
-        direction="left"
-        calibrationX="2.5px"
-        onClick={handleArrowClick}
-      />
+      <ImageContainer onClick={handleClick}>
+        <Image src={src} alt={alt} width="24px" height="24px" />
+      </ImageContainer>
       <Title>{title}</Title>
     </Wrapper>
   );
