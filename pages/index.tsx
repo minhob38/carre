@@ -14,6 +14,7 @@ import casperImage from '@assets/images/casper.svg';
 import tendencyBannerImage from '@assets/images/tendency-banner.svg';
 import dealerBannerImage from '@assets/images/dealer-banner.svg';
 import Card from '@components/home/Card';
+import Tag from '@components/home/Tag';
 
 interface IStyleProps {
   backgroundColor?: string;
@@ -40,14 +41,6 @@ const TagContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0 6px;
-`;
-
-const Tag = styled.div`
-  font: normal 400 12px / 24px roboto;
-  color: ${colors.BLACK2};
-  border: 0.5px solid ${colors.BLACK2};
-  border-radius: 10px;
-  padding: 0 10px;
 `;
 
 const MbtiButton = styled.div`
