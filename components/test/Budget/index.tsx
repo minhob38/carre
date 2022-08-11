@@ -27,15 +27,12 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  /* width: 310px; */
-  /* height: 116px; */
   margin: auto;
 `;
 
 const Bar = styled.div`
   position: relative;
   width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
-  /* width: 100%; */
   height: 12px;
   background-color: ${colors.GRAY2};
   border-radius: 100px;
@@ -51,6 +48,7 @@ const RangeBar = styled.div`
     `${props.minBudgetPosition + INITIAL_MIN_POSITION}px`};
   right: ${(props: IProps) =>
     `${props.maxBudgetPosition + INITIAL_MAX_POSITION}px`};
+  z-index: 1;
 `;
 
 const BallContainer = styled.div`
@@ -58,15 +56,16 @@ const BallContainer = styled.div`
   top: 50%;
   width: 50px;
   height: 50px;
+  z-index: 2;
 `;
 
-const LeftBallContainer = styled(BallContainer)`
+const LeftBallReferencePoint = styled(BallContainer)`
   left: ${INITIAL_MIN_POSITION}px;
   transform: translate(-50%, -50%);
   background-color: red;
 `;
 
-const RightBallContainer = styled(BallContainer)`
+const RightBallReferencePoint = styled(BallContainer)`
   right: ${INITIAL_MAX_POSITION}px;
   transform: translate(50%, -50%);
   background-color: blue;
@@ -76,27 +75,25 @@ const Ball = styled.div`
   box-sizing: border-box;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 22px;
   height: 22px;
   border-radius: 50%;
   border: 1px solid ${colors.SECONDARY_100};
   background-color: ${colors.SECONDARY_REAL_WHITE};
   box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
-  z-index: 2;
+  z-index: 2000;
 `;
 
 const LeftBall = styled(Ball)`
-  /* left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
-    `${props.minBudgetPosition}px`}; */
+  left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
+    `calc(50% + ${props.minBudgetPosition}px)`};
+  transform: translate(-50%, -50%);
 `;
 
-// `calc(50% + ${props.minBudgetPosition}px)`};
-
 const RightBall = styled(Ball)`
-  /* right: ${(props: Pick<IProps, 'maxBudgetPosition'>) =>
-    `${props.maxBudgetPosition}px`}; */
+  right: ${(props: Pick<IProps, 'maxBudgetPosition'>) =>
+    `calc(50% + ${props.maxBudgetPosition}px)`};
+  transform: translate(50%, -50%);
 `;
 
 const IndicatorContainer = styled.div`
@@ -117,6 +114,7 @@ const Indicator = styled.div`
   color: ${colors.SECONDARY_250};
 `;
 
+// TODO: BALL_RADIUS 관계없이 정렬시키기
 const LeftIndicator = styled(Indicator)`
   left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
     `${props.minBudgetPosition - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
@@ -141,12 +139,10 @@ const Budget: React.FC = () => {
     maxBudgetPosition,
   );
 
-  console.log(minBudgetPosition);
-
   return (
     <Wrapper>
       <Bar>
-        <LeftBallContainer>
+        <LeftBallReferencePoint>
           <LeftBall
             minBudgetPosition={minBudgetPosition}
             onTouchMove={(ev) => {
@@ -160,8 +156,8 @@ const Budget: React.FC = () => {
               // 가격입력 dispatch 추가 (안보는 input)
             }}
           />
-        </LeftBallContainer>
-        <RightBallContainer>
+        </LeftBallReferencePoint>
+        <RightBallReferencePoint>
           <RightBall
             maxBudgetPosition={maxBudgetPosition}
             onTouchMove={(ev) => {
@@ -170,13 +166,14 @@ const Budget: React.FC = () => {
                   -(
                     -window.innerWidth +
                     ev.changedTouches[0].pageX +
-                    SIDE_MARGIN
+                    SIDE_MARGIN +
+                    INITIAL_MAX_POSITION
                   ),
                 ),
               );
             }}
           />
-        </RightBallContainer>
+        </RightBallReferencePoint>
         <RangeBar
           minBudgetPosition={minBudgetPosition}
           maxBudgetPosition={maxBudgetPosition}
