@@ -3,10 +3,13 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 
-const SIDE_MARGIN = 37;
+const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
+const BALL_RADIUS = 11;
 
 interface IProps {
   minBudgetOffsetX: number;
@@ -18,15 +21,15 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  width: 310px;
-  height: 116px;
+  /* width: 310px; */
+  /* height: 116px; */
   margin: auto;
 `;
 
 const Bar = styled.div`
   position: relative;
-  /* width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px); */
-  width: 100%;
+  width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
+  /* width: 100%; */
   height: 12px;
   background-color: ${colors.GRAY2};
   border-radius: 100px;
@@ -43,14 +46,18 @@ const RangeBar = styled.div`
 `;
 
 const Ball = styled.div`
+  box-sizing: border-box;
   position: absolute;
-  top: 0;
-  width: 12px;
-  height: 12px;
+  top: 50%;
+  /* left: 50%; */
+  transform: translate(0, -50%);
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background-color: ${colors.YELLOW2};
+  border: 1px solid ${colors.SECONDARY_100};
+  background-color: ${colors.SECONDARY_REAL_WHITE};
+  box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
   z-index: 2;
-  opacity: 0.6;
 `;
 
 const LeftBall = styled(Ball)`
@@ -80,12 +87,12 @@ const Input = styled.input`
 
 const MinBudgetInput = styled(Input)`
   left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
-    `${props.minBudgetOffsetX}px`};
+    `${props.minBudgetOffsetX - BALL_RADIUS / 2}px`};
 `;
 
 const MaxBudgetInput = styled(Input)`
   right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
-    `${props.maxBudgetOffsetX}px`};
+    `${props.maxBudgetOffsetX - BALL_RADIUS / 2}px`};
 `;
 
 const InputContainer = styled.div`
@@ -118,7 +125,7 @@ const Budget: React.FC = () => {
   */
   return (
     <Wrapper>
-      <InputContainer>
+      {/* <InputContainer>
         <Input
           placeholder="4000만원"
           type="number"
@@ -142,7 +149,7 @@ const Budget: React.FC = () => {
             dispatch(actions.moveMaxBudgetX(-(parseInt(value) / 40) + 255));
           }}
         />
-      </InputContainer>
+      </InputContainer> */}
       <Bar>
         <LeftBall
           minBudgetOffsetX={minBudgetOffsetX}

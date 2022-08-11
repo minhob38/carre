@@ -10,36 +10,40 @@ import Image from '@components/common/Image';
 import Budget from '@components/test/Budget';
 import checkImage from '@assets/images/check.svg';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
+import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { MIN_YEAR, MAX_YEAR, DEFAULT_YEAR } from '@constants/variables';
 
 const Title = styled.div`
-  margin: 30px 0 2px 20px;
-  font: normal 700 20px / 32px roboto;
-  color: ${colors.BLACK1};
+  margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.TITLE_T1};
+  color: ${colors.SECONDARY_500};
 `;
 
 const Description = styled.div`
-  margin: 0 0 20px 20px;
-  font: normal 400 14px / 23px roboto;
-  color: ${colors.GRAY1};
+  margin: 0 0 32px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.SUBTITLE_T1};
+  color: ${colors.SECONDARY_300};
 `;
 
 const SubTitle = styled.div`
-  margin: 0 0 0 20px;
-  font: normal 400 16px / 27px roboto;
-  color: ${colors.BLACK2};
+  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_400};
 `;
 
 const SubDescription = styled.div`
-  margin: 0 0 30px 20px;
-  font: normal 400 12px / 20px roboto;
-  color: ${colors.GRAY1};
+  margin: 0 0 15px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.SUBTITLE_T2};
+  color: ${colors.SECONDARY_300};
 `;
 
 const Test: NextPage = () => {
   return (
     <>
-      <Header title="나의 정보 입력" backPath="/test/2" />
-      <Content top="55px" bottom="0">
+      <Header title="나의 정보 입력" type="close" closePath="/" />
+      <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>나의 구매 필수 조건 입력</Title>
         <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>
         <SubTitle>가격설정</SubTitle>
