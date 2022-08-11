@@ -1,17 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { ChangeEvent } from 'react';
-import {
-  INITIAL_MIN_POSITION,
-  INITIAL_MAX_POSITION,
-} from '@constants/variables';
 
 interface IState {
   year: string | null;
   gender: string | null;
   purpose: string[];
-  minBudgetOffsetX: number;
-  maxBudgetOffsetX: number;
+  minBudgetPosition: number;
+  maxBudgetPosition: number;
   brands: string[];
   fuels: string[];
   categories: string[]; // category?
@@ -22,8 +18,8 @@ const initialState: IState = {
   gender: null,
   purpose: [],
   /* budger range bar 안에 있는 ball의 초기 위치*/
-  minBudgetOffsetX: INITIAL_MIN_POSITION,
-  maxBudgetOffsetX: INITIAL_MAX_POSITION,
+  minBudgetPosition: 0,
+  maxBudgetPosition: 0,
   brands: [],
   fuels: [],
   categories: [],
@@ -61,13 +57,13 @@ const inputSlice = createSlice({
       return;
     },
     moveMinBudgetX: (state, action: PayloadAction<number>) => {
-      const minBudgetOffsetX = action.payload;
-      state.minBudgetOffsetX = minBudgetOffsetX;
+      const minBudgetPosition = action.payload;
+      state.minBudgetPosition = minBudgetPosition;
       return;
     },
     moveMaxBudgetX: (state, action: PayloadAction<number>) => {
-      const maxBudgetOffsetX = action.payload;
-      state.maxBudgetOffsetX = maxBudgetOffsetX;
+      const maxBudgetPosition = action.payload;
+      state.maxBudgetPosition = maxBudgetPosition;
       return;
     },
   },

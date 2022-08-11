@@ -10,14 +10,16 @@ import { actions } from '@store/slices/inputSlice';
 import {
   BALL_RADIUS,
   INDICATOR_WIDTH,
+  INITIAL_MAX_POSITION,
+  INITIAL_MIN_POSITION,
   SIDE_MARGIN,
 } from '@constants/variables';
 
 import useBudget from '@hooks/useBudget';
 
 interface IProps {
-  minBudgetOffsetX: number;
-  maxBudgetOffsetX: number;
+  minBudgetPosition: number;
+  maxBudgetPosition: number;
 }
 
 const Wrapper = styled.div`
@@ -45,16 +47,37 @@ const RangeBar = styled.div`
   border-radius: 100px;
   top: 0;
   bottom: 0;
-  left: ${(props: IProps) => `${props.minBudgetOffsetX}px`};
-  right: ${(props: IProps) => `${props.maxBudgetOffsetX}px`};
+  left: ${(props: IProps) =>
+    `${props.minBudgetPosition + INITIAL_MIN_POSITION}px`};
+  right: ${(props: IProps) =>
+    `${props.maxBudgetPosition + INITIAL_MAX_POSITION}px`};
+`;
+
+const BallContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+`;
+
+const LeftBallContainer = styled(BallContainer)`
+  left: ${INITIAL_MIN_POSITION}px;
+  transform: translate(-50%, -50%);
+  background-color: red;
+`;
+
+const RightBallContainer = styled(BallContainer)`
+  right: ${INITIAL_MAX_POSITION}px;
+  transform: translate(50%, -50%);
+  background-color: blue;
 `;
 
 const Ball = styled.div`
   box-sizing: border-box;
   position: absolute;
   top: 50%;
-  /* left: 50%; */
-  transform: translate(0, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -65,13 +88,15 @@ const Ball = styled.div`
 `;
 
 const LeftBall = styled(Ball)`
-  left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
-    `${props.minBudgetOffsetX}px`};
+  left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
+    `${props.minBudgetPosition}px`};
 `;
 
+// `calc(50% + ${props.minBudgetPosition}px)`};
+
 const RightBall = styled(Ball)`
-  right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
-    `${props.maxBudgetOffsetX}px`};
+  /* right: ${(props: Pick<IProps, 'maxBudgetPosition'>) =>
+    `${props.maxBudgetPosition}px`}; */
 `;
 
 const IndicatorContainer = styled.div`
@@ -93,66 +118,74 @@ const Indicator = styled.div`
 `;
 
 const LeftIndicator = styled(Indicator)`
-  left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
-    `${props.minBudgetOffsetX - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
+  left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
+    `${props.minBudgetPosition - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
 `;
 
 const RightIndicator = styled(Indicator)`
-  right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
-    `${props.maxBudgetOffsetX - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
+  right: ${(props: Pick<IProps, 'maxBudgetPosition'>) =>
+    `${props.maxBudgetPosition - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
 `;
 
 const Budget: React.FC = () => {
   const dispatch = useTypedDispatch();
-  const minBudgetOffsetX = useTypedSelector(
-    (state) => state.rootReducer.inputReducer.minBudgetOffsetX,
+  const minBudgetPosition = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.minBudgetPosition,
   );
-  const maxBudgetOffsetX = useTypedSelector(
-    (state) => state.rootReducer.inputReducer.maxBudgetOffsetX,
+  const maxBudgetPosition = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.maxBudgetPosition,
   );
 
-  const [minBudgetPosition, maxBudgetPosition] = useBudget(
-    minBudgetOffsetX,
-    maxBudgetOffsetX,
+  const [minBudgetValue, maxBudgetValue] = useBudget(
+    minBudgetPosition,
+    maxBudgetPosition,
   );
 
   return (
     <Wrapper>
       <Bar>
-        <LeftBall
-          minBudgetOffsetX={minBudgetOffsetX}
-          onTouchMove={(ev) => {
-            dispatch(
-              actions.moveMinBudgetX(ev.changedTouches[0].pageX - SIDE_MARGIN),
-            );
-            // 가격입력 dispatch 추가 (안보는 input)
-          }}
-        />
-        <RightBall
-          maxBudgetOffsetX={maxBudgetOffsetX}
-          onTouchMove={(ev) => {
-            dispatch(
-              actions.moveMaxBudgetX(
-                -(
-                  -window.innerWidth +
-                  ev.changedTouches[0].pageX +
-                  SIDE_MARGIN
+        <LeftBallContainer>
+          <LeftBall
+            minBudgetPosition={minBudgetPosition}
+            onTouchMove={(ev) => {
+              dispatch(
+                actions.moveMinBudgetX(
+                  ev.changedTouches[0].pageX -
+                    SIDE_MARGIN -
+                    INITIAL_MIN_POSITION,
                 ),
-              ),
-            );
-          }}
-        />
+              );
+              // 가격입력 dispatch 추가 (안보는 input)
+            }}
+          />
+        </LeftBallContainer>
+        <RightBallContainer>
+          <RightBall
+            maxBudgetPosition={maxBudgetPosition}
+            onTouchMove={(ev) => {
+              dispatch(
+                actions.moveMaxBudgetX(
+                  -(
+                    -window.innerWidth +
+                    ev.changedTouches[0].pageX +
+                    SIDE_MARGIN
+                  ),
+                ),
+              );
+            }}
+          />
+        </RightBallContainer>
         <RangeBar
-          minBudgetOffsetX={minBudgetOffsetX}
-          maxBudgetOffsetX={maxBudgetOffsetX}
+          minBudgetPosition={minBudgetPosition}
+          maxBudgetPosition={maxBudgetPosition}
         />
       </Bar>
       <IndicatorContainer>
-        <LeftIndicator minBudgetOffsetX={minBudgetOffsetX}>
-          {minBudgetPosition}
+        <LeftIndicator minBudgetPosition={minBudgetPosition}>
+          {minBudgetValue}
         </LeftIndicator>
-        <RightIndicator maxBudgetOffsetX={maxBudgetOffsetX}>
-          {maxBudgetPosition}
+        <RightIndicator maxBudgetPosition={maxBudgetPosition}>
+          {maxBudgetValue}
         </RightIndicator>
       </IndicatorContainer>
     </Wrapper>
