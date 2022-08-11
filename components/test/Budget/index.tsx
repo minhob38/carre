@@ -10,6 +10,7 @@ import { actions } from '@store/slices/inputSlice';
 
 const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
 const BALL_RADIUS = 11;
+const INDICATOR_WIDTH = 80;
 
 interface IProps {
   minBudgetOffsetX: number;
@@ -70,36 +71,58 @@ const RightBall = styled(Ball)`
     `${props.maxBudgetOffsetX}px`};
 `;
 
-const Input = styled.input`
-  all: unset;
-  /* position: absolute; */
-  width: 110px;
-  height: 36px;
-  background: #ffffff;
-  border: 1px solid ${colors.YELLOW1};
-  border-radius: 100px;
-  font: normal 400 13px / 21px roboto;
-  text-align: center;
-  &::placeholder {
-    color: ${colors.GRAY1};
-  }
-`;
+// const LeftInput = styled.input`
+//   all: unset;
+//   position: absolute;
+//   left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
+//     `${props.minBudgetOffsetX}px`};
+//   background: #ffffff;
+//   font: ${fonts.BUTTON_3};
+//   color: ${colors.SECONDARY_250};
+//   width: 80px;
+// `;
 
-const MinBudgetInput = styled(Input)`
-  left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
-    `${props.minBudgetOffsetX - BALL_RADIUS / 2}px`};
-`;
+// const RightInput = styled(LeftInput)`
+//   right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
+//     `${props.maxBudgetOffsetX}px`};
+//   background-color: yellow;
+// `;
 
-const MaxBudgetInput = styled(Input)`
-  right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
-    `${props.maxBudgetOffsetX - BALL_RADIUS / 2}px`};
-`;
+// const MinBudgetInput = styled(Input)`
+//   left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
+//     `${props.minBudgetOffsetX - BALL_RADIUS / 2}px`};
+// `;
 
-const InputContainer = styled.div`
-  width: 100%;
+// const MaxBudgetInput = styled(Input)`
+//   right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
+//     `${props.maxBudgetOffsetX - BALL_RADIUS / 2}px`};
+// `;
+
+const IndicatorContainer = styled.div`
+  position: relative;
+  width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
   margin: 0 0 30px 0;
+  height: 23px;
+`;
+
+const Indicator = styled.div`
+  position: absolute;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  font: ${fonts.BUTTON_3};
+  color: ${colors.SECONDARY_250};
+`;
+
+const LeftIndicator = styled(Indicator)`
+  left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
+    `${props.minBudgetOffsetX - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
+`;
+
+const RightIndicator = styled(Indicator)`
+  right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
+    `${props.maxBudgetOffsetX - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
 `;
 
 const Budget: React.FC = () => {
@@ -125,8 +148,10 @@ const Budget: React.FC = () => {
   */
   return (
     <Wrapper>
-      {/* <InputContainer>
-        <Input
+      <IndicatorContainer>
+        {/* <LeftInput
+          readOnly={true}
+          minBudgetOffsetX={minBudgetOffsetX}
           placeholder="4000만원"
           type="number"
           pattern="[0-9]*"
@@ -137,7 +162,9 @@ const Budget: React.FC = () => {
             dispatch(actions.moveMinBudgetX(parseInt(value) / 40 - 45));
           }}
         />
-        <Input
+        <RightInput
+          readOnly={true}
+          maxBudgetOffsetX={maxBudgetOffsetX}
           placeholder="8000만원"
           type="number"
           pattern="[0-9]*"
@@ -148,8 +175,14 @@ const Budget: React.FC = () => {
             console.log(-(parseInt(value) / 40) + 75);
             dispatch(actions.moveMaxBudgetX(-(parseInt(value) / 40) + 255));
           }}
-        />
-      </InputContainer> */}
+        /> */}
+        <LeftIndicator minBudgetOffsetX={minBudgetOffsetX}>
+          {Math.floor((minBudgetOffsetX - 55) * 40 + 4000)}
+        </LeftIndicator>
+        <RightIndicator maxBudgetOffsetX={maxBudgetOffsetX}>
+          {Math.floor(-(maxBudgetOffsetX - 55) * 40 + 8000)}
+        </RightIndicator>
+      </IndicatorContainer>
       <Bar>
         <LeftBall
           minBudgetOffsetX={minBudgetOffsetX}
