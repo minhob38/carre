@@ -8,11 +8,6 @@ import * as margins from '@constants/margins';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import {
-  INITIAL_MIN_BUDGET,
-  INITIAL_MAX_BUDGET,
-  DELTA_Y,
-  INITIAL_LEFT_POSITION,
-  INITIAL_RIGHT_POSITION,
   BALL_RADIUS,
   INDICATOR_WIDTH,
   SIDE_MARGIN,
@@ -79,33 +74,6 @@ const RightBall = styled(Ball)`
     `${props.maxBudgetOffsetX}px`};
 `;
 
-// const LeftInput = styled.input`
-//   all: unset;
-//   position: absolute;
-//   left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
-//     `${props.minBudgetOffsetX}px`};
-//   background: #ffffff;
-//   font: ${fonts.BUTTON_3};
-//   color: ${colors.SECONDARY_250};
-//   width: 80px;
-// `;
-
-// const RightInput = styled(LeftInput)`
-//   right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
-//     `${props.maxBudgetOffsetX}px`};
-//   background-color: yellow;
-// `;
-
-// const MinBudgetInput = styled(Input)`
-//   left: ${(props: Pick<IProps, 'minBudgetOffsetX'>) =>
-//     `${props.minBudgetOffsetX - BALL_RADIUS / 2}px`};
-// `;
-
-// const MaxBudgetInput = styled(Input)`
-//   right: ${(props: Pick<IProps, 'maxBudgetOffsetX'>) =>
-//     `${props.maxBudgetOffsetX - BALL_RADIUS / 2}px`};
-// `;
-
 const IndicatorContainer = styled.div`
   position: relative;
   width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
@@ -143,20 +111,6 @@ const Budget: React.FC = () => {
     (state) => state.rootReducer.inputReducer.maxBudgetOffsetX,
   );
 
-  // TODO: ball이 bar를 안 넘어가게 처리
-  // TODO: 말풍선 기준으로 드래그
-  /* bar길이 - 말풍선 연동 수식
-  - preset min 설정: m (e.g 4000만원)
-  - preset max 설정: n (e.g 8000만원)
-  - preset min / max 설정 및 구간 계산: p (e.g 8000만원 - 4000만원 : 4000만원)
-  - preset min / max bar 길이: q  (e.g 200px)
-  - preset min / max 초기 위치(왼쪽/오른쪽으로부터) 계산: r (e.g 55px)
-  - min budget offset = p/q(x - r) + m
-  - max budget offset = -p/q(x - r) + m
-  (x는 min / max offset (왼쪽/오른쪽으로부터))
-  */
-  // console.log(document);
-  // console.log(window.innerWidth);
   const [minBudgetPosition, maxBudgetPosition] = useBudget(
     minBudgetOffsetX,
     maxBudgetOffsetX,
