@@ -88,8 +88,8 @@ const Ball = styled.div`
 `;
 
 const LeftBall = styled(Ball)`
-  left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
-    `${props.minBudgetPosition}px`};
+  /* left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
+    `${props.minBudgetPosition}px`}; */
 `;
 
 // `calc(50% + ${props.minBudgetPosition}px)`};
@@ -140,6 +140,8 @@ const Budget: React.FC = () => {
     minBudgetPosition,
     maxBudgetPosition,
   );
+
+  console.log(minBudgetPosition);
 
   return (
     <Wrapper>

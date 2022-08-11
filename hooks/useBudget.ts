@@ -35,10 +35,10 @@ export default function useBudget(minBudgetPosition, maxBudgetPosition) {
 
     const slope = DELTA_Y / DELTA_X;
     const minBudgetValue = Math.floor(
-      slope * (minBudgetPosition - INITIAL_MIN_POSITION) + INITIAL_MIN_BUDGET,
+      slope * minBudgetPosition + INITIAL_MIN_BUDGET,
     );
     const maxBudgetValue = Math.floor(
-      -slope * (maxBudgetPosition - INITIAL_MIN_POSITION) + INITIAL_MAX_BUDGET,
+      -slope * maxBudgetPosition + INITIAL_MAX_BUDGET,
     );
 
     setMinBudgetValue(minBudgetValue);
