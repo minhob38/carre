@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import * as colors from '@constants/colors';
@@ -7,10 +7,18 @@ import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
+import {
+  INITIAL_MIN_BUDGET,
+  INITIAL_MAX_BUDGET,
+  DELTA_Y,
+  INITIAL_LEFT_POSITION,
+  INITIAL_RIGHT_POSITION,
+  BALL_RADIUS,
+  INDICATOR_WIDTH,
+  SIDE_MARGIN,
+} from '@constants/variables';
 
-const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
-const BALL_RADIUS = 11;
-const INDICATOR_WIDTH = 80;
+import useBudget from '@hooks/useBudget';
 
 interface IProps {
   minBudgetOffsetX: number;
@@ -101,7 +109,7 @@ const RightBall = styled(Ball)`
 const IndicatorContainer = styled.div`
   position: relative;
   width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
-  margin: 0 0 30px 0;
+  margin: 12px 0 0 0;
   height: 23px;
 `;
 
@@ -110,7 +118,8 @@ const Indicator = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
+  width: ${INDICATOR_WIDTH}px;
+  height: 100%;
   font: ${fonts.BUTTON_3};
   color: ${colors.SECONDARY_250};
 `;
@@ -146,43 +155,15 @@ const Budget: React.FC = () => {
   - max budget offset = -p/q(x - r) + m
   (x는 min / max offset (왼쪽/오른쪽으로부터))
   */
+  // console.log(document);
+  // console.log(window.innerWidth);
+  const [minBudgetPosition, maxBudgetPosition] = useBudget(
+    minBudgetOffsetX,
+    maxBudgetOffsetX,
+  );
+
   return (
     <Wrapper>
-      <IndicatorContainer>
-        {/* <LeftInput
-          readOnly={true}
-          minBudgetOffsetX={minBudgetOffsetX}
-          placeholder="4000만원"
-          type="number"
-          pattern="[0-9]*"
-          name="min-budget"
-          value={Math.floor((minBudgetOffsetX - 55) * 40 + 4000)}
-          onChange={(ev) => {
-            const value = ev.target.value;
-            dispatch(actions.moveMinBudgetX(parseInt(value) / 40 - 45));
-          }}
-        />
-        <RightInput
-          readOnly={true}
-          maxBudgetOffsetX={maxBudgetOffsetX}
-          placeholder="8000만원"
-          type="number"
-          pattern="[0-9]*"
-          name="max-budget"
-          value={Math.floor(-(maxBudgetOffsetX - 55) * 40 + 8000)}
-          onChange={(ev) => {
-            const value = ev.target.value;
-            console.log(-(parseInt(value) / 40) + 75);
-            dispatch(actions.moveMaxBudgetX(-(parseInt(value) / 40) + 255));
-          }}
-        /> */}
-        <LeftIndicator minBudgetOffsetX={minBudgetOffsetX}>
-          {Math.floor((minBudgetOffsetX - 55) * 40 + 4000)}
-        </LeftIndicator>
-        <RightIndicator maxBudgetOffsetX={maxBudgetOffsetX}>
-          {Math.floor(-(maxBudgetOffsetX - 55) * 40 + 8000)}
-        </RightIndicator>
-      </IndicatorContainer>
       <Bar>
         <LeftBall
           minBudgetOffsetX={minBudgetOffsetX}
@@ -190,6 +171,7 @@ const Budget: React.FC = () => {
             dispatch(
               actions.moveMinBudgetX(ev.changedTouches[0].pageX - SIDE_MARGIN),
             );
+            // 가격입력 dispatch 추가 (안보는 input)
           }}
         />
         <RightBall
@@ -211,6 +193,14 @@ const Budget: React.FC = () => {
           maxBudgetOffsetX={maxBudgetOffsetX}
         />
       </Bar>
+      <IndicatorContainer>
+        <LeftIndicator minBudgetOffsetX={minBudgetOffsetX}>
+          {minBudgetPosition}
+        </LeftIndicator>
+        <RightIndicator maxBudgetOffsetX={maxBudgetOffsetX}>
+          {maxBudgetPosition}
+        </RightIndicator>
+      </IndicatorContainer>
     </Wrapper>
   );
 };

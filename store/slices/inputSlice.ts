@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { ChangeEvent } from 'react';
+import {
+  INITIAL_MIN_POSITION,
+  INITIAL_MAX_POSITION,
+} from '@constants/variables';
 
 interface IState {
   year: string | null;
@@ -18,8 +22,8 @@ const initialState: IState = {
   gender: null,
   purpose: [],
   /* budger range bar 안에 있는 ball의 초기 위치*/
-  minBudgetOffsetX: 55,
-  maxBudgetOffsetX: 55,
+  minBudgetOffsetX: INITIAL_MIN_POSITION,
+  maxBudgetOffsetX: INITIAL_MAX_POSITION,
   brands: [],
   fuels: [],
   categories: [],

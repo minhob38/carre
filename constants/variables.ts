@@ -9,6 +9,8 @@ import style3Image from '@assets/images/styles/style-3.svg';
 import style4Image from '@assets/images/styles/style-4.svg';
 import style5Image from '@assets/images/styles/style-5.svg';
 
+import * as margins from './margins';
+
 interface IInput {
   title: string;
   value: string;
@@ -133,3 +135,15 @@ export const styles = [
 export const MIN_YEAR = 1941;
 export const MAX_YEAR = 2004;
 export const DEFAULT_YEAR = 1997;
+
+/* input spectrum 설정 */
+export const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
+export const BALL_RADIUS = 11;
+export const INDICATOR_WIDTH = 80;
+
+export const INITIAL_MIN_POSITION = 55; // 55px
+export const INITIAL_MAX_POSITION = INITIAL_MIN_POSITION;
+
+export const INITIAL_MIN_BUDGET = 4000; // 4000만원
+export const INITIAL_MAX_BUDGET = 8000; // 8000만원
+export const DELTA_Y = INITIAL_MAX_BUDGET - INITIAL_MIN_BUDGET;
