@@ -33,14 +33,14 @@ const Wrapper = styled.div`
 const Bar = styled.div`
   position: relative;
   width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
-  height: 12px;
-  background-color: ${colors.GRAY2};
+  height: 14px;
+  background-color: ${colors.SECONDARY_200};
   border-radius: 100px;
 `;
 
 const RangeBar = styled.div`
   position: absolute;
-  background-color: ${colors.YELLOW1};
+  background-color: ${colors.PRIMARY_400};
   border-radius: 100px;
   top: 0;
   bottom: 0;
@@ -51,24 +51,22 @@ const RangeBar = styled.div`
   z-index: 1;
 `;
 
-const BallContainer = styled.div`
+const BallReferencePoint = styled.div`
   position: absolute;
   top: 50%;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 14px;
   z-index: 2;
 `;
 
-const LeftBallReferencePoint = styled(BallContainer)`
+const LeftBallReferencePoint = styled(BallReferencePoint)`
   left: ${INITIAL_MIN_POSITION}px;
   transform: translate(-50%, -50%);
-  background-color: red;
 `;
 
-const RightBallReferencePoint = styled(BallContainer)`
+const RightBallReferencePoint = styled(BallReferencePoint)`
   right: ${INITIAL_MAX_POSITION}px;
   transform: translate(50%, -50%);
-  background-color: blue;
 `;
 
 const Ball = styled.div`
@@ -81,7 +79,6 @@ const Ball = styled.div`
   border: 1px solid ${colors.SECONDARY_100};
   background-color: ${colors.SECONDARY_REAL_WHITE};
   box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
-  z-index: 2000;
 `;
 
 const LeftBall = styled(Ball)`
@@ -96,15 +93,9 @@ const RightBall = styled(Ball)`
   transform: translate(50%, -50%);
 `;
 
-const IndicatorContainer = styled.div`
-  position: relative;
-  width: calc(100% - ${SIDE_MARGIN}px - ${SIDE_MARGIN}px);
-  margin: 12px 0 0 0;
-  height: 23px;
-`;
-
 const Indicator = styled.div`
   position: absolute;
+  bottom: -26px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,15 +105,16 @@ const Indicator = styled.div`
   color: ${colors.SECONDARY_250};
 `;
 
-// TODO: BALL_RADIUS 관계없이 정렬시키기
 const LeftIndicator = styled(Indicator)`
   left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
-    `${props.minBudgetPosition - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
+    `calc(50% + ${props.minBudgetPosition}px)`};
+  transform: translate(-50%);
 `;
 
 const RightIndicator = styled(Indicator)`
   right: ${(props: Pick<IProps, 'maxBudgetPosition'>) =>
-    `${props.maxBudgetPosition - INDICATOR_WIDTH / 2 + BALL_RADIUS}px`};
+    `calc(50% + ${props.maxBudgetPosition}px)`};
+  transform: translate(50%);
 `;
 
 const Budget: React.FC = () => {
@@ -156,6 +148,9 @@ const Budget: React.FC = () => {
               // 가격입력 dispatch 추가 (안보는 input)
             }}
           />
+          <LeftIndicator minBudgetPosition={minBudgetPosition}>
+            {minBudgetValue}
+          </LeftIndicator>
         </LeftBallReferencePoint>
         <RightBallReferencePoint>
           <RightBall
@@ -173,20 +168,16 @@ const Budget: React.FC = () => {
               );
             }}
           />
+
+          <RightIndicator maxBudgetPosition={maxBudgetPosition}>
+            {maxBudgetValue}
+          </RightIndicator>
         </RightBallReferencePoint>
         <RangeBar
           minBudgetPosition={minBudgetPosition}
           maxBudgetPosition={maxBudgetPosition}
         />
       </Bar>
-      <IndicatorContainer>
-        <LeftIndicator minBudgetPosition={minBudgetPosition}>
-          {minBudgetValue}
-        </LeftIndicator>
-        <RightIndicator maxBudgetPosition={maxBudgetPosition}>
-          {maxBudgetValue}
-        </RightIndicator>
-      </IndicatorContainer>
     </Wrapper>
   );
 };
