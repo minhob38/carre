@@ -1,19 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import NextButton from '@components/common/NextButton';
 import ProgressBar from '@components/test/ProgressBar';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
-import Image from '@components/common/Image';
 import Budget from '@components/test/Budget';
-import checkImage from '@assets/images/check.svg';
+import CheckBox from '@components/test/Toggle';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
-import { MIN_YEAR, MAX_YEAR, DEFAULT_YEAR } from '@constants/variables';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -39,6 +36,21 @@ const SubDescription = styled.div`
   color: ${colors.SECONDARY_300};
 `;
 
+const Manual = styled.div`
+  display: flex;
+  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
+  justify-content: flex-end;
+  align-items: center;
+  margin: 51px auto 12px auto;
+  font: ${fonts.BUTTON_3};
+  color: ${colors.SECONDARY_400};
+  text-decoration-line: underline;
+`;
+
+const CheckBoxContainer = styled.div`
+  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+`;
+
 const Test: NextPage = () => {
   return (
     <>
@@ -48,31 +60,22 @@ const Test: NextPage = () => {
         <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>
         <SubTitle>가격설정</SubTitle>
         <SubDescription>가격의 스펙트럼을 변경해요</SubDescription>
-        <div
-          css={css`
-            display: flex;
-            margin: 0 0 0 18px;
-          `}
-        ></div>
         <Budget />
-        <div
+        <Manual>직접입력하기</Manual>
+        <CheckBoxContainer>
+          <CheckBox />
+        </CheckBoxContainer>
+        {/* <Image src={checkImage} alt="check" width="18px" height="18px" /> */}
+        {/* <div
           css={css`
-            display: flex;
-            align-items: center;
-            margin: 15px 0 0 35px;
+            font: normal 400 13px / 26px roboto;
+            color: ${colors.GRAY1};
+            margin: 0 0 0 16px;
           `}
         >
-          <Image src={checkImage} alt="check" width="18px" height="18px" />
-          <div
-            css={css`
-              font: normal 400 13px / 26px roboto;
-              color: ${colors.GRAY1};
-              margin: 0 0 0 16px;
-            `}
-          >
-            비슷한 가격대 차량도 함께 보기
-          </div>
-        </div>
+          비슷한 가격대 차량도 함께 보기
+        </div> */}
+
         <ProgressBar stage={2} />
         <NextButton title="다음" path={'/test/4'} />
       </Content>

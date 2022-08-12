@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { ChangeEvent } from 'react';
+import styled from '@emotion/styled';
 
 interface IState {
   year: string | null;
@@ -11,6 +12,7 @@ interface IState {
   brands: string[];
   fuels: string[];
   categories: string[]; // category?
+  similarBudget: boolean;
 }
 
 const initialState: IState = {
@@ -23,6 +25,7 @@ const initialState: IState = {
   brands: [],
   fuels: [],
   categories: [],
+  similarBudget: false,
 };
 
 const inputSlice = createSlice({
@@ -55,6 +58,14 @@ const inputSlice = createSlice({
       set.delete(value);
       state[name] = [...set];
       return;
+    },
+    clickToggle: (
+      state,
+      action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
+    ) => {
+      const { name, value } = action.payload;
+      if (value == 'true') state[name] = false;
+      if (value == 'false') state[name] = true;
     },
     moveMinBudgetX: (state, action: PayloadAction<number>) => {
       const minBudgetPosition = action.payload;
