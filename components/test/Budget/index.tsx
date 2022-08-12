@@ -129,7 +129,6 @@ const Budget: React.FC = () => {
 
   const handleLeftBallTouch = (ev) => {
     setMinBudgetPosition(ev.changedTouches[0].pageX);
-    // 가격입력 dispatch 추가 (안보는 input)
   };
 
   const handleRightBallTouch = (ev) => {

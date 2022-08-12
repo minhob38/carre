@@ -15,11 +15,14 @@ const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
 const GAP = 50;
 
 export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
+  const dispatch = useTypedDispatch();
   const { width } = useWindowDimensions();
-  const [minBudgetValue, setMinBudgetValue] =
-    useState<number>(INITIAL_MIN_POSITION);
-  const [maxBudgetValue, setMaxBudgetValue] =
-    useState<number>(INITIAL_MAX_POSITION);
+  const minBudgetValue = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.minBudgetValue,
+  );
+  const maxBudgetValue = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.maxBudgetValue,
+  );
 
   /* bar길이 - 말풍선 연동 수식
   - preset min 설정: m (e.g 4000만원)
@@ -43,17 +46,19 @@ export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
     const maxBudgetValue = Math.floor(
       -slope * maxBudgetPosition + INITIAL_MAX_BUDGET,
     );
+    console.log(minBudgetValue, maxBudgetValue);
 
-    setMinBudgetValue(minBudgetValue);
-    setMaxBudgetValue(maxBudgetValue);
+    dispatch(actions.setMinBudgetX(minBudgetValue));
+    dispatch(actions.setMaxBudgetX(maxBudgetValue));
   }, [
+    dispatch,
     width,
     minBudgetPosition,
     maxBudgetPosition,
     minBudgetValue,
     maxBudgetValue,
   ]);
-
+  console.log('@@@', minBudgetValue, maxBudgetValue);
   return [minBudgetValue, maxBudgetValue];
 };
 
