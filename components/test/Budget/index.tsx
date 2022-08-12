@@ -15,7 +15,7 @@ import {
   SIDE_MARGIN,
 } from '@constants/variables';
 
-import useBudget from '@hooks/useBudget';
+import { useBudgetValue, useBudgetPosition } from '@hooks/useBudget';
 
 interface IProps {
   minBudgetPosition: number;
@@ -125,11 +125,20 @@ const Budget: React.FC = () => {
   const maxBudgetPosition = useTypedSelector(
     (state) => state.rootReducer.inputReducer.maxBudgetPosition,
   );
-
-  const [minBudgetValue, maxBudgetValue] = useBudget(
+  const [setMinBudgetPosition, setMaxBudgetPosition] = useBudgetPosition();
+  const [minBudgetValue, maxBudgetValue] = useBudgetValue(
     minBudgetPosition,
     maxBudgetPosition,
   );
+
+  const handleLeftBallTouch = (ev) => {
+    setMinBudgetPosition(ev.changedTouches[0].pageX);
+    // 가격입력 dispatch 추가 (안보는 input)
+  };
+
+  const handleRightBallTouch = (ev) => {
+    setMaxBudgetPosition(ev.changedTouches[0].pageX);
+  };
 
   return (
     <Wrapper>
@@ -137,16 +146,7 @@ const Budget: React.FC = () => {
         <LeftBallReferencePoint>
           <LeftBall
             minBudgetPosition={minBudgetPosition}
-            onTouchMove={(ev) => {
-              dispatch(
-                actions.moveMinBudgetX(
-                  ev.changedTouches[0].pageX -
-                    SIDE_MARGIN -
-                    INITIAL_MIN_POSITION,
-                ),
-              );
-              // 가격입력 dispatch 추가 (안보는 input)
-            }}
+            onTouchMove={handleLeftBallTouch}
           />
           <LeftIndicator minBudgetPosition={minBudgetPosition}>
             {minBudgetValue}
@@ -155,18 +155,7 @@ const Budget: React.FC = () => {
         <RightBallReferencePoint>
           <RightBall
             maxBudgetPosition={maxBudgetPosition}
-            onTouchMove={(ev) => {
-              dispatch(
-                actions.moveMaxBudgetX(
-                  -(
-                    -window.innerWidth +
-                    ev.changedTouches[0].pageX +
-                    SIDE_MARGIN +
-                    INITIAL_MAX_POSITION
-                  ),
-                ),
-              );
-            }}
+            onTouchMove={handleRightBallTouch}
           />
 
           <RightIndicator maxBudgetPosition={maxBudgetPosition}>

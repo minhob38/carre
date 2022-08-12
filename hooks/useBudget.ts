@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useTypedDispatch } from './useStore';
 import useWindowDimensions from '@hooks/useWindowDimension';
 import {
   INITIAL_MIN_BUDGET,
@@ -8,10 +9,11 @@ import {
   INITIAL_MAX_POSITION,
 } from '@constants/variables';
 import * as margins from '@constants/margins';
+import { actions } from '@store/slices/inputSlice';
 
 const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
 
-export default function useBudget(minBudgetPosition, maxBudgetPosition) {
+export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
   const { width } = useWindowDimensions();
   const [minBudgetValue, setMinBudgetValue] =
     useState<number>(INITIAL_MIN_POSITION);
@@ -52,4 +54,34 @@ export default function useBudget(minBudgetPosition, maxBudgetPosition) {
   ]);
 
   return [minBudgetValue, maxBudgetValue];
-}
+};
+
+/**
+ * @description bar fixed point에서의 거리를 계산하는 함수 반환
+ * @params x는 ev.changedTouces[0].pageX
+ */
+export const useBudgetPosition = () => {
+  const dispatch = useTypedDispatch();
+  const { width } = useWindowDimensions();
+
+  const setMinBudgetPosition = useCallback(
+    (x) => {
+      dispatch(actions.moveMinBudgetX(x - SIDE_MARGIN - INITIAL_MIN_POSITION));
+    },
+    [dispatch],
+  );
+
+  const setMaxBudgetPosition = useCallback(
+    (x) => {
+      if (!width) return;
+      dispatch(
+        actions.moveMaxBudgetX(
+          -(-width + x + SIDE_MARGIN + INITIAL_MAX_POSITION),
+        ),
+      );
+    },
+    [dispatch, width],
+  );
+
+  return [setMinBudgetPosition, setMaxBudgetPosition];
+};
