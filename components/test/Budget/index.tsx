@@ -1,14 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
-import { actions } from '@store/slices/inputSlice';
+import { useTypedSelector } from '@hooks/useStore';
 import {
-  BALL_RADIUS,
   INDICATOR_WIDTH,
   INITIAL_MAX_POSITION,
   INITIAL_MIN_POSITION,
@@ -16,7 +13,7 @@ import {
 } from '@constants/variables';
 
 import { useBudgetValue, useBudgetPosition } from '@hooks/useBudget';
-
+import { convertNumberToWon } from '@utils/helpers';
 interface IProps {
   minBudgetPosition: number;
   maxBudgetPosition: number;
@@ -118,7 +115,6 @@ const RightIndicator = styled(Indicator)`
 `;
 
 const Budget: React.FC = () => {
-  const dispatch = useTypedDispatch();
   const minBudgetPosition = useTypedSelector(
     (state) => state.rootReducer.inputReducer.minBudgetPosition,
   );
@@ -149,7 +145,7 @@ const Budget: React.FC = () => {
             onTouchMove={handleLeftBallTouch}
           />
           <LeftIndicator minBudgetPosition={minBudgetPosition}>
-            {minBudgetValue}
+            {convertNumberToWon(minBudgetValue)}
           </LeftIndicator>
         </LeftBallReferencePoint>
         <RightBallReferencePoint>
@@ -159,7 +155,7 @@ const Budget: React.FC = () => {
           />
 
           <RightIndicator maxBudgetPosition={maxBudgetPosition}>
-            {maxBudgetValue}
+            {convertNumberToWon(maxBudgetValue)}
           </RightIndicator>
         </RightBallReferencePoint>
         <RangeBar
