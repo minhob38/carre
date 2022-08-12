@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useTypedDispatch } from './useStore';
+import { useTypedDispatch, useTypedSelector } from './useStore';
 import useWindowDimensions from '@hooks/useWindowDimension';
 import {
   INITIAL_MIN_BUDGET,
@@ -12,6 +12,7 @@ import * as margins from '@constants/margins';
 import { actions } from '@store/slices/inputSlice';
 
 const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
+const GAP = 50;
 
 export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
   const { width } = useWindowDimensions();
@@ -63,24 +64,63 @@ export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
 export const useBudgetPosition = () => {
   const dispatch = useTypedDispatch();
   const { width } = useWindowDimensions();
-
+  const minBudgetPosition = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.minBudgetPosition,
+  );
+  const maxBudgetPosition = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.maxBudgetPosition,
+  );
   const setMinBudgetPosition = useCallback(
     (x) => {
-      dispatch(actions.moveMinBudgetX(x - SIDE_MARGIN - INITIAL_MIN_POSITION));
+      if (!width) return;
+
+      const positiveLimit =
+        width -
+        2 * SIDE_MARGIN -
+        INITIAL_MIN_POSITION -
+        INITIAL_MAX_POSITION -
+        maxBudgetPosition -
+        GAP;
+      const negativeLimit = -INITIAL_MIN_POSITION;
+
+      dispatch(
+        actions.moveMinBudgetX(
+          Math.max(
+            Math.min(x - SIDE_MARGIN - INITIAL_MIN_POSITION, positiveLimit),
+            negativeLimit,
+          ),
+        ),
+      );
     },
-    [dispatch],
+    [dispatch, width, maxBudgetPosition],
   );
 
   const setMaxBudgetPosition = useCallback(
     (x) => {
       if (!width) return;
+
+      const positiveLimit =
+        width -
+        2 * SIDE_MARGIN -
+        INITIAL_MIN_POSITION -
+        INITIAL_MAX_POSITION -
+        minBudgetPosition -
+        GAP;
+      const negativeLimit = -INITIAL_MAX_POSITION;
+
       dispatch(
         actions.moveMaxBudgetX(
-          -(-width + x + SIDE_MARGIN + INITIAL_MAX_POSITION),
+          Math.max(
+            Math.min(
+              -(-width + x + SIDE_MARGIN + INITIAL_MAX_POSITION),
+              positiveLimit,
+            ),
+            negativeLimit,
+          ),
         ),
       );
     },
-    [dispatch, width],
+    [dispatch, width, minBudgetPosition],
   );
 
   return [setMinBudgetPosition, setMaxBudgetPosition];
