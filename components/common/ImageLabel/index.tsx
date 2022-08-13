@@ -6,7 +6,6 @@ import { shallowEqual } from 'react-redux';
 import Image from '@components/common/Image';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
-import * as colors from '@constants/colors';
 import activeCheckImage from '@assets/images/icons/big-active-check.svg';
 import inactiveCheckImage from '@assets/images/icons/big-inactive-check.svg';
 

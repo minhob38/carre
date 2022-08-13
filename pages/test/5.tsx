@@ -6,7 +6,6 @@ import Content from '@components/common/Content';
 import LinkButton from '@components/common/LinkButton';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
-import * as margins from '@constants/margins';
 import { HEADER_HEIGHT } from '@constants/size';
 
 const Title = styled.div`

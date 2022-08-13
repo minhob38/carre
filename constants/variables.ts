@@ -40,7 +40,7 @@ export const INITIAL_MIN_BUDGET = 4000; // 4000만원
 export const INITIAL_MAX_BUDGET = 8000; // 8000만원
 export const DELTA_Y = INITIAL_MAX_BUDGET - INITIAL_MIN_BUDGET;
 
-/* */
+/* 추가 선택 조건 선택 설정*/
 export const brands: IInput[] = [
   { title: '현대', value: 'hyundai' },
   { title: 'bmw', value: 'bmw' },
