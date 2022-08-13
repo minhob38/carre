@@ -8,15 +8,15 @@ import ProgressBar from '@components/test/ProgressBar';
 import Header from '@components/common/Header';
 import Scroll from '@components/common/Scroll';
 import Content from '@components/common/Content';
+import DropDown from '@components/test/DropDown';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import { brands, fuels, categories } from '@constants/variables';
-import brandImage from '@assets/images/brand.svg';
-import categoryImage from '@assets/images/category.svg';
-import fuelImage from '@assets/images/fuel.svg';
-import DropDown from '@components/test/DropDown';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { brands, fuels, categories } from '@constants/variables';
+import brandImage from '@assets/images/icons/brand.svg';
+import categoryImage from '@assets/images/icons/category.svg';
+import fuelImage from '@assets/images/icons/fuel.svg';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
