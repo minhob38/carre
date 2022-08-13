@@ -88,7 +88,7 @@ const Test: NextPage = () => {
         <Description>
           {`다음 두 가지의 상황 중 자신에게 더 잘 맞다고 \n느껴지는 상황을 선택해주세요.`}
         </Description>
-        <Scroll direction="y" height="cacl(100% - 200px)">
+        <Scroll direction="y" height="calc(100% - 127px - 10px)">
           <QuetsionContainer>{Questions}</QuetsionContainer>
         </Scroll>
         <NextButton title="다음" onClick={handleNextClick} />

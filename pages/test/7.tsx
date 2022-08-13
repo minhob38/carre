@@ -70,7 +70,7 @@ const Test: NextPage = () => {
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>차량 스타일 선택</Title>
         <Description>선호하는 차량 스타일을 선택해주세요.</Description>
-        <Scroll direction="y" height="cacl(100% - 184px)">
+        <Scroll direction="y" height="calc(100% - 113px - 10px)">
           <StyleContainer>{Questions}</StyleContainer>
         </Scroll>
       </Content>
