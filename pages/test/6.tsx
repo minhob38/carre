@@ -8,6 +8,7 @@ import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import ImageLabel from '@components/common/ImageLabel';
 import QuestionProgressBar from '@components/test/QuestionProgressBar';
+import Scroll from '@components/common/Scroll';
 import NextButton from '@components/common/NextButton';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
@@ -87,7 +88,9 @@ const Test: NextPage = () => {
         <Description>
           {`다음 두 가지의 상황 중 자신에게 더 잘 맞다고 \n느껴지는 상황을 선택해주세요.`}
         </Description>
-        <QuetsionContainer>{Questions}</QuetsionContainer>
+        <Scroll direction="y" height="cacl(100% - 200px)">
+          <QuetsionContainer>{Questions}</QuetsionContainer>
+        </Scroll>
         <NextButton title="다음" onClick={handleNextClick} />
       </Content>
     </>

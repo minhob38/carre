@@ -7,6 +7,7 @@ import Header from '@components/common/Header';
 import NextButton from '@components/common/NextButton';
 import Content from '@components/common/Content';
 import ImageLabel from '@components/common/ImageLabel';
+import Scroll from '@components/common/Scroll';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -69,7 +70,9 @@ const Test: NextPage = () => {
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>차량 스타일 선택</Title>
         <Description>선호하는 차량 스타일을 선택해주세요.</Description>
-        <StyleContainer>{Questions}</StyleContainer>
+        <Scroll direction="y" height="cacl(100% - 184px)">
+          <StyleContainer>{Questions}</StyleContainer>
+        </Scroll>
       </Content>
       {/* test 결과로 보내기 */}
       <NextButton title="다음" path={'/result'} />
