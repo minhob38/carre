@@ -6,10 +6,12 @@ import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import Scroll from '@components/common/Scroll';
 import ResultCard from '@components/result/ResultCard';
-import * as colors from '@constants/colors';
-import * as fonts from '@constants/fonts';
 import NextButton from '@components/common/NextButton';
 import StyleCheckBoxes from '@components/common/StyleCheckBoxes';
+import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
+import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 
 const Title = styled.div`
   margin: 0 0 0 20px;
@@ -30,7 +32,7 @@ const StyleCheckBoxesContainer = styled.div`
 const Result: NextPage = () => {
   return (
     <>
-      <Header title="검사 결과 조절" backPath="/result" />
+      <Header title="검사 결과 조절" type="close" closePath="/" />
       <Content top="55px" bottom="72px">
         <Scroll direction="y" height="100%">
           <Title>차량 스타일 변경</Title>

@@ -6,9 +6,12 @@ import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import Scroll from '@components/common/Scroll';
 import ResultCard from '@components/result/ResultCard';
-import * as colors from '@constants/colors';
 import DropDown from '@components/result/DropDown';
 import DealerButton from '@components/result/DealerButton';
+import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
+import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 
 const Title = styled.div`
   margin: 24px 0 20px 20px;
@@ -79,7 +82,7 @@ const Test: NextPage = () => {
 
   return (
     <>
-      <Header title="나의 추천 차량" backPath="/test" />
+      <Header title="나의 추천 차량" type="close" closePath="/" />
       <Content top="55px" bottom="112px">
         <Title>성능과 안전 두마리 토끼를 잡으려는 당신!</Title>
         <Scroll direction="x" width="100%">

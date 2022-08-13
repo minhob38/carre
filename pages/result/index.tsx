@@ -10,7 +10,7 @@ import Scroll from '@components/common/Scroll';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { HEADER_HEIGHT } from '@constants/size';
 import { TOTAL_SCORE, CRITERION_SCORE } from '@constants/variables';
 
 interface IStyleProps {
