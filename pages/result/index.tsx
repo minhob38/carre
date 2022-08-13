@@ -6,7 +6,12 @@ import styled from '@emotion/styled';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import ResultBar from '@components/result/ResultBar';
+import Scroll from '@components/common/Scroll';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
+import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { TOTAL_SCORE, CRITERION_SCORE } from '@constants/variables';
 
 interface IStyleProps {
   color: string;
@@ -15,44 +20,42 @@ interface IStyleProps {
 }
 
 const Title = styled.div`
-  margin: 39px 0 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: normal 400 30px / 39px roboto;
-  color: ${colors.WHITE1};
+  margin: 22px 0 0 ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.TITLE_T1};
+  color: ${colors.SECONDARY_500};
 `;
 
 const SubTitle = styled.div`
-  margin: 2px 0 24px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: normal 400 24px / 39px roboto;
-  color: ${colors.BLACK1};
+  margin: 4px 0 20px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_400};
 `;
 
 const Description = styled.div`
-  margin: 22px auto 32px auto;
+  margin: 40px auto 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 42px - 42px);
-  font: normal 400 16px / 28px roboto;
-  color: ${colors.BLACK5};
+  width: calc(100% - 52px - 52px);
+  text-align: center;
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_500};
 `;
 
 const NextButton = styled.div`
+  position: fixed;
+  left: 50%;
+  bottom: 78px;
+  transform: translate(-50%, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 350px;
-  height: 80px;
-  margin: auto;
+  height: 70px;
   border-radius: 8px;
-  background-color: ${colors.BLACK1};
-  font: normal 400 20px / 32px roboto;
-  color: ${colors.WHITE1};
+  background-color: ${colors.SECONDARY_REAL_BLACK};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_REAL_WHITE};
 `;
 
 const ScoreContainer = styled.div`
@@ -60,20 +63,21 @@ const ScoreContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  gap: 10px 0;
+  gap: 14px 0;
   width: 350px;
-  height: 328px;
+  height: 320px;
   margin: auto;
+  padding: 0 22px;
   border-radius: 8px;
   box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.2);
-  background-color: ${colors.WHITE1};
+  background-color: ${colors.SECONDARY_REAL_WHITE};
 `;
 
 const ScoreText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font: normal 400 20px / 32px roboto;
+  font: ${fonts.TITLE_T2};
   color: ${(props: IStyleProps) => props.color};
 `;
 
@@ -81,13 +85,13 @@ const ScoreBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 22px - 22px);
+  width: 100%;
 `;
 
-const Result: NextPage = () => {
-  const TOTAL_SCORE = 5;
-  const CRITERION_SCORE = 3;
+const BUTTON_POSTION = '78px';
+const BUTTON_HEIGHT = '70px';
 
+const Result: NextPage = () => {
   const scores: { title: string; score: number }[] = [
     { title: '성능', score: 5 },
     { title: '신뢰성', score: 4 },
@@ -99,7 +103,8 @@ const Result: NextPage = () => {
   ];
 
   const Scores = scores.map((score) => {
-    const color = score.score > CRITERION_SCORE ? colors.RED1 : colors.BLACK2;
+    const color =
+      score.score > CRITERION_SCORE ? colors.PRIMARY_500 : colors.SECONDARY_400;
     return (
       <ScoreBox key={uuid4()}>
         <ScoreText color={color}>{score.title}</ScoreText>
@@ -114,15 +119,25 @@ const Result: NextPage = () => {
 
   return (
     <>
-      <Header title="나의 취향 결과" backPath="/test" />
-      <Content top="55px" bottom="0" backgroudColor={colors.YELLOW3}>
-        {/* TODO: 변수로 사용자 이름 넣기 */}
-        <Title>성능과 안전</Title>
-        <SubTitle>두마리 토끼를 잡으려는 당신!</SubTitle>
-        <ScoreContainer>{Scores}</ScoreContainer>
-        <Description>
-          당신은 안전과 편의성을 중시하며 실속을 챙기는 합리적인 실속파입니다.
-        </Description>
+      <Header title="나의 취향 결과" type="close" closePath="/" />
+      <Content
+        top={HEADER_HEIGHT}
+        bottom={'0'}
+        // bottom={`(${BUTTON_HEIGHT} + ${BUTTON_POSTION})px`}
+        backgroudColor={colors.PRIMARY_400}
+      >
+        <Scroll
+          direction="y"
+          height={`calc(100% - ${BUTTON_HEIGHT} - ${BUTTON_POSTION} - 15px)`}
+        >
+          {/* TODO: 변수로 사용자 이름 넣기 */}
+          <Title>성능과 안전</Title>
+          <SubTitle>두마리 토끼를 잡으려는 당신!</SubTitle>
+          <ScoreContainer>{Scores}</ScoreContainer>
+          <Description>
+            당신은 안전과 편의성을 중시하며 실속을 챙기는 합리적인 실속파입니다.
+          </Description>
+        </Scroll>
         <Link href="/result/1" passHref={true}>
           <NextButton>내 취향의 차량 보기</NextButton>
         </Link>

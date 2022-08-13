@@ -152,3 +152,7 @@ export const questions: [IImageInput, IImageInput][] = [
     },
   ],
 ];
+
+/* 나의 취향 결과 설정 */
+export const TOTAL_SCORE = 5;
+export const CRITERION_SCORE = 3;
