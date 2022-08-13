@@ -8,7 +8,8 @@ import { NEXT_BUTTON_HEIGHT } from '@constants/size';
 
 interface IProps {
   title: string;
-  path: string;
+  path?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 const Wrapper = styled.div`
@@ -24,12 +25,20 @@ const Wrapper = styled.div`
   background-color: ${colors.SECONDARY_500};
 `;
 
-const NextButton: React.FC<IProps> = ({ path, title }) => {
-  return (
-    <Link href={path} passHref={true}>
-      <Wrapper>{title}</Wrapper>
-    </Link>
-  );
+const NextButton: React.FC<IProps> = ({ path, title, onClick }) => {
+  if (path) {
+    return (
+      <Link href={path} passHref={true}>
+        <Wrapper>{title}</Wrapper>
+      </Link>
+    );
+  }
+
+  if (onClick) {
+    return <Wrapper onClick={onClick}>{title}</Wrapper>;
+  }
+
+  return <Wrapper onClick={onClick}>{title}</Wrapper>;
 };
 
 export default NextButton;
