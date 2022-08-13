@@ -5,39 +5,42 @@ import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import LinkButton from '@components/common/LinkButton';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
+import { HEADER_HEIGHT } from '@constants/size';
 
 const Title = styled.div`
-  margin: 212px 0 0 0;
-  font: normal 400 20px / 32px roboto;
-  color: ${colors.BLACK1};
+  margin: 291px 0 0 0;
+  font: ${fonts.TITLE_T1};
+  color: ${colors.SECONDARY_500};
 `;
 
 const Description = styled.div`
-  margin: 2px 0 16px 0;
-  font: normal 400 14px / 23px roboto;
-  color: ${colors.GRAY1};
+  margin: 4px 0 30px 0;
+  font: ${fonts.SUBTITLE_T1};
+  color: ${colors.SECONDARY_400};
 `;
 
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
 const Test: NextPage = () => {
   return (
     <>
-      <Header title="차량 성향 테스트" backPath="/test/4" />
-      <Content top="55px" bottom="0">
+      <Header title="차량 성향 테스트" type="close" closePath="/" />
+      <Content top={HEADER_HEIGHT} bottom="0">
         <Container>
           <Title>차량 성향 테스트하기</Title>
           <Description>당신에게 맞는 차량을 전문 분석해 알려드려요</Description>
           <LinkButton
             path="/test/6"
             title="시작하기"
-            width="275px"
-            height="48px"
+            width="350px"
+            height="50px"
           />
         </Container>
       </Content>
