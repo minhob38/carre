@@ -23,6 +23,24 @@ interface IImageInput {
   alt: string;
 }
 
+/* 출생년도 select 설정*/
+export const MIN_YEAR = 1941;
+export const MAX_YEAR = 2004;
+export const DEFAULT_YEAR = 1997;
+
+/* 가격 설정 */
+export const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
+export const BALL_RADIUS = 11;
+export const INDICATOR_WIDTH = 80;
+
+export const INITIAL_MIN_POSITION = 55; // 55px
+export const INITIAL_MAX_POSITION = INITIAL_MIN_POSITION;
+
+export const INITIAL_MIN_BUDGET = 4000; // 4000만원
+export const INITIAL_MAX_BUDGET = 8000; // 8000만원
+export const DELTA_Y = INITIAL_MAX_BUDGET - INITIAL_MIN_BUDGET;
+
+/* */
 export const brands: IInput[] = [
   { title: '현대', value: 'hyundai' },
   { title: 'bmw', value: 'bmw' },
@@ -49,6 +67,18 @@ export const categories: IInput[] = [
   { title: '세단?', value: 'sedan' },
   { title: 'SUV?', value: 'suc' },
 ];
+
+/* 차량 성향 테스트 설정 (차량스타일) */
+export const styles = [
+  { name: 'style', value: '1', src: style1Image, alt: 'style-1' },
+  { name: 'style', value: '2', src: style2Image, alt: 'style-2' },
+  { name: 'style', value: '3', src: style3Image, alt: 'style-3' },
+  { name: 'style', value: '4', src: style4Image, alt: 'style-4' },
+  { name: 'style', value: '5', src: style5Image, alt: 'style-5' },
+];
+
+/* 차량 성향 테스트 설정 (질문) */
+export const TOTAL_PAGE = 5; // 질문 개수
 
 export const questions: [IImageInput, IImageInput][] = [
   [
@@ -122,28 +152,3 @@ export const questions: [IImageInput, IImageInput][] = [
     },
   ],
 ];
-
-export const styles = [
-  { name: 'style', value: '1', src: style1Image, alt: 'style-1' },
-  { name: 'style', value: '2', src: style2Image, alt: 'style-2' },
-  { name: 'style', value: '3', src: style3Image, alt: 'style-3' },
-  { name: 'style', value: '4', src: style4Image, alt: 'style-4' },
-  { name: 'style', value: '5', src: style5Image, alt: 'style-5' },
-];
-
-/* 출생년도 select 설정*/
-export const MIN_YEAR = 1941;
-export const MAX_YEAR = 2004;
-export const DEFAULT_YEAR = 1997;
-
-/* input spectrum 설정 */
-export const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
-export const BALL_RADIUS = 11;
-export const INDICATOR_WIDTH = 80;
-
-export const INITIAL_MIN_POSITION = 55; // 55px
-export const INITIAL_MAX_POSITION = INITIAL_MIN_POSITION;
-
-export const INITIAL_MIN_BUDGET = 4000; // 4000만원
-export const INITIAL_MAX_BUDGET = 8000; // 8000만원
-export const DELTA_Y = INITIAL_MAX_BUDGET - INITIAL_MIN_BUDGET;
