@@ -53,6 +53,7 @@ const Line = styled.div`
   opacity: ${(props: IStyleProps) => props.opacity};
 `;
 
+// TODO: 소수점도 처리한다면, 해당 비율에 맞는 bar를 만들어 overwrap 시켜야 할듯
 const ResultBar: React.FC<IProps> = ({ score, totalScore, criterionScore }) => {
   const _: number[] = [];
 
@@ -60,10 +61,11 @@ const ResultBar: React.FC<IProps> = ({ score, totalScore, criterionScore }) => {
     _.push(i + 1);
   }
 
-  const blockScoreColor = score > criterionScore ? colors.RED1 : colors.YELLOW1;
-  const noScoreColor = colors.GRAY2;
-  const lineScoreColor = colors.YELLOW4;
-  const lineNoScoreColor = colors.WHITE1;
+  const blockScoreColor =
+    score > criterionScore ? colors.PRIMARY_500 : colors.PRIMARY_400;
+  const noScoreColor = colors.SECONDARY_100;
+  const lineScoreColor = colors.PRIMARY_100;
+  const lineNoScoreColor = colors.SECONDARY_REAL_WHITE;
 
   const Blocks = _.map((item, index) => {
     if (index === 0 && item <= score) {

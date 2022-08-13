@@ -66,7 +66,7 @@ const ScoreContainer = styled.div`
   gap: 14px 0;
   width: 350px;
   height: 320px;
-  margin: auto;
+  margin: 0 auto;
   padding: 0 22px;
   border-radius: 8px;
   box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.2);
