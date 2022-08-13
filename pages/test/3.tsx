@@ -65,17 +65,6 @@ const Test: NextPage = () => {
         <ToggleContainer>
           <Toggle />
         </ToggleContainer>
-        {/* <Image src={checkImage} alt="check" width="18px" height="18px" /> */}
-        {/* <div
-          css={css`
-            font: normal 400 13px / 26px roboto;
-            color: ${colors.GRAY1};
-            margin: 0 0 0 16px;
-          `}
-        >
-          비슷한 가격대 차량도 함께 보기
-        </div> */}
-
         <ProgressBar stage={2} />
         <NextButton title="다음" path={'/test/4'} />
       </Content>

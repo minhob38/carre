@@ -15,7 +15,7 @@ interface IProps {
     name: string;
     value: string;
   };
-  size: 'narrow' | 'long';
+  size: 'narrow' | 'long' | 'drop-down';
 }
 
 interface IStyleProps extends Pick<IProps, 'size'> {
@@ -32,6 +32,8 @@ const Wrapper = styled.label`
       return '80px';
     } else if (props.size === 'long') {
       return '159px';
+    } else if (props.size === 'drop-down') {
+      return '96px';
     }
   }};
   height: 48px;
@@ -39,7 +41,15 @@ const Wrapper = styled.label`
     props.checked ? `2px solid ${colors.PRIMARY_400}` : `none`};
   border-radius: 8px;
   background-color: ${colors.SECONDARY_REAL_WHITE};
-  font: ${fonts.BODY_REGULAR_1};
+  font: ${(props: IStyleProps) => {
+    if (props.size === 'narrow') {
+      return fonts.BODY_REGULAR_1;
+    } else if (props.size === 'long') {
+      return fonts.BODY_REGULAR_1;
+    } else if (props.size === 'drop-down') {
+      return fonts.LABEL_2;
+    }
+  }};
   color: ${colors.SECONDARY_400};
 `;
 

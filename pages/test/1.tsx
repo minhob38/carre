@@ -16,22 +16,6 @@ const Title = styled.div`
   color: ${colors.SECONDARY_400};
 `;
 
-const ItemText = styled.div`
-  font: 'normal 400 18px / 20px roboto';
-  color: ${colors.BLACK1};
-`;
-
-const TestItemContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 350px;
-  height: 78px;
-  border-radius: 8px;
-  background-color: ${colors.YELLOW1};
-  padding: 0 23px;
-`;
-
 const ButtonContainer = styled.div`
   margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
 `;

@@ -6,7 +6,8 @@ import styled from '@emotion/styled';
 import Image from '@components/common/Image';
 import Arrow from '@components/common/Arrow';
 import * as colors from '@constants/colors';
-import brandImage from '@assets/images/brand.svg';
+import * as margins from '@constants/margins';
+import * as fonts from '@constants/fonts';
 
 interface IProps {
   title: string;
@@ -25,11 +26,11 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 20px - 20px);
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   border-radius: 8px;
-  background-color: ${colors.GRAY2};
   background-color: ${(props: IStyleProps) =>
-    props.isDown ? colors.GRAY2 : colors.WHITE1};
+    props.isDown ? colors.SECONDARY_100 : colors.SECONDARY_REAL_WHITE};
+  box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.04);
 `;
 
 const Header = styled.div`
@@ -39,22 +40,24 @@ const Header = styled.div`
   height: 70px;
   margin: auto;
   border-bottom: ${(props: IStyleProps) =>
-    props.isDown ? `solid 1px ${colors.GRAY3}` : 'none'};
+    props.isDown ? `solid 1px ${colors.SECONDARY_200}` : 'none'};
 `;
 
 const Title = styled.div`
   margin: 0 0 0 16px;
-  font: normal 400 16px / 27px roboto;
-  color: ${colors.BLACK3};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_400};
 `;
 
 const ItemContainer = styled.div`
-  display: ${(props: IStyleProps) => (props.isDown ? 'flex' : 'none')};
-  flex-flow: row wrap;
-  justify-content: center;
+  display: ${(props: IStyleProps) => (props.isDown ? 'grid' : 'none')};
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: start;
   align-items: center;
-  gap: 9px 14px;
-  padding: 14px 0;
+  justify-items: center;
+  row-gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
 `;
 
 const DropDown: React.FC<IProps> = ({

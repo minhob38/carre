@@ -9,22 +9,25 @@ import Header from '@components/common/Header';
 import Scroll from '@components/common/Scroll';
 import Content from '@components/common/Content';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
 import { brands, fuels, categories } from '@constants/variables';
 import brandImage from '@assets/images/brand.svg';
 import categoryImage from '@assets/images/category.svg';
 import fuelImage from '@assets/images/fuel.svg';
 import DropDown from '@components/test/DropDown';
+import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 
 const Title = styled.div`
-  margin: 30px 0 2px 20px;
-  font: normal 700 20px / 32px roboto;
-  color: ${colors.BLACK1};
+  margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.TITLE_T1};
+  color: ${colors.SECONDARY_500};
 `;
 
 const Description = styled.div`
-  margin: 0 0 20px 20px;
-  font: normal 400 14px / 23px roboto;
-  color: ${colors.GRAY1};
+  margin: 0 0 20px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.SUBTITLE_T1};
+  color: ${colors.SECONDARY_300};
 `;
 
 const DropDownContainer = styled.div`
@@ -45,11 +48,7 @@ const Test: NextPage = () => {
           name: 'brands',
           value: brand.value,
         }}
-        style={{
-          width: '95px',
-          height: '48px',
-          font: 'normal 400 12px / 26px roboto',
-        }}
+        size="drop-down"
       />
     );
   });
@@ -64,11 +63,7 @@ const Test: NextPage = () => {
           name: 'fuels',
           value: fuel.value,
         }}
-        style={{
-          width: '95px',
-          height: '48px',
-          font: 'normal 400 12px / 26px roboto',
-        }}
+        size="drop-down"
       />
     );
   });
@@ -83,22 +78,22 @@ const Test: NextPage = () => {
           name: 'categories',
           value: category.value,
         }}
-        style={{
-          width: '95px',
-          height: '48px',
-          font: 'normal 400 12px / 26px roboto',
-        }}
+        size="drop-down"
       />
     );
   });
 
   return (
     <>
-      <Header title="나의 정보 입력" backPath="/test/3" />
-      <Content top="55px" bottom="99px">
+      <Header title="나의 정보 입력" type="close" closePath="/" />
+      <Content
+        top={HEADER_HEIGHT}
+        bottom={`calc(${NEXT_BUTTON_HEIGHT} + 50px)`}
+      >
         <Title>추가 선택 조건 선택</Title>
         <Description>꼭 원하는 조건이 있다면선택해주세요</Description>
-        <Scroll direction="y" height="calc(100% - 120px)">
+        {/* 106은 Header와의 간격 */}
+        <Scroll direction="y" height="calc(100% - 106px)">
           <DropDownContainer>
             <DropDown
               title="브랜드"
