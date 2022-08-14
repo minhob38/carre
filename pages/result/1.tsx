@@ -20,7 +20,7 @@ const Title = styled.div`
   color: ${colors.SECONDARY_500};
 `;
 
-const ScrollContainer = styled.div`
+const ResultCardContainer = styled.div`
   width: 100%;
   padding: 0 ${margins.SIDE_MAIN_MARGIN};
 `;
@@ -51,6 +51,11 @@ const InfomationContainer = styled.div`
   width: 100%;
   margin: 0 0 16px 0;
   padding: 0 20px;
+`;
+
+const Border = styled.div`
+  padding: 5px 0 5px 0;
+  background-color: ${colors.SECONDARY_100};
 `;
 
 const Result: NextPage = () => {
@@ -90,17 +95,21 @@ const Result: NextPage = () => {
     <>
       <Header title="나의 추천 차량" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
-        <Title>성능과 안전 두마리 토끼를 잡으려는 당신!</Title>
-        <ScrollContainer>
-          <Scroll direction="x" width="100%">
-            <ResultCard />
-            <ResultCard />
-            <ResultCard />
-          </Scroll>
-        </ScrollContainer>
-        {/* <DropDownContainer>{Values}</DropDownContainer> */}
+        <Scroll direction="y" height="100%">
+          <Title>성능과 안전 두마리 토끼를 잡으려는 당신!</Title>
+          <ResultCardContainer>
+            <Scroll direction="x" width="100%">
+              <ResultCard />
+              <ResultCard />
+              <ResultCard />
+            </Scroll>
+          </ResultCardContainer>
+          {/* <Border>?</Border> */}
+          <Border />
+          <DropDownContainer>{Values}</DropDownContainer>
+        </Scroll>
       </Content>
-      <DealerButton />
+      {/* <DealerButton /> */}
     </>
   );
 };
