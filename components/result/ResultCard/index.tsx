@@ -1,18 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import Image from '@components/common/Image';
-import * as colors from '@constants/colors';
-import Arrow from '@components/common/Arrow';
 import Link from 'next/link';
+import Image from '@components/common/Image';
+import Chip from '@components/result/Chip';
 import casperImage from '@assets/images/casper.svg';
-import infoImage from '@assets/images/info.svg';
+import infoImage from '@assets/images/icons/info.svg';
+import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import rightArrorImage from '@assets/images/icons/small-black-right-arrow.svg';
 
 const Wrapper = styled.div`
-  padding: 16px 22px 0 22px;
   width: 324px;
-  height: 534px;
+  margin: 0 12px 0 0;
+  padding: 16px 20px 21px 20px;
   border-radius: 8px;
-  background-color: ${colors.WHITE1};
+  background-color: ${colors.SECONDARY_REAL_WHITE};
   box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
 `;
 
@@ -24,26 +26,19 @@ const RankContainer = styled.div`
 
 const Rank = styled.div`
   margin: 0 10px 0 0;
-  font: normal 400 24px / 32px roboto;
-  color: ${colors.YELLOW2};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.PRIMARY_500};
 `;
 
 const CarName = styled.div`
-  font: normal 400 24px / 32px roboto;
-  color: ${colors.BLACK1};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_500};
 `;
 
 const Description = styled.div`
-  margin: 0 0 8px 0;
-  font: normal 400 14px / 22px roboto;
-  color: ${colors.BLACK1};
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 100%;
+  margin: 0 0 10px 0;
+  font: ${fonts.SUBTITLE_T2};
+  color: ${colors.SECONDARY_500};
 `;
 
 const DetailContainer = styled.div`
@@ -54,8 +49,8 @@ const DetailContainer = styled.div`
 `;
 
 const Detail = styled.div`
-  font: normal 400 14px / 23px roboto;
-  color: ${colors.BLACK2};
+  font: ${fonts.BODY_EMPHASIS_1};
+  color: ${colors.SECONDARY_400};
 `;
 
 const TermContainer = styled.div`
@@ -64,29 +59,34 @@ const TermContainer = styled.div`
 `;
 
 const Term = styled.div`
-  margin: 2px 0 0 12px;
-  font: normal 400 12px / 20px roboto;
-  color: ${colors.GRAY1};
-  text-decoration-line: underline;
+  margin: 0 0 0 12px;
+  padding: 1px 0 0 0;
+  font: ${fonts.BODY_REGULAR_2};
+  color: ${colors.SECONDARY_300};
 `;
 
 const TrimContainer = styled.div`
   display: flex;
-  align-items: center;
+  width: 100%;
+  margin: 18px 0 0 0;
 `;
 
 const TrimTitle = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  font: normal 400 16px / 27px roboto;
-  color: ${colors.BLACK2};
+  width: 43px;
+  height: 32px; // Chip 높이와 같아야 함
+  font: ${fonts.BODY_EMPHASIS_1};
+  color: ${colors.SECONDARY_400};
+  flex-shrink: 0;
 `;
 
 const Trim = styled.div`
   display: flex;
+  flex: 1;
   flex-flow: row wrap;
   align-items: center;
+  gap: 8px 8px;
 `;
 
 const OptionContainer = styled(TrimContainer)``;
@@ -99,17 +99,18 @@ const PriceContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin: 10px 0 0 0;
 `;
 
 const PriceTitle = styled.div`
   margin: 0 16px 0 0;
-  font: normal 400 16px / 27px roboto;
-  color: ${colors.BLACK2};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_400};
 `;
 
 const Price = styled.div`
-  font: normal 400 20px / 32px roboto;
-  color: ${colors.BLACK2};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_400};
 `;
 
 const ResultCard: React.FC = () => {
@@ -124,17 +125,14 @@ const ResultCard: React.FC = () => {
           지프 그랜드 체로키는 성능이 어쭈구 좋고 안전은 또 이렇게 막 이렇게
           좋은 대표 차량입니다.
         </Description>
-        <ImageContainer>
-          <Image src={casperImage} alt="casper" width="271px" height="170px" />
-        </ImageContainer>
+        <Image src={casperImage} alt="casper" width="271px" height="170px" />
         <DetailContainer>
           <Detail>차량 상세보기</Detail>
-          <Arrow
-            length="8.5px"
-            width="1px"
-            color={colors.BLACK2}
-            direction="right"
-            calibrationX="2.5px"
+          <Image
+            src={rightArrorImage}
+            alt="right-arrow"
+            width="20px"
+            height="20px"
           />
         </DetailContainer>
         <TermContainer>
@@ -144,18 +142,20 @@ const ResultCard: React.FC = () => {
         <TrimContainer>
           <TrimTitle>트림</TrimTitle>
           <Trim>
-            <div>스마트</div>
-            <div>모던</div>
-            <div>인스퍼레이션</div>
+            <Chip type="no" title="스마트" />
+            <Chip type="yes" title="모던" />
+            <Chip type="no" title="인스퍼레이션" />
           </Trim>
         </TrimContainer>
         <OptionContainer>
           <OptionTitle>옵션</OptionTitle>
           <Option>
-            <div>캐스퍼액티브</div>
-            <div>선루프</div>
-            <div>에센셜 풀</div>
-            <div>스마트팩</div>
+            <Chip type="yes" title="캐스퍼액티브" />
+            <Chip type="yes" title="선루프" />
+            <Chip type="no" title="애센셜 풀" />
+            <Chip type="no" title="스마트팩" />
+            <Chip type="no" title="선루프" />
+            <Chip type="yes" title="옵션" />
           </Option>
         </OptionContainer>
         <PriceContainer>

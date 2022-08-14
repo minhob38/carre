@@ -14,9 +14,15 @@ import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 
 const Title = styled.div`
-  margin: 24px 0 20px 20px;
-  font: normal 400 20px / 26px roboto;
-  color: ${colors.BLACK1};
+  margin: 22px 0 16px ${margins.SIDE_MAIN_MARGIN};
+  padding: 0 100px 0 0;
+  font: ${fonts.TITLE_T1};
+  color: ${colors.SECONDARY_500};
+`;
+
+const ScrollContainer = styled.div`
+  width: 100%;
+  padding: 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const InformationTitle = styled.div`
@@ -47,7 +53,7 @@ const InfomationContainer = styled.div`
   padding: 0 20px;
 `;
 
-const Test: NextPage = () => {
+const Result: NextPage = () => {
   const values: { value: string; title: string; description: string }[] = [
     {
       value: '가성비',
@@ -85,9 +91,13 @@ const Test: NextPage = () => {
       <Header title="나의 추천 차량" type="close" closePath="/" />
       <Content top="55px" bottom="112px">
         <Title>성능과 안전 두마리 토끼를 잡으려는 당신!</Title>
-        <Scroll direction="x" width="100%">
-          <ResultCard />
-        </Scroll>
+        <ScrollContainer>
+          <Scroll direction="x" width="100%">
+            <ResultCard />
+            <ResultCard />
+            <ResultCard />
+          </Scroll>
+        </ScrollContainer>
         {/* <DropDownContainer>{Values}</DropDownContainer> */}
       </Content>
       <DealerButton />
@@ -95,4 +105,4 @@ const Test: NextPage = () => {
   );
 };
 
-export default Test;
+export default Result;
