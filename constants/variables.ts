@@ -156,3 +156,35 @@ export const questions: [IImageInput, IImageInput][] = [
 /* 나의 취향 결과 설정 */
 export const TOTAL_SCORE = 5;
 export const CRITERION_SCORE = 3;
+
+/* 이 차량의 매력 설정 */
+export const attractions: {
+  value: string;
+  title: string;
+  description: string;
+}[] = [
+  {
+    value: '유류비',
+    title: ' 연비 15.3 km/L SUV차량 기준 8등',
+    description:
+      '해외 자동차 전문매체 왓카(What Car) 반복된 주행과 엄격하게 통제된 실험 조건속에 실제 연비 측정 결과 SUV차량 기준 8등!',
+  },
+  {
+    value: '신차품질조사',
+    title: ' 연비 15.3 km/L SUV차량 기준 8등',
+    description:
+      '해외 자동차 전문매체 왓카(What Car) 반복된 주행과 엄격하게 통제된 실험 조건속에 실제 연비 측정 결과 SUV차량 기준 8등!',
+  },
+  {
+    value: '안전도 평가',
+    title: ' 연비 15.3 km/L SUV차량 기준 8등',
+    description:
+      '해외 자동차 전문매체 왓카(What Car) 반복된 주행과 엄격하게 통제된 실험 조건속에 실제 연비 측정 결과 SUV차량 기준 8등!',
+  },
+  {
+    value: '구매자 만족지수',
+    title: ' 연비 15.3 km/L SUV차량 기준 8등',
+    description:
+      '해외 자동차 전문매체 왓카(What Car) 반복된 주행과 엄격하게 통제된 실험 조건속에 실제 연비 측정 결과 SUV차량 기준 8등!',
+  },
+];

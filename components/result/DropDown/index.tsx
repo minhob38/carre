@@ -1,9 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import Arrow from '@components/common/Arrow';
+import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
+import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
+import upArrowImage from '@assets/images/icons/small-black-up-arrow.svg';
+import downArrowImage from '@assets/images/icons/small-black-down-arrow.svg';
 
 interface IProps {
   title: string;
@@ -18,7 +21,7 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 20px - 20px);
+  width: calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN});
   border-radius: 8px;
   background-color: ${colors.WHITE1};
 `;
@@ -28,13 +31,13 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 58px;
+  height: 60px;
   padding: 0 20px;
 `;
 
 const Title = styled.div`
-  font: normal 400 16px / 26px roboto;
-  color: ${colors.BLACK3};
+  font: ${fonts.TITLE_T2};
+  color: ${colors.SECONDARY_500};
 `;
 
 const ItemContainer = styled.div`
@@ -44,6 +47,8 @@ const ItemContainer = styled.div`
   align-items: center;
 `;
 
+const ImageContainer = styled.div``;
+
 const DropDown: React.FC<IProps> = ({ children, title }) => {
   const [isDown, setIsDown] = useState<boolean>(false);
 
@@ -51,14 +56,14 @@ const DropDown: React.FC<IProps> = ({ children, title }) => {
     <Wrapper>
       <Header>
         <Title>{title}</Title>
-        <Arrow
-          length="8px"
-          width="2px"
-          color={colors.BLACK2}
-          direction={isDown ? 'bottom' : 'top'}
-          calibrationY="2.5px"
-          onClick={() => setIsDown(!isDown)}
-        />
+        <ImageContainer onClick={() => setIsDown(!isDown)}>
+          <Image
+            src={isDown ? downArrowImage : upArrowImage}
+            alt={isDown ? 'down-arrow' : 'up-arrow'}
+            width="20px"
+            height="20px"
+          />
+        </ImageContainer>
       </Header>
       <ItemContainer isDown={isDown}>{children}</ItemContainer>
     </Wrapper>
