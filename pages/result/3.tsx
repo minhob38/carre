@@ -33,7 +33,7 @@ const Result: NextPage = () => {
   return (
     <>
       <Header title="검사 결과 조절" type="close" closePath="/" />
-      <Content top="55px" bottom="72px">
+      <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Scroll direction="y" height="100%">
           <Title>차량 스타일 변경</Title>
           <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
