@@ -2,6 +2,7 @@
 import styled from '@emotion/styled';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
+import { DEALER_BUTTON_HEIGHT } from '@constants/size';
 import * as fonts from '@constants/fonts';
 import heartImage from '@assets/images/icons/heart.svg';
 
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 112px;
+  height: ${DEALER_BUTTON_HEIGHT};
   background-color: ${colors.SECONDARY_REAL_WHITE};
   box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.1);
 `;

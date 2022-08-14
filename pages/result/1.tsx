@@ -11,7 +11,7 @@ import DealerButton from '@components/result/DealerButton';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
 
 const Title = styled.div`
   margin: 22px 0 16px ${margins.SIDE_MAIN_MARGIN};
@@ -89,7 +89,7 @@ const Result: NextPage = () => {
   return (
     <>
       <Header title="나의 추천 차량" type="close" closePath="/" />
-      <Content top="55px" bottom="112px">
+      <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
         <Title>성능과 안전 두마리 토끼를 잡으려는 당신!</Title>
         <ScrollContainer>
           <Scroll direction="x" width="100%">
