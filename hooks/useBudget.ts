@@ -58,7 +58,6 @@ export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
     minBudgetValue,
     maxBudgetValue,
   ]);
-  console.log('@@@', minBudgetValue, maxBudgetValue);
   return [minBudgetValue, maxBudgetValue];
 };
 

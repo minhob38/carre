@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
   margin: auto;
 `;
 
@@ -142,6 +143,7 @@ const Budget: React.FC = () => {
           <LeftBall
             minBudgetPosition={minBudgetPosition}
             onTouchMove={handleLeftBallTouch}
+            // onClick={(ev) => console.log('left')}
           />
           <LeftIndicator minBudgetPosition={minBudgetPosition}>
             {convertNumberToWon(minBudgetValue)}
@@ -151,8 +153,8 @@ const Budget: React.FC = () => {
           <RightBall
             maxBudgetPosition={maxBudgetPosition}
             onTouchMove={handleRightBallTouch}
+            // onClick={(ev) => console.log('right')}
           />
-
           <RightIndicator maxBudgetPosition={maxBudgetPosition}>
             {convertNumberToWon(maxBudgetValue)}
           </RightIndicator>
