@@ -12,6 +12,7 @@ interface IProps {
 type IStyleProps = Pick<IProps, 'type'>;
 
 const Wrapper = styled.div`
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
