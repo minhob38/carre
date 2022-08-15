@@ -70,7 +70,7 @@ const Result: NextPage = () => {
           {/* TODO: 변수로 사용자 이름 넣기 */}
           <Title>성능과 안전</Title>
           <SubTitle>두마리 토끼를 잡으려는 당신!</SubTitle>
-          <ScoreCard />
+          <ScoreCard type="static" />
           <Description>
             당신은 안전과 편의성을 중시하며 실속을 챙기는 합리적인 실속파입니다.
           </Description>

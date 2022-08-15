@@ -6,8 +6,13 @@ import * as fonts from '@constants/fonts';
 import ResultBar from '@components/result/ResultBar';
 import { TOTAL_SCORE, CRITERION_SCORE } from '@constants/variables';
 import { useTypedSelector } from '@hooks/useStore';
+import { type } from 'os';
 
-interface IStyleProps {
+interface IProps {
+  type: 'static' | 'dynamic';
+}
+
+interface IStyleProps extends IProps {
   color: string;
   backgroundColor?: string;
   opacity?: number;
@@ -25,6 +30,10 @@ const Wrapper = styled.div`
   padding: 0 22px;
   border-radius: 8px;
   box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.2);
+  box-shadow: ${(props: IProps) =>
+    props.type === 'dynamic'
+      ? '0px 5px 10px rgba(96, 100, 112, 0.06);'
+      : '0px 5px 20px rgba(96, 100, 112, 0.2)'};
   background-color: ${colors.SECONDARY_REAL_WHITE};
 `;
 
@@ -32,8 +41,10 @@ const ScoreText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font: ${fonts.TITLE_T2};
-  color: ${(props: IStyleProps) => props.color};
+  font: ${(props: IStyleProps) =>
+    props.type === 'dynamic' ? fonts.BODY_REGULAR_2 : fonts.TITLE_T2};
+  color: ${(props: IStyleProps) =>
+    props.type === 'dynamic' ? colors.SECONDARY_400 : props.color};
 `;
 
 const ScoreBox = styled.div`
@@ -43,7 +54,7 @@ const ScoreBox = styled.div`
   width: 100%;
 `;
 
-const ScoreCard: React.FC = () => {
+const ScoreCard: React.FC<IProps> = ({ type }) => {
   const values = useTypedSelector(
     (state) => state.rootReducer.inputReducer.values,
   );
@@ -53,8 +64,11 @@ const ScoreCard: React.FC = () => {
       score.score > CRITERION_SCORE ? colors.PRIMARY_500 : colors.SECONDARY_400;
     return (
       <ScoreBox key={uuid4()}>
-        <ScoreText color={color}>{score.title}</ScoreText>
+        <ScoreText type={type} color={color}>
+          {score.title}
+        </ScoreText>
         <ResultBar
+          type={type}
           value={score.value}
           score={score.score}
           totalScore={TOTAL_SCORE}
@@ -64,7 +78,7 @@ const ScoreCard: React.FC = () => {
     );
   });
 
-  return <Wrapper>{Scores}</Wrapper>;
+  return <Wrapper type={type}>{Scores}</Wrapper>;
 };
 
 export default ScoreCard;

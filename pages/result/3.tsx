@@ -2,11 +2,9 @@
 import type { NextPage } from 'next';
 import { useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { v4 as uuid4 } from 'uuid';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import Scroll from '@components/common/Scroll';
-import ResultCard from '@components/result/ResultCard';
 import NextButton from '@components/common/NextButton';
 import StyleCheckBoxes from '@components/common/StyleCheckBoxes';
 import * as colors from '@constants/colors';
@@ -67,7 +65,9 @@ const StyleContainer = styled.div`
   margin: 0 0 26px 0;
 `;
 
-const ValueContainer = styled.div``;
+const ValueContainer = styled.div`
+  margin: 0 0 52px 0;
+`;
 
 const Result: NextPage = () => {
   const { width, height } = useWindowDimensions();
@@ -157,7 +157,7 @@ const Result: NextPage = () => {
           <ValueContainer ref={valueRef}>
             <Title>차량 가치 변경</Title>
             <Subtitle>가치별 차량 정보를 알 수 있어요</Subtitle>
-            <ScoreCard />
+            <ScoreCard type="dynamic" />
           </ValueContainer>
         </Scroll>
       </Content>

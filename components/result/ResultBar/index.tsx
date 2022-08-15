@@ -6,6 +6,7 @@ import { useTypedDispatch } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 
 interface IProps {
+  type: 'static' | 'dynamic';
   value: string;
   totalScore: number;
   score: number;
@@ -90,6 +91,7 @@ const Ball = styled.div`
 
 // TODO: 소수점도 처리한다면, 해당 비율에 맞는 bar를 만들어 overwrap 시켜야 할듯
 const ResultBar: React.FC<IProps> = ({
+  type,
   value,
   score,
   totalScore,
@@ -111,10 +113,12 @@ const ResultBar: React.FC<IProps> = ({
 
   const Blocks = _.map((item, index) => {
     const handleLeftClick = () => {
+      if (type === 'static') return;
       dispatch(actions.changeValue({ value, score: item }));
     };
 
     const handleRightClick = () => {
+      if (type === 'static') return;
       dispatch(actions.changeValue({ value, score: item }));
       // if (item < totalScore) {
       //   dispatch(actions.changeValue({ value, score: item + 1 }));
@@ -135,7 +139,7 @@ const ResultBar: React.FC<IProps> = ({
           />
           <LeftClick onClick={handleLeftClick} />
           <RightClick onClick={handleRightClick} />
-          {item === score && <Ball />}
+          {type === 'dynamic' && item === score && <Ball />}
         </Block>
       );
     }
@@ -150,7 +154,7 @@ const ResultBar: React.FC<IProps> = ({
         >
           <LeftClick onClick={handleLeftClick} />
           <RightClick onClick={handleRightClick} />
-          {item === score && <Ball />}
+          {type === 'dynamic' && item === score && <Ball />}
         </Block>
       );
     }
@@ -168,7 +172,7 @@ const ResultBar: React.FC<IProps> = ({
         />
         <LeftClick onClick={handleLeftClick} />
         <RightClick onClick={handleRightClick} />
-        {item === score && <Ball />}
+        {type === 'dynamic' && item === score && <Ball />}
       </Block>
     );
   });
