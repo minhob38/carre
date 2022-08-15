@@ -127,7 +127,9 @@ const ResultCard: React.FC = () => {
         </Description>
         <Image src={casperImage} alt="casper" width="271px" height="170px" />
         <DetailContainer>
-          <Detail>차량 상세보기</Detail>
+          <Link href="/result/2" passHref={true}>
+            <Detail>차량 상세보기</Detail>
+          </Link>
           <Image
             src={rightArrorImage}
             alt="right-arrow"

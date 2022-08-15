@@ -42,7 +42,6 @@ const MenuContainer = styled.div`
 
 const Menu = styled.div`
   font: ${fonts.TITLE_T2};
-  color: ${colors.SECONDARY_REAL_BLACK};
   color: ${(props: IStyleProps) => {
     return props.isCurrent
       ? `${colors.SECONDARY_REAL_BLACK}`

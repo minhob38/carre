@@ -9,6 +9,8 @@ import style3Image from '@assets/images/styles/style-3.svg';
 import style4Image from '@assets/images/styles/style-4.svg';
 import style5Image from '@assets/images/styles/style-5.svg';
 
+import thumbnail1Image from '@assets/images/details/thumbnail1.svg';
+
 import * as margins from './margins';
 
 interface IInput {
@@ -187,4 +189,47 @@ export const attractions: {
     description:
       '해외 자동차 전문매체 왓카(What Car) 반복된 주행과 엄격하게 통제된 실험 조건속에 실제 연비 측정 결과 SUV차량 기준 8등!',
   },
+];
+
+/* 차량 상세보기 설정 */
+export const pictures = [
+  {
+    src: thumbnail1Image,
+    alt: 'thumbnail-1',
+    width: '70px',
+    height: '70px',
+  },
+  {
+    src: thumbnail1Image,
+    alt: 'thumbnail-1',
+    width: '70px',
+    height: '70px',
+  },
+  {
+    src: thumbnail1Image,
+    alt: 'thumbnail-1',
+    width: '70px',
+    height: '70px',
+  },
+  {
+    src: thumbnail1Image,
+    alt: 'thumbnail-1',
+    width: '70px',
+    height: '70px',
+  },
+  {
+    src: thumbnail1Image,
+    alt: 'thumbnail-1',
+    width: '70px',
+    height: '70px',
+  },
+];
+
+export const carColors = [
+  '#B9B6A9',
+  '#434343',
+  '#F1EFEE',
+  '#7B2C17',
+  '#484A3E',
+  '#1C2F53',
 ];
