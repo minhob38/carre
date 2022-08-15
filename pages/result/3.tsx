@@ -46,7 +46,7 @@ const ToggleContainer = styled.div`
 `;
 
 const StyleCheckBoxesContainer = styled.div`
-  margin: 0 0 0 27px;
+  margin: 16px 0 0 ${margins.SIDE_SUB_MARGIN};
 `;
 
 const NavigatorContainer = styled.div`
@@ -67,7 +67,7 @@ const Result: NextPage = () => {
   const [isStyleViewd, setIsStyleViewd] = useState<boolean>(false);
   const [isValueViewd, setIsValueViewd] = useState<boolean>(false);
 
-  const handleScroll = () => {
+  const handleDetectScroll = () => {
     const topOffset = 72 + 62; // header 및 nav 높이
     const bottomOffset = (height || 0) - 72 - 62 - 72; // header 및 nav 및 nest button 높이
 
@@ -125,7 +125,7 @@ const Result: NextPage = () => {
           direction="y"
           height="100%"
           width="100%"
-          onScroll={handleScroll}
+          onScroll={handleDetectScroll}
         >
           <div ref={budgetRef}>
             <Title>가격 변경</Title>
