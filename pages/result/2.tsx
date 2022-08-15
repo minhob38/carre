@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import styled from '@emotion/styled';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
@@ -60,9 +59,7 @@ const Result: NextPage = () => {
           </ResultCardContainer>
           <Border />
           <Attractions />
-          <Link href="/result/3" passHref={true}>
-            <EditButton>검사 결과 조절해보기</EditButton>
-          </Link>
+          <EditButton>검사 결과 조절해보기</EditButton>
         </Scroll>
       </Content>
       <DealerButton />
