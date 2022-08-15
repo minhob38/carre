@@ -17,6 +17,7 @@ import Chip from '@components/result/BigChip';
 import Budget from '@components/common/Budget';
 import Toggle from '@components/common/Toggle';
 import useWindowDimensions from '@hooks/useWindowDimension';
+import ScoreCard from '@components/result/ScoreCard';
 
 const Title = styled.div`
   margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
@@ -42,7 +43,7 @@ const Manual = styled.div`
 `;
 
 const ToggleContainer = styled.div`
-  margin: 0 0 47px ${margins.SIDE_MAIN_MARGIN};
+  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const StyleCheckBoxesContainer = styled.div`
@@ -57,6 +58,16 @@ const NavigatorContainer = styled.div`
   margin: 16px 0 20px 0;
   padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
 `;
+
+const BudgetContainer = styled.div`
+  margin: 0 0 47px 0;
+`;
+
+const StyleContainer = styled.div`
+  margin: 0 0 26px 0;
+`;
+
+const ValueContainer = styled.div``;
 
 const Result: NextPage = () => {
   const { width, height } = useWindowDimensions();
@@ -123,11 +134,11 @@ const Result: NextPage = () => {
         </NavigatorContainer>
         <Scroll
           direction="y"
-          height="100%"
+          height={'calc(100% - 72px)'}
           width="100%"
           onScroll={handleDetectScroll}
         >
-          <div ref={budgetRef}>
+          <BudgetContainer ref={budgetRef}>
             <Title>가격 변경</Title>
             <Subtitle>가격의 스펙트럼을 변경할 수 있어요.</Subtitle>
             <Budget />
@@ -135,21 +146,19 @@ const Result: NextPage = () => {
             <ToggleContainer>
               <Toggle />
             </ToggleContainer>
-          </div>
-          <div ref={styleRef}>
+          </BudgetContainer>
+          <StyleContainer ref={styleRef}>
             <Title>차량 스타일 변경</Title>
             <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
             <StyleCheckBoxesContainer>
               <StyleCheckBoxes />
             </StyleCheckBoxesContainer>
-          </div>
-          <div ref={valueRef}>
-            <Title>111차량 스타일 변경</Title>
-            <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
-            <StyleCheckBoxesContainer>
-              <StyleCheckBoxes />
-            </StyleCheckBoxesContainer>
-          </div>
+          </StyleContainer>
+          <ValueContainer ref={valueRef}>
+            <Title>차량 가치 변경</Title>
+            <Subtitle>가치별 차량 정보를 알 수 있어요</Subtitle>
+            <ScoreCard />
+          </ValueContainer>
         </Scroll>
       </Content>
       <NextButton title="다음" path="/result" />
