@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import Header from '@components/common/Header';
@@ -15,6 +16,7 @@ import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import Chip from '@components/result/BigChip';
 import Budget from '@components/common/Budget';
 import Toggle from '@components/common/Toggle';
+import useWindowDimensions from '@hooks/useWindowDimension';
 
 const Title = styled.div`
   margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
@@ -57,17 +59,75 @@ const NavigatorContainer = styled.div`
 `;
 
 const Result: NextPage = () => {
+  const { width, height } = useWindowDimensions();
+  const budgetRef = useRef<HTMLDivElement>(null);
+  const styleRef = useRef<HTMLDivElement>(null);
+  const valueRef = useRef<HTMLDivElement>(null);
+  const [isBudgetViewd, setIsBudgetViewd] = useState<boolean>(true);
+  const [isStyleViewd, setIsStyleViewd] = useState<boolean>(false);
+  const [isValueViewd, setIsValueViewd] = useState<boolean>(false);
+
+  const handleScroll = () => {
+    const topOffset = 72 + 62; // header 및 nav 높이
+    const bottomOffset = (height || 0) - 72 - 62 - 72; // header 및 nav 및 nest button 높이
+
+    if (!budgetRef.current || !styleRef.current || !valueRef.current) return;
+    const budgetPosition =
+      budgetRef.current.getBoundingClientRect().top - topOffset;
+    const stylePosition =
+      styleRef.current.getBoundingClientRect().top - topOffset + 0; //styleRef.current.clientHeight / 2 <- 중간점 기반
+    const valuePosition =
+      valueRef.current.getBoundingClientRect().top - topOffset;
+
+    if (budgetPosition < -10) {
+      setIsBudgetViewd(false);
+    } else if (budgetPosition > bottomOffset) {
+      setIsBudgetViewd(false);
+    } else {
+      setIsBudgetViewd(true);
+      setIsStyleViewd(false);
+      setIsValueViewd(false);
+      return;
+    }
+
+    if (stylePosition < 0) {
+      setIsStyleViewd(false);
+    } else if (stylePosition > bottomOffset) {
+      setIsStyleViewd(false);
+    } else {
+      setIsBudgetViewd(false);
+      setIsStyleViewd(true);
+      setIsValueViewd(false);
+      return;
+    }
+
+    if (valuePosition < 0) {
+      setIsValueViewd(false);
+    } else if (valuePosition > bottomOffset) {
+      setIsValueViewd(false);
+    } else {
+      setIsBudgetViewd(false);
+      setIsStyleViewd(false);
+      setIsValueViewd(true);
+    }
+  };
+
   return (
     <>
       <Header title="검사 결과 조절" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <NavigatorContainer>
-          <Chip title="가격 변경" type="yes" />
-          <Chip title="차량 스타일 변경" type="no" />
-          <Chip title="차량 가치 변경" type="no" />
+          <Chip title="가격 변경" type={isBudgetViewd ? 'yes' : 'no'} />
+          <Chip title="차량 스타일 변경" type={isStyleViewd ? 'yes' : 'no'} />
+          <Chip title="차량 가치 변경" type={isValueViewd ? 'yes' : 'no'} />
         </NavigatorContainer>
-        <Scroll direction="y" height="100%" width="100%">
-          <div>
+        <Scroll
+          direction="y"
+          height="100%"
+          width="100%"
+          onScroll={handleScroll}
+        >
+          <div ref={budgetRef}>
             <Title>가격 변경</Title>
             <Subtitle>가격의 스펙트럼을 변경할 수 있어요.</Subtitle>
             <Budget />
@@ -76,8 +136,15 @@ const Result: NextPage = () => {
               <Toggle />
             </ToggleContainer>
           </div>
-          <div>
+          <div ref={styleRef}>
             <Title>차량 스타일 변경</Title>
+            <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
+            <StyleCheckBoxesContainer>
+              <StyleCheckBoxes />
+            </StyleCheckBoxesContainer>
+          </div>
+          <div ref={valueRef}>
+            <Title>111차량 스타일 변경</Title>
             <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
             <StyleCheckBoxesContainer>
               <StyleCheckBoxes />

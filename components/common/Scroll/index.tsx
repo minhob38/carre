@@ -6,6 +6,7 @@ interface IProps {
   width?: string;
   height?: string;
   direction: 'x' | 'y';
+  onScroll?: React.UIEventHandler<HTMLDivElement>;
 }
 
 const Wrapper = styled.div`
@@ -29,9 +30,15 @@ const Scroll: React.FC<IProps> = ({
   direction,
   width = 'auto',
   height = 'auto',
+  onScroll,
 }) => {
   return (
-    <Wrapper direction={direction} width={width} height={height}>
+    <Wrapper
+      direction={direction}
+      width={width}
+      height={height}
+      onScroll={onScroll}
+    >
       {children}
     </Wrapper>
   );
