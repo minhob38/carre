@@ -16,22 +16,31 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 32px;
-  padding: 0 10px;
+  padding: 0 16px;
   border-radius: 4px;
+  border: ${(props: IStyleProps) => {
+    if (props.type === 'yes') {
+      return 'none';
+    } else if (props.type === 'no') {
+      return `1px solid ${colors.PRIMARY_400}`;
+    } else {
+      return 'none';
+    }
+  }};
   background-color: ${(props: IStyleProps) => {
     if (props.type === 'yes') {
       return colors.PRIMARY_400;
     } else if (props.type === 'no') {
-      return colors.SECONDARY_200;
+      return 'transparent';
     } else {
       return 'transparent';
     }
   }};
   color: ${(props: IStyleProps) => {
     if (props.type === 'yes') {
-      return colors.SECONDARY_400;
-    } else if (props.type === 'no') {
       return colors.SECONDARY_REAL_WHITE;
+    } else if (props.type === 'no') {
+      return colors.SECONDARY_300;
     } else {
       return colors.SECONDARY_300;
     }
@@ -39,9 +48,8 @@ const Wrapper = styled.div`
   font: ${fonts.BODY_REGULAR_2};
 `;
 
-// TODO: 소수점도 처리한다면, 해당 비율에 맞는 bar를 만들어 overwrap 시켜야 할듯
-const Chip: React.FC<IProps> = ({ type, title }) => {
+const BigChip: React.FC<IProps> = ({ type, title }) => {
   return <Wrapper type={type}>{title}</Wrapper>;
 };
 
-export default Chip;
+export default BigChip;

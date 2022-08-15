@@ -12,6 +12,7 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import Chip from '@components/result/BigChip';
 import Budget from '@components/common/Budget';
 import Toggle from '@components/common/Toggle';
 
@@ -46,11 +47,25 @@ const StyleCheckBoxesContainer = styled.div`
   margin: 0 0 0 27px;
 `;
 
+const NavigatorContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 16px 0 20px 0;
+  padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
+`;
+
 const Result: NextPage = () => {
   return (
     <>
       <Header title="검사 결과 조절" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
+        <NavigatorContainer>
+          <Chip title="가격 변경" type="yes" />
+          <Chip title="차량 스타일 변경" type="no" />
+          <Chip title="차량 가치 변경" type="no" />
+        </NavigatorContainer>
         <Scroll direction="y" height="100%" width="100%">
           <div>
             <Title>가격 변경</Title>

@@ -2,7 +2,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import Image from '@components/common/Image';
-import Chip from '@components/result/Chip';
+import Chip from '@components/result/SmallChip';
 import casperImage from '@assets/images/casper.svg';
 import infoImage from '@assets/images/icons/info.svg';
 import * as colors from '@constants/colors';
