@@ -39,3 +39,14 @@ export const bindSurvey = async (surveyToken: string) => {
     console.log((err as TError).message);
   }
 };
+
+export const getSurveyQuestions = async (surveyToken: string) => {
+  try {
+    const response = await axios
+      .get<IResponse>(`/user-surveys/${surveyToken}/questions`)
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};

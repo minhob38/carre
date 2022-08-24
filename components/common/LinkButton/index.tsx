@@ -6,8 +6,9 @@ import * as fonts from '@constants/fonts';
 import Link from 'next/link';
 
 interface IProps extends IStyleProps {
-  path: string;
+  path?: string;
   title: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 interface IStyleProps {
@@ -33,14 +34,36 @@ const Wrapper = styled.button`
   cursor: pointer;
 `;
 
-const NextButton: React.FC<IProps> = ({ path, title, width, height }) => {
-  return (
-    <Link href={path} passHref={true}>
-      <Wrapper title={title} width={width} height={height}>
+const LinkButton: React.FC<IProps> = ({
+  path,
+  title,
+  width,
+  height,
+  onClick,
+}) => {
+  if (path) {
+    return (
+      <Link href={path} passHref={true}>
+        <Wrapper title={title} width={width} height={height}>
+          {title}
+        </Wrapper>
+      </Link>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <Wrapper onClick={onClick} width={width} height={height}>
         {title}
       </Wrapper>
-    </Link>
+    );
+  }
+
+  return (
+    <Wrapper onClick={onClick} width={width} height={height}>
+      {title}
+    </Wrapper>
   );
 };
 
-export default NextButton;
+export default LinkButton;
