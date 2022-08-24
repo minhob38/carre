@@ -22,6 +22,7 @@
       "@store/*": ["store/*"],
       "@hooks/*": ["hooks/*"],
       "@constants/*": ["constants/*"],
+      "@configs/*": ["configs/*"],
       "@utils/*": ["utils/*"],
     }
   },

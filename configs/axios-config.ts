@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  /* axios base 요청 주소 (next.config.ts에서 rewrite) */
+  baseURL: '/',
 });
 
 instance.interceptors.request.use(
@@ -9,6 +10,8 @@ instance.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.log('axios request error');
+    console.log(error.message);
     return Promise.reject(error);
   },
 );
@@ -18,6 +21,8 @@ instance.interceptors.response.use(
     return config;
   },
   (error) => {
+    console.log('axios response error');
+    console.log(error.message);
     return Promise.reject(error);
   },
 );
