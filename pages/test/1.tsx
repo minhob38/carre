@@ -8,6 +8,7 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT } from '@constants/size';
+import { IS_HIDDEN } from '@constants/variables';
 
 const Title = styled.div`
   width: calc(100% - 22px - 22px);
@@ -31,7 +32,9 @@ const Test: NextPage = () => {
       <Header type="close" title="차량 구매 성향 테스트" backPath="/test" />
       <Content top={HEADER_HEIGHT} bottom="0">
         {/* TODO: 변수로 사용자 이름 넣기 */}
-        <Title>성능과 안전 두마리 토끼를 잡으려는 카레님</Title>
+        <Title>
+          {IS_HIDDEN ? '' : '성능과 안전 두마리 토끼를 잡으려는 카레님'}
+        </Title>
         <ButtonContainer>
           <TestStartButton />
         </ButtonContainer>

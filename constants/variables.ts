@@ -25,6 +25,8 @@ interface IImageInput {
   alt: string;
 }
 
+export const IS_HIDDEN = true;
+
 /* 출생년도 select 설정*/
 export const MIN_YEAR = 1941;
 export const MAX_YEAR = 2004;
