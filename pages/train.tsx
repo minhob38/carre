@@ -1,10 +1,10 @@
-import React from "react";
-import type { NextPage } from "next";
-import Head from "next/head";
-import axios from "../configs/axios-config";
-import { ITrainApi } from "../types/types";
+import React from 'react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import axios from '../configs/axios-config';
+// import { ITrainApi } from "../types/types";
 
-const Train: NextPage<{ serverProps: ITrainApi }> = ({ serverProps }) => {
+const Train: NextPage<{ serverProps: any }> = ({ serverProps }) => {
   const { emoji } = serverProps;
 
   return (
@@ -19,7 +19,7 @@ const Train: NextPage<{ serverProps: ITrainApi }> = ({ serverProps }) => {
 };
 
 Train.getInitialProps = async (ctx) => {
-  const { data } = await axios.get("train");
+  const { data } = await axios.get('train');
   return { serverProps: data };
 };
 

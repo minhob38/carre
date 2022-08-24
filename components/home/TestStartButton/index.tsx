@@ -7,6 +7,8 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import rightArrowImage from '@assets/images/icons/small-black-right-arrow.svg';
 import axios from '@configs/axios-config';
+import { actions } from '@store/slices/surveySlice';
+import { useTypedDispatch } from '@hooks/useStore';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,18 +28,11 @@ const ItemText = styled.div`
 
 const TestStartButton: React.FC = () => {
   const router = useRouter();
+  const dispatch = useTypedDispatch();
 
   return (
     // <Link href="/test/2" passHref={true}>
-    <Wrapper
-      onClick={() => {
-        axios.post('/user-surveys/create', {
-          surveyToken: 'svy_yA6e2ate403kY2Wb',
-          userId: '123123123123',
-          userSurveyName: '이희창 차량 구입 설문',
-        });
-      }}
-    >
+    <Wrapper onClick={() => dispatch(actions.createSurveyTokenAsync())}>
       <ItemText>테스트하러가기</ItemText>
       <Image
         src={rightArrowImage}

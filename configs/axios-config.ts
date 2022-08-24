@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (error) => {
     console.log('axios request error');
     console.log(error.message);
-    return Promise.reject(error);
+    return Promise.reject(error.message);
   },
 );
 
@@ -23,7 +23,7 @@ instance.interceptors.response.use(
   (error) => {
     console.log('axios response error');
     console.log(error.message);
-    return Promise.reject(error);
+    return Promise.reject(error.message);
   },
 );
 

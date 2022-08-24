@@ -4,12 +4,17 @@ import { combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import logger from 'redux-logger';
+
 import appReducer from './slices/appSlice';
 import { appSaga } from './slices/appSlice';
+
 import inputReducer from './slices/inputSlice';
 
+import surveyReducer from './slices/surveySlice';
+import { surveySaga } from './slices/surveySlice';
+
 export function* rootSaga() {
-  yield all([appSaga()]);
+  yield all([appSaga(), surveySaga()]);
 }
 const sagaMiddleware = createSagaMiddleware();
 const middleware: any = [sagaMiddleware];
@@ -22,6 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 const rootReducer = combineReducers({
   appReducer,
   inputReducer,
+  surveyReducer,
 });
 
 const store = configureStore({

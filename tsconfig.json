@@ -24,6 +24,7 @@
       "@constants/*": ["constants/*"],
       "@configs/*": ["configs/*"],
       "@utils/*": ["utils/*"],
+      "@apis/*": ["apis/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
