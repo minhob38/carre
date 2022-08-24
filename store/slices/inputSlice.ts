@@ -20,6 +20,7 @@ interface IState {
     title: string;
     score: number;
   }[];
+  survey: Record<string, string>;
 }
 
 const initialState: IState = {
@@ -45,12 +46,25 @@ const initialState: IState = {
     { value: 'sentiment', title: '승차감', score: 2 },
     { value: 'design', title: '디자인', score: 1 },
   ],
+  survey: {},
 };
 
 const inputSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setCategoryRadioBoxValue: (
+      state,
+      action: PayloadAction<{
+        eventTarget: ChangeEvent<HTMLInputElement>['target'];
+        category: string;
+      }>,
+    ) => {
+      const { eventTarget, category } = action.payload;
+      const { name, value } = eventTarget;
+      // state[name] = value;
+      state[category][name] = value;
+    },
     setRadioBoxValue: (
       state,
       action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,

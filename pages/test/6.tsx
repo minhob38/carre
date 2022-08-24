@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -14,7 +14,8 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
-import { questions, TOTAL_PAGE } from '@constants/variables';
+// import { questions } from '@constants/variables';
+import { useTypedSelector } from '@hooks/useStore';
 
 const Description = styled.div`
   margin: 0 0 12px ${margins.SIDE_SUB_MARGIN};
@@ -49,33 +50,29 @@ const Page = styled.div`
 
 const Test: NextPage = () => {
   const [page, setPage] = useState<number>(1);
+  const surveyQuestions = useTypedSelector(
+    (state) => state.rootReducer.surveyReducer.surveyQuestions,
+  );
   const router = useRouter();
+
+  if (!surveyQuestions) return <div>API Loading...</div>;
+
+  const TOTAL_PAGE = surveyQuestions.length;
 
   const handleNextClick = () => {
     if (page >= TOTAL_PAGE) return router.push('/test/7');
     setPage(page + 1);
   };
 
-  const Questions = questions[page - 1].map((question) => {
-    return (
-      <ImageLabel
-        key={uuid4()}
-        input={{
-          type: 'radio',
-          name: question.name,
-          value: question.value,
-        }}
-        style={{
-          width: '330px',
-          height: '258px',
-        }}
-        image={{
-          src: question.src,
-          alt: question.alt,
-        }}
-      />
-    );
-  });
+  const questionToken = surveyQuestions[page - 1].surveyQuestionToken;
+  const firstQuestionFactorElement =
+    surveyQuestions[page - 1].firstQuestionFactorElement;
+  const secondQuestionFactorElement =
+    surveyQuestions[page - 1].secondQuestionFactorElement;
+  const firstQuestionImageSrc =
+    surveyQuestions[page - 1].firstQuestionImagePath;
+  const secondQuestionImageSrc =
+    surveyQuestions[page - 1].secondQuestionImagePath;
 
   return (
     <>
@@ -89,7 +86,42 @@ const Test: NextPage = () => {
           {`다음 두 가지의 상황 중 자신에게 더 잘 맞다고 \n느껴지는 상황을 선택해주세요.`}
         </Description>
         <Scroll direction="y" height="calc(100% - 127px - 10px)">
-          <QuetsionContainer>{Questions}</QuetsionContainer>
+          <QuetsionContainer>
+            <ImageLabel
+              key={uuid4()}
+              input={{
+                type: 'radio',
+                name: questionToken,
+                value: firstQuestionFactorElement,
+              }}
+              style={{
+                width: '330px',
+                height: '258px',
+              }}
+              image={{
+                src: firstQuestionImageSrc,
+                alt: 'first-question',
+              }}
+              category="survey"
+            />
+            <ImageLabel
+              key={uuid4()}
+              input={{
+                type: 'radio',
+                name: questionToken,
+                value: secondQuestionFactorElement,
+              }}
+              style={{
+                width: '330px',
+                height: '258px',
+              }}
+              image={{
+                src: secondQuestionImageSrc,
+                alt: 'second-question',
+              }}
+              category="survey"
+            />
+          </QuetsionContainer>
         </Scroll>
         <NextButton title="다음" onClick={handleNextClick} />
       </Content>

@@ -25,7 +25,13 @@ const Wrapper = styled.div`
 const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
   return (
     <Wrapper width={width} height={height}>
-      <NextImage src={src} alt={alt} layout="fill" />
+      <NextImage
+        src={src}
+        alt={alt}
+        layout="fill"
+        priority={true}
+        loading="eager"
+      />
     </Wrapper>
   );
 };

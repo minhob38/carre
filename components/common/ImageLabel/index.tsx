@@ -20,6 +20,7 @@ interface IProps {
     src: any;
     alt: string;
   };
+  category?: string;
   onClick?: React.MouseEventHandler<HTMLInputElement>;
 }
 
@@ -47,7 +48,13 @@ const ImageContainer = styled.div`
   right: 10px;
 `;
 
-const ImageLabel: React.FC<IProps> = ({ input, style, image, onClick }) => {
+const ImageLabel: React.FC<IProps> = ({
+  input,
+  style,
+  image,
+  category,
+  onClick,
+}) => {
   const { type, name, value } = input;
   const { width, height } = style;
   const { src, alt } = image;
@@ -100,7 +107,16 @@ const ImageLabel: React.FC<IProps> = ({ input, style, image, onClick }) => {
 
     if (type === 'radio') {
       if (ev.target.checked) {
-        dispatch(actions.setRadioBoxValue(ev.target));
+        if (category) {
+          dispatch(
+            actions.setCategoryRadioBoxValue({
+              eventTarget: ev.target,
+              category,
+            }),
+          );
+        } else {
+          dispatch(actions.setRadioBoxValue(ev.target));
+        }
         return setChecked(true);
       }
       setChecked(false);

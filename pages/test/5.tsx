@@ -40,7 +40,7 @@ const Test: NextPage = () => {
   const handleButtonClick = () => {
     if (!surveyToken) return;
     dispatch(actions.getSurveyQuestionsAsync(surveyToken));
-    router.push('/test/5');
+    router.push('/test/6');
   };
 
   return (
