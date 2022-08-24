@@ -21,18 +21,6 @@ interface IState {
     | null;
 }
 
-// firstQuestionFactorElement: "SAFETY"
-// firstQuestionImageFileName: "3_1.png"
-// firstQuestionImagePath: "https://m.carre.co.kr/images/survey/202205/3_1.png"
-// ordering: 3
-// secondQuestionFactorElement: "RELIABILITY"
-// secondQuestionImageFileName: "3_2.png"
-// secondQuestionImagePath: "https://m.carre.co.kr/images/survey/202205/3_2.png"
-// surveyName: "22년 7월 설문조사"
-// surveyQuestionTitle: "회사에서 야근 후 집으로 가는 길은 두 가지이다."
-// surveyQuestionToken: "svq_hwIKX0MedjpqpJwe"
-// surveyToken: "svy_yA6e2ate403kY2Wb"
-
 /* slices */
 const initialState: IState = {
   surveyToken: null,
