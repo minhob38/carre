@@ -19,3 +19,23 @@ export const createSurveyToken = async () => {
     console.log((err as TError).message);
   }
 };
+
+export const bindSurvey = async (surveyToken: string) => {
+  try {
+    const response = await axios
+      .post<IResponse>(`/user-surveys/${surveyToken}/binding-init-info`, {
+        // TODO: input값으로 넣어주기
+        birthYear: '1982',
+        gender: 'MALE',
+        carUsagePurpose: 'COMMUTING',
+        userBudgetMin: 5000,
+        userBudgetMax: 10000,
+        passengerCount: 4,
+        drivenDistanceInYear: 10000,
+      })
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};

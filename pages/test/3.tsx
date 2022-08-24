@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import NextButton from '@components/common/NextButton';
 import ProgressBar from '@components/test/ProgressBar';
@@ -11,6 +12,8 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { actions } from '@store/slices/surveySlice';
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -52,6 +55,18 @@ const ToggleContainer = styled.div`
 `;
 
 const Test: NextPage = () => {
+  const router = useRouter();
+  const dispatch = useTypedDispatch();
+  const surveyToken = useTypedSelector(
+    (state) => state.rootReducer.surveyReducer.surveyToken,
+  );
+
+  const handleButtonClick = () => {
+    if (!surveyToken) return;
+    dispatch(actions.bindSurveyAsync(surveyToken));
+    router.push('/test/5');
+  };
+
   return (
     <>
       <Header title="나의 정보 입력" type="close" closePath="/" />
@@ -66,7 +81,7 @@ const Test: NextPage = () => {
           <Toggle />
         </ToggleContainer>
         <ProgressBar stage={2} />
-        <NextButton title="다음" path={'/test/4'} />
+        <NextButton title="다음" onClick={handleButtonClick} />
       </Content>
     </>
   );
