@@ -91,9 +91,19 @@ const RightBall = styled(Ball)`
   transform: translate(50%, -50%);
 `;
 
+const TouchableBall = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+`;
+
 const Indicator = styled.div`
   position: absolute;
-  bottom: -26px;
+  top: -26px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,24 +150,28 @@ const Budget: React.FC = () => {
     <Wrapper>
       <Bar>
         <LeftBallReferencePoint>
+          <LeftIndicator minBudgetPosition={minBudgetPosition}>
+            {convertNumberToWon(minBudgetValue)}
+          </LeftIndicator>
           <LeftBall
             minBudgetPosition={minBudgetPosition}
             onTouchMove={handleLeftBallTouch}
             // onClick={(ev) => console.log('left')}
-          />
-          <LeftIndicator minBudgetPosition={minBudgetPosition}>
-            {convertNumberToWon(minBudgetValue)}
-          </LeftIndicator>
+          >
+            <TouchableBall />
+          </LeftBall>
         </LeftBallReferencePoint>
         <RightBallReferencePoint>
+          <RightIndicator maxBudgetPosition={maxBudgetPosition}>
+            {convertNumberToWon(maxBudgetValue)}
+          </RightIndicator>
           <RightBall
             maxBudgetPosition={maxBudgetPosition}
             onTouchMove={handleRightBallTouch}
             // onClick={(ev) => console.log('right')}
-          />
-          <RightIndicator maxBudgetPosition={maxBudgetPosition}>
-            {convertNumberToWon(maxBudgetValue)}
-          </RightIndicator>
+          >
+            <TouchableBall />
+          </RightBall>
         </RightBallReferencePoint>
         <RangeBar
           minBudgetPosition={minBudgetPosition}

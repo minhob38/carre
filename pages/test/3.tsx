@@ -14,6 +14,7 @@ import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import { actions } from '@store/slices/surveySlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
+import { IS_HIDDEN } from '@constants/variables';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -34,7 +35,7 @@ const SubTitle = styled.div`
 `;
 
 const SubDescription = styled.div`
-  margin: 0 0 15px ${margins.SIDE_MAIN_MARGIN};
+  margin: 0 0 40px ${margins.SIDE_MAIN_MARGIN};
   font: ${fonts.SUBTITLE_T2};
   color: ${colors.SECONDARY_300};
 `;
@@ -76,10 +77,14 @@ const Test: NextPage = () => {
         <SubTitle>가격설정</SubTitle>
         <SubDescription>가격의 스펙트럼을 변경해요</SubDescription>
         <Budget />
-        <Manual>직접입력하기</Manual>
-        <ToggleContainer>
-          <Toggle />
-        </ToggleContainer>
+        {!IS_HIDDEN && (
+          <>
+            <Manual>직접입력하기</Manual>
+            <ToggleContainer>
+              <Toggle />
+            </ToggleContainer>
+          </>
+        )}
         <ProgressBar stage={2} />
         <NextButton title="다음" onClick={handleButtonClick} />
       </Content>
