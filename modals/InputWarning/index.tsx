@@ -1,26 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
+import { useTypedDispatch } from '@hooks/useStore';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import { actions } from '@store/slices/appSlice';
-
-import {
-  INDICATOR_WIDTH,
-  INITIAL_MAX_POSITION,
-  INITIAL_MIN_POSITION,
-  SIDE_MARGIN,
-} from '@constants/variables';
-
-import { useBudgetValue, useBudgetPosition } from '@hooks/useBudget';
-import { convertNumberToWon } from '@utils/helpers';
-interface IProps {
-  minBudgetPosition: number;
-  maxBudgetPosition: number;
-}
 
 const Modal = styled.div`
   position: fixed;

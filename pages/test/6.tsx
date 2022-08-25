@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -63,6 +63,16 @@ const Test: NextPage = () => {
     if (page >= TOTAL_PAGE) return router.push('/test/7');
     setPage(page + 1);
   };
+  const handleImageClick = async (ev) => {
+    await new Promise((resolve, reject) => {
+      setTimeout(() => resolve(''), 500);
+    });
+
+    if (page >= TOTAL_PAGE) {
+      return router.push('/test/7');
+    }
+    setPage(page + 1);
+  };
 
   const questionToken = surveyQuestions[page - 1].surveyQuestionToken;
   const firstQuestionFactorElement =
@@ -103,6 +113,7 @@ const Test: NextPage = () => {
                 alt: 'first-question',
               }}
               category="survey"
+              onClick={handleImageClick}
             />
             <ImageLabel
               key={uuid4()}
@@ -120,10 +131,11 @@ const Test: NextPage = () => {
                 alt: 'second-question',
               }}
               category="survey"
+              onClick={handleImageClick}
             />
           </QuetsionContainer>
         </Scroll>
-        <NextButton title="다음" onClick={handleNextClick} />
+        {/* <NextButton title="다음" onClick={handleNextClick} /> */}
       </Content>
     </>
   );
