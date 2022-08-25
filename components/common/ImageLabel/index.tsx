@@ -8,6 +8,7 @@ import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import activeCheckImage from '@assets/images/icons/big-active-check.svg';
 import inactiveCheckImage from '@assets/images/icons/big-inactive-check.svg';
+import * as colors from '@constants/colors';
 
 interface IProps {
   input: {
@@ -32,14 +33,17 @@ interface IStyleProps {
 
 const Wrapper = styled.label`
   position: relative;
-  box-sizing: border-box;
+  box-sizing: content-box;
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${(props: IStyleProps) => props.width};
   height: ${(props: IStyleProps) => props.height};
+  border: ${(props: IStyleProps) =>
+    props.checked ? `2px solid ${colors.PRIMARY_400}` : `none`};
   border-radius: 8px;
   box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
+  overflow: hidden;
 `;
 
 const ImageContainer = styled.div`

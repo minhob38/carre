@@ -36,7 +36,7 @@ const QuetsionContainer = styled.div`
   flex-flow: column nowrap;
   align-items: flex-start;
   gap: 12px 0;
-  margin: 0 0 0 ${margins.SIDE_SUB_MARGIN};
+  margin: 0 auto;
 `;
 
 const Page = styled.div`
