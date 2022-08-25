@@ -5,6 +5,8 @@ import Link from 'next/link';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import { NEXT_BUTTON_HEIGHT } from '@constants/size';
+import { useTypedDispatch } from '@hooks/useStore';
+import { actions } from '@store/slices/appSlice';
 
 interface IProps {
   title: string;
@@ -35,8 +37,16 @@ const NextButton: React.FC<IProps> = ({
   onClick,
   isActive = true,
 }) => {
+  const dispatch = useTypedDispatch();
   if (!isActive) {
-    return <Wrapper isActive={isActive}>{title}</Wrapper>;
+    return (
+      <Wrapper
+        isActive={isActive}
+        onClick={() => dispatch(actions.showInputWariningModal())}
+      >
+        {title}
+      </Wrapper>
+    );
   }
 
   if (path) {

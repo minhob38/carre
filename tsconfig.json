@@ -18,6 +18,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@modals/*": ["modals/*"],
       "@assets/*": ["assets/*"],
       "@store/*": ["store/*"],
       "@hooks/*": ["hooks/*"],

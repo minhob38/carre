@@ -8,6 +8,7 @@ import NextButton from '@components/common/NextButton';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import ProgressBar from '@components/test/ProgressBar';
+import InputWarning from '@modals/InputWarning';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -82,6 +83,9 @@ const DistanceContainer = styled.div``;
 const Test: NextPage = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
+  const isInputWarningModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isInputWarningModal,
+  );
   const birthYear = useTypedSelector(
     (state) => state.rootReducer.inputReducer.birthYear,
   );
@@ -188,6 +192,7 @@ const Test: NextPage = () => {
 
   return (
     <>
+      {isInputWarningModal && <InputWarning />}
       <Header title="나의 정보 입력" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>나의 정보 입력</Title>

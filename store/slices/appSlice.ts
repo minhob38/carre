@@ -4,6 +4,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 /* slices */
 const initialState = {
   isClicked: false,
+  isInputWarningModal: false,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -17,6 +18,12 @@ const appSlice = createSlice({
     },
     clickButton: (state, action: PayloadAction) => {
       state.isClicked = !state.isClicked;
+    },
+    showInputWariningModal: (state) => {
+      state.isInputWarningModal = true;
+    },
+    hideInputWariningModal: (state) => {
+      state.isInputWarningModal = false;
     },
   },
 });
