@@ -1,8 +1,5 @@
 export {};
 
-import question1_1_Image from '@assets/images/questions/1-1.svg';
-import question1_2_Image from '@assets/images/questions/1-2.svg';
-
 import style1Image from '@assets/images/styles/style-1.svg';
 import style2Image from '@assets/images/styles/style-2.svg';
 import style3Image from '@assets/images/styles/style-3.svg';
@@ -31,6 +28,17 @@ export const IS_HIDDEN = true;
 export const MIN_YEAR = 1941;
 export const MAX_YEAR = 2004;
 export const DEFAULT_YEAR = 1997;
+
+/* 탑승인원 select 설정 */
+export const MIN_PERSON = 1;
+export const MAX_PERSON = 9;
+export const DEFAULT_PERSON = 1;
+
+/* 연주행거리 select 설정 */
+export const MIN_DISTANCE_UNIT = 1;
+export const MAX_DISTANCE_UNIT = 10;
+export const DEFAULT_DISTANCE = 2;
+export const UNIT_DISTANCE = 5000;
 
 /* 가격 설정 */
 export const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));

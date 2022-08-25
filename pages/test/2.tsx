@@ -12,7 +12,18 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
-import { MIN_YEAR, MAX_YEAR, DEFAULT_YEAR } from '@constants/variables';
+import {
+  MIN_YEAR,
+  MAX_YEAR,
+  DEFAULT_YEAR,
+  MIN_PERSON,
+  MAX_PERSON,
+  DEFAULT_PERSON,
+  MIN_DISTANCE_UNIT,
+  MAX_DISTANCE_UNIT,
+  DEFAULT_DISTANCE,
+  UNIT_DISTANCE,
+} from '@constants/variables';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -50,14 +61,20 @@ const Select = styled.select`
 `;
 
 const YearContainer = styled.div`
-  margin: 0 42px 0 30px;
+  margin: 0 42px 0 ${margins.SIDE_SUB_MARGIN};
 `;
 
 const GenderContainer = styled.div``;
 
 const PurposeContainer = styled.div`
-  margin: 40px 0 0 30px;
+  margin: 40px 0 0 ${margins.SIDE_SUB_MARGIN};
 `;
+
+const PersonContainer = styled.div`
+  margin: 0 44px 0 0;
+`;
+
+const DistanceContainer = styled.div``;
 
 const Test: NextPage = () => {
   const genderLabels: { title: string; value: string }[] = [
@@ -107,13 +124,40 @@ const Test: NextPage = () => {
     years.push(i);
   }
 
-  const Options = years.map((year) => {
+  const persons: number[] = [];
+  for (let i = MIN_PERSON; i < MAX_PERSON; i++) {
+    persons.push(i);
+  }
+
+  const distances: number[] = [];
+  for (let i = MIN_DISTANCE_UNIT; i < MAX_DISTANCE_UNIT; i++) {
+    distances.push(i * UNIT_DISTANCE);
+  }
+
+  const YearOptions = years.map((year) => {
     return (
       <option key={uuid4()} value={year}>
         {year}
       </option>
     );
   });
+
+  const PersonOptions = persons.map((person) => {
+    return (
+      <option key={uuid4()} value={person}>
+        {person}
+      </option>
+    );
+  });
+
+  const DistanceOptions = distances.map((distance) => {
+    return (
+      <option key={uuid4()} value={distance}>
+        {distance}
+      </option>
+    );
+  });
+
   return (
     <>
       <Header title="나의 정보 입력" type="close" closePath="/" />
@@ -128,7 +172,7 @@ const Test: NextPage = () => {
           <YearContainer>
             <SubTitle>출생연도</SubTitle>
             <SelectContainer>
-              <Select defaultValue={DEFAULT_YEAR}>{Options}</Select>
+              <Select defaultValue={DEFAULT_YEAR}>{YearOptions}</Select>
             </SelectContainer>
           </YearContainer>
           <GenderContainer>
@@ -156,6 +200,27 @@ const Test: NextPage = () => {
             {PurposeLabels}
           </div>
         </PurposeContainer>
+        <div
+          css={css`
+            display: flex;
+            margin: 40px 0 0 ${margins.SIDE_SUB_MARGIN};
+          `}
+        >
+          <PersonContainer>
+            <SubTitle>탑승인원</SubTitle>
+            <SelectContainer>
+              <Select defaultValue={DEFAULT_PERSON}>{PersonOptions}</Select>
+            </SelectContainer>
+          </PersonContainer>
+          <DistanceContainer>
+            <SubTitle>연주행거리</SubTitle>
+            <SelectContainer>
+              <Select defaultValue={DEFAULT_DISTANCE * UNIT_DISTANCE}>
+                {DistanceOptions}
+              </Select>
+            </SelectContainer>
+          </DistanceContainer>
+        </div>
       </Content>
       <ProgressBar stage={1} />
       <NextButton title="다음" path={'/test/3'} />
