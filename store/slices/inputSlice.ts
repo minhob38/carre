@@ -1,12 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { ChangeEvent } from 'react';
-import { INITIAL_MIN_BUDGET, INITIAL_MAX_BUDGET } from '@constants/variables';
+import {
+  INITIAL_MIN_BUDGET,
+  INITIAL_MAX_BUDGET,
+  DEFAULT_YEAR,
+  DEFAULT_PERSON,
+  DEFAULT_DISTANCE,
+  UNIT_DISTANCE,
+} from '@constants/variables';
 
 interface IState {
-  year: string | null;
+  birthYear: number;
+  passengerCount: number;
+  drivenDistanceInYear: number;
   gender: string | null;
-  purpose: string[];
+  carUsagePurpose: string[];
   minBudgetPosition: number;
   maxBudgetPosition: number;
   minBudgetValue: number;
@@ -24,9 +33,11 @@ interface IState {
 }
 
 const initialState: IState = {
-  year: null,
+  birthYear: DEFAULT_YEAR,
   gender: null,
-  purpose: [],
+  passengerCount: DEFAULT_PERSON,
+  drivenDistanceInYear: DEFAULT_DISTANCE * UNIT_DISTANCE,
+  carUsagePurpose: [],
   /* budget range bar 안에 있는 ball의 초기 위치 */
   minBudgetPosition: 0,
   maxBudgetPosition: 0,
@@ -53,6 +64,13 @@ const inputSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setSelectOption: (
+      state,
+      action: PayloadAction<ChangeEvent<HTMLSelectElement>['target']>,
+    ) => {
+      const { name, value } = action.payload;
+      state[name] = value;
+    },
     setCategoryRadioBoxValue: (
       state,
       action: PayloadAction<{
@@ -62,7 +80,6 @@ const inputSlice = createSlice({
     ) => {
       const { eventTarget, category } = action.payload;
       const { name, value } = eventTarget;
-      // state[name] = value;
       state[category][name] = value;
     },
     setRadioBoxValue: (

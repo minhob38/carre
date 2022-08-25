@@ -15,14 +15,21 @@ interface IInput {
   value: string;
 }
 
-interface IImageInput {
-  name: string;
-  value: string;
-  src: any;
-  alt: string;
-}
-
 export const IS_HIDDEN = true;
+
+/* 성별 input 설정 */
+export const genderLabels: { title: string; value: string }[] = [
+  { title: '여자', value: 'FEMALE' },
+  { title: '남자', value: 'MALE' },
+];
+
+/* 용도 input 설정 */
+export const purposeLabels: { title: string; value: string }[] = [
+  { title: '출퇴근용', value: 'work-commuting' },
+  { title: '등/하교', value: 'school-commuting' },
+  { title: '캠핑/레저', value: 'outdoor' },
+  { title: '영업', value: 'sales' },
+];
 
 /* 출생년도 select 설정*/
 export const MIN_YEAR = 1941;

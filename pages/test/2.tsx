@@ -15,15 +15,16 @@ import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import {
   MIN_YEAR,
   MAX_YEAR,
-  DEFAULT_YEAR,
   MIN_PERSON,
   MAX_PERSON,
-  DEFAULT_PERSON,
   MIN_DISTANCE_UNIT,
   MAX_DISTANCE_UNIT,
-  DEFAULT_DISTANCE,
   UNIT_DISTANCE,
+  genderLabels,
+  purposeLabels,
 } from '@constants/variables';
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
+import { actions } from '@store/slices/inputSlice';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -77,17 +78,16 @@ const PersonContainer = styled.div`
 const DistanceContainer = styled.div``;
 
 const Test: NextPage = () => {
-  const genderLabels: { title: string; value: string }[] = [
-    { title: '여자', value: 'female' },
-    { title: '남자', value: 'male' },
-  ];
-
-  const purposeLabels: { title: string; value: string }[] = [
-    { title: '출퇴근용', value: 'work-commuting' },
-    { title: '등/하교', value: 'school-commuting' },
-    { title: '캠핑/레저', value: 'outdoor' },
-    { title: '영업', value: 'sales' },
-  ];
+  const dispatch = useTypedDispatch();
+  const birthYear = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.birthYear,
+  );
+  const passengerCount = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.passengerCount,
+  );
+  const drivenDistanceInYear = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.drivenDistanceInYear,
+  );
 
   const GenderLabels = genderLabels.map((label) => {
     return (
@@ -111,7 +111,7 @@ const Test: NextPage = () => {
         input={{
           title: label.title,
           type: 'checkbox',
-          name: 'purpose',
+          name: 'carUsagePurpose',
           value: label.value,
         }}
         size="long"
@@ -172,7 +172,13 @@ const Test: NextPage = () => {
           <YearContainer>
             <SubTitle>출생연도</SubTitle>
             <SelectContainer>
-              <Select defaultValue={DEFAULT_YEAR}>{YearOptions}</Select>
+              <Select
+                name="birthYear"
+                value={birthYear}
+                onChange={(ev) => dispatch(actions.setSelectOption(ev.target))}
+              >
+                {YearOptions}
+              </Select>
             </SelectContainer>
           </YearContainer>
           <GenderContainer>
@@ -209,13 +215,23 @@ const Test: NextPage = () => {
           <PersonContainer>
             <SubTitle>탑승인원</SubTitle>
             <SelectContainer>
-              <Select defaultValue={DEFAULT_PERSON}>{PersonOptions}</Select>
+              <Select
+                name="passengerCount"
+                value={passengerCount}
+                onChange={(ev) => dispatch(actions.setSelectOption(ev.target))}
+              >
+                {PersonOptions}
+              </Select>
             </SelectContainer>
           </PersonContainer>
           <DistanceContainer>
             <SubTitle>연주행거리</SubTitle>
             <SelectContainer>
-              <Select defaultValue={DEFAULT_DISTANCE * UNIT_DISTANCE}>
+              <Select
+                name="drivenDistanceInYear"
+                value={drivenDistanceInYear}
+                onChange={(ev) => dispatch(actions.setSelectOption(ev.target))}
+              >
                 {DistanceOptions}
               </Select>
             </SelectContainer>
