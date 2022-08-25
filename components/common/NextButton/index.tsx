@@ -10,7 +10,10 @@ interface IProps {
   title: string;
   path?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
+  isActive?: boolean;
 }
+
+type TStyleProps = Pick<IProps, 'isActive'>;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -22,23 +25,33 @@ const Wrapper = styled.div`
   height: ${NEXT_BUTTON_HEIGHT};
   font: ${fonts.BUTTON_1};
   color: ${colors.SECONDARY_REAL_WHITE};
-  background-color: ${colors.SECONDARY_500};
+  background-color: ${(props: TStyleProps) =>
+    props.isActive ? colors.SECONDARY_500 : colors.SECONDARY_250};
 `;
 
-const NextButton: React.FC<IProps> = ({ path, title, onClick }) => {
+const NextButton: React.FC<IProps> = ({
+  path,
+  title,
+  onClick,
+  isActive = true,
+}) => {
+  if (!isActive) {
+    return <Wrapper isActive={isActive}>{title}</Wrapper>;
+  }
+
   if (path) {
     return (
       <Link href={path} passHref={true}>
-        <Wrapper>{title}</Wrapper>
+        <Wrapper isActive={isActive}>{title}</Wrapper>
       </Link>
     );
+  } else {
+    return (
+      <Wrapper isActive={isActive} onClick={onClick}>
+        {title}
+      </Wrapper>
+    );
   }
-
-  if (onClick) {
-    return <Wrapper onClick={onClick}>{title}</Wrapper>;
-  }
-
-  return <Wrapper onClick={onClick}>{title}</Wrapper>;
 };
 
 export default NextButton;

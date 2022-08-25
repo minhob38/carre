@@ -25,6 +25,8 @@ import {
 } from '@constants/variables';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
+import { useEffect, useState } from 'react';
+import { shallowEqual } from 'react-redux';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -78,6 +80,7 @@ const PersonContainer = styled.div`
 const DistanceContainer = styled.div``;
 
 const Test: NextPage = () => {
+  const [isActive, setIsActive] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const birthYear = useTypedSelector(
     (state) => state.rootReducer.inputReducer.birthYear,
@@ -88,6 +91,31 @@ const Test: NextPage = () => {
   const drivenDistanceInYear = useTypedSelector(
     (state) => state.rootReducer.inputReducer.drivenDistanceInYear,
   );
+  const gender = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.gender,
+  );
+  const carUsagePurpose = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.carUsagePurpose,
+    shallowEqual,
+  );
+
+  useEffect(() => {
+    if (
+      birthYear &&
+      passengerCount &&
+      drivenDistanceInYear &&
+      gender &&
+      carUsagePurpose.length > 0
+    ) {
+      setIsActive(true);
+    }
+  }, [
+    birthYear,
+    passengerCount,
+    drivenDistanceInYear,
+    gender,
+    carUsagePurpose,
+  ]);
 
   const GenderLabels = genderLabels.map((label) => {
     return (
@@ -239,7 +267,7 @@ const Test: NextPage = () => {
         </div>
       </Content>
       <ProgressBar stage={1} />
-      <NextButton title="다음" path={'/test/3'} />
+      <NextButton title="다음" path={'/test/3'} isActive={isActive} />
     </>
   );
 };
