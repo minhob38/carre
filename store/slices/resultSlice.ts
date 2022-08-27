@@ -5,11 +5,13 @@ import * as api from '@apis/api';
 
 interface IState {
   tendency: any;
+  recoms: any;
 }
 
 /* slices */
 const initialState: IState = {
   tendency: null,
+  recoms: [],
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -24,13 +26,21 @@ const resultSlice = createSlice({
       const tendency = action.payload;
       state.tendency = tendency;
     },
+
+    getUserRecomAsync: (state, action: PayloadAction<any>) => {
+      return;
+    },
+    saveUserRecom: (state, action: PayloadAction<any>) => {
+      const recoms = action.payload;
+      state.recoms = recoms;
+    },
   },
 });
 
 /* sagas */
 
 /**
- * 추천차량을 조회 api 호출
+ * 사용자 성향 조회 api 호출
  */
 function* getUserTendencySaga(action: PayloadAction<string>) {
   const surveyToken = action.payload;
@@ -38,8 +48,18 @@ function* getUserTendencySaga(action: PayloadAction<string>) {
   yield put(actions.saveUserTendency(data));
 }
 
+/**
+ * 추천차량을 조회 api 호출
+ */
+function* getUserRecomSaga(action: PayloadAction<string>) {
+  const recommendationId = action.payload;
+  const data = yield api.getUserRecommendation(recommendationId);
+  yield put(actions.saveUserRecom(data));
+}
+
 export function* resultSaga() {
   yield takeLatest(actions.getUserTendencyAsync, getUserTendencySaga);
+  yield takeLatest(actions.getUserRecomAsync, getUserRecomSaga);
 }
 
 export const actions = resultSlice.actions;

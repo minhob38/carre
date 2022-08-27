@@ -67,14 +67,6 @@ const surveySlice = createSlice({
       return;
     },
     checkSurveyAnswerAnalysis: (state, action: PayloadAction<void>) => {},
-
-    getRecommendationAsync: (state, action: PayloadAction<any>) => {
-      return;
-    },
-    saveRecommendation: (state, action: PayloadAction<any>) => {
-      const surveyQuestions = action.payload;
-      state.surveyQuestions = surveyQuestions;
-    },
   },
 });
 
@@ -136,14 +128,17 @@ function* saveSurveyAnswersSaga(
 }
 
 /**
- * 서버에 저장한 나의정보 및 설문을 기반으로, 추천차량을 계산하는 api 호출
- * 추천차량 계산 후, 유저성향 조회api 호출 (따로따로 dispatch하면, 추천차량 계산 전에 조회를 해서 데이터가 비어있음 : (
+ * 서버에 저장한 나의정보 및 설문을 기반으로, 사용자성향/추천차량을 계산하는 api 호출
+ * 사용자성향/추천차량 계산 후, 사용자성향/추천차량 조회api 호출 (따로따로 dispatch하면, 추천차량 계산 전에 조회를 해서 데이터가 비어있음 : (
  */
 function* analyzeSurveyAnswersSaga(action: PayloadAction<string>) {
   const surveyToken = action.payload;
-  const data = yield api.analyzeSurveyAnswers(surveyToken);
-  yield put(actions.checkSurveyAnswerAnalysis());
+  const tendencyData = yield api.analyzeUserTendency(surveyToken);
+  const recomData = yield api.analyzeUserRecommendation(surveyToken);
+  console.log(recomData);
   yield put(resultActions.getUserTendencyAsync(surveyToken));
+  yield put(resultActions.getUserRecomAsync(recomData));
+  yield put(actions.checkSurveyAnswerAnalysis());
 }
 
 export function* surveySaga() {

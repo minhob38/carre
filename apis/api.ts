@@ -75,7 +75,7 @@ export const saveSurveyAnswers = async (surveyToken: string, surveyInput) => {
   }
 };
 
-export const analyzeSurveyAnswers = async (surveyToken: string) => {
+export const analyzeUserTendency = async (surveyToken: string) => {
   try {
     const response = await axios
       .post<IResponse>(
@@ -92,6 +92,28 @@ export const getUserTendency = async (surveyToken: string) => {
   try {
     const response = await axios
       .get<IResponse>(`/user-surveys/${surveyToken}/user-survey-factor`)
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};
+
+export const analyzeUserRecommendation = async (surveyToken: string) => {
+  try {
+    const response = await axios
+      .post<IResponse>(`/recommends/user-survey/${surveyToken}`)
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};
+
+export const getUserRecommendation = async (recommendationId: string) => {
+  try {
+    const response = await axios
+      .get<IResponse>(`/recommends/${recommendationId}`)
       .then((res) => res.data);
     return response.data;
   } catch (err) {
