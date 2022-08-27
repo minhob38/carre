@@ -74,3 +74,27 @@ export const saveSurveyAnswers = async (surveyToken: string, surveyInput) => {
     console.log((err as TError).message);
   }
 };
+
+export const analyzeSurveyAnswers = async (surveyToken: string) => {
+  try {
+    const response = await axios
+      .post<IResponse>(
+        `/user-surveys/${surveyToken}/calculate-user-survey-factor`,
+      )
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};
+
+export const getRecommendation = async (surveyToken: string) => {
+  try {
+    const response = await axios
+      .get<IResponse>(`/user-surveys/${surveyToken}/user-survey-factor`)
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};

@@ -10,6 +10,7 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT } from '@constants/size';
+import { useEffect } from 'react';
 
 const Title = styled.div`
   margin: 22px 0 0 ${margins.SIDE_MAIN_MARGIN};

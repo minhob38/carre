@@ -144,7 +144,10 @@ const ResultCard: React.FC = () => {
         <TrimContainer>
           <TrimTitle>트림</TrimTitle>
           <Trim>
-            <Chip type="no" title="스마트" />
+            <Chip
+              type="no"
+              title="다이내믹 패키지 20인치 다크 스퍼터링 스포츠 전용 휠 \& 미쉐린 썸머 타이어 + 능동형 후륜 조향(RWS) + 렉시콘 18스피커 시스템 + 액티브 로드 노이즈 컨트롤 + 스포츠+"
+            />
             <Chip type="yes" title="모던" />
             <Chip type="no" title="인스퍼레이션" />
           </Trim>

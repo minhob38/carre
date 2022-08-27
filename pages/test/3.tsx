@@ -15,7 +15,6 @@ import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import { actions } from '@store/slices/surveySlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
-import { IInput } from '@type/input';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
