@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { IInput } from '@type/input';
 import * as api from '@apis/api';
+import { actions as resultActions } from './resultSlice';
 
 interface IState {
   surveyToken: string | null;
@@ -70,7 +71,10 @@ const surveySlice = createSlice({
     getRecommendationAsync: (state, action: PayloadAction<any>) => {
       return;
     },
-    saveRecommendation: (state, action: PayloadAction<void>) => {},
+    saveRecommendation: (state, action: PayloadAction<any>) => {
+      const surveyQuestions = action.payload;
+      state.surveyQuestions = surveyQuestions;
+    },
   },
 });
 
@@ -133,22 +137,13 @@ function* saveSurveyAnswersSaga(
 
 /**
  * 서버에 저장한 나의정보 및 설문을 기반으로, 추천차량을 계산하는 api 호출
- * 추천차량 계산 후, 추천차량 조회api 호출 (따로따로 dispatch하면, 추천차량 계산 전에 조회를 해서 데이터가 비어있음 : (
+ * 추천차량 계산 후, 유저성향 조회api 호출 (따로따로 dispatch하면, 추천차량 계산 전에 조회를 해서 데이터가 비어있음 : (
  */
 function* analyzeSurveyAnswersSaga(action: PayloadAction<string>) {
   const surveyToken = action.payload;
   const data = yield api.analyzeSurveyAnswers(surveyToken);
   yield put(actions.checkSurveyAnswerAnalysis());
-  yield put(actions.getRecommendationAsync(surveyToken));
-}
-
-/**
- * 추천차량을 조회 api 호출
- */
-function* getRecommendationSaga(action: PayloadAction<string>) {
-  const surveyToken = action.payload;
-  const data = yield api.getRecommendation(surveyToken);
-  yield put(actions.checkSurveyAnswerAnalysis());
+  yield put(resultActions.getUserTendencyAsync(surveyToken));
 }
 
 export function* surveySaga() {
@@ -157,7 +152,6 @@ export function* surveySaga() {
   yield takeLatest(actions.getSurveyQuestionsAsync, getSurveyQuestionsSaga);
   yield takeLatest(actions.saveSurveyAnswersAsync, saveSurveyAnswersSaga);
   yield takeLatest(actions.analyzeSurveyAnswersAsync, analyzeSurveyAnswersSaga);
-  yield takeLatest(actions.getRecommendationAsync, getRecommendationSaga);
 }
 
 export const actions = surveySlice.actions;

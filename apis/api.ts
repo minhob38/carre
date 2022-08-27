@@ -88,7 +88,7 @@ export const analyzeSurveyAnswers = async (surveyToken: string) => {
   }
 };
 
-export const getRecommendation = async (surveyToken: string) => {
+export const getUserTendency = async (surveyToken: string) => {
   try {
     const response = await axios
       .get<IResponse>(`/user-surveys/${surveyToken}/user-survey-factor`)

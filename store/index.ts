@@ -13,8 +13,11 @@ import inputReducer from './slices/inputSlice';
 import surveyReducer from './slices/surveySlice';
 import { surveySaga } from './slices/surveySlice';
 
+import resultReducer from './slices/resultSlice';
+import { resultSaga } from './slices/resultSlice';
+
 export function* rootSaga() {
-  yield all([appSaga(), surveySaga()]);
+  yield all([appSaga(), surveySaga(), resultSaga()]);
 }
 const sagaMiddleware = createSagaMiddleware();
 const middleware: any = [sagaMiddleware];
@@ -28,6 +31,7 @@ const rootReducer = combineReducers({
   appReducer,
   inputReducer,
   surveyReducer,
+  resultReducer,
 });
 
 const store = configureStore({
