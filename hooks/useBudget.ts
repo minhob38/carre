@@ -46,7 +46,6 @@ export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
     const maxBudgetValue = Math.floor(
       -slope * maxBudgetPosition + INITIAL_MAX_BUDGET,
     );
-    console.log(minBudgetValue, maxBudgetValue);
 
     dispatch(actions.setMinBudgetX(minBudgetValue));
     dispatch(actions.setMaxBudgetX(maxBudgetValue));

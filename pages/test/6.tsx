@@ -72,7 +72,6 @@ const Test: NextPage = () => {
   // };
 
   useEffect(() => {
-    console.log(page, Object.keys(surveyAnswers).length, surveyAnswers);
     if (page >= totalPage && page == Object.keys(surveyAnswers).length) {
       dispatch(
         actions.saveSurveyAnswersAsync({
