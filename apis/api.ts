@@ -65,7 +65,7 @@ export const saveSurveyAnswers = async (surveyToken: string, surveyInput) => {
   try {
     const response = await axios
       .post<IResponse>(
-        `/user-surveys/${surveyToken}/task-input-survey-answer`,
+        `/user-surveys/${surveyToken}/take-input-survey-answer`,
         surveyInput,
       )
       .then((res) => res.data);
