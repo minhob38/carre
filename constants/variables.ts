@@ -430,6 +430,16 @@ export const questions = [
 /* 나의 취향 결과 설정 */
 export const TOTAL_SCORE = 5;
 export const CRITERION_SCORE = 3;
+export const TENDENCY_TABLE = {
+  factorBaseAge: '연식?',
+  factorBaseCarSentiment: '승차감',
+  factorBaseDesign: '디자인',
+  factorBaseEconomics: '가성비',
+  factorBaseNewTechnology: '신기술',
+  factorBasePerformance: '성능',
+  factorBaseReliability: '신뢰성',
+  factorBaseSafety: '안전',
+};
 
 /* 이 차량의 매력 설정 */
 export const attractions: {

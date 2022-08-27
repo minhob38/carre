@@ -24,11 +24,6 @@ interface IState {
   fuels: string[];
   categories: string[]; // category?
   similarBudget: boolean;
-  values: {
-    value: string;
-    title: string;
-    score: number;
-  }[];
   survey: Record<string, string>;
 }
 
@@ -48,15 +43,6 @@ const initialState: IState = {
   fuels: [],
   categories: [],
   similarBudget: false,
-  values: [
-    { value: 'perfomance', title: '성능', score: 5 },
-    { value: 'reliablity', title: '신뢰성', score: 4 },
-    { value: 'economics', title: '가성비', score: 3 },
-    { value: 'convenience', title: '편의성', score: 3 },
-    { value: 'technology', title: '신기술', score: 2 },
-    { value: 'sentiment', title: '승차감', score: 2 },
-    { value: 'design', title: '디자인', score: 1 },
-  ],
   survey: {},
 };
 
@@ -142,10 +128,10 @@ const inputSlice = createSlice({
       action: PayloadAction<{ value: string; score: number }>,
     ) => {
       const { value, score } = action.payload;
-      state.values.map((item) => {
-        if (item.value !== value) return;
-        item.score = score;
-      });
+      // state.values.map((item) => {
+      //   if (item.value !== value) return;
+      //   item.score = score;
+      // });
     },
   },
 });

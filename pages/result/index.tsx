@@ -10,7 +10,7 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT } from '@constants/size';
-import { useEffect } from 'react';
+import { useTypedSelector } from '@hooks/useStore';
 
 const Title = styled.div`
   margin: 22px 0 0 ${margins.SIDE_MAIN_MARGIN};
@@ -33,6 +33,7 @@ const Description = styled.div`
   text-align: center;
   font: ${fonts.TITLE_T2};
   color: ${colors.SECONDARY_500};
+  white-space: pre;
 `;
 
 const NextButton = styled.div`
@@ -55,6 +56,16 @@ const BUTTON_POSTION = '78px';
 const BUTTON_HEIGHT = '70px';
 
 const Result: NextPage = () => {
+  const tendency = useTypedSelector((state) => {
+    return state.rootReducer.resultReducer.tendency;
+  });
+
+  if (!tendency) {
+    return <div>loading...</div>;
+  }
+
+  const { userTendencySentence } = tendency;
+
   return (
     <>
       <Header title="나의 취향 결과" type="close" closePath="/" />
@@ -72,9 +83,7 @@ const Result: NextPage = () => {
           <Title>성능과 안전</Title>
           <SubTitle>두마리 토끼를 잡으려는 당신!</SubTitle>
           <ScoreCard type="static" />
-          <Description>
-            당신은 안전과 편의성을 중시하며 실속을 챙기는 합리적인 실속파입니다.
-          </Description>
+          <Description>{userTendencySentence}</Description>
         </Scroll>
         <Link href="/result/1" passHref={true}>
           <NextButton>내 취향의 차량 보기</NextButton>
@@ -85,3 +94,22 @@ const Result: NextPage = () => {
 };
 
 export default Result;
+
+// carFactor: {
+// factorBaseAge: 3
+// factorBaseCarSentiment: 2
+// factorBaseDesign: 3
+// factorBaseEconomics: 0
+// factorBaseNewTechnology: 4
+// factorBasePerformance: 6
+// factorBaseReliability: 5
+// factorBaseSafety: 1
+// }
+// carUsagePurpose: "SCHOOL"
+// drivenDistanceInYear: 10000
+// gender: "FEMALE"
+// passengerCount: 1
+// userBudgetMax: 80000000
+// userBudgetMin: 40000000
+// userId: 123
+// userTendencySentence: "잘 달리면서 잔고장도 적은\n 자동차가 어울리는 당신은 욕심쟁이"

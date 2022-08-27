@@ -126,7 +126,7 @@ const ResultBar: React.FC<IProps> = ({
     };
 
     /* 첫번째 block*/
-    if (index === 0 && item <= score) {
+    if (index === 0) {
       return (
         <Block
           key={uuid4()}
