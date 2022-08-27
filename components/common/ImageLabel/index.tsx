@@ -59,6 +59,7 @@ const ImageLabel: React.FC<IProps> = ({
   category,
   onClick,
 }) => {
+  console.log(category);
   const { type, name, value } = input;
   const { width, height } = style;
   const { src, alt } = image;
@@ -85,8 +86,23 @@ const ImageLabel: React.FC<IProps> = ({
 
     if (type === 'radio') {
       for (const key in inputState) {
+        /* category되어 있는 input 정리 */
+        if (category) {
+          /* 현재 input의 category가 아니면 continue */
+          if (key !== category) continue;
+          const isName = inputState[key][name] === value;
+          if (isName) {
+            setChecked(true);
+            continue;
+          }
+          setChecked(false);
+          continue;
+        }
+
+        /* 현재 input의 관련 정보가 아니면 continue */
         if (key !== name) continue;
         if (Array.isArray(inputState[key])) continue;
+
         const isName = inputState[key] === value;
         if (isName) {
           setChecked(true);
@@ -95,7 +111,7 @@ const ImageLabel: React.FC<IProps> = ({
         setChecked(false);
       }
     }
-  }, [inputState, type, name, value]);
+  }, [inputState, name, type, value, category]);
 
   const handleChange = (ev) => {
     if (type === 'checkbox') {
@@ -104,7 +120,6 @@ const ImageLabel: React.FC<IProps> = ({
         setChecked(true);
         return;
       }
-
       dispatch(actions.deleteCheckBoxItem(ev.target));
       setChecked(false);
     }
@@ -123,7 +138,7 @@ const ImageLabel: React.FC<IProps> = ({
         }
         return setChecked(true);
       }
-      setChecked(false);
+      return setChecked(true);
     }
   };
 

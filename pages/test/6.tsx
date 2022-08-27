@@ -15,7 +15,9 @@ import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 // import { questions } from '@constants/variables';
-import { useTypedSelector } from '@hooks/useStore';
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
+import { actions } from '@store/slices/surveySlice';
+import { shallowEqual } from 'react-redux';
 
 const Description = styled.div`
   margin: 0 0 12px ${margins.SIDE_SUB_MARGIN};
@@ -50,8 +52,16 @@ const Page = styled.div`
 
 const Test: NextPage = () => {
   const [page, setPage] = useState<number>(1);
+  const dispatch = useTypedDispatch();
   const surveyQuestions = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyQuestions,
+  );
+  const surveyToken = useTypedSelector(
+    (state) => state.rootReducer.surveyReducer.surveyToken,
+  );
+  const surveyAnswers = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.survey,
+    shallowEqual,
   );
   const router = useRouter();
 
@@ -64,14 +74,21 @@ const Test: NextPage = () => {
     setPage(page + 1);
   };
   const handleImageClick = async (ev) => {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => resolve(''), 500);
-    });
+    // await new Promise((resolve, reject) => {
+    //   setTimeout(() => resolve(''), 1500);
+    // });
 
     if (page >= TOTAL_PAGE) {
+      dispatch(
+        actions.saveSurveyAnswersAsync({
+          surveyToken,
+          surveyQuestions,
+          surveyAnswers,
+        }),
+      );
       return router.push('/test/7');
     }
-    setPage(page + 1);
+    // setPage(page + 1);
   };
 
   const questionToken = surveyQuestions[page - 1].surveyQuestionToken;

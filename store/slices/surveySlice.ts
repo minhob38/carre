@@ -56,6 +56,11 @@ const surveySlice = createSlice({
       const surveyQuestions = action.payload;
       state.surveyQuestions = surveyQuestions;
     },
+    checkSaveSurvey: (state, action: PayloadAction<void>) => {},
+
+    saveSurveyAnswersAsync: (state, action: PayloadAction<any>) => {
+      return;
+    },
   },
 });
 
@@ -80,10 +85,38 @@ function* getSurveyQuestionsSaga(action: PayloadAction<string>) {
   yield put(actions.saveSurveyQuestions(data));
 }
 
+function* saveSurveyAnswersSaga(
+  action: PayloadAction<{
+    surveyToken: string;
+    surveyQuestions: Record<string, string>[];
+    surveyAnswers: Record<string, string>;
+  }>,
+) {
+  const { surveyToken, surveyQuestions, surveyAnswers } = action.payload;
+
+  const surveyInput = surveyQuestions.map((question) => {
+    const {
+      surveyQuestionToken,
+      firstQuestionFactorElement,
+      secondQuestionFactorElement,
+    } = question;
+    const userChoiceFactorElement = surveyAnswers[surveyQuestionToken];
+    return {
+      surveyQuestionToken,
+      firstQuestionFactorElement,
+      secondQuestionFactorElement,
+      userChoiceFactorElement,
+    };
+  });
+  const data = yield api.saveSurveyAnswers(surveyToken, surveyInput);
+  yield put(actions.checkSaveSurvey());
+}
+
 export function* surveySaga() {
   yield takeLatest(actions.createSurveyTokenAsync, createSurveyTokenSaga);
   yield takeLatest(actions.bindSurveyAsync, bindSurveySaga);
   yield takeLatest(actions.getSurveyQuestionsAsync, getSurveyQuestionsSaga);
+  yield takeLatest(actions.saveSurveyAnswersAsync, saveSurveyAnswersSaga);
 }
 
 export const actions = surveySlice.actions;

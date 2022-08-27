@@ -32,9 +32,6 @@ export const bindSurvey = async (surveyToken: string, input: IInput) => {
       passengerCount,
       drivenDistanceInYear,
     } = input;
-    console.log('!!!');
-    console.log(surveyToken);
-    console.log(input);
     const response = await axios
       .post<IResponse>(`/user-surveys/${surveyToken}/binding-init-info`, {
         // TODO: input값으로 넣어주기
@@ -57,6 +54,20 @@ export const getSurveyQuestions = async (surveyToken: string) => {
   try {
     const response = await axios
       .get<IResponse>(`/user-surveys/${surveyToken}/questions`)
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};
+
+export const saveSurveyAnswers = async (surveyToken: string, surveyInput) => {
+  try {
+    const response = await axios
+      .post<IResponse>(
+        `/user-surveys/${surveyToken}/task-input-survey-answer`,
+        surveyInput,
+      )
       .then((res) => res.data);
     return response.data;
   } catch (err) {
