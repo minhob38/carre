@@ -25,10 +25,10 @@ export const genderLabels: { title: string; value: string }[] = [
 
 /* 용도 input 설정 */
 export const purposeLabels: { title: string; value: string }[] = [
-  { title: '출퇴근용', value: 'work-commuting' },
-  { title: '등/하교', value: 'school-commuting' },
-  { title: '캠핑/레저', value: 'outdoor' },
-  { title: '영업', value: 'sales' },
+  { title: '출퇴근용', value: 'COMMUTING' },
+  { title: '등/하교', value: 'SCHOOL' },
+  { title: '캠핑/레저', value: 'CAMPING' },
+  { title: '영업', value: 'SALES' },
 ];
 
 /* 출생년도 select 설정*/

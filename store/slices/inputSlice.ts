@@ -15,7 +15,7 @@ interface IState {
   passengerCount: number;
   drivenDistanceInYear: number;
   gender: string | null;
-  carUsagePurpose: string[];
+  carUsagePurpose: string | null;
   minBudgetPosition: number;
   maxBudgetPosition: number;
   minBudgetValue: number;
@@ -37,7 +37,7 @@ const initialState: IState = {
   gender: null,
   passengerCount: DEFAULT_PERSON,
   drivenDistanceInYear: DEFAULT_DISTANCE * UNIT_DISTANCE,
-  carUsagePurpose: [],
+  carUsagePurpose: null,
   /* budget range bar 안에 있는 ball의 초기 위치 */
   minBudgetPosition: 0,
   maxBudgetPosition: 0,
