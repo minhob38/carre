@@ -59,7 +59,6 @@ const ImageLabel: React.FC<IProps> = ({
   category,
   onClick,
 }) => {
-  console.log(category);
   const { type, name, value } = input;
   const { width, height } = style;
   const { src, alt } = image;

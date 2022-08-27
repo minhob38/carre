@@ -12,7 +12,7 @@ import { useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 
 const Wrapper = styled.div`
-  flex-shrink:0;
+  flex-shrink: 0;
   width: 324px;
   margin: 0 12px 0 0;
   padding: 16px 20px 21px 20px;
@@ -117,7 +117,6 @@ const Price = styled.div`
 `;
 
 const ResultCard: React.FC<any> = ({ data }) => {
-  console.log('!!!', data);
   const {
     rankingInfoText,
     brandName,
@@ -129,6 +128,7 @@ const ResultCard: React.FC<any> = ({ data }) => {
   } = data;
 
   const imageSrc = carImagePath + carImageFileName;
+  const rank = rankingInfoText.slice(0, -2);
 
   const TrimChips = trims.map((trim) => {
     const { trimName, recommend } = trim;
@@ -144,9 +144,10 @@ const ResultCard: React.FC<any> = ({ data }) => {
     return (
       <Chip key={uuid4()} type={recommend ? 'yes' : 'no'} title={optionName} />
     );
-  })
+  });
 
-    return (<>
+  return (
+    <>
       <Wrapper>
         <RankContainer>
           <Rank>{rankingInfoText}</Rank>
@@ -158,7 +159,7 @@ const ResultCard: React.FC<any> = ({ data }) => {
         </Description>
         <Image src={imageSrc} alt={carModelName} width="271px" height="170px" />
         <DetailContainer>
-          <Link href="/result/2" passHref={true}>
+          <Link href={`/result/detail/${rank}`} passHref={true}>
             <Detail>차량 상세보기</Detail>
           </Link>
           <Image
@@ -176,22 +177,18 @@ const ResultCard: React.FC<any> = ({ data }) => {
         )}
         <TrimContainer>
           <TrimTitle>트림</TrimTitle>
-          <Trim>
-            {TrimChips}
-          </Trim>
+          <Trim>{TrimChips}</Trim>
         </TrimContainer>
         <OptionContainer>
           <OptionTitle>옵션</OptionTitle>
-          <Option>
-        {OptionsChips}
-          </Option>
+          <Option>{OptionsChips}</Option>
         </OptionContainer>
         <PriceContainer>
           <PriceTitle>총 차량 가격</PriceTitle>
           <Price>{`${carTotalPrice} 원`}</Price>
         </PriceContainer>
       </Wrapper>
-    </>,
+    </>
   );
 };
 

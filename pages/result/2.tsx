@@ -1,166 +1,167 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import { v4 as uuid4 } from 'uuid';
+import { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
-import Image from '@components/common/Image';
 import Scroll from '@components/common/Scroll';
-import ResultCard from '@components/result/ResultCard';
-import DealerButton from '@components/result/DealerButton';
-import Attractions from '@components/result/Attractions';
+import NextButton from '@components/common/NextButton';
+import StyleCheckBoxes from '@components/common/StyleCheckBoxes';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
-import casperImage from '@assets/images/casper.svg';
+import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import Chip from '@components/result/BigChip';
-import { pictures, carColors } from '@constants/variables';
+import Budget from '@components/common/Budget';
+import Toggle from '@components/common/Toggle';
+import useWindowDimensions from '@hooks/useWindowDimension';
+import ScoreCard from '@components/result/ScoreCard';
 
 const Title = styled.div`
-  margin: 22px 0 22px ${margins.SIDE_MAIN_MARGIN};
-  font: ${fonts.TITLE_T1};
-  color: ${colors.SECONDARY_500};
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: calc(100% - 20px - 20px);
-  margin: 0 auto 16px auto;
-`;
-
-const PicturesContainer = styled.div`
-  display: flex;
-  width: calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN});
-  gap: 0 23px;
-  margin: 0 auto;
-`;
-
-const PictureBox = styled.div``;
-
-const CarColorsContainer = styled.div`
-  display: flex;
-  width: calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN});
-  gap: 0 12px;
-  margin: 16px auto 0 auto;
-  height: 100px;
-`;
-
-const CarColor = styled.div`
-  width: 48px;
-  height: 30px;
-  border: 0.5px solid ${colors.SECONDARY_200};
-  border-radius: 4px;
-  background-color: ${(props: { backgroundColor: string }) =>
-    props.backgroundColor};
-`;
-
-const TrimContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 0 14px ${margins.SIDE_SUB_MARGIN};
-`;
-
-const TrimTitle = styled.div`
+  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
   font: ${fonts.TITLE_T2};
   color: ${colors.SECONDARY_400};
 `;
 
-const TrimBorder = styled.div`
-  box-sizing: border-box;
-  height: 20px;
-  width: 1.5px;
-  margin: 0 12px;
-  border-left: 1.5px solid ${colors.SECONDARY_400};
+const Subtitle = styled.div`
+  margin: 2px 0 14px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.SUBTITLE_T2};
+  color: ${colors.SECONDARY_300};
 `;
 
-const TrimCar = styled.div`
-  font: ${fonts.SUBTITLE_T1};
-  color: ${colors.PRIMARY_400};
-`;
-
-const TrimsContainer = styled.div`
+const Manual = styled.div`
   display: flex;
-  width: calc(100% - ${margins.SIDE_SUB_MARGIN} - ${margins.SIDE_SUB_MARGIN});
-  margin: 0 auto;
-  gap: 0 12px;
-`;
-
-const TrimDetailContainer = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  margin: 16px 0 0 0;
-  gap: 0 8px;
-  border-bottom: 1px solid ${colors.PRIMARY_400};
-`;
-
-const TrimDetail = styled.div`
-  font: ${fonts.SUBTITLE_T1};
+  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
+  justify-content: flex-end;
+  align-items: center;
+  margin: 47px auto 12px auto;
+  font: ${fonts.BUTTON_3};
   color: ${colors.SECONDARY_400};
-  padding: 0 10px;
-  flex-shrink: 0;
+  text-decoration-line: underline;
 `;
 
-const Border = styled.div`
-  border-bottom: 1px solid ${colors.SECONDARY_200};
+const ToggleContainer = styled.div`
+  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+`;
+
+const StyleCheckBoxesContainer = styled.div`
+  margin: 16px 0 0 ${margins.SIDE_SUB_MARGIN};
+`;
+
+const NavigatorContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 16px 0 20px 0;
+  padding: 0 ${margins.SIDE_MAIN_MARGIN} 0 ${margins.SIDE_MAIN_MARGIN};
+`;
+
+const BudgetContainer = styled.div`
+  margin: 0 0 47px 0;
+`;
+
+const StyleContainer = styled.div`
+  margin: 0 0 26px 0;
+`;
+
+const ValueContainer = styled.div`
+  margin: 0 0 52px 0;
 `;
 
 const Result: NextPage = () => {
-  const Pictures = pictures.map((picture) => {
-    return (
-      <PictureBox key={uuid4()}>
-        <Image
-          src={picture.src}
-          alt={picture.alt}
-          width={picture.width}
-          height={picture.height}
-        />
-      </PictureBox>
-    );
-  });
+  const { width, height } = useWindowDimensions();
+  const budgetRef = useRef<HTMLDivElement>(null);
+  const styleRef = useRef<HTMLDivElement>(null);
+  const valueRef = useRef<HTMLDivElement>(null);
+  const [isBudgetViewd, setIsBudgetViewd] = useState<boolean>(true);
+  const [isStyleViewd, setIsStyleViewd] = useState<boolean>(false);
+  const [isValueViewd, setIsValueViewd] = useState<boolean>(false);
 
-  const CarColors = carColors.map((color) => {
-    return <CarColor key={uuid4()} backgroundColor={color}></CarColor>;
-  });
+  const handleDetectScroll = () => {
+    const topOffset = 72 + 62; // header 및 nav 높이
+    const bottomOffset = (height || 0) - 72 - 62 - 72; // header 및 nav 및 nest button 높이
+
+    if (!budgetRef.current || !styleRef.current || !valueRef.current) return;
+    const budgetPosition =
+      budgetRef.current.getBoundingClientRect().top - topOffset;
+    const stylePosition =
+      styleRef.current.getBoundingClientRect().top - topOffset + 0; //styleRef.current.clientHeight / 2 <- 중간점 기반
+    const valuePosition =
+      valueRef.current.getBoundingClientRect().top - topOffset;
+
+    if (budgetPosition < -10) {
+      setIsBudgetViewd(false);
+    } else if (budgetPosition > bottomOffset) {
+      setIsBudgetViewd(false);
+    } else {
+      setIsBudgetViewd(true);
+      setIsStyleViewd(false);
+      setIsValueViewd(false);
+      return;
+    }
+
+    if (stylePosition < 0) {
+      setIsStyleViewd(false);
+    } else if (stylePosition > bottomOffset) {
+      setIsStyleViewd(false);
+    } else {
+      setIsBudgetViewd(false);
+      setIsStyleViewd(true);
+      setIsValueViewd(false);
+      return;
+    }
+
+    if (valuePosition < 0) {
+      setIsValueViewd(false);
+    } else if (valuePosition > bottomOffset) {
+      setIsValueViewd(false);
+    } else {
+      setIsBudgetViewd(false);
+      setIsStyleViewd(false);
+      setIsValueViewd(true);
+    }
+  };
 
   return (
     <>
-      <Header title="차량 상세보기" type="back" backPath="/result/1" />
-      <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
-        <Title>현대 캐스퍼 액티브</Title>
-        <ImageContainer>
-          <Image src={casperImage} alt="casper" width="271px" height="170px" />
-        </ImageContainer>
-        <Scroll direction="x" width="100%">
-          <PicturesContainer>{Pictures}</PicturesContainer>
+      <Header title="검사 결과 조절" type="close" closePath="/" />
+      <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
+        <NavigatorContainer>
+          <Chip title="가격 변경" type={isBudgetViewd ? 'yes' : 'no'} />
+          <Chip title="차량 스타일 변경" type={isStyleViewd ? 'yes' : 'no'} />
+          <Chip title="차량 가치 변경" type={isValueViewd ? 'yes' : 'no'} />
+        </NavigatorContainer>
+        <Scroll
+          direction="y"
+          height={'calc(100% - 72px)'}
+          width="100%"
+          onScroll={handleDetectScroll}
+        >
+          <BudgetContainer ref={budgetRef}>
+            <Title>가격 변경</Title>
+            <Subtitle>가격의 스펙트럼을 변경할 수 있어요.</Subtitle>
+            <Budget />
+            <Manual>직접입력하기</Manual>
+            <ToggleContainer>
+              <Toggle />
+            </ToggleContainer>
+          </BudgetContainer>
+          <StyleContainer ref={styleRef}>
+            <Title>차량 스타일 변경</Title>
+            <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
+            <StyleCheckBoxesContainer>
+              <StyleCheckBoxes />
+            </StyleCheckBoxesContainer>
+          </StyleContainer>
+          <ValueContainer ref={valueRef}>
+            <Title>차량 가치 변경</Title>
+            <Subtitle>가치별 차량 정보를 알 수 있어요</Subtitle>
+            <ScoreCard type="dynamic" />
+          </ValueContainer>
         </Scroll>
-        <Scroll direction="x" width="100%">
-          <CarColorsContainer>{CarColors}</CarColorsContainer>
-        </Scroll>
-        <TrimContainer>
-          <TrimTitle>트림</TrimTitle>
-          <TrimBorder />
-          <TrimCar>캐스퍼액티브</TrimCar>
-        </TrimContainer>
-        <Scroll direction="x" width="100%">
-          <TrimsContainer>
-            <Chip title="파워트레인/성능" type="yes" />
-            <Chip title="지능형 안전 기술" type="no" />
-            <Chip title="안전" type="no" />
-          </TrimsContainer>
-        </Scroll>
-        <Scroll direction="x" width="100%">
-          <TrimDetailContainer>
-            <TrimDetail>스마트스트림 가솔린 1.0 엔진</TrimDetail>
-            <TrimDetail>4단 자동변속기</TrimDetail>
-            <TrimDetail>풋파킹 브레이크</TrimDetail>
-          </TrimDetailContainer>
-        </Scroll>
-        <Border />
       </Content>
-      <DealerButton />
+      <NextButton title="다음" path="/result" />
     </>
   );
 };

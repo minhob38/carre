@@ -14,6 +14,7 @@ import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
 import { useTypedSelector } from '@hooks/useStore';
+import { IS_HIDDEN } from '@constants/variables';
 
 const Title = styled.div`
   margin: 22px 0 16px ${margins.SIDE_MAIN_MARGIN};
@@ -57,7 +58,6 @@ const Result: NextPage = () => {
   }
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
-  console.log(recommendCarInfoList.slice(0, 2));
   const ResultCards = recommendCarInfoList.slice(0, 2).map((recom) => {
     return <ResultCard key={uuid4()} data={recom} />;
   });
@@ -74,7 +74,7 @@ const Result: NextPage = () => {
             </Scroll>
           </ResultCardContainer>
           <Border />
-          <Attractions />
+          {!IS_HIDDEN && <Attractions />}
           <Link href="/result/3" passHref={true}>
             <EditButton>검사 결과 조절해보기</EditButton>
           </Link>

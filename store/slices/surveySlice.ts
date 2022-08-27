@@ -135,7 +135,6 @@ function* analyzeSurveyAnswersSaga(action: PayloadAction<string>) {
   const surveyToken = action.payload;
   const tendencyData = yield api.analyzeUserTendency(surveyToken);
   const recomData = yield api.analyzeUserRecommendation(surveyToken);
-  console.log(recomData);
   yield put(resultActions.getUserTendencyAsync(surveyToken));
   yield put(resultActions.getUserRecomAsync(recomData));
   yield put(actions.checkSurveyAnswerAnalysis());
