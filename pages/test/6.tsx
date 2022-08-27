@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -52,6 +52,7 @@ const Page = styled.div`
 
 const Test: NextPage = () => {
   const [page, setPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(100);
   const dispatch = useTypedDispatch();
   const surveyQuestions = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyQuestions,
@@ -65,20 +66,14 @@ const Test: NextPage = () => {
   );
   const router = useRouter();
 
-  if (!surveyQuestions) return <div>API Loading...</div>;
+  // const handleNextClick = () => {
+  //   if (page >= totalPage) return router.push('/test/7');
+  //   setPage(page + 1);
+  // };
 
-  const TOTAL_PAGE = surveyQuestions.length;
-
-  const handleNextClick = () => {
-    if (page >= TOTAL_PAGE) return router.push('/test/7');
-    setPage(page + 1);
-  };
-  const handleImageClick = async (ev) => {
-    // await new Promise((resolve, reject) => {
-    //   setTimeout(() => resolve(''), 1500);
-    // });
-
-    if (page >= TOTAL_PAGE) {
+  useEffect(() => {
+    console.log(page, Object.keys(surveyAnswers).length, surveyAnswers);
+    if (page >= totalPage && page == Object.keys(surveyAnswers).length) {
       dispatch(
         actions.saveSurveyAnswersAsync({
           surveyToken,
@@ -86,10 +81,33 @@ const Test: NextPage = () => {
           surveyAnswers,
         }),
       );
-      return router.push('/test/7');
+      router.push('/test/7');
     }
-    // setPage(page + 1);
+  }, [
+    dispatch,
+    page,
+    router,
+    surveyAnswers,
+    surveyQuestions,
+    surveyToken,
+    totalPage,
+  ]);
+
+  const handleImageClick = async () => {
+    if (process.env.NODE_ENV === 'production') {
+      await new Promise((resolve, reject) => {
+        setTimeout(() => resolve(''), 500);
+      });
+    }
+    if (page >= totalPage) return;
+    setPage(page + 1);
   };
+
+  useEffect(() => {
+    if (surveyQuestions) setTotalPage(surveyQuestions.length);
+  }, [surveyQuestions]);
+
+  if (!surveyQuestions) return <div>API Loading...</div>;
 
   const questionToken = surveyQuestions[page - 1].surveyQuestionToken;
   const firstQuestionFactorElement =
@@ -106,9 +124,9 @@ const Test: NextPage = () => {
       <Header title="차량 성향 테스트" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <BarContainer>
-          <QuestionProgressBar stage={page} total={TOTAL_PAGE} />
+          <QuestionProgressBar stage={page} total={totalPage} />
         </BarContainer>
-        <Page>{`${page}/${TOTAL_PAGE} 문항`}</Page>
+        <Page>{`${page}/${totalPage} 문항`}</Page>
         <Description>
           {`다음 두 가지의 상황 중 자신에게 더 잘 맞다고 \n느껴지는 상황을 선택해주세요.`}
         </Description>
