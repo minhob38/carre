@@ -10,3 +10,15 @@ declare module '@type/axios' {
 
   type TError = AxiosError;
 }
+
+declare module '@type/input' {
+  interface IInput {
+    birthYear: string;
+    gender: string;
+    carUsagePurpose: string;
+    userBudgetMin: number;
+    userBudgetMax: number;
+    passengerCount: number;
+    drivenDistanceInYear: number;
+  }
+}

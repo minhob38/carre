@@ -15,6 +15,7 @@ import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import { actions } from '@store/slices/surveySlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
+import { IInput } from '@type/input';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -62,9 +63,36 @@ const Test: NextPage = () => {
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
 
+  const input: any = useTypedSelector((state) => {
+    state.rootReducer.surveyReducer.surveyToken;
+
+    const inputState = state.rootReducer.inputReducer;
+    const {
+      birthYear,
+      gender,
+      carUsagePurpose,
+      minBudgetValue,
+      maxBudgetValue,
+      passengerCount,
+      drivenDistanceInYear,
+    } = inputState;
+
+    return {
+      birthYear,
+      gender,
+      carUsagePurpose,
+      userBudgetMin: 10000 * Number(minBudgetValue),
+      userBudgetMax: 10000 * Number(maxBudgetValue),
+      passengerCount,
+      drivenDistanceInYear,
+    };
+  });
+
   const handleButtonClick = () => {
-    if (!surveyToken) return;
-    dispatch(actions.bindSurveyAsync(surveyToken));
+    if (!surveyToken) {
+      return alert('survey token does not exist');
+    }
+    dispatch(actions.bindSurveyAsync({ surveyToken, input }));
     router.push('/test/5');
   };
 

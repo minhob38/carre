@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { IInput } from '@type/input';
 import * as api from '@apis/api';
 
 interface IState {
@@ -40,7 +41,10 @@ const surveySlice = createSlice({
       state.surveyToken = userSurveyToken;
     },
 
-    bindSurveyAsync: (state, action: PayloadAction<string>) => {
+    bindSurveyAsync: (
+      state,
+      action: PayloadAction<{ surveyToken: string; input: IInput }>,
+    ) => {
       return;
     },
     checkBindSurvey: (state, action: PayloadAction<void>) => {},
@@ -62,9 +66,11 @@ function* createSurveyTokenSaga(action) {
   yield put(actions.saveSurveyToken(userSurveyToken));
 }
 
-function* bindSurveySaga(action: PayloadAction<string>) {
-  const surveyToken = action.payload;
-  yield api.bindSurvey(surveyToken);
+function* bindSurveySaga(
+  action: PayloadAction<{ surveyToken: string; input: IInput }>,
+) {
+  const { surveyToken, input } = action.payload;
+  yield api.bindSurvey(surveyToken, input);
   yield put(actions.checkBindSurvey());
 }
 
