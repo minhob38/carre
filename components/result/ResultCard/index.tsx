@@ -1,15 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { v4 as uuid4 } from 'uuid';
 import Image from '@components/common/Image';
 import Chip from '@components/result/SmallChip';
-import casperImage from '@assets/images/casper.svg';
 import infoImage from '@assets/images/icons/info.svg';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import rightArrorImage from '@assets/images/icons/small-black-right-arrow.svg';
+import { useTypedSelector } from '@hooks/useStore';
+import { IS_HIDDEN } from '@constants/variables';
 
 const Wrapper = styled.div`
+  flex-shrink:0;
   width: 324px;
   margin: 0 12px 0 0;
   padding: 16px 20px 21px 20px;
@@ -113,19 +116,47 @@ const Price = styled.div`
   color: ${colors.SECONDARY_400};
 `;
 
-const ResultCard: React.FC = () => {
-  return (
-    <>
+const ResultCard: React.FC<any> = ({ data }) => {
+  console.log('!!!', data);
+  const {
+    rankingInfoText,
+    brandName,
+    carModelName,
+    carImagePath,
+    carImageFileName,
+    carTotalPrice,
+    trimList: trims,
+  } = data;
+
+  const imageSrc = carImagePath + carImageFileName;
+
+  const TrimChips = trims.map((trim) => {
+    const { trimName, recommend } = trim;
+    return (
+      <Chip key={uuid4()} type={recommend ? 'yes' : 'no'} title={trimName} />
+    );
+  });
+
+  const options = trims.find((trim) => trim.recommend).optionList;
+
+  const OptionsChips = options.map((option) => {
+    const { optionName, recommend } = option;
+    return (
+      <Chip key={uuid4()} type={recommend ? 'yes' : 'no'} title={optionName} />
+    );
+  })
+
+    return (<>
       <Wrapper>
         <RankContainer>
-          <Rank>1순위</Rank>
-          <CarName>현대 캐스퍼 밴</CarName>
+          <Rank>{rankingInfoText}</Rank>
+          <CarName>{`${brandName} ${carModelName}`}</CarName>
         </RankContainer>
         <Description>
           지프 그랜드 체로키는 성능이 어쭈구 좋고 안전은 또 이렇게 막 이렇게
           좋은 대표 차량입니다.
         </Description>
-        <Image src={casperImage} alt="casper" width="271px" height="170px" />
+        <Image src={imageSrc} alt={carModelName} width="271px" height="170px" />
         <DetailContainer>
           <Link href="/result/2" passHref={true}>
             <Detail>차량 상세보기</Detail>
@@ -137,38 +168,30 @@ const ResultCard: React.FC = () => {
             height="20px"
           />
         </DetailContainer>
-        <TermContainer>
-          <Image src={infoImage} alt="info" width="12px" height="12px" />
-          <Term>차량 용어 바로 알아보기</Term>
-        </TermContainer>
+        {!IS_HIDDEN && (
+          <TermContainer>
+            <Image src={infoImage} alt="info" width="12px" height="12px" />
+            <Term>차량 용어 바로 알아보기</Term>
+          </TermContainer>
+        )}
         <TrimContainer>
           <TrimTitle>트림</TrimTitle>
           <Trim>
-            <Chip
-              type="no"
-              title="다이내믹 패키지 20인치 다크 스퍼터링 스포츠 전용 휠 \& 미쉐린 썸머 타이어 + 능동형 후륜 조향(RWS) + 렉시콘 18스피커 시스템 + 액티브 로드 노이즈 컨트롤 + 스포츠+"
-            />
-            <Chip type="yes" title="모던" />
-            <Chip type="no" title="인스퍼레이션" />
+            {TrimChips}
           </Trim>
         </TrimContainer>
         <OptionContainer>
           <OptionTitle>옵션</OptionTitle>
           <Option>
-            <Chip type="yes" title="캐스퍼액티브" />
-            <Chip type="yes" title="선루프" />
-            <Chip type="no" title="애센셜 풀" />
-            <Chip type="no" title="스마트팩" />
-            <Chip type="no" title="선루프" />
-            <Chip type="yes" title="옵션" />
+        {OptionsChips}
           </Option>
         </OptionContainer>
         <PriceContainer>
           <PriceTitle>총 차량 가격</PriceTitle>
-          <Price>44,580,000원</Price>
+          <Price>{`${carTotalPrice} 원`}</Price>
         </PriceContainer>
       </Wrapper>
-    </>
+    </>,
   );
 };
 

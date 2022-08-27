@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 import { v4 as uuid4 } from 'uuid';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
@@ -11,11 +12,21 @@ interface IProps {
 
 type IStyleProps = Pick<IProps, 'type'>;
 
+const Loop = keyframes`
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+`;
+
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 32px;
+  max-width: 100px;
+  min-width: 0;
   padding: 0 10px;
   border-radius: 4px;
   background-color: ${(props: IStyleProps) => {
@@ -37,11 +48,24 @@ const Wrapper = styled.div`
     }
   }};
   font: ${fonts.BODY_REGULAR_2};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 32px;
 `;
 
-// TODO: 소수점도 처리한다면, 해당 비율에 맞는 bar를 만들어 overwrap 시켜야 할듯
+const Flow = styled.div`
+  animation: ${Loop} 3s linear infinite;
+`;
+
 const SmallChip: React.FC<IProps> = ({ type, title }) => {
-  return <Wrapper type={type}>{title}</Wrapper>;
+  return (
+    <Wrapper type={type}>
+      {/* <Flow>{title}</Flow> */}
+      {title}
+    </Wrapper>
+  );
 };
 
 export default SmallChip;

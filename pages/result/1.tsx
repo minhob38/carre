@@ -2,6 +2,7 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import { v4 as uuid4 } from 'uuid';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import Scroll from '@components/common/Scroll';
@@ -12,12 +13,14 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
+import { useTypedSelector } from '@hooks/useStore';
 
 const Title = styled.div`
   margin: 22px 0 16px ${margins.SIDE_MAIN_MARGIN};
   padding: 0 100px 0 0;
   font: ${fonts.TITLE_T1};
   color: ${colors.SECONDARY_500};
+  white-space: pre;
 `;
 
 const ResultCardContainer = styled.div`
@@ -45,17 +48,29 @@ const EditButton = styled.div`
 `;
 
 const Result: NextPage = () => {
+  const recoms = useTypedSelector((state) => {
+    return state.rootReducer.resultReducer.recoms;
+  });
+
+  if (!recoms) {
+    return <div>loading...</div>;
+  }
+
+  const { recommendCarInfoList, userTendencySentence } = recoms;
+  console.log(recommendCarInfoList.slice(0, 2));
+  const ResultCards = recommendCarInfoList.slice(0, 2).map((recom) => {
+    return <ResultCard key={uuid4()} data={recom} />;
+  });
+
   return (
     <>
       <Header title="나의 추천 차량" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
         <Scroll direction="y" height="100%">
-          <Title>성능과 안전 두마리 토끼를 잡으려는 당신!</Title>
+          <Title>{userTendencySentence}</Title>
           <ResultCardContainer>
             <Scroll direction="x" width="100%">
-              <ResultCard />
-              <ResultCard />
-              <ResultCard />
+              {ResultCards}
             </Scroll>
           </ResultCardContainer>
           <Border />

@@ -11,7 +11,7 @@ interface IState {
 /* slices */
 const initialState: IState = {
   tendency: null,
-  recoms: [],
+  recoms: null,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
