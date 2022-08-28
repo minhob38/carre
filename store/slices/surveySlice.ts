@@ -34,6 +34,11 @@ const surveySlice = createSlice({
   name: 'survey',
   initialState,
   reducers: {
+    initialize: (state) => {
+      for (const key in state) {
+        state[key] = initialState[key];
+      }
+    },
     createSurveyTokenAsync: (state, action: PayloadAction) => {
       return;
     },

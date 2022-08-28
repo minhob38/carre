@@ -47,9 +47,14 @@ const initialState: IState = {
 };
 
 const inputSlice = createSlice({
-  name: 'app',
+  name: 'input',
   initialState,
   reducers: {
+    initialize: (state) => {
+      for (const key in state) {
+        state[key] = initialState[key];
+      }
+    },
     setSelectOption: (
       state,
       action: PayloadAction<ChangeEvent<HTMLSelectElement>['target']>,

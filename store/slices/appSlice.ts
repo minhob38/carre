@@ -12,6 +12,11 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    initialize: (state) => {
+      for (const key in state) {
+        state[key] = initialState[key];
+      }
+    },
     clickButtonAsync: (state, action: PayloadAction) => {
       // action을 만들기 위한 함수입니다.
       return;

@@ -17,6 +17,11 @@ const dealerSlice = createSlice({
   name: 'dealer',
   initialState,
   reducers: {
+    initialize: (state) => {
+      for (const key in state) {
+        state[key] = initialState[key];
+      }
+    },
     setRadioBoxValue: (
       state,
       action: PayloadAction<React.ChangeEvent<HTMLInputElement>['target']>,

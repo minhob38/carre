@@ -6,7 +6,10 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import rightArrowImage from '@assets/images/icons/small-black-right-arrow.svg';
 import { actions } from '@store/slices/surveySlice';
+
 import { useTypedDispatch } from '@hooks/useStore';
+import { useInitialization } from '@hooks/useStore';
+import { useEffect } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,10 +30,15 @@ const ItemText = styled.div`
 const TestStartButton: React.FC = () => {
   const router = useRouter();
   const dispatch = useTypedDispatch();
+  const initializeStore = useInitialization();
   const handleButtonClick = () => {
     dispatch(actions.createSurveyTokenAsync());
     router.push('/test/2');
   };
+
+  useEffect(() => {
+    initializeStore();
+  }, []);
 
   return (
     <Wrapper onClick={handleButtonClick}>

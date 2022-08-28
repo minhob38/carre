@@ -19,6 +19,11 @@ const resultSlice = createSlice({
   name: 'result',
   initialState,
   reducers: {
+    initialize: (state) => {
+      for (const key in state) {
+        state[key] = initialState[key];
+      }
+    },
     getUserTendencyAsync: (state, action: PayloadAction<any>) => {
       return;
     },
