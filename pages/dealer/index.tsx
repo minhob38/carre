@@ -59,31 +59,37 @@ const DealerCardContainer = styled.div`
 
 const dealers = [
   {
+    value: 'dealer1',
     description: '24시간 상담가능 포천 유일 여성 딜러',
     src: dealer1Image,
     chips: ['친절해요', '전문성이 강해요'],
   },
   {
+    value: 'dealer2',
     description: '가족같은 편안함으로 14년 경력의 전문가',
     src: dealer2Image,
     chips: ['세심한 배려', '쉽게 설명해줘요'],
   },
   {
+    value: 'dealer3',
     description: '24시간 상담가능 포천 유일 여성 딜러',
     src: dealer3Image,
     chips: ['친절해요', '응답이 빨라요'],
   },
   {
+    value: 'dealer4',
     description: '24시간 상담가능 포천 유일 여성 딜러',
     src: dealer1Image,
     chips: ['친절해요', '전문성이 강해요'],
   },
   {
+    value: 'dealer5',
     description: '가족같은 편안함으로 14년 경력의 전문가',
     src: dealer2Image,
     chips: ['세심한 배려', '쉽게 설명해줘요'],
   },
   {
+    value: 'dealer6',
     description: '24시간 상담가능 포천 유일 여성 딜러',
     src: dealer3Image,
     chips: ['친절해요', '응답이 빨라요'],
@@ -100,13 +106,14 @@ const Dealer: NextPage = () => {
   // }
 
   const Dealers = dealers.map((dealer) => {
-    const { description, src, chips } = dealer;
+    const { description, src, chips, value } = dealer;
     return (
       <DealerCard
         key={uuid4()}
         description={description}
         src={src}
         chips={chips}
+        value={value}
       />
     );
   });

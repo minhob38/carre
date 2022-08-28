@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
+import { css } from '@emotion/react';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import * as margins from '@constants/margins';
@@ -11,72 +12,31 @@ import downArrowImage from '@assets/images/icons/small-black-down-arrow.svg';
 
 import dealer1Image from '@assets/images/temps/dealer-1.png';
 import hyundaiCi from '@assets/images/temps/hyundai-ci.png';
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
+import { shallowEqual } from 'react-redux';
+import { actions } from '@store/slices/dealerSlice';
 
 interface IProps {
   description: string;
   chips: string[];
   src: any;
+  value: string;
 }
 
 interface IStyleProps {
-  isDown: boolean;
+  checked: boolean;
 }
 
-// const Wrapper = styled.div`
-//   display: flex;
-//   flex-flow: column nowrap;
-//   justify-content: center;
-//   align-items: center;
-//   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
-//   border-radius: 8px;
-//   background-color: ${(props: IStyleProps) =>
-//     props.isDown ? colors.SECONDARY_100 : colors.SECONDARY_REAL_WHITE};
-//   box-shadow: 0px 5px 20px rgba(96, 100, 112, 0.04);
-// `;
-
-// const Header = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   width: calc(100% - 20px - 20px);
-//   height: 70px;
-//   margin: auto;
-//   border-bottom: ${(props: IStyleProps) =>
-//     props.isDown ? `solid 1px ${colors.SECONDARY_200}` : 'none'};
-// `;
-
-// const Title = styled.div`
-//   margin: 0 0 0 16px;
-//   font: ${fonts.TITLE_T2};
-//   color: ${colors.SECONDARY_400};
-// `;
-
-// const ItemContainer = styled.div`
-//   display: ${(props: IStyleProps) => (props.isDown ? 'grid' : 'none')};
-//   grid-template-columns: repeat(3, 1fr);
-//   justify-content: start;
-//   align-items: center;
-//   justify-items: center;
-//   row-gap: 8px;
-//   width: 100%;
-//   padding: 14px 20px;
-// `;
-
-// const Container = styled.div`
-//   display: flex;
-// `;
-
-// const ImageContainer = styled.div`
-//   display: flex;
-// `;
-
-const Wrapper = styled.div`
+const Wrapper = styled.label`
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   margin: 0 auto;
   padding: 10px;
+  border: ${(props: IStyleProps) =>
+    props.checked ? `2px solid ${colors.PRIMARY_400}` : `none`};
   border-radius: 8px;
   box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
   background-color: ${colors.SECONDARY_REAL_WHITE};
@@ -113,14 +73,42 @@ const Chip = styled.div`
   border-radius: 4px;
 `;
 
-const DealerCard: React.FC<IProps> = ({ description, chips, src }) => {
+const INPUT_NAME = 'dealer';
+const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
   const [isDown, setIsDown] = useState<boolean>(false);
+  const dispatch = useTypedDispatch();
   const Chips = chips.map((chip) => {
     return <Chip key={uuid4()}>{chip}</Chip>;
   });
+  const dealerState = useTypedSelector(
+    (state) => state.rootReducer.dealerReudcer,
+    shallowEqual,
+  );
+  const [checked, setChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    for (const key in dealerState) {
+      if (key !== INPUT_NAME) continue;
+      if (Array.isArray(dealerState[key])) continue;
+      const isName = dealerState[key] === value;
+      if (isName) {
+        setChecked(true);
+        continue;
+      }
+      setChecked(false);
+    }
+  }, [dealerState, value]);
+
+  const handleChange = (ev) => {
+    if (ev.target.checked) {
+      dispatch(actions.setRadioBoxValue(ev.target));
+      setChecked(true);
+      return;
+    }
+  };
 
   return (
-    <Wrapper>
+    <Wrapper checked={checked}>
       <ImageContainer>
         <Image src={src} alt={'dealer'} width="74px" />
       </ImageContainer>
@@ -131,6 +119,16 @@ const DealerCard: React.FC<IProps> = ({ description, chips, src }) => {
         </DescriptionContainer>
         <ChipContainer>{Chips}</ChipContainer>
       </div>
+      <input
+        type="radio"
+        name={INPUT_NAME}
+        value={value}
+        css={css`
+          all: unset;
+        `}
+        onChange={handleChange}
+        checked={checked}
+      />
     </Wrapper>
   );
 };

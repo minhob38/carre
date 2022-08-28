@@ -16,6 +16,8 @@ import { surveySaga } from './slices/surveySlice';
 import resultReducer from './slices/resultSlice';
 import { resultSaga } from './slices/resultSlice';
 
+import dealerReudcer from './slices/dealerSlice';
+
 export function* rootSaga() {
   yield all([appSaga(), surveySaga(), resultSaga()]);
 }
@@ -32,6 +34,7 @@ const rootReducer = combineReducers({
   inputReducer,
   surveyReducer,
   resultReducer,
+  dealerReudcer,
 });
 
 const store = configureStore({
