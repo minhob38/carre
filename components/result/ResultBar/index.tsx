@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import * as colors from '@constants/colors';
@@ -17,21 +18,23 @@ interface IStyleProps {
   position?: 'start' | 'middle' | 'end';
   backgroundColor?: string;
   opacity?: number;
+  blockWidth: number;
 }
 
 const LineWidth = 4;
 
 const Wrapper = styled.div`
   display: flex;
+  flex: 1;
 `;
 
 const Block = styled.div`
   position: relative;
   width: ${(props: IStyleProps) => {
     if (props.position === 'end') {
-      return `${49 - LineWidth}px`;
+      return `${props.blockWidth - LineWidth}px`;
     } else {
-      return '49px';
+      return `${props.blockWidth}px`;
     }
   }};
   height: 10px;
@@ -54,8 +57,9 @@ const Line = styled.div`
   display: flex;
   width: ${LineWidth}px;
   height: 10px;
-  background-color: ${(props: IStyleProps) => props.backgroundColor};
-  opacity: ${(props: IStyleProps) => props.opacity};
+  background-color: ${(props: Omit<IStyleProps, 'blockWidth'>) =>
+    props.backgroundColor};
+  opacity: ${(props: Omit<IStyleProps, 'blockWidth'>) => props.opacity};
 `;
 
 const LeftClick = styled.div`
@@ -98,6 +102,14 @@ const ResultBar: React.FC<IProps> = ({
   criterionScore,
 }) => {
   const _: number[] = [];
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // const [width, setWidth] = useState<number>(0);
+  const [blockWidth, setBlockWidth] = useState<number>(0);
+
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+    setBlockWidth(wrapperRef.current.offsetWidth / totalScore);
+  }, [totalScore]);
 
   for (let i = 0; i < totalScore; i++) {
     _.push(i + 1);
@@ -132,6 +144,7 @@ const ResultBar: React.FC<IProps> = ({
           key={uuid4()}
           position="start"
           backgroundColor={item <= score ? blockScoreColor : noBlockScoreColor}
+          blockWidth={blockWidth}
         >
           <Line
             backgroundColor={item <= score ? lineScoreColor : noLineScoreColor}
@@ -151,6 +164,7 @@ const ResultBar: React.FC<IProps> = ({
           key={uuid4()}
           position="end"
           backgroundColor={item <= score ? blockScoreColor : noBlockScoreColor}
+          blockWidth={blockWidth}
         >
           <LeftClick onClick={handleLeftClick} />
           <RightClick onClick={handleRightClick} />
@@ -165,6 +179,7 @@ const ResultBar: React.FC<IProps> = ({
         key={uuid4()}
         position="middle"
         backgroundColor={item <= score ? blockScoreColor : noBlockScoreColor}
+        blockWidth={blockWidth}
       >
         <Line
           backgroundColor={item <= score ? lineScoreColor : noLineScoreColor}
@@ -177,7 +192,7 @@ const ResultBar: React.FC<IProps> = ({
     );
   });
 
-  return <Wrapper>{Blocks}</Wrapper>;
+  return <Wrapper ref={wrapperRef}>{Blocks}</Wrapper>;
 };
 
 export default ResultBar;

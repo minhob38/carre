@@ -30,8 +30,7 @@ const Description = styled.div`
 
 const StyleCheckBoxesContainer = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
-  margin: 16px auto 0 auto;
-  background-color: red;
+  margin: 0 auto;
 `;
 
 const Test: NextPage = () => {

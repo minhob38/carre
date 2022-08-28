@@ -11,6 +11,7 @@ import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT } from '@constants/size';
 import { useTypedSelector } from '@hooks/useStore';
+import { IS_HIDDEN } from '@constants/variables';
 
 const Title = styled.div`
   margin: 22px 0 0 ${margins.SIDE_MAIN_MARGIN};
@@ -44,7 +45,7 @@ const NextButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 350px;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 70px;
   border-radius: 8px;
   background-color: ${colors.SECONDARY_REAL_BLACK};
@@ -64,7 +65,7 @@ const Result: NextPage = () => {
     return <div>loading...</div>;
   }
 
-  const { userTendencySentence } = tendency;
+  const { userTendencySentence, userTendencyTitle } = tendency;
 
   return (
     <>
@@ -80,8 +81,8 @@ const Result: NextPage = () => {
           height={`calc(100% - ${BUTTON_HEIGHT} - ${BUTTON_POSTION} - 15px)`}
         >
           {/* TODO: 변수로 사용자 이름 넣기 */}
-          <Title>성능과 안전</Title>
-          <SubTitle>두마리 토끼를 잡으려는 당신!</SubTitle>
+          <Title>{userTendencyTitle}</Title>
+          <SubTitle>{IS_HIDDEN ? '' : '두마리 토끼를 잡으려는 당신!'}</SubTitle>
           <ScoreCard type="static" />
           <Description>{userTendencySentence}</Description>
         </Scroll>
@@ -94,22 +95,3 @@ const Result: NextPage = () => {
 };
 
 export default Result;
-
-// carFactor: {
-// factorBaseAge: 3
-// factorBaseCarSentiment: 2
-// factorBaseDesign: 3
-// factorBaseEconomics: 0
-// factorBaseNewTechnology: 4
-// factorBasePerformance: 6
-// factorBaseReliability: 5
-// factorBaseSafety: 1
-// }
-// carUsagePurpose: "SCHOOL"
-// drivenDistanceInYear: 10000
-// gender: "FEMALE"
-// passengerCount: 1
-// userBudgetMax: 80000000
-// userBudgetMin: 40000000
-// userId: 123
-// userTendencySentence: "잘 달리면서 잔고장도 적은\n 자동차가 어울리는 당신은 욕심쟁이"

@@ -139,10 +139,7 @@ const Test: NextPage = () => {
                 name: questionToken,
                 value: firstQuestionFactorElement,
               }}
-              style={{
-                width: '330px',
-                height: '258px',
-              }}
+              style={{ width: '330px' }}
               image={{
                 src: firstQuestionImageSrc,
                 alt: 'first-question',
@@ -157,10 +154,7 @@ const Test: NextPage = () => {
                 name: questionToken,
                 value: secondQuestionFactorElement,
               }}
-              style={{
-                width: '330px',
-                height: '258px',
-              }}
+              style={{ width: '330px' }}
               image={{
                 src: secondQuestionImageSrc,
                 alt: 'second-question',

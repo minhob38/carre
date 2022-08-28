@@ -38,7 +38,7 @@ const Wrapper = styled.label`
   justify-content: center;
   align-items: center;
   width: ${(props: IStyleProps) => props.width};
-  height: ${(props: IStyleProps) => props.height};
+  /* height: ${(props: IStyleProps) => props.height}; */
   border: ${(props: IStyleProps) =>
     props.checked ? `2px solid ${colors.PRIMARY_400}` : `none`};
   border-radius: 8px;
@@ -160,7 +160,6 @@ const ImageLabel: React.FC<IProps> = ({
           src={checked ? activeCheckImage : inactiveCheckImage}
           alt={checked ? 'activeCheckImage' : 'inactiveCheckImage'}
           width="30px"
-          height="30px"
         />
       </ImageContainer>
     </Wrapper>
