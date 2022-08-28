@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['m.carre.co.kr', '*'],
+    domains: ['m.carre.co.kr', 'static.carre.kr', '*'],
   },
   // async rewrites() {
   //   return [
