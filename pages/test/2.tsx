@@ -123,10 +123,13 @@ const Test: NextPage = () => {
       passengerCount &&
       drivenDistanceInYear &&
       gender &&
-      carUsagePurpose
+      carUsagePurpose.length > 0
     ) {
       setIsActive(true);
+      return;
     }
+
+    setIsActive(false);
   }, [
     birthYear,
     passengerCount,
@@ -156,7 +159,7 @@ const Test: NextPage = () => {
         key={uuid4()}
         input={{
           title: label.title,
-          type: 'radio',
+          type: 'checkbox',
           name: 'carUsagePurpose',
           value: label.value,
         }}
