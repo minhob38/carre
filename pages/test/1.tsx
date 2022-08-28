@@ -23,10 +23,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Test: NextPage = () => {
-  const genderLabels: { title: string; value: string }[] = [
-    { title: '여자', value: 'female' },
-    { title: '남자', value: 'male' },
-  ];
   return (
     <>
       <Header type="close" title="차량 구매 성향 테스트" backPath="/test" />

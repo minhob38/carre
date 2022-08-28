@@ -14,7 +14,7 @@ import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
 import casperImage from '@assets/images/casper.svg';
 import Chip from '@components/result/BigChip';
-import { pictures, carColors } from '@constants/variables';
+import { pictures, carColors, IS_HIDDEN } from '@constants/variables';
 import { useTypedSelector } from '@hooks/useStore';
 
 const Title = styled.div`
@@ -121,7 +121,7 @@ export async function getStaticProps(context) {
   };
 }
 
-const Result: NextPage<any> = () => {
+const Detail: NextPage<any> = () => {
   const router = useRouter();
   const rank = parseInt(router.query.rank as string);
   const recoms = useTypedSelector((state) => {
@@ -144,7 +144,7 @@ const Result: NextPage<any> = () => {
   const imageSrc = carImagePath + carImageFileName;
   const trim = trims.find((trim) => trim.recommend);
   const { trimName, optionList: options } = trim;
-  console.log(trim);
+
   const Pictures = pictures.map((picture) => {
     return (
       <PictureBox key={uuid4()}>
@@ -177,9 +177,11 @@ const Result: NextPage<any> = () => {
         <ImageContainer>
           <Image src={imageSrc} alt={carModelName} width="271px" />
         </ImageContainer>
-        <Scroll direction="x" width="100%">
-          <PicturesContainer>{Pictures}</PicturesContainer>
-        </Scroll>
+        {!IS_HIDDEN && (
+          <Scroll direction="x" width="100%">
+            <PicturesContainer>{Pictures}</PicturesContainer>
+          </Scroll>
+        )}
         <Scroll direction="x" width="100%">
           <CarColorsContainer>{CarColors}</CarColorsContainer>
         </Scroll>
@@ -203,4 +205,4 @@ const Result: NextPage<any> = () => {
   );
 };
 
-export default Result;
+export default Detail;

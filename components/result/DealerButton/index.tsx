@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
+import Link from 'next/link';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import { DEALER_BUTTON_HEIGHT } from '@constants/size';
@@ -51,10 +52,12 @@ const DealerButton: React.FC = () => {
     <Wrapper>
       <Container>
         <Image src={heartImage} alt="heart" width="36px" height="36px" />
-        <Button>
-          <Text1>나에게 맞는</Text1>
-          <Text2> 딜러 찾기</Text2>
-        </Button>
+        <Link href={'/dealer'} passHref={true}>
+          <Button>
+            <Text1>나에게 맞는</Text1>
+            <Text2> 딜러 찾기</Text2>
+          </Button>
+        </Link>
       </Container>
     </Wrapper>
   );
