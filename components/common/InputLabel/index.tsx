@@ -15,7 +15,7 @@ interface IProps {
     name: string;
     value: string;
   };
-  size: 'narrow' | 'long' | 'drop-down';
+  size: 'narrow' | 'medium' | 'long' | 'drop-down';
 }
 
 interface IStyleProps extends Pick<IProps, 'size'> {
@@ -30,6 +30,8 @@ const Wrapper = styled.label`
   width: ${(props: IStyleProps) => {
     if (props.size === 'narrow') {
       return '80px';
+    } else if (props.size === 'medium') {
+      return '130px';
     } else if (props.size === 'long') {
       return '159px';
     } else if (props.size === 'drop-down') {

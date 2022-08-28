@@ -18,7 +18,8 @@ const Title = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  margin: 0 auto 0 auto;
 `;
 
 const Test: NextPage = () => {

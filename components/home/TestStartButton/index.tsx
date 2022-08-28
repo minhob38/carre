@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 350px;
+  width: 100%;
   height: 78px;
   border-radius: 8px;
   background-color: ${colors.PRIMARY_400};

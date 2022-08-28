@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
+import Scroll from '@components/common/Scroll';
 import InputLabel from '@components/common/InputLabel';
 import NextButton from '@components/common/NextButton';
 import Header from '@components/common/Header';
@@ -64,14 +65,25 @@ const Select = styled.select`
   color: ${colors.SECONDARY_400};
 `;
 
-const YearContainer = styled.div`
-  margin: 0 42px 0 ${margins.SIDE_SUB_MARGIN};
+const YearGenderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
 `;
+
+const YearContainer = styled.div``;
 
 const GenderContainer = styled.div``;
 
 const PurposeContainer = styled.div`
-  margin: 40px 0 0 ${margins.SIDE_SUB_MARGIN};
+  margin: 40px 0 0 0;
+`;
+
+const PersonDistanceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 0 0;
 `;
 
 const PersonContainer = styled.div`
@@ -194,82 +206,96 @@ const Test: NextPage = () => {
     <>
       {isInputWarningModal && <InputWarning />}
       <Header title="나의 정보 입력" type="close" closePath="/" />
-      <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
+      <Content
+        top={HEADER_HEIGHT}
+        bottom={`calc(${NEXT_BUTTON_HEIGHT} + 50px)`}
+      >
         <Title>나의 정보 입력</Title>
         <Description>차량 구매에 필요한 나의 정보를 입력해요.</Description>
-        <div
-          css={css`
-            display: flex;
-          `}
+        <Scroll
+          direction="y"
+          width={`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`}
+          height="calc(100% - 130px)"
         >
-          <YearContainer>
-            <SubTitle>출생연도</SubTitle>
-            <SelectContainer>
-              <Select
-                name="birthYear"
-                value={birthYear}
-                onChange={(ev) => dispatch(actions.setSelectOption(ev.target))}
+          <YearGenderContainer>
+            <YearContainer>
+              <SubTitle>출생연도</SubTitle>
+              <SelectContainer>
+                <Select
+                  name="birthYear"
+                  value={birthYear}
+                  onChange={(ev) =>
+                    dispatch(actions.setSelectOption(ev.target))
+                  }
+                >
+                  {YearOptions}
+                </Select>
+              </SelectContainer>
+            </YearContainer>
+            <GenderContainer>
+              <SubTitle>성별</SubTitle>
+              <div
+                css={css`
+                  display: flex;
+                  flex-flow: row nowrap;
+                  gap: 0 9px;
+                `}
               >
-                {YearOptions}
-              </Select>
-            </SelectContainer>
-          </YearContainer>
-          <GenderContainer>
-            <SubTitle>성별</SubTitle>
+                {GenderLabels}
+              </div>
+            </GenderContainer>
+          </YearGenderContainer>
+          <PurposeContainer>
+            <SubTitle>용도</SubTitle>
             <div
               css={css`
+                /* display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                justify-content: start;
+                align-items: flex-start;
+                justify-items: self-start;
+                row-gap: 20px;
+                column-gap: 10px; */
                 display: flex;
-                flex-flow: row nowrap;
-                gap: 0 9px;
+                flex-flow: row wrap;
+                justify-content: flex-start;
+                gap: 20px 10px;
               `}
             >
-              {GenderLabels}
+              {PurposeLabels}
             </div>
-          </GenderContainer>
-        </div>
-        <PurposeContainer>
-          <SubTitle>용도</SubTitle>
-          <div
-            css={css`
-              display: flex;
-              flex-flow: row wrap;
-              gap: 20px 10px;
-            `}
-          >
-            {PurposeLabels}
-          </div>
-        </PurposeContainer>
-        <div
-          css={css`
-            display: flex;
-            margin: 40px 0 0 ${margins.SIDE_SUB_MARGIN};
-          `}
-        >
-          <PersonContainer>
-            <SubTitle>탑승인원</SubTitle>
-            <SelectContainer>
-              <Select
-                name="passengerCount"
-                value={passengerCount}
-                onChange={(ev) => dispatch(actions.setSelectOption(ev.target))}
-              >
-                {PersonOptions}
-              </Select>
-            </SelectContainer>
-          </PersonContainer>
-          <DistanceContainer>
-            <SubTitle>연주행거리</SubTitle>
-            <SelectContainer>
-              <Select
-                name="drivenDistanceInYear"
-                value={drivenDistanceInYear}
-                onChange={(ev) => dispatch(actions.setSelectOption(ev.target))}
-              >
-                {DistanceOptions}
-              </Select>
-            </SelectContainer>
-          </DistanceContainer>
-        </div>
+          </PurposeContainer>
+          <PersonDistanceContainer>
+            <PersonContainer>
+              <SubTitle>탑승인원</SubTitle>
+              <SelectContainer>
+                <Select
+                  name="passengerCount"
+                  value={passengerCount}
+                  onChange={(ev) =>
+                    dispatch(actions.setSelectOption(ev.target))
+                  }
+                >
+                  {PersonOptions}
+                </Select>
+              </SelectContainer>
+            </PersonContainer>
+            <DistanceContainer>
+              <SubTitle>연주행거리</SubTitle>
+              <SelectContainer>
+                <Select
+                  name="drivenDistanceInYear"
+                  value={drivenDistanceInYear}
+                  onChange={(ev) =>
+                    dispatch(actions.setSelectOption(ev.target))
+                  }
+                >
+                  {DistanceOptions}
+                </Select>
+              </SelectContainer>
+            </DistanceContainer>
+          </PersonDistanceContainer>
+        </Scroll>
       </Content>
       <ProgressBar stage={1} />
       <NextButton title="다음" path={'/test/3'} isActive={isActive} />
