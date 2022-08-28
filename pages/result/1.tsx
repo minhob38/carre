@@ -75,7 +75,7 @@ const Result: NextPage = () => {
           </ResultCardContainer>
           <Border />
           {!IS_HIDDEN && <Attractions />}
-          <Link href="/result/3" passHref={true}>
+          <Link href="/result/2" passHref={true}>
             <EditButton>검사 결과 조절해보기</EditButton>
           </Link>
         </Scroll>
