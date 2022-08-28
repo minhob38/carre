@@ -65,15 +65,15 @@ const TopNavigator: React.FC = () => {
         <Link href={'/'} passHref={true}>
           <Menu isCurrent={pathname === '/'}>홈</Menu>
         </Link>
-        <Link href={'/history'} passHref={true}>
-          <Menu isCurrent={pathname === '/history'}>히스토리</Menu>
-        </Link>
-        <Link href={'/bookmark'} passHref={true}>
-          <Menu isCurrent={pathname === '/bookmark'}>찜</Menu>
-        </Link>
-        <Link href={'/my'} passHref={true}>
-          <Menu isCurrent={pathname === '/my'}>MY</Menu>
-        </Link>
+        {/* <Link href={'/history'} passHref={true}> */}
+        <Menu isCurrent={pathname === '/history'}>히스토리</Menu>
+        {/* </Link> */}
+        {/* <Link href={'/bookmark'} passHref={true}> */}
+        <Menu isCurrent={pathname === '/bookmark'}>찜</Menu>
+        {/* </Link> */}
+        {/* <Link href={'/my'} passHref={true}> */}
+        <Menu isCurrent={pathname === '/my'}>MY</Menu>
+        {/* </Link> */}
       </MenuContainer>
     </Wrapper>
   );
