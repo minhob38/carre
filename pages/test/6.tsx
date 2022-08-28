@@ -9,7 +9,7 @@ import Content from '@components/common/Content';
 import ImageLabel from '@components/common/ImageLabel';
 import QuestionProgressBar from '@components/test/QuestionProgressBar';
 import Scroll from '@components/common/Scroll';
-import NextButton from '@components/common/NextButton';
+import Loading from '@animations/Loading';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -108,7 +108,7 @@ const Test: NextPage = () => {
     if (surveyQuestions) setTotalPage(surveyQuestions.length);
   }, [surveyQuestions]);
 
-  if (!surveyQuestions) return <div>API Loading...</div>;
+  if (!surveyQuestions) return <Loading text={'설문을 불러오고 있습니다.'} />;
 
   const questionToken = surveyQuestions[page - 1].surveyQuestionToken;
   const firstQuestionFactorElement =

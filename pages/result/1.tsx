@@ -9,6 +9,7 @@ import Scroll from '@components/common/Scroll';
 import ResultCard from '@components/result/ResultCard';
 import DealerButton from '@components/result/DealerButton';
 import Attractions from '@components/result/Attractions';
+import Loading from '@animations/Loading';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -52,10 +53,7 @@ const Result: NextPage = () => {
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
   });
-
-  if (!recoms) {
-    return <div>loading...</div>;
-  }
+  if (!recoms) return <Loading text={'추천차량을 불러오고 있습니다.'} />;
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
   const ResultCards = recommendCarInfoList.slice(0, 2).map((recom) => {

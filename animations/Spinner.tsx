@@ -29,7 +29,6 @@ const Wrapper = styled.div`
   animation: ${(props: IProps) => {
     return css`${SpinAnime} ${props.speed}s infinite linear normal}`;
   }};
-  /* animation: ${SpinAnime} 2s infinite linear normal; */
 `;
 
 const Spinner: React.FC<IProps> = ({
@@ -39,7 +38,6 @@ const Spinner: React.FC<IProps> = ({
   lineColor,
   speed,
 }) => {
-  console.log(backgroundColor);
   return (
     <Wrapper
       diameter={diameter}

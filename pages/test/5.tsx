@@ -39,7 +39,9 @@ const Test: NextPage = () => {
   );
 
   const handleButtonClick = () => {
-    if (!surveyToken) return;
+    if (!surveyToken) {
+      return alert('survey token does not exist');
+    }
     dispatch(actions.getSurveyQuestionsAsync(surveyToken));
     router.push('/test/6');
   };
