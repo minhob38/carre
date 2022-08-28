@@ -67,6 +67,8 @@ const Select = styled.select`
 
 const YearGenderContainer = styled.div`
   display: flex;
+  flex-flow: row wrap;
+  gap: 20px 10px;
   justify-content: space-between;
   width: 100%;
   margin: 0 auto;
@@ -258,7 +260,7 @@ const Test: NextPage = () => {
                 column-gap: 10px; */
                 display: flex;
                 flex-flow: row wrap;
-                justify-content: flex-start;
+                justify-content: space-between;
                 gap: 20px 10px;
               `}
             >
