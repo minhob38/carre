@@ -20,10 +20,11 @@ import { actions } from '@store/slices/surveySlice';
 import { shallowEqual } from 'react-redux';
 
 const Description = styled.div`
-  margin: 0 0 12px ${margins.SIDE_SUB_MARGIN};
+  width: ${`calc(100% - ${margins.SIDE_SUB_MARGIN} - ${margins.SIDE_SUB_MARGIN})`};
+  margin: 0 auto 12px auto;
   font: ${fonts.TITLE_T2};
   color: ${colors.SECONDARY_500};
-  white-space: pre;
+  /* white-space: pre; */
 `;
 
 const BarContainer = styled.div`
@@ -38,6 +39,7 @@ const QuetsionContainer = styled.div`
   flex-flow: column nowrap;
   align-items: flex-start;
   gap: 12px 0;
+  width: ${`calc(100% - ${margins.SIDE_SUB_MARGIN} - ${margins.SIDE_SUB_MARGIN})`};
   margin: 0 auto;
 `;
 
@@ -139,7 +141,7 @@ const Test: NextPage = () => {
                 name: questionToken,
                 value: firstQuestionFactorElement,
               }}
-              style={{ width: '330px' }}
+              style={{ width: '100%' }}
               image={{
                 src: firstQuestionImageSrc,
                 alt: 'first-question',
@@ -154,7 +156,7 @@ const Test: NextPage = () => {
                 name: questionToken,
                 value: secondQuestionFactorElement,
               }}
-              style={{ width: '330px' }}
+              style={{ width: '100%' }}
               image={{
                 src: secondQuestionImageSrc,
                 alt: 'second-question',

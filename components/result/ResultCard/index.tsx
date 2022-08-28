@@ -157,21 +157,16 @@ const ResultCard: React.FC<any> = ({ data }) => {
           지프 그랜드 체로키는 성능이 어쭈구 좋고 안전은 또 이렇게 막 이렇게
           좋은 대표 차량입니다.
         </Description>
-        <Image src={imageSrc} alt={carModelName} width="271px" height="170px" />
+        <Image src={imageSrc} alt={carModelName} width="271px" />
         <DetailContainer>
           <Link href={`/result/detail/${rank}`} passHref={true}>
             <Detail>차량 상세보기</Detail>
           </Link>
-          <Image
-            src={rightArrorImage}
-            alt="right-arrow"
-            width="20px"
-            height="20px"
-          />
+          <Image src={rightArrorImage} alt="right-arrow" width="20px" />
         </DetailContainer>
         {!IS_HIDDEN && (
           <TermContainer>
-            <Image src={infoImage} alt="info" width="12px" height="12px" />
+            <Image src={infoImage} alt="info" width="12px" />
             <Term>차량 용어 바로 알아보기</Term>
           </TermContainer>
         )}
