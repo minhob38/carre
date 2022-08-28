@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { wrapper } from '@store/index';
 import '@assets/styles/globals.css';
 import * as colors from '@constants/colors';
+import { ErrorBoundary } from 'react-error-boundary';
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -13,6 +14,13 @@ const MobileWrapper = styled.div`
   background-color: ${colors.WHITE2};
   overflow: hidden;
 `;
+
+/**
+ * 왜 안되지...
+ */
+function ErrorFallback({ error, resetErrorBoundary }) {
+  return <div>error...</div>;
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -29,7 +37,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.5/variable/pretendardvariable.css"
         />
       </Head>
-      <Component {...pageProps} />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Component {...pageProps} />
+      </ErrorBoundary>
     </MobileWrapper>
   );
 }
