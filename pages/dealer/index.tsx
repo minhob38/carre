@@ -9,6 +9,7 @@ import Image from '@components/common/Image';
 import DealerButton from '@components/result/DealerButton';
 import DealerCard from '@components/dealer/DealerCard';
 import DealerMatchingModal from '@modals/DealerMatching';
+import DealerMatchedModal from '@modals/DealerMatched';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -21,7 +22,6 @@ import rightArrorImage from '@assets/images/icons/small-black-right-arrow.svg';
 import dealer1Image from '@assets/images/temps/dealer-1.png';
 import dealer2Image from '@assets/images/temps/dealer-2.png';
 import dealer3Image from '@assets/images/temps/dealer-3.png';
-import { stat } from 'fs/promises';
 
 const Title = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
@@ -109,6 +109,9 @@ const Dealer: NextPage = () => {
   const isDealerMatchingModal = useTypedSelector((state) => {
     return state.rootReducer.appReducer.isDealerMatchingModal;
   });
+  const isDealerMatchedModal = useTypedSelector((state) => {
+    return state.rootReducer.appReducer.isDealerMatchedModal;
+  });
 
   const Dealers = dealers.map((dealer) => {
     const { description, src, chips, value } = dealer;
@@ -126,6 +129,7 @@ const Dealer: NextPage = () => {
   return (
     <>
       {isDealerMatchingModal && <DealerMatchingModal />}
+      {isDealerMatchedModal && <DealerMatchedModal />}
       <Header type="close" title="견적 파트너 추천 결과" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
         <Title>성능과 안전 두마리 토끼를 잡으려는 카레님</Title>

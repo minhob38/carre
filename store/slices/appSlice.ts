@@ -6,6 +6,7 @@ const initialState = {
   isClicked: false,
   isInputWarningModal: false,
   isDealerMatchingModal: false,
+  isDealerMatchedModal: false,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -36,6 +37,12 @@ const appSlice = createSlice({
     },
     hideDealerMatchingModal: (state) => {
       state.isDealerMatchingModal = false;
+    },
+    showDealerMatchedModal: (state) => {
+      state.isDealerMatchedModal = true;
+    },
+    hideDealerMatchedModal: (state) => {
+      state.isDealerMatchedModal = false;
     },
   },
 });

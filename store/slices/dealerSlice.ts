@@ -40,7 +40,9 @@ function* findDealerSaga(action: PayloadAction<any>) {
   // const data = yield api.getUserTendency(surveyToken);
   // yield put(actions.saveUserTendency(data));
   yield put(appActions.showDealerMatchingModal());
-  yield delay(5000);
+  yield delay(3000);
+  yield put(appActions.hideDealerMatchingModal());
+  yield put(appActions.showDealerMatchedModal());
 }
 
 /* sagas */

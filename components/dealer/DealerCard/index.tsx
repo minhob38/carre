@@ -7,10 +7,6 @@ import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import * as margins from '@constants/margins';
 import * as fonts from '@constants/fonts';
-import upArrowImage from '@assets/images/icons/small-black-up-arrow.svg';
-import downArrowImage from '@assets/images/icons/small-black-down-arrow.svg';
-
-import dealer1Image from '@assets/images/temps/dealer-1.png';
 import hyundaiCi from '@assets/images/temps/hyundai-ci.png';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { shallowEqual } from 'react-redux';
