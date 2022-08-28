@@ -58,7 +58,7 @@ const Banner: React.FC<IProps> = ({ type }) => {
   let titleFontColor: string;
   let descFontColor: string;
   let arrowColor: string;
-  let path: '/test/1' | '/test/1'; // TODO: dealer 페이지 만들기
+  let path: '/test/1' | '/dealer'; // TODO: dealer 페이지 만들기
 
   if (type === 'test') {
     path = '/test/1';
@@ -70,7 +70,7 @@ const Banner: React.FC<IProps> = ({ type }) => {
     descFontColor = colors.SECONDARY_400;
     arrowColor = colors.SECONDARY_500;
   } else {
-    path = '/test/1';
+    path = '/dealer';
     title = '나에게 맞는 딜러찾기';
     description = `구매하고자 하는 차종이 있으신 \n당신에게 딜러를 추천해드립니다.`;
     imageSrc = dealerBannerImage.src;
