@@ -28,7 +28,7 @@ interface IProps {
 interface IStyleProps {
   checked: boolean;
   width: string;
-  height: string;
+  height?: string;
 }
 
 const Wrapper = styled.label`
@@ -142,7 +142,7 @@ const ImageLabel: React.FC<IProps> = ({
   };
 
   return (
-    <Wrapper checked={checked} width={width} height={height}>
+    <Wrapper checked={checked} width={width}>
       <Image src={src} alt={alt} width={width} height={height} />
       <input
         type={type}

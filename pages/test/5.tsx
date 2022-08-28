@@ -7,6 +7,7 @@ import Content from '@components/common/Content';
 import LinkButton from '@components/common/LinkButton';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
+import * as margins from '@constants/margins';
 import { HEADER_HEIGHT } from '@constants/size';
 import { actions } from '@store/slices/surveySlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
@@ -53,7 +54,7 @@ const Test: NextPage = () => {
           <LinkButton
             // path="/test/6"
             title="시작하기"
-            width="350px"
+            width={`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`}
             height="50px"
             onClick={handleButtonClick}
           />

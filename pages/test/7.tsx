@@ -29,7 +29,9 @@ const Description = styled.div`
 `;
 
 const StyleCheckBoxesContainer = styled.div`
-  margin: 16px 0 0 ${margins.SIDE_SUB_MARGIN};
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  margin: 16px auto 0 auto;
+  background-color: red;
 `;
 
 const Test: NextPage = () => {

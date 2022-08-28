@@ -21,10 +21,7 @@ const StyleCheckBoxes: React.FC = () => {
           name: style.name,
           value: style.value,
         }}
-        style={{
-          width: '330px',
-          height: '106px',
-        }}
+        style={{ width: '100%' }}
         image={{
           src: style.src,
           alt: style.alt,

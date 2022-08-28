@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL:
-    'http://ec2-3-37-55-86.ap-northeast-2.compute.amazonaws.com:8080/api/v1',
+  /* axios base 요청 주소 (next.config.ts에서 rewrite) */
+  baseURL: '/',
 });
 
 instance.interceptors.request.use(

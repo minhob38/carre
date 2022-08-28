@@ -121,7 +121,8 @@ const Test: NextPage = () => {
   return (
     <>
       <Header title="차량 성향 테스트" type="close" closePath="/" />
-      <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
+      {/* <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}> */}
+      <Content top={HEADER_HEIGHT} bottom={'0'}>
         <BarContainer>
           <QuestionProgressBar stage={page} total={totalPage} />
         </BarContainer>
