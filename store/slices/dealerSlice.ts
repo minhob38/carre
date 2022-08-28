@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
-import { IInput } from '@type/input';
+import { actions as appActions } from './appSlice';
 import * as api from '@apis/api';
 
 interface IState {
@@ -29,11 +29,24 @@ const dealerSlice = createSlice({
       const { name, value } = action.payload;
       state[name] = value;
     },
+    findDealerAsync: (state, action: PayloadAction<void>) => {
+      return;
+    },
   },
 });
 
+function* findDealerSaga(action: PayloadAction<any>) {
+  // const surveyToken = action.payload;
+  // const data = yield api.getUserTendency(surveyToken);
+  // yield put(actions.saveUserTendency(data));
+  yield put(appActions.showDealerMatchingModal());
+  yield delay(5000);
+}
+
 /* sagas */
-// export function* dealerSaga() {}
+export function* dealerSaga() {
+  yield takeLatest(actions.findDealerAsync, findDealerSaga);
+}
 
 export const actions = dealerSlice.actions;
 export default dealerSlice.reducer;

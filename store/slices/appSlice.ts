@@ -5,6 +5,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 const initialState = {
   isClicked: false,
   isInputWarningModal: false,
+  isDealerMatchingModal: false,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -29,6 +30,12 @@ const appSlice = createSlice({
     },
     hideInputWariningModal: (state) => {
       state.isInputWarningModal = false;
+    },
+    showDealerMatchingModal: (state) => {
+      state.isDealerMatchingModal = true;
+    },
+    hideDealerMatchingModal: (state) => {
+      state.isDealerMatchingModal = false;
     },
   },
 });

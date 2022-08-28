@@ -107,6 +107,10 @@ const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
     }
   };
 
+  const handleClick = () => {
+    dispatch(actions.findDealerAsync());
+  };
+
   return (
     <Wrapper checked={checked}>
       <ImageContainer>
@@ -127,6 +131,7 @@ const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
           all: unset;
         `}
         onChange={handleChange}
+        onClick={handleClick}
         checked={checked}
       />
     </Wrapper>
