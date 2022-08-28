@@ -144,7 +144,7 @@ const Result: NextPage<any> = () => {
   const imageSrc = carImagePath + carImageFileName;
   const trim = trims.find((trim) => trim.recommend);
   const { trimName, optionList: options } = trim;
-
+  console.log(trim);
   const Pictures = pictures.map((picture) => {
     return (
       <PictureBox key={uuid4()}>
@@ -175,12 +175,7 @@ const Result: NextPage<any> = () => {
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
         <Title>{`${brandName} ${carModelName} ${trimName}`}</Title>
         <ImageContainer>
-          <Image
-            src={imageSrc}
-            alt={carModelName}
-            width="271px"
-            height="170px"
-          />
+          <Image src={imageSrc} alt={carModelName} width="271px" />
         </ImageContainer>
         <Scroll direction="x" width="100%">
           <PicturesContainer>{Pictures}</PicturesContainer>

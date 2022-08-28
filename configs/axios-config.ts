@@ -3,8 +3,7 @@ import axios from 'axios';
 const instance = axios.create({
   /* axios base 요청 주소 (next.config.ts에서 rewrite) */
   // baseURL: '/',
-  baseURL:
-    'http://ec2-3-37-55-86.ap-northeast-2.compute.amazonaws.com:8080/api/v1',
+  baseURL: 'https://api.carre.kr/api/v1/',
 });
 
 instance.interceptors.request.use(

@@ -40,7 +40,7 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
     <Wrapper
       ref={wrapperRef}
       width={width}
-      height={`${height ? height : _height}px`}
+      height={`${height ? height : `${_height}px`}`}
     >
       <NextImage
         src={src}

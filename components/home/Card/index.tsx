@@ -43,7 +43,7 @@ const Card: React.FC = () => {
       <Wrapper>
         <CarName>현대 캐스퍼</CarName>
         <ImageContainer>
-          <Image src={casperImage} alt="casper" width="205px" height="129px" />
+          <Image src={casperImage} alt="casper" width="205px" />
         </ImageContainer>
       </Wrapper>
     </>
