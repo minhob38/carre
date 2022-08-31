@@ -5,6 +5,11 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import casperImage from '@assets/images/casper.svg';
 
+interface IProps {
+  title: string;
+  src: any;
+}
+
 interface IStyleProps {
   backgroundColor?: string;
   imageSrc?: any;
@@ -37,13 +42,13 @@ const ImageContainer = styled.div`
   /* margin: 0 16px 22px 0; */
 `;
 
-const Card: React.FC = () => {
+const Card: React.FC<IProps> = ({ title, src }) => {
   return (
     <>
       <Wrapper>
-        <CarName>현대 캐스퍼</CarName>
+        <CarName>{title}</CarName>
         <ImageContainer>
-          <Image src={casperImage} alt="casper" width="205px" />
+          <Image src={src} alt="casper" width="205px" />
         </ImageContainer>
       </Wrapper>
     </>

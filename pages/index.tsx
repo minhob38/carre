@@ -13,6 +13,11 @@ import Card from '@components/home/Card';
 import Tag from '@components/home/Tag';
 import MbtiButton from '@components/home/MbtiButton';
 import Banner from '@components/home/Banner';
+import casperImage from '@assets/images/casper.svg';
+import cClassImage from '@assets/images/c-class.webp';
+import bmw3Series from '@assets/images/bmw-3-series.png';
+import kiaRay from '@assets/images/kia-ray.webp';
+import miniCooper from '@assets/images/mini-cooper.png';
 
 const Title = styled.div`
   font: ${fonts.TITLE_T2};
@@ -70,11 +75,11 @@ const Index: NextPage = () => {
               height="190px"
             >
               <CardContainer>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                <Card title="현대 캐스퍼" src={casperImage} />
+                <Card title="벤츠 C-Class" src={cClassImage} />
+                <Card title="bmw 3 Series" src={bmw3Series} />
+                <Card title="기아 레이" src={kiaRay} />
+                <Card title="미니 쿠퍼" src={miniCooper} />
               </CardContainer>
             </Scroll>
             <SubContainer>
