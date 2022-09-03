@@ -62,37 +62,36 @@ const Test: NextPage = () => {
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
 
-  const input: any = useTypedSelector((state) => {
-    state.rootReducer.surveyReducer.surveyToken;
+  // const input: any = useTypedSelector((state) => {
+  //   // state.rootReducer.surveyReducer.surveyToken;
+  //   const inputState = state.rootReducer.inputReducer;
+  //   const {
+  //     birthYear,
+  //     gender,
+  //     carUsagePurpose,
+  //     minBudgetValue,
+  //     maxBudgetValue,
+  //     passengerCount,
+  //     drivenDistanceInYear,
+  //   } = inputState;
 
-    const inputState = state.rootReducer.inputReducer;
-    const {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      minBudgetValue,
-      maxBudgetValue,
-      passengerCount,
-      drivenDistanceInYear,
-    } = inputState;
-
-    return {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      userBudgetMin: 10000 * Number(minBudgetValue),
-      userBudgetMax: 10000 * Number(maxBudgetValue),
-      passengerCount,
-      drivenDistanceInYear,
-    };
-  });
+  //   return {
+  //     birthYear,
+  //     gender,
+  //     carUsagePurpose,
+  //     userBudgetMin: 10000 * Number(minBudgetValue),
+  //     userBudgetMax: 10000 * Number(maxBudgetValue),
+  //     passengerCount,
+  //     drivenDistanceInYear,
+  //   };
+  // });
 
   const handleButtonClick = () => {
-    if (!surveyToken) {
-      return alert('survey token does not exist');
-    }
-    dispatch(actions.bindSurveyAsync({ surveyToken, input }));
-    router.push('/test/5');
+    // if (!surveyToken) {
+    //   return alert('survey token does not exist');
+    // }
+    // dispatch(actions.bindSurveyAsync({ surveyToken, input }));
+    router.push('/test/4');
   };
 
   return (

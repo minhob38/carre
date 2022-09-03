@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import InputLabel from '@components/common/InputLabel';
@@ -9,6 +10,8 @@ import Header from '@components/common/Header';
 import Scroll from '@components/common/Scroll';
 import Content from '@components/common/Content';
 import DropDown from '@components/test/DropDown';
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
+import { actions } from '@store/slices/surveySlice';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -38,6 +41,12 @@ const DropDownContainer = styled.div`
 `;
 
 const Test: NextPage = () => {
+  const router = useRouter();
+  const dispatch = useTypedDispatch();
+  const surveyToken = useTypedSelector(
+    (state) => state.rootReducer.surveyReducer.surveyToken,
+  );
+
   const Brands = brands.map((brand) => {
     return (
       <InputLabel
@@ -83,6 +92,37 @@ const Test: NextPage = () => {
     );
   });
 
+  const handleButtonClick = () => {
+    if (!surveyToken) {
+      return alert('survey token does not exist');
+    }
+    dispatch(actions.bindSurveyAsync({ surveyToken, input }));
+    router.push('/test/5');
+  };
+
+  const input: any = useTypedSelector((state) => {
+    const inputState = state.rootReducer.inputReducer;
+    const {
+      birthYear,
+      gender,
+      carUsagePurpose,
+      minBudgetValue,
+      maxBudgetValue,
+      passengerCount,
+      drivenDistanceInYear,
+    } = inputState;
+
+    return {
+      birthYear,
+      gender,
+      carUsagePurpose,
+      userBudgetMin: 10000 * Number(minBudgetValue),
+      userBudgetMax: 10000 * Number(maxBudgetValue),
+      passengerCount,
+      drivenDistanceInYear,
+    };
+  });
+
   return (
     <>
       <Header title="나의 정보 입력" type="close" closePath="/" />
@@ -126,7 +166,7 @@ const Test: NextPage = () => {
         </Scroll>
         <ProgressBar stage={3} />
       </Content>
-      <NextButton title="다음" path={'/test/5'} />
+      <NextButton title="다음" onClick={handleButtonClick} />
     </>
   );
 };

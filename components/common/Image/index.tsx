@@ -9,7 +9,7 @@ interface IProps extends IStyleProps {
 }
 
 interface IStyleProps {
-  width: string;
+  width?: string;
   height?: string;
   // ratio: number;
 }
@@ -32,15 +32,24 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
 
   useEffect(() => {
     if (!wrapperRef.current) return;
-    _setWidth(wrapperRef.current.offsetWidth);
-    _setHeight(wrapperRef.current.offsetWidth / ratio);
-  }, [ratio]);
+
+    if (width) {
+      _setWidth(wrapperRef.current.offsetWidth);
+      _setHeight(wrapperRef.current.offsetWidth / ratio);
+    }
+
+    if (height) {
+      _setHeight(wrapperRef.current.offsetHeight);
+      _setWidth(wrapperRef.current.offsetHeight * ratio);
+    }
+  }, [ratio, height, width]);
 
   return (
     <Wrapper
       ref={wrapperRef}
-      width={width}
+      // width={width}
       height={`${height ? height : `${_height}px`}`}
+      width={`${width ? width : `${_width}px`}`}
     >
       <NextImage
         src={src}

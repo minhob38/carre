@@ -8,3 +8,7 @@ export const convertNumberToWon = (number: number): string => {
   }
   return '';
 };
+
+export const insertCommaToNumber = (number: number): string => {
+  return number.toLocaleString();
+};

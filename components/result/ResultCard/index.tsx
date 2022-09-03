@@ -10,6 +10,7 @@ import * as fonts from '@constants/fonts';
 import rightArrorImage from '@assets/images/icons/small-black-right-arrow.svg';
 import { useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
+import { insertCommaToNumber } from '@utils/helpers';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
@@ -180,7 +181,7 @@ const ResultCard: React.FC<any> = ({ data }) => {
         </OptionContainer>
         <PriceContainer>
           <PriceTitle>총 차량 가격</PriceTitle>
-          <Price>{`${carTotalPrice} 원`}</Price>
+          <Price>{`${insertCommaToNumber(carTotalPrice)} 원`}</Price>
         </PriceContainer>
       </Wrapper>
     </>

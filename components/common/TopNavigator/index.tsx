@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Image from '@components/common/Image';
+import logoImage from '@assets/images/logos/logo.jpg';
 import * as fonts from '@constants/fonts';
 import * as colors from '@constants/colors';
-import Link from 'next/link';
 
 interface IStyleProps {
   isCurrent: boolean;
@@ -60,7 +62,8 @@ const TopNavigator: React.FC = () => {
 
   return (
     <Wrapper>
-      <Title>CARRE</Title>
+      <Image src={logoImage} alt="logo" height="61px" />
+      {/* <Title>CARRE</Title> */}
       <MenuContainer>
         <Link href={'/'} passHref={true}>
           <Menu isCurrent={pathname === '/'}>홈</Menu>
