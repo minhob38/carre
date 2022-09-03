@@ -119,7 +119,7 @@ const Test: NextPage = () => {
     surveyQuestions[page - 1].firstQuestionImagePath;
   const secondQuestionImageSrc =
     surveyQuestions[page - 1].secondQuestionImagePath;
-
+  console.log('secondQuestionImageSrc', secondQuestionImageSrc);
   return (
     <>
       <Header title="차량 성향 테스트" type="close" closePath="/" />
