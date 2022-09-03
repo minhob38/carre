@@ -63,6 +63,7 @@ export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
 
 /**
  * @description bar fixed point에서의 거리를 계산하는 함수 반환
+ * minBudgetPosition, maxBudgetPosition은 pageX와 같은 좌표계
  * @params x는 ev.changedTouces[0].pageX
  */
 export const useBudgetPosition = () => {

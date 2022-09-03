@@ -12,7 +12,7 @@ import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import Chip from '@components/result/BigChip';
-import Budget from '@components/common/Budget';
+import Budget from '@components/common/MinMaxBudget';
 import Toggle from '@components/common/Toggle';
 import useWindowDimensions from '@hooks/useWindowDimension';
 import ScoreCard from '@components/result/ScoreCard';

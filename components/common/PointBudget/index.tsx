@@ -14,6 +14,7 @@ import {
 
 import { useBudgetValue, useBudgetPosition } from '@hooks/useBudget';
 import { convertNumberToWon } from '@utils/helpers';
+import useWindowDimensions from '@hooks/useWindowDimension';
 interface IProps {
   minBudgetPosition: number;
   maxBudgetPosition: number;
@@ -36,19 +37,6 @@ const Bar = styled.div`
   border-radius: 100px;
 `;
 
-const RangeBar = styled.div`
-  position: absolute;
-  background-color: ${colors.PRIMARY_400};
-  border-radius: 100px;
-  top: 0;
-  bottom: 0;
-  left: ${(props: IProps) =>
-    `${props.minBudgetPosition + INITIAL_MIN_POSITION}px`};
-  right: ${(props: IProps) =>
-    `${props.maxBudgetPosition + INITIAL_MAX_POSITION}px`};
-  z-index: 1;
-`;
-
 const BallReferencePoint = styled.div`
   position: absolute;
   top: 50%;
@@ -60,11 +48,6 @@ const BallReferencePoint = styled.div`
 const PointBallReferencePoint = styled(BallReferencePoint)`
   left: ${INITIAL_MIN_POSITION}px;
   transform: translate(-50%, -50%);
-`;
-
-const RightBallReferencePoint = styled(BallReferencePoint)`
-  right: ${INITIAL_MAX_POSITION}px;
-  transform: translate(50%, -50%);
 `;
 
 const Ball = styled.div`
@@ -84,12 +67,6 @@ const PointBall = styled(Ball)`
     `calc(50% + ${props.minBudgetPosition}px)`};
   transform: translate(-50%, -50%);
   background-color: ${colors.PRIMARY_400};
-`;
-
-const RightBall = styled(Ball)`
-  right: ${(props: Pick<IProps, 'maxBudgetPosition'>) =>
-    `calc(50% + ${props.maxBudgetPosition}px)`};
-  transform: translate(50%, -50%);
 `;
 
 const TouchableBall = styled.div`
@@ -114,19 +91,16 @@ const Indicator = styled.div`
   color: ${colors.SECONDARY_250};
 `;
 
-const LeftIndicator = styled(Indicator)`
+const PointIndicator = styled(Indicator)`
   left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
     `calc(50% + ${props.minBudgetPosition}px)`};
   transform: translate(-50%);
 `;
 
-const RightIndicator = styled(Indicator)`
-  right: ${(props: Pick<IProps, 'maxBudgetPosition'>) =>
-    `calc(50% + ${props.maxBudgetPosition}px)`};
-  transform: translate(50%);
-`;
-
+/* min이 point와 같음 */
 const Budget: React.FC = () => {
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const { width } = useWindowDimensions();
   const minBudgetPosition = useTypedSelector(
     (state) => state.rootReducer.inputReducer.minBudgetPosition,
   );
@@ -134,31 +108,37 @@ const Budget: React.FC = () => {
     (state) => state.rootReducer.inputReducer.maxBudgetPosition,
   );
   const [setMinBudgetPosition, setMaxBudgetPosition] = useBudgetPosition();
-  const [minBudgetValue, maxBudgetValue] = useBudgetValue(
-    minBudgetPosition,
-    maxBudgetPosition,
-  );
+  const [minBudgetValue] = useBudgetValue(minBudgetPosition, maxBudgetPosition);
 
   const handlePointBallTouch = (ev) => {
     setMinBudgetPosition(ev.changedTouches[0].pageX);
   };
 
+  useEffect(() => {
+    if (!width) return;
+    const halfLength = (width - SIDE_MARGIN - SIDE_MARGIN) / 2;
+    setMinBudgetPosition(halfLength + SIDE_MARGIN);
+    setIsInitialized(true);
+  }, []);
+
   return (
     <Wrapper>
-      <Bar>
-        <PointBallReferencePoint>
-          <LeftIndicator minBudgetPosition={minBudgetPosition}>
-            {convertNumberToWon(Math.round(minBudgetValue / 100) * 100)}
-          </LeftIndicator>
-          <PointBall
-            minBudgetPosition={minBudgetPosition}
-            onTouchMove={handlePointBallTouch}
-            // onClick={(ev) => console.log('left')}
-          >
-            <TouchableBall />
-          </PointBall>
-        </PointBallReferencePoint>
-      </Bar>
+      {isInitialized && (
+        <Bar>
+          <PointBallReferencePoint>
+            <PointIndicator minBudgetPosition={minBudgetPosition}>
+              {convertNumberToWon(Math.round(minBudgetValue / 100) * 100)}
+            </PointIndicator>
+            <PointBall
+              minBudgetPosition={minBudgetPosition}
+              onTouchMove={handlePointBallTouch}
+              // onClick={(ev) => console.log('left')}
+            >
+              <TouchableBall />
+            </PointBall>
+          </PointBallReferencePoint>
+        </Bar>
+      )}
     </Wrapper>
   );
 };
