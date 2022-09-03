@@ -11,11 +11,7 @@ import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
 import { IS_HIDDEN } from '@constants/variables';
 import { useTypedSelector } from '@hooks/useStore';
 import kakaoImage from '@assets/images/icons/kakao.svg';
-import axios from 'axios';
-import { useEffect } from 'react';
-import { redirect } from 'next/dist/server/api-utils';
-import qs from 'qs';
-console.log(qs);
+
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -60,55 +56,12 @@ const ButtonText = styled.a`
   color: ${colors.SECONDARY_REAL_BLACK};
 `;
 
-// const handleButtonClick = async () => {
-//   const response = await axios.get(
-//     `https://kauth.kakao.com/oauth/authorize?client_id=a4dd7943c813bbe4937ca12a57ab18b4&redirect_uri=${REDIRECT_URI}&response_type=code`,
-//   );
-//   console.log(response.data);
-// };
-
 const REDIRECT_URI =
   process.env.NODE_ENV === 'production'
     ? 'https://carre-silk.vercel.app/auth/login'
     : 'http://localhost:3000/auth/login';
 
 const Login: NextPage = () => {
-  // const router = userouter();
-  // const { code: authcode } = router.query;
-  // console.log(process.env.next_public_kakao_rest_api_key);
-  // console.log(router.query);
-  // useEffect(() => {
-  //   if (authCode) {
-  //     // console.log({
-  //     //   grant_type: 'authorization_code',
-  //     //   cliend_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
-  //     //   code: authCode,
-  //     //   redirect_uri: REDIRECT_URI,
-  //     // });
-
-  //     const data = {
-  //       grant_type: 'authorization_code',
-  //       cliend_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
-  //       code: authCode,
-  //       redirect_uri: REDIRECT_URI,
-  //     };
-
-  //     axios.post(
-  //       'https://kauth.kakao.com/oauth/token',
-  //       {
-  //         grant_type: 'authorization_code',
-  //         client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
-  //         code: authCode,
-  //         redirect_uri: REDIRECT_URI,
-  //       },
-  //       {
-  //         headers: { 'content-type': 'application/x-www-form-urlencoded' },
-  //         data: qs.stringify(data),
-  //       },
-  //     );
-  //   }
-  // }, [authCode]);
-  console.log(process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY);
   return (
     <>
       <Content top="0px" bottom="0px">
