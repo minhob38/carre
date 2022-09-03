@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { shallowEqual } from 'react-redux';
 import Image from '@components/common/Image';
+import Scroll from '@components/common/Scroll';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import activeCheckImage from '@assets/images/icons/big-active-check.svg';
@@ -31,6 +32,7 @@ interface IStyleProps {
 }
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -54,7 +56,9 @@ const ImageContainer = styled.div``;
 
 const Description = styled.div`
   width: 100%;
+  font: ${fonts.SUBTITLE_T1};
   background-color: ${colors.SECONDARY_100};
+  padding: 10px;
 `;
 
 const Title = styled.div`
@@ -66,6 +70,10 @@ const Title = styled.div`
 const ImageTitleContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const ScrollContainer = styled.div`
+  max-height: 300px;
 `;
 
 const ImageLabel: React.FC<IProps> = ({
@@ -142,7 +150,13 @@ const ImageLabel: React.FC<IProps> = ({
           />
         </ImageContainer>
       </Header>
-      {isDown && <Description>{description}</Description>}
+      {isDown && (
+        <ScrollContainer>
+          <Scroll direction="y" height="100%">
+            <Description>{description}</Description>
+          </Scroll>
+        </ScrollContainer>
+      )}
     </Wrapper>
   );
 };
