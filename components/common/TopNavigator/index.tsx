@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from '@components/common/Image';
-import logoImage from '@assets/images/logos/logo.jpg';
+import logoImage from '@assets/images/logos/logo.png';
 import * as fonts from '@constants/fonts';
 import * as colors from '@constants/colors';
 
@@ -21,16 +21,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   background-color: #ffffff;
   box-shadow: 0px 1px 10px 1px rgba(96, 100, 112, 0.06);
-`;
-
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  font: ${fonts.TITLE_T1};
-  width: 100%;
-  height: 61px;
-  padding: 0 0 0 30px;
-  color: ${colors.PRIMARY_400};
 `;
 
 const MenuContainer = styled.div`
