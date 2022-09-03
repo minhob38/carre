@@ -6,7 +6,7 @@ const nextConfig = {
     loader: 'akamai',
     path: '/',
   },
-  trailingSlash: true,
+  // trailingSlash: true,
 
   // async rewrites() {
   //   return [
