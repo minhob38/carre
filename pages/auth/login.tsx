@@ -56,10 +56,10 @@ const ButtonText = styled.a`
   color: ${colors.SECONDARY_REAL_BLACK};
 `;
 
-const REDIRECT_URI =
-  process.env.NODE_ENV === 'production'
-    ? 'https://carre-silk.vercel.app/auth/login'
-    : 'http://localhost:3000/auth/login';
+const REDIRECT_URI = 'https://api.carre.kr/api/v1/user-login';
+// process.env.NODE_ENV === 'production'
+//   ? 'https://carre-silk.vercel.app/auth/login'
+//   : 'http://localhost:3000/auth/login';
 
 const Login: NextPage = () => {
   return (
