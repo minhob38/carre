@@ -155,8 +155,9 @@ const ResultCard: React.FC<any> = ({ data }) => {
           <CarName>{`${brandName} ${carModelName}`}</CarName>
         </RankContainer>
         <Description>
-          지프 그랜드 체로키는 성능이 어쭈구 좋고 안전은 또 이렇게 막 이렇게
-          좋은 대표 차량입니다.
+          {IS_HIDDEN
+            ? ''
+            : '지프 그랜드 체로키는 성능이 어쭈구 좋고 안전은 또 이렇게 막 이렇게 좋은 대표 차량입니다.'}
         </Description>
         <Image src={imageSrc} alt={carModelName} width="271px" />
         <DetailContainer>

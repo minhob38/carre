@@ -13,6 +13,7 @@ import { actions } from '@store/slices/inputSlice';
 
 const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
 const GAP = 50;
+const END = 20;
 
 export const useBudgetValue = (minBudgetPosition, maxBudgetPosition) => {
   const dispatch = useTypedDispatch();
@@ -77,14 +78,23 @@ export const useBudgetPosition = () => {
     (x) => {
       if (!width) return;
 
-      const positiveLimit =
-        width -
-        2 * SIDE_MARGIN -
-        INITIAL_MIN_POSITION -
-        INITIAL_MAX_POSITION -
-        maxBudgetPosition -
-        GAP;
-      const negativeLimit = -INITIAL_MIN_POSITION;
+      const negativeLimit = -INITIAL_MIN_POSITION + END;
+      let positiveLimit;
+      const budgetType: 'min-max' | 'point' = 'point';
+
+      if (budgetType === 'point') {
+        positiveLimit = width - 2 * SIDE_MARGIN - INITIAL_MIN_POSITION - END;
+      } else {
+        /* min/max일 때 계산법 */
+        positiveLimit =
+          width -
+          2 * SIDE_MARGIN -
+          INITIAL_MIN_POSITION -
+          INITIAL_MAX_POSITION -
+          maxBudgetPosition -
+          GAP -
+          END;
+      }
 
       dispatch(
         actions.moveMinBudgetX(

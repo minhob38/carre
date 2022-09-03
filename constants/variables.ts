@@ -79,7 +79,9 @@ export const fuels: IInput[] = [
   { title: '가솔린', value: 'gasoline' },
   { title: 'LPG', value: 'lpg' },
   { title: '하이브리드', value: 'hybrid' },
-  { title: '전기', value: 'electricity' },
+  { title: '디젤', value: 'diesel' },
+  { title: '연료전지', value: 'fuelcell' },
+  { title: '전기차', value: 'electricity' },
 ];
 
 export const categories: IInput[] = [

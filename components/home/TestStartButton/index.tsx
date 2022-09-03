@@ -1,15 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import rightArrowImage from '@assets/images/icons/small-black-right-arrow.svg';
 import { actions } from '@store/slices/surveySlice';
-
-import { useTypedDispatch } from '@hooks/useStore';
-import { useInitialization } from '@hooks/useStore';
-import { useEffect } from 'react';
+import { useTypedDispatch, useInitialization } from '@hooks/useStore';
 
 const Wrapper = styled.div`
   display: flex;
@@ -38,7 +36,7 @@ const TestStartButton: React.FC = () => {
 
   useEffect(() => {
     initializeStore();
-  }, []);
+  }, [initializeStore]);
 
   return (
     <Wrapper onClick={handleButtonClick}>

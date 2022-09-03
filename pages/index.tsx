@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import Link from 'next/link';
 import Scroll from '@components/common/Scroll';
 import Content from '@components/common/Content';
 import TopNavigator from '@components/common/TopNavigator';
@@ -18,6 +17,7 @@ import cClassImage from '@assets/images/c-class.webp';
 import bmw3Series from '@assets/images/bmw-3-series.png';
 import kiaRay from '@assets/images/kia-ray.webp';
 import miniCooper from '@assets/images/mini-cooper.png';
+import { useInitialization } from '@hooks/useStore';
 
 const Title = styled.div`
   font: ${fonts.TITLE_T2};
@@ -59,6 +59,12 @@ const SubContainer = styled.div`
 `;
 
 const Index: NextPage = () => {
+  const initializeStore = useInitialization();
+
+  useEffect(() => {
+    initializeStore();
+  }, [initializeStore]);
+
   return (
     <>
       <TopNavigator />

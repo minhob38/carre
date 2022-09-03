@@ -29,6 +29,7 @@ import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
 import { useEffect, useState } from 'react';
 import { shallowEqual } from 'react-redux';
+import { actions as surveyActions } from '@store/slices/surveySlice';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -116,6 +117,10 @@ const Test: NextPage = () => {
     (state) => state.rootReducer.inputReducer.carUsagePurpose,
     shallowEqual,
   );
+
+  useEffect(() => {
+    dispatch(surveyActions.createSurveyTokenAsync());
+  }, [dispatch]);
 
   useEffect(() => {
     if (

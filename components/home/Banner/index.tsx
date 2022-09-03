@@ -58,10 +58,10 @@ const Banner: React.FC<IProps> = ({ type }) => {
   let titleFontColor: string;
   let descFontColor: string;
   let arrowColor: string;
-  let path: '/test/1' | '/dealer'; // TODO: dealer 페이지 만들기
+  let path: '/test/2' | '/dealer'; // TODO: dealer 페이지 만들기
 
   if (type === 'test') {
-    path = '/test/1';
+    path = '/test/2'; // TODO: 회원기능 생기면 1로 보내기
     title = '차량 구매 성향 테스트하기';
     description = `성향을 자세히 분석하여 당신에게 \n꼭 맞는 차를 추천해드려요`;
     imageSrc = testBannerImage.src;
