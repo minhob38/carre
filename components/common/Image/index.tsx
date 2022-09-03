@@ -57,7 +57,7 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
         layout="fill"
         priority={true}
         loading="eager"
-        // objectFit="contain"
+        objectFit="contain"
         onLoadingComplete={({ naturalWidth, naturalHeight }) =>
           setRatio(naturalWidth / naturalHeight)
         }
