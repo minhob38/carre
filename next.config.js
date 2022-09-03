@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     domains: ['m.carre.co.kr', 'static.carre.kr', '*'],
     loader: 'akamai',
-    path: '/',
+    path: '',
   },
   trailingSlash: true,
 
