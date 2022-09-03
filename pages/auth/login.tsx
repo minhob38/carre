@@ -69,13 +69,13 @@ const ButtonText = styled.a`
 
 const REDIRECT_URI =
   process.env.NODE_ENV === 'production'
-    ? 'http://localhost:3000/auth/login'
+    ? 'https://carre-silk.vercel.app/auth/login'
     : 'http://localhost:3000/auth/login';
 
 const Login: NextPage = () => {
-  // const router = useRouter();
-  // const { code: authCode } = router.query;
-  // console.log(process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY);
+  // const router = userouter();
+  // const { code: authcode } = router.query;
+  // console.log(process.env.next_public_kakao_rest_api_key);
   // console.log(router.query);
   // useEffect(() => {
   //   if (authCode) {
@@ -108,7 +108,7 @@ const Login: NextPage = () => {
   //     );
   //   }
   // }, [authCode]);
-
+  console.log(process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY);
   return (
     <>
       <Content top="0px" bottom="0px">
