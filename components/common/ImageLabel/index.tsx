@@ -68,7 +68,7 @@ const ImageLabel: React.FC<IProps> = ({
     shallowEqual,
   );
   const [checked, setChecked] = useState<boolean>(false);
-
+  console.log(image);
   useEffect(() => {
     if (type === 'checkbox') {
       for (const key in inputState) {
