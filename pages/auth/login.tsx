@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Content from '@components/common/Content';
 import Image from '@components/common/Image';
@@ -10,7 +11,11 @@ import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
 import { IS_HIDDEN } from '@constants/variables';
 import { useTypedSelector } from '@hooks/useStore';
 import kakaoImage from '@assets/images/icons/kakao.svg';
-
+import axios from 'axios';
+import { useEffect } from 'react';
+import { redirect } from 'next/dist/server/api-utils';
+import qs from 'qs';
+console.log(qs);
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -47,14 +52,63 @@ const Button = styled.div`
   background-color: #fee500;
 `;
 
-const ButtonText = styled.div`
+const ButtonText = styled.a`
+  all: unset;
   flex: 1;
   text-align: center;
   font: ${fonts.TITLE_T2};
   color: ${colors.SECONDARY_REAL_BLACK};
 `;
 
-const Dealer: NextPage = () => {
+// const handleButtonClick = async () => {
+//   const response = await axios.get(
+//     `https://kauth.kakao.com/oauth/authorize?client_id=a4dd7943c813bbe4937ca12a57ab18b4&redirect_uri=${REDIRECT_URI}&response_type=code`,
+//   );
+//   console.log(response.data);
+// };
+
+const REDIRECT_URI =
+  process.env.NODE_ENV === 'production'
+    ? 'http://localhost:3000/auth/login'
+    : 'http://localhost:3000/auth/login';
+
+const Login: NextPage = () => {
+  // const router = useRouter();
+  // const { code: authCode } = router.query;
+  // console.log(process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY);
+  // console.log(router.query);
+  // useEffect(() => {
+  //   if (authCode) {
+  //     // console.log({
+  //     //   grant_type: 'authorization_code',
+  //     //   cliend_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
+  //     //   code: authCode,
+  //     //   redirect_uri: REDIRECT_URI,
+  //     // });
+
+  //     const data = {
+  //       grant_type: 'authorization_code',
+  //       cliend_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
+  //       code: authCode,
+  //       redirect_uri: REDIRECT_URI,
+  //     };
+
+  //     axios.post(
+  //       'https://kauth.kakao.com/oauth/token',
+  //       {
+  //         grant_type: 'authorization_code',
+  //         client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
+  //         code: authCode,
+  //         redirect_uri: REDIRECT_URI,
+  //       },
+  //       {
+  //         headers: { 'content-type': 'application/x-www-form-urlencoded' },
+  //         data: qs.stringify(data),
+  //       },
+  //     );
+  //   }
+  // }, [authCode]);
+
   return (
     <>
       <Content top="0px" bottom="0px">
@@ -63,7 +117,11 @@ const Dealer: NextPage = () => {
           <Description>{`간편하게 로그인하고\n 다양한 서비스를 이용해보세요`}</Description>
           <Button>
             <Image src={kakaoImage} alt={'carModelName'} width="16px" />
-            <ButtonText>카카오계정으로 로그인</ButtonText>
+            <ButtonText
+              href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`}
+            >
+              카카오계정으로 로그인
+            </ButtonText>
           </Button>
         </Container>
       </Content>
@@ -71,4 +129,4 @@ const Dealer: NextPage = () => {
   );
 };
 
-export default Dealer;
+export default Login;
