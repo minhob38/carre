@@ -20,7 +20,7 @@
       "@components/*": ["components/*"],
       "@animations/*": ["animations/*"],
       "@modals/*": ["modals/*"],
-      "@assets/*": ["assets/*"],
+      "@assets/*": ["public/assets/*"],
       "@store/*": ["store/*"],
       "@hooks/*": ["hooks/*"],
       "@constants/*": ["constants/*"],

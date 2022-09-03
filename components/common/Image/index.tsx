@@ -24,6 +24,8 @@ const Wrapper = styled.div`
   height: ${(props: IStyleProps) => props.height};
 `;
 
+const loader = ({ src }) => src;
+
 const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
   const [ratio, setRatio] = useState<number>(0);
   const [_height, _setHeight] = useState<number>(0);
@@ -47,7 +49,6 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
   return (
     <Wrapper
       ref={wrapperRef}
-      // width={width}
       height={`${height ? height : `${_height}px`}`}
       width={`${width ? width : `${_width}px`}`}
     >
@@ -61,6 +62,7 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
         onLoadingComplete={({ naturalWidth, naturalHeight }) =>
           setRatio(naturalWidth / naturalHeight)
         }
+        loader={loader}
       />
     </Wrapper>
   );

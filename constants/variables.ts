@@ -85,8 +85,9 @@ export const fuels: IInput[] = [
 ];
 
 export const categories: IInput[] = [
-  { title: '세단?', value: 'sedan' },
-  { title: 'SUV?', value: 'suc' },
+  { title: '세단', value: 'sedan' },
+  { title: 'SUV', value: 'suv' },
+  { title: 'MPV', value: 'mpv' },
 ];
 
 /* 차량 성향 테스트 설정 (차량스타일) */
