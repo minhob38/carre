@@ -76,8 +76,8 @@ export const brands: IInput[] = [
 ];
 
 export const fuels: IInput[] = [
-  { title: '경유', value: 'diesel' },
-  { title: '휘발유', value: 'gasoline' },
+  { title: '가솔린', value: 'gasoline' },
+  { title: 'LPG', value: 'lpg' },
   { title: '하이브리드', value: 'hybrid' },
   { title: '전기', value: 'electricity' },
 ];
