@@ -57,7 +57,7 @@ const BallReferencePoint = styled.div`
   z-index: 2;
 `;
 
-const LeftBallReferencePoint = styled(BallReferencePoint)`
+const PointBallReferencePoint = styled(BallReferencePoint)`
   left: ${INITIAL_MIN_POSITION}px;
   transform: translate(-50%, -50%);
 `;
@@ -79,7 +79,7 @@ const Ball = styled.div`
   box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
 `;
 
-const LeftBall = styled(Ball)`
+const PointBall = styled(Ball)`
   left: ${(props: Pick<IProps, 'minBudgetPosition'>) =>
     `calc(50% + ${props.minBudgetPosition}px)`};
   transform: translate(-50%, -50%);
@@ -139,45 +139,25 @@ const Budget: React.FC = () => {
     maxBudgetPosition,
   );
 
-  const handleLeftBallTouch = (ev) => {
+  const handlePointBallTouch = (ev) => {
     setMinBudgetPosition(ev.changedTouches[0].pageX);
-  };
-
-  const handleRightBallTouch = (ev) => {
-    setMaxBudgetPosition(ev.changedTouches[0].pageX);
   };
 
   return (
     <Wrapper>
       <Bar>
-        <LeftBallReferencePoint>
+        <PointBallReferencePoint>
           <LeftIndicator minBudgetPosition={minBudgetPosition}>
-            {convertNumberToWon(minBudgetValue)}
+            {convertNumberToWon(Math.round(minBudgetValue / 100) * 100)}
           </LeftIndicator>
-          <LeftBall
+          <PointBall
             minBudgetPosition={minBudgetPosition}
-            onTouchMove={handleLeftBallTouch}
+            onTouchMove={handlePointBallTouch}
             // onClick={(ev) => console.log('left')}
           >
             <TouchableBall />
-          </LeftBall>
-        </LeftBallReferencePoint>
-        {/* <RightBallReferencePoint>
-          <RightIndicator maxBudgetPosition={maxBudgetPosition}>
-            {convertNumberToWon(maxBudgetValue)}
-          </RightIndicator>
-          <RightBall
-            maxBudgetPosition={maxBudgetPosition}
-            onTouchMove={handleRightBallTouch}
-            // onClick={(ev) => console.log('right')}
-          >
-            <TouchableBall />
-          </RightBall>
-        </RightBallReferencePoint> */}
-        {/* <RangeBar
-          minBudgetPosition={minBudgetPosition}
-          maxBudgetPosition={maxBudgetPosition}
-        /> */}
+          </PointBall>
+        </PointBallReferencePoint>
       </Bar>
     </Wrapper>
   );

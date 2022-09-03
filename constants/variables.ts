@@ -56,7 +56,7 @@ export const INITIAL_MIN_POSITION = 55; // 55px
 export const INITIAL_MAX_POSITION = INITIAL_MIN_POSITION;
 
 export const INITIAL_MIN_BUDGET = 4000; // 4000만원
-export const INITIAL_MAX_BUDGET = 8000; // 8000만원
+export const INITIAL_MAX_BUDGET = 18000; // 18000만원
 export const DELTA_Y = INITIAL_MAX_BUDGET - INITIAL_MIN_BUDGET;
 
 /* 추가 선택 조건 선택 설정*/
