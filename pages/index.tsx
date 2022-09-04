@@ -84,11 +84,26 @@ const Index: NextPage = () => {
               height="190px"
             >
               <CardContainer>
-                <Card title="현대 캐스퍼" src={casperImage} />
-                <Card title="벤츠 C-Class" src={cClassImage} />
-                <Card title="bmw 3 Series" src={bmw3Series} />
-                <Card title="기아 레이" src={kiaRay} />
-                <Card title="미니 쿠퍼" src={miniCooper} />
+                <Card
+                  title="현대 아반떼"
+                  src="https://static.carre.kr/home_main/hyundae_avante.png"
+                />
+                <Card
+                  title="벤츠 C-Class"
+                  src="https://static.carre.kr/home_main/benz_c_class_ver2.png"
+                />
+                <Card
+                  title="bmw 3 Series"
+                  src="https://static.carre.kr/home_main/bmw_3_serise_ver2.png"
+                />
+                <Card
+                  title="기아 레이"
+                  src="https://static.carre.kr/home_main/kia_ray_ver3.png"
+                />
+                <Card
+                  title="미니 쿠퍼"
+                  src="https://static.carre.kr/home_main/mini_cooper_ver2.png"
+                />
               </CardContainer>
             </Scroll>
             <SubContainer>
