@@ -79,7 +79,7 @@ const Result: NextPage = () => {
           height={`calc(100% - ${BUTTON_HEIGHT} - ${BUTTON_POSTION} - 15px)`}
         >
           {/* TODO: 변수로 사용자 이름 넣기 */}
-          <Title>{userTendencyTitle}</Title>
+          {!IS_HIDDEN && <Title>{userTendencyTitle}</Title>}
           <SubTitle>{IS_HIDDEN ? '' : '두마리 토끼를 잡으려는 당신!'}</SubTitle>
           <ScoreCard type="static" />
           <Description>{userTendencySentence}</Description>

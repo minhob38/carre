@@ -174,9 +174,10 @@ const Test: NextPage = () => {
             placeholder="원하는 값을 입력해주세요."
             type="number"
             name="useBudget"
-            min="1000"
-            max="30000"
+            value={!!budget ? budget : 'none'}
             onChange={handleInputChange}
+            pattern="[0-9]*"
+            inputMode="numeric"
           />
           {!!budget && <Won>만원</Won>}
         </InputContainer>

@@ -26,7 +26,7 @@ export const genderLabels: { title: string; value: string }[] = [
 /* 용도 input 설정 */
 export const purposeLabels: { title: string; value: string }[] = [
   { title: '출퇴근용', value: 'COMMUTING' },
-  { title: '등/하교', value: 'SCHOOL' },
+  { title: '근거리용', value: 'SHORT_DISTANCE' },
   { title: '캠핑/레저', value: 'CAMPING' },
   { title: '영업', value: 'SALES' },
 ];

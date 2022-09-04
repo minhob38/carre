@@ -64,7 +64,6 @@ const inputSlice = createSlice({
       state,
       action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
     ) => {
-      console.log('!!!!!!');
       const { value } = action.payload;
       state['budget'] = Number(value);
     },

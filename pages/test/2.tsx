@@ -31,6 +31,10 @@ import { useEffect, useState } from 'react';
 import { shallowEqual } from 'react-redux';
 import { actions as surveyActions } from '@store/slices/surveySlice';
 
+interface IStyleProps {
+  checked: boolean;
+}
+
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
   font: ${fonts.TITLE_T1};
@@ -56,12 +60,16 @@ const SelectContainer = styled.div`
   align-items: center;
   width: 120px;
   height: 48px;
+  border: ${(props: IStyleProps) =>
+    props.checked ? `2px solid ${colors.PRIMARY_400}` : `none`};
   border-radius: 8px;
   background: ${colors.SECONDARY_REAL_WHITE};
 `;
 
 const Select = styled.select`
   all: unset;
+  width: 100%;
+  text-align: center;
   font: ${fonts.BODY_REGULAR_1};
   color: ${colors.SECONDARY_400};
 `;
@@ -97,6 +105,10 @@ const DistanceContainer = styled.div``;
 
 const Test: NextPage = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [isPersonClicked, setIsPersonClicked] = useState<boolean>(false);
+  const [isDistanceClicked, setIDistanceClicked] = useState<boolean>(false);
+  const [isBirthYearClicked, setIsBirthYearClicked] = useState<boolean>(false);
+
   const dispatch = useTypedDispatch();
   const isInputWarningModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isInputWarningModal,
@@ -231,13 +243,14 @@ const Test: NextPage = () => {
           <YearGenderContainer>
             <YearContainer>
               <SubTitle>출생연도</SubTitle>
-              <SelectContainer>
+              <SelectContainer checked={isBirthYearClicked}>
                 <Select
                   name="birthYear"
                   value={birthYear}
-                  onChange={(ev) =>
-                    dispatch(actions.setSelectOption(ev.target))
-                  }
+                  onChange={(ev) => {
+                    dispatch(actions.setSelectOption(ev.target));
+                  }}
+                  onClick={() => setIsBirthYearClicked(true)}
                 >
                   {YearOptions}
                 </Select>
@@ -279,13 +292,14 @@ const Test: NextPage = () => {
           <PersonDistanceContainer>
             <PersonContainer>
               <SubTitle>탑승인원</SubTitle>
-              <SelectContainer>
+              <SelectContainer checked={isPersonClicked}>
                 <Select
                   name="passengerCount"
                   value={passengerCount}
-                  onChange={(ev) =>
-                    dispatch(actions.setSelectOption(ev.target))
-                  }
+                  onChange={(ev) => {
+                    dispatch(actions.setSelectOption(ev.target));
+                  }}
+                  onClick={() => setIsPersonClicked(true)}
                 >
                   {PersonOptions}
                 </Select>
@@ -293,13 +307,14 @@ const Test: NextPage = () => {
             </PersonContainer>
             <DistanceContainer>
               <SubTitle>연주행거리</SubTitle>
-              <SelectContainer>
+              <SelectContainer checked={isDistanceClicked}>
                 <Select
                   name="drivenDistanceInYear"
                   value={drivenDistanceInYear}
-                  onChange={(ev) =>
-                    dispatch(actions.setSelectOption(ev.target))
-                  }
+                  onChange={(ev) => {
+                    dispatch(actions.setSelectOption(ev.target));
+                  }}
+                  onClick={() => setIDistanceClicked(true)}
                 >
                   {DistanceOptions}
                 </Select>

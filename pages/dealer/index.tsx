@@ -10,6 +10,7 @@ import DealerButton from '@components/result/DealerButton';
 import DealerCard from '@components/dealer/DealerCard';
 import DealerMatchingModal from '@modals/DealerMatching';
 import DealerMatchedModal from '@modals/DealerMatched';
+import Loading from '@animations/Loading';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -111,7 +112,7 @@ const Dealer: NextPage = () => {
   });
 
   if (!recoms) {
-    return <div>loading...</div>;
+    return <Loading text={'추천차량을 불러오고 있습니다.'} />;
   }
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
