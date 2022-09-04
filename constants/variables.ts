@@ -437,11 +437,11 @@ export const TENDENCY_TABLE = {
   factorBaseAge: 'N/A',
   factorBaseCarSentiment: '승차감',
   factorBaseDesign: '디자인',
-  factorBaseEconomics: '가성비',
+  factorBaseEconomics: '경제성',
   factorBaseNewTechnology: '신기술',
   factorBasePerformance: '성능',
-  factorBaseReliability: '편의성',
-  factorBaseSafety: '신뢰성',
+  factorBaseReliability: '신뢰도',
+  factorBaseSafety: '안전성',
 };
 
 /* 이 차량의 매력 설정 */
