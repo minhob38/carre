@@ -17,10 +17,12 @@ interface IProps {
     value: string;
   };
   title: string;
+  link: string;
   description: string;
   category?: string;
   checked: boolean;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: any;
+  // onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 interface IStyleProps {
@@ -65,41 +67,57 @@ const Title = styled.div`
   color: ${colors.SECONDARY_REAL_BLACK};
 `;
 
-const ImageTitleContainer = styled.div`
+const ImageTitleContainer = styled.label`
   display: flex;
   align-items: center;
 `;
 
 const ScrollContainer = styled.div`
   max-height: 300px;
+  width: 100%;
+`;
+
+const ALink = styled.a`
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font: ${fonts.SUBTITLE_T1};
+  background-color: ${colors.SECONDARY_100};
+  padding: 10px;
+  text-decoration: underline;
 `;
 
 const ImageLabel: React.FC<IProps> = ({
   input,
   title,
-  description,
+  link,
   category,
   checked,
   onChange,
+  description,
 }) => {
   const [isDown, setIsDown] = useState<boolean>(false);
   const { name, value } = input;
-
+  // TODO: input 넣으면 범위가 이상해짐 : (
   return (
     <Wrapper>
       <Header>
         <ImageTitleContainer>
-          <input
+          {/* <input
             type="checkbox"
             name={name}
             value={value}
             css={css`
               all: unset;
+              width: '10px';
             `}
+            onClick={() => console.log('!!!!')}
             onChange={onChange}
             checked={checked}
-          />
-          <ImageContainer>
+          /> */}
+          <ImageContainer onClick={onChange}>
             <Image
               src={checked ? activeCheckImage : inactiveCheckImage}
               alt={checked ? 'activeCheckImage' : 'inactiveCheckImage'}
@@ -108,21 +126,26 @@ const ImageLabel: React.FC<IProps> = ({
           </ImageContainer>
           <Title>{title}</Title>
         </ImageTitleContainer>
-        <ImageContainer onClick={() => setIsDown(!isDown)}>
-          <Image
-            src={isDown ? upArrowImage : downArrowImage}
-            // src={isDown ? downArrowImage : upArrowImage}
-            alt={isDown ? 'up-arrow' : 'down-arrow'}
-            // alt={isDown ? 'down-arrow' : 'up-arrow'}
-            width="20px"
-            height="20px"
-          />
-        </ImageContainer>
+        {description && (
+          <ImageContainer onClick={() => setIsDown(!isDown)}>
+            <Image
+              src={isDown ? upArrowImage : downArrowImage}
+              // src={isDown ? downArrowImage : upArrowImage}
+              alt={isDown ? 'up-arrow' : 'down-arrow'}
+              // alt={isDown ? 'down-arrow' : 'up-arrow'}
+              width="20px"
+              height="20px"
+            />
+          </ImageContainer>
+        )}
       </Header>
       {isDown && (
         <ScrollContainer>
-          <Scroll direction="y" height="100%">
-            <Description>{description}</Description>
+          <Scroll direction="y" height="100%" width="100%">
+            {/* <Description>{description}</Description> */}
+            <ALink href={link} target="_blank">
+              {description}
+            </ALink>
           </Scroll>
         </ScrollContainer>
       )}

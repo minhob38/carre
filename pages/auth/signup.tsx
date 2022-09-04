@@ -85,28 +85,37 @@ const Signup: NextPage = () => {
               <Checbox
                 input={{ name: '', value: 'user' }}
                 title="전체동의"
-                description={USE_TERM}
+                description=""
+                link={''}
                 onChange={() => dispatch(actions.clickTotalAgreement())}
                 checked={isTotalTermAgreement}
               />
               <Checbox
                 input={{ name: '', value: 'user' }}
                 title="[필수] 개인 정보 활용 동의"
-                description={USE_TERM}
+                description="개인 정보 활용 동의 보러가기"
+                link="https://invited-magic-684.notion.site/203af742a79e4b65bf68ccd884b7f632"
                 onChange={() => dispatch(actions.clickInfoUseTermAgreement())}
                 checked={isInfoUseTermAgreement}
               />
               <Checbox
                 input={{ name: '', value: 'user' }}
                 title="[선택] 개인 정보 동의"
-                description={USE_TERM}
+                description="개인 정보 동의 보러가기"
+                link={
+                  'https://invited-magic-684.notion.site/646d75216c184217bf0a7eef2ca06742'
+                }
                 onChange={() => dispatch(actions.clickInfoTermAgreement())}
                 checked={isInfoTermAgreement}
               />
               <Checbox
-                input={{ name: '', value: 'user' }}
+                input={{
+                  name: '',
+                  value: 'user',
+                }}
                 title="[선택] 이용 약관 동의"
-                description={USE_TERM}
+                description="이용 약관 동의 보러가기"
+                link="https://invited-magic-684.notion.site/92b92d8352b14f53a397f1cf603cc5b8"
                 onChange={() => dispatch(actions.clickUseTermAgreement())}
                 checked={isUseTermAgreement}
               />
