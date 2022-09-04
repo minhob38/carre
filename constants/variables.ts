@@ -435,7 +435,7 @@ export const TOTAL_SCORE = 5;
 export const CRITERION_SCORE = 3;
 export const TENDENCY_TABLE = {
   factorBaseAge: 'N/A',
-  factorBaseCarSentiment: '승차감',
+  factorBaseCarSentiment: '하차감',
   factorBaseDesign: '디자인',
   factorBaseEconomics: '경제성',
   factorBaseNewTechnology: '신기술',
