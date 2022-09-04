@@ -82,7 +82,8 @@ const Test: NextPage = () => {
           surveyAnswers,
         }),
       );
-      router.push('/test/7');
+      // router.push('/test/7');
+      router.push('/result');
     }
   }, [
     dispatch,

@@ -130,6 +130,8 @@ function* saveSurveyAnswersSaga(
   });
   const data = yield api.saveSurveyAnswers(surveyToken, surveyInput);
   yield put(actions.checkSaveSurveyAnswer());
+  // TODO: analyzeSurveyAnswersAsync는 따로 처리해야함...
+  yield put(actions.analyzeSurveyAnswersAsync(surveyToken));
 }
 
 /**
