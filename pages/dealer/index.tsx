@@ -99,19 +99,36 @@ const dealers = [
 ];
 
 const Dealer: NextPage = () => {
-  // const recoms = useTypedSelector((state) => {
-  //   return state.rootReducer.resultReducer.recoms;
-  // });
+  const recoms = useTypedSelector((state) => {
+    return state.rootReducer.resultReducer.recoms;
+  });
 
-  // if (!recoms) {
-  //   return <div>loading...</div>;
-  // }
   const isDealerMatchingModal = useTypedSelector((state) => {
     return state.rootReducer.appReducer.isDealerMatchingModal;
   });
   const isDealerMatchedModal = useTypedSelector((state) => {
     return state.rootReducer.appReducer.isDealerMatchedModal;
   });
+
+  if (!recoms) {
+    return <div>loading...</div>;
+  }
+
+  const { recommendCarInfoList, userTendencySentence } = recoms;
+  const bestRecommendCarInfo = recommendCarInfoList[0];
+  const {
+    rankingInfoText,
+    brandName,
+    carModelName,
+    carImagePath,
+    carImageFileName,
+    carTotalPrice,
+    trimList: trims,
+  } = bestRecommendCarInfo;
+  console.log(bestRecommendCarInfo);
+
+  const imageSrc = carImagePath + carImageFileName;
+  const rank = rankingInfoText.slice(0, -2);
 
   const Dealers = dealers.map((dealer) => {
     const { description, src, chips, value } = dealer;
@@ -130,16 +147,16 @@ const Dealer: NextPage = () => {
     <>
       {isDealerMatchingModal && <DealerMatchingModal />}
       {isDealerMatchedModal && <DealerMatchedModal />}
-      <Header type="close" title="견적 파트너 추천 결과" closePath="/" />
+      <Header type="back" title="견적 파트너 추천 결과" backPath="/result/1" />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
-        <Title>성능과 안전 두마리 토끼를 잡으려는 카레님</Title>
+        <Title>{userTendencySentence}</Title>
         <CardContainer>
           <CarContainer>
             <RankCarNameContainer>
-              <Rank>1순위</Rank>
-              <CarName>현대 캐스퍼 밴</CarName>
+              <Rank>{rankingInfoText}</Rank>
+              <CarName>{`${brandName} ${carModelName}`}</CarName>
             </RankCarNameContainer>
-            <Image src={casperImage} alt={'carModelName'} width="201px" />
+            <Image src={imageSrc} alt={carModelName} width="201px" />
           </CarContainer>
           {!IS_HIDDEN && (
             <Image src={rightArrorImage} alt="right-arrow" width="20px" />

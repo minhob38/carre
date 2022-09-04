@@ -56,14 +56,13 @@ const Result: NextPage = () => {
   if (!recoms) return <Loading text={'추천차량을 불러오고 있습니다.'} />;
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
-  console.log(recommendCarInfoList.length);
   const ResultCards = recommendCarInfoList.slice(0, 5).map((recom) => {
     return <ResultCard key={uuid4()} data={recom} />;
   });
 
   return (
     <>
-      <Header title="나의 추천 차량" type="close" closePath="/" />
+      <Header title="나의 추천 차량" type="back" backPath="/result" />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
         <Scroll direction="y" height="100%">
           <Title>{userTendencySentence}</Title>

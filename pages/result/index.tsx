@@ -67,7 +67,7 @@ const Result: NextPage = () => {
 
   return (
     <>
-      <Header title="나의 취향 결과" type="close" closePath="/" />
+      <Header title="나의 취향 결과" type="back" backPath="/test/7" />
       <Content
         top={HEADER_HEIGHT}
         bottom={'0'}
