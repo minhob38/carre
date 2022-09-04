@@ -11,6 +11,7 @@ import hyundaiCi from '@assets/images/temps/hyundai-ci.png';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { shallowEqual } from 'react-redux';
 import { actions } from '@store/slices/dealerSlice';
+import { useRouter } from 'next/router';
 
 interface IProps {
   description: string;
@@ -72,6 +73,7 @@ const Chip = styled.div`
 const INPUT_NAME = 'dealer';
 const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
   const [isDown, setIsDown] = useState<boolean>(false);
+  const router = useRouter();
   const dispatch = useTypedDispatch();
   const Chips = chips.map((chip) => {
     return <Chip key={uuid4()}>{chip}</Chip>;
@@ -104,7 +106,8 @@ const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
   };
 
   const handleClick = () => {
-    dispatch(actions.findDealerAsync());
+    // dispatch(actions.findDealerAsync());
+    router.push('/auth/login');
   };
 
   return (
