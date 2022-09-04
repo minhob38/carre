@@ -23,6 +23,7 @@ interface IState {
   brands: string[];
   fuels: string[];
   categories: string[]; // category?
+  styles: string[];
   similarBudget: boolean;
   survey: Record<string, string>;
 }
@@ -42,6 +43,7 @@ const initialState: IState = {
   brands: [],
   fuels: [],
   categories: [],
+  styles: [],
   similarBudget: false,
   survey: {},
 };

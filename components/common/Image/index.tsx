@@ -63,6 +63,7 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
           setRatio(naturalWidth / naturalHeight)
         }
         loader={loader}
+        unoptimized={true}
       />
     </Wrapper>
   );

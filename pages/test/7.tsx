@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Header from '@components/common/Header';
 import NextButton from '@components/common/NextButton';
 import Content from '@components/common/Content';
 import StyleCheckBoxes from '@components/common/StyleCheckBoxes';
+import InputWarning from '@modals/InputWarning';
 import Scroll from '@components/common/Scroll';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
@@ -34,11 +36,27 @@ const StyleCheckBoxesContainer = styled.div`
 `;
 
 const Test: NextPage = () => {
+  const [isActive, setIsActive] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useTypedDispatch();
   const surveyToken = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
+  const isInputWarningModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isInputWarningModal,
+  );
+  const styles = useTypedSelector(
+    (state) => state.rootReducer.inputReducer.styles,
+  );
+
+  useEffect(() => {
+    if (styles.length > 0) {
+      setIsActive(true);
+      return;
+    }
+
+    setIsActive(false);
+  }, [styles]);
 
   const handleButtonClick = () => {
     if (!surveyToken) {
@@ -50,6 +68,7 @@ const Test: NextPage = () => {
 
   return (
     <>
+      {isInputWarningModal && <InputWarning />}
       <Header title="차량 성향 테스트" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>차량 스타일 선택</Title>
@@ -61,7 +80,11 @@ const Test: NextPage = () => {
         </Scroll>
       </Content>
       {/* test 결과로 보내기 */}
-      <NextButton title="다음" onClick={handleButtonClick} />
+      <NextButton
+        title="다음"
+        onClick={handleButtonClick}
+        isActive={isActive}
+      />
     </>
   );
 };

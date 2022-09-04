@@ -92,11 +92,11 @@ export const categories: IInput[] = [
 
 /* 차량 성향 테스트 설정 (차량스타일) */
 export const styles = [
-  { name: 'style', value: '1', src: style1Image, alt: 'style-1' },
-  { name: 'style', value: '2', src: style2Image, alt: 'style-2' },
-  { name: 'style', value: '3', src: style3Image, alt: 'style-3' },
-  { name: 'style', value: '4', src: style4Image, alt: 'style-4' },
-  { name: 'style', value: '5', src: style5Image, alt: 'style-5' },
+  { name: 'styles', value: '1', src: style1Image, alt: 'style-1' },
+  { name: 'styles', value: '2', src: style2Image, alt: 'style-2' },
+  { name: 'styles', value: '3', src: style3Image, alt: 'style-3' },
+  { name: 'styles', value: '4', src: style4Image, alt: 'style-4' },
+  { name: 'styles', value: '5', src: style5Image, alt: 'style-5' },
 ];
 
 /* 차량 성향 테스트 설정 (질문) */
