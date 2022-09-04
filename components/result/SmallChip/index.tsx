@@ -8,9 +8,10 @@ import * as fonts from '@constants/fonts';
 interface IProps {
   type: 'yes' | 'no' | 'default';
   title: string;
+  maxWidth: string;
 }
 
-type IStyleProps = Pick<IProps, 'type'>;
+type IStyleProps = Pick<IProps, 'type' | 'maxWidth'>;
 
 const Loop = keyframes`
   0% {
@@ -25,7 +26,7 @@ const Loop = keyframes`
 
 const Wrapper = styled.div`
   height: 32px;
-  max-width: 100px;
+  max-width: ${(props: IStyleProps) => props.maxWidth};
   min-width: 0;
   padding: 0 10px;
   border-radius: 4px;
@@ -59,9 +60,9 @@ const Flow = styled.div`
   animation: ${Loop} 3s linear infinite;
 `;
 
-const SmallChip: React.FC<IProps> = ({ type, title }) => {
+const SmallChip: React.FC<IProps> = ({ type, title, maxWidth }) => {
   return (
-    <Wrapper type={type}>
+    <Wrapper type={type} maxWidth={maxWidth}>
       {/* <Flow>{title}</Flow> */}
       {title}
     </Wrapper>

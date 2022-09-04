@@ -134,7 +134,12 @@ const ResultCard: React.FC<any> = ({ data }) => {
   const TrimChips = trims.map((trim) => {
     const { trimName, recommend } = trim;
     return (
-      <Chip key={uuid4()} type={recommend ? 'yes' : 'no'} title={trimName} />
+      <Chip
+        key={uuid4()}
+        type={recommend ? 'yes' : 'no'}
+        title={trimName}
+        maxWidth="100px"
+      />
     );
   });
 
@@ -143,7 +148,12 @@ const ResultCard: React.FC<any> = ({ data }) => {
   const OptionsChips = options.map((option) => {
     const { optionName, recommend } = option;
     return (
-      <Chip key={uuid4()} type={recommend ? 'yes' : 'no'} title={optionName} />
+      <Chip
+        key={uuid4()}
+        type={recommend ? 'yes' : 'no'}
+        title={optionName}
+        maxWidth="100px"
+      />
     );
   });
 
@@ -160,12 +170,14 @@ const ResultCard: React.FC<any> = ({ data }) => {
             : '지프 그랜드 체로키는 성능이 어쭈구 좋고 안전은 또 이렇게 막 이렇게 좋은 대표 차량입니다.'}
         </Description>
         <Image src={imageSrc} alt={carModelName} width="271px" />
-        <DetailContainer>
-          <Link href={`/result/detail/${rank}`} passHref={true}>
-            <Detail>차량 상세보기</Detail>
-          </Link>
-          <Image src={rightArrorImage} alt="right-arrow" width="20px" />
-        </DetailContainer>
+        {!IS_HIDDEN && (
+          <DetailContainer>
+            <Link href={`/result/detail/${rank}`} passHref={true}>
+              <Detail>차량 상세보기</Detail>
+            </Link>
+            <Image src={rightArrorImage} alt="right-arrow" width="20px" />
+          </DetailContainer>
+        )}
         {!IS_HIDDEN && (
           <TermContainer>
             <Image src={infoImage} alt="info" width="12px" />
@@ -178,7 +190,13 @@ const ResultCard: React.FC<any> = ({ data }) => {
         </TrimContainer>
         <OptionContainer>
           <OptionTitle>옵션</OptionTitle>
-          <Option>{OptionsChips}</Option>
+          <Option>
+            {OptionsChips.length === 0 ? (
+              <Chip key={uuid4()} type="no" title="N/A" maxWidth="100px" />
+            ) : (
+              OptionsChips
+            )}
+          </Option>
         </OptionContainer>
         <PriceContainer>
           <PriceTitle>총 차량 가격</PriceTitle>

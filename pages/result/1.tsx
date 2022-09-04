@@ -56,7 +56,8 @@ const Result: NextPage = () => {
   if (!recoms) return <Loading text={'추천차량을 불러오고 있습니다.'} />;
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
-  const ResultCards = recommendCarInfoList.slice(0, 2).map((recom) => {
+  console.log(recommendCarInfoList.length);
+  const ResultCards = recommendCarInfoList.slice(0, 10).map((recom) => {
     return <ResultCard key={uuid4()} data={recom} />;
   });
 
@@ -73,9 +74,11 @@ const Result: NextPage = () => {
           </ResultCardContainer>
           <Border />
           {!IS_HIDDEN && <Attractions />}
-          <Link href="/result/2" passHref={true}>
-            <EditButton>검사 결과 조절해보기</EditButton>
-          </Link>
+          {!IS_HIDDEN && (
+            <Link href="/result/2" passHref={true}>
+              <EditButton>검사 결과 조절해보기</EditButton>
+            </Link>
+          )}
         </Scroll>
       </Content>
       <DealerButton />
