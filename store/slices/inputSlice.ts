@@ -16,6 +16,8 @@ interface IState {
   drivenDistanceInYear: number;
   gender: string | null;
   carUsagePurpose: string | null;
+  budget: number;
+  /* minBudgetPosition, maxBudgetPosition, minBudgetValue, maxBudgetValue 는 budget bar에 사용되는거, 추후 사용안하면 삭제하자 */
   minBudgetPosition: number;
   maxBudgetPosition: number;
   minBudgetValue: number;
@@ -34,6 +36,7 @@ const initialState: IState = {
   passengerCount: DEFAULT_PERSON,
   drivenDistanceInYear: DEFAULT_DISTANCE * UNIT_DISTANCE,
   carUsagePurpose: null,
+  budget: 0,
   /* budget range bar 안에 있는 ball의 초기 위치 */
   minBudgetPosition: 0,
   maxBudgetPosition: 0,
@@ -56,6 +59,14 @@ const inputSlice = createSlice({
       for (const key in state) {
         state[key] = initialState[key];
       }
+    },
+    setBudget: (
+      state,
+      action: PayloadAction<ChangeEvent<HTMLInputElement>['target']>,
+    ) => {
+      console.log('!!!!!!');
+      const { value } = action.payload;
+      state['budget'] = Number(value);
     },
     setSelectOption: (
       state,

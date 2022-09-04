@@ -115,7 +115,7 @@ const Index: NextPage = () => {
             </SubContainer>
             <BannerContainer>
               <Banner type="test" />
-              <Banner type="dealer" />
+              {!IS_HIDDEN && <Banner type="dealer" />}
             </BannerContainer>
           </div>
         </Scroll>

@@ -125,7 +125,6 @@ const Dealer: NextPage = () => {
     carTotalPrice,
     trimList: trims,
   } = bestRecommendCarInfo;
-  console.log(bestRecommendCarInfo);
 
   const imageSrc = carImagePath + carImageFileName;
   const rank = rankingInfoText.slice(0, -2);

@@ -16,6 +16,7 @@ declare module '@type/input' {
     birthYear: string;
     gender: string;
     carUsagePurpose: string;
+    userBudget: number;
     userBudgetMin: number;
     userBudgetMax: number;
     passengerCount: number;

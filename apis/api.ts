@@ -27,6 +27,7 @@ export const bindSurvey = async (surveyToken: string, input: IInput) => {
       birthYear,
       gender,
       carUsagePurpose,
+      userBudget,
       userBudgetMin,
       userBudgetMax,
       passengerCount,
@@ -40,7 +41,7 @@ export const bindSurvey = async (surveyToken: string, input: IInput) => {
         carUsagePurpose,
         // userBudgetMin,
         // userBudgetMax,
-        userBudget: userBudgetMin,
+        userBudget,
         passengerCount,
         drivenDistanceInYear,
       })
