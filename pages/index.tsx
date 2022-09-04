@@ -90,7 +90,7 @@ const Index: NextPage = () => {
                 />
                 <Card
                   title="벤츠 C-Class"
-                  src="https://static.carre.kr/home_main/benz_c_class_ver2.png"
+                  src="https://static.carre.kr/home_main/benz_c_class_ver3.png"
                 />
                 <Card
                   title="bmw 3 Series"

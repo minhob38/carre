@@ -57,7 +57,7 @@ const Result: NextPage = () => {
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
   console.log(recommendCarInfoList.length);
-  const ResultCards = recommendCarInfoList.slice(0, 10).map((recom) => {
+  const ResultCards = recommendCarInfoList.slice(0, 5).map((recom) => {
     return <ResultCard key={uuid4()} data={recom} />;
   });
 
