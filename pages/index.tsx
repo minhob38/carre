@@ -18,6 +18,7 @@ import bmw3Series from '@assets/images/bmw-3-series.png';
 import kiaRay from '@assets/images/kia-ray.webp';
 import miniCooper from '@assets/images/mini-cooper.png';
 import { useInitialization } from '@hooks/useStore';
+import { IS_HIDDEN } from '@constants/variables';
 
 const Title = styled.div`
   font: ${fonts.TITLE_T2};
@@ -73,7 +74,9 @@ const Index: NextPage = () => {
           <div>
             <Title>20대 여성들이 많이 타는차</Title>
             <Description>
-              MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!
+              {IS_HIDDEN
+                ? ''
+                : 'MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!'}
             </Description>
             <Scroll
               direction="x"
@@ -93,7 +96,7 @@ const Index: NextPage = () => {
                 <Tag># 20대</Tag>
                 <Tag># 여성</Tag>
               </TagContainer>
-              <MbtiButton />
+              {!IS_HIDDEN && <MbtiButton />}
             </SubContainer>
             <BannerContainer>
               <Banner type="test" />
