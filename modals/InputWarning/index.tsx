@@ -6,6 +6,10 @@ import * as fonts from '@constants/fonts';
 import { useTypedDispatch } from '@hooks/useStore';
 import { actions } from '@store/slices/appSlice';
 
+interface IProps {
+  title: string;
+}
+
 const Modal = styled.div`
   position: fixed;
   top: 0;
@@ -48,7 +52,7 @@ const Button = styled.div`
   color: ${colors.SECONDARY_400};
 `;
 
-const InputWarningModal: React.FC = () => {
+const InputWarningModal: React.FC<IProps> = ({ title }) => {
   const dispatch = useTypedDispatch();
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     if (ev.currentTarget !== ev.target) return;
@@ -61,7 +65,7 @@ const InputWarningModal: React.FC = () => {
   return (
     <Modal onClick={handleClickModal}>
       <Box>
-        입력값을 모두 넣어주세요.
+        {title}
         <Button onClick={handleClickButton}>확인</Button>
       </Box>
     </Modal>

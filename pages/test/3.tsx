@@ -162,7 +162,7 @@ const Test: NextPage = () => {
 
   return (
     <>
-      {isInputWarningModal && <InputWarning />}
+      {isInputWarningModal && <InputWarning title="알맞은 값을 넣어주세요." />}
       <Header title="나의 정보 입력" type="back" backPath="/test/2" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>나의 구매 필수 조건 입력</Title>

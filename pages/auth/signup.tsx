@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Content from '@components/common/Content';
@@ -22,6 +22,7 @@ import Checbox from '@components/auth/Checkbox';
 import { USE_TERM } from '@constants/terms';
 import { actions } from '@store/slices/authSlice';
 import { shallowEqual } from 'react-redux';
+import InputWarning from '@modals/InputWarning';
 
 const Title = styled.div`
   margin: 24px 0 33px 0;
@@ -58,14 +59,14 @@ const Box = styled.div`
 `;
 
 const Signup: NextPage = () => {
-  const [isTotalChecked, setIsTotalChecked] = useState<boolean>(false);
-  const [isInfoUseChecked, setIsInfoUseChecked] = useState<boolean>(false);
-  const [isInfoChecked, setIsInfoChecked] = useState<boolean>(false);
-  const [isUseChecked, setIsUseChecked] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const authState = useTypedSelector((state) => {
     return state.rootReducer.authReducer;
   }, shallowEqual);
+  const isInputWarningModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isInputWarningModal,
+  );
 
   const {
     isTotalTermAgreement,
@@ -74,8 +75,18 @@ const Signup: NextPage = () => {
     isUseTermAgreement,
   } = authState;
 
+  useEffect(() => {
+    if (isInfoUseTermAgreement && isInfoTermAgreement) {
+      setIsActive(true);
+      return;
+    }
+
+    setIsActive(false);
+  }, [isInfoUseTermAgreement, isInfoTermAgreement]);
+
   return (
     <>
+      {isInputWarningModal && <InputWarning title="동의(필수)를 해주세요." />}
       <Content top="0px" bottom={NEXT_BUTTON_HEIGHT}>
         <Background />
         <Box>
@@ -122,7 +133,11 @@ const Signup: NextPage = () => {
             </CheckboxContainer>
           </Scroll>
         </Box>
-        <NextButton title="확인" onClick={() => console.log('확인')} />
+        <NextButton
+          title="확인"
+          onClick={() => console.log('확인')}
+          isActive={isActive}
+        />
       </Content>
     </>
   );

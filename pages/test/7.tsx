@@ -68,7 +68,7 @@ const Test: NextPage = () => {
 
   return (
     <>
-      {isInputWarningModal && <InputWarning />}
+      {isInputWarningModal && <InputWarning title="스타일을 선택해주세요." />}
       <Header title="차량 성향 테스트" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>차량 스타일 선택</Title>
