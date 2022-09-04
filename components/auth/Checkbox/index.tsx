@@ -1,12 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { shallowEqual } from 'react-redux';
 import Image from '@components/common/Image';
 import Scroll from '@components/common/Scroll';
-import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
-import { actions } from '@store/slices/inputSlice';
 import activeCheckImage from '@assets/images/icons/big-active-check.svg';
 import inactiveCheckImage from '@assets/images/icons/big-inactive-check.svg';
 import upArrowImage from '@assets/images/icons/small-black-up-arrow.svg';
@@ -22,7 +19,8 @@ interface IProps {
   title: string;
   description: string;
   category?: string;
-  onClick?: React.MouseEventHandler<HTMLInputElement>;
+  checked: boolean;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 interface IStyleProps {
@@ -81,39 +79,11 @@ const ImageLabel: React.FC<IProps> = ({
   title,
   description,
   category,
-  onClick,
+  checked,
+  onChange,
 }) => {
   const [isDown, setIsDown] = useState<boolean>(false);
   const { name, value } = input;
-  const dispatch = useTypedDispatch();
-  const inputState = useTypedSelector(
-    (state) => state.rootReducer.inputReducer,
-    shallowEqual,
-  );
-  const [checked, setChecked] = useState<boolean>(false);
-
-  useEffect(() => {
-    // for (const key in inputState) {
-    //   if (key !== name) continue;
-    //   if (!Array.isArray(inputState[key])) continue;
-    //   const hasName = inputState[key].indexOf(value) !== -1;
-    //   if (hasName) {
-    //     setChecked(true);
-    //     continue;
-    //   }
-    //   setChecked(false);
-    // }
-  }, [inputState, name, value, category]);
-
-  const handleChange = (ev) => {
-    // if (ev.target.checked) {
-    //   dispatch(actions.addCheckBoxItem(ev.target));
-    //   setChecked(true);
-    //   return;
-    // }
-    // dispatch(actions.deleteCheckBoxItem(ev.target));
-    // setChecked(false);
-  };
 
   return (
     <Wrapper>
@@ -126,8 +96,7 @@ const ImageLabel: React.FC<IProps> = ({
             css={css`
               all: unset;
             `}
-            onChange={handleChange}
-            onClick={onClick}
+            onChange={onChange}
             checked={checked}
           />
           <ImageContainer>

@@ -68,7 +68,6 @@ const SelectContainer = styled.div`
 
 const Select = styled.select`
   all: unset;
-  width: 100%;
   text-align: center;
   font: ${fonts.BODY_REGULAR_1};
   color: ${colors.SECONDARY_400};

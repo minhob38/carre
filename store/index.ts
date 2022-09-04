@@ -19,6 +19,8 @@ import { resultSaga } from './slices/resultSlice';
 import dealerReudcer from './slices/dealerSlice';
 import { dealerSaga } from './slices/dealerSlice';
 
+import authReducer from './slices/authSlice';
+
 export function* rootSaga() {
   yield all([appSaga(), surveySaga(), resultSaga(), dealerSaga()]);
 }
@@ -32,6 +34,7 @@ if (process.env.NODE_ENV === 'development') {
 // combine으로 합치지 않아도 됩니다. (코드정리를 위해 rootReducer로 묶었습니다.)
 const rootReducer = combineReducers({
   appReducer,
+  authReducer,
   inputReducer,
   surveyReducer,
   resultReducer,
