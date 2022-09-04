@@ -61,9 +61,35 @@ const Test: NextPage = () => {
   const surveyToken = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
+  const input: any = useTypedSelector((state) => {
+    const inputState = state.rootReducer.inputReducer;
+    const {
+      birthYear,
+      gender,
+      carUsagePurpose,
+      minBudgetValue,
+      maxBudgetValue,
+      passengerCount,
+      drivenDistanceInYear,
+    } = inputState;
+
+    return {
+      birthYear,
+      gender,
+      carUsagePurpose,
+      userBudgetMin: 10000 * Number(minBudgetValue),
+      userBudgetMax: 10000 * Number(maxBudgetValue),
+      passengerCount,
+      drivenDistanceInYear,
+    };
+  });
 
   const handleButtonClick = () => {
-    router.push('/test/4');
+    if (!surveyToken) {
+      return alert('survey token does not exist');
+    }
+    dispatch(actions.bindSurveyAsync({ surveyToken, input }));
+    router.push('/test/5');
   };
 
   return (

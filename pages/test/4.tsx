@@ -93,10 +93,10 @@ const Test: NextPage = () => {
   });
 
   const handleButtonClick = () => {
-    if (!surveyToken) {
-      return alert('survey token does not exist');
-    }
-    dispatch(actions.bindSurveyAsync({ surveyToken, input }));
+    // if (!surveyToken) {
+    //   return alert('survey token does not exist');
+    // }
+    // dispatch(actions.bindSurveyAsync({ surveyToken, input }));
     router.push('/test/5');
   };
 
