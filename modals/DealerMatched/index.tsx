@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
@@ -65,11 +66,13 @@ const DealerMatchedModal: React.FC = () => {
   const dispatch = useTypedDispatch();
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     if (ev.currentTarget !== ev.target) return;
-    dispatch(actions.hideDealerMatchedModal());
+    // dispatch(actions.hideDealerMatchedModal());
   };
   const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     dispatch(actions.hideDealerMatchedModal());
+    router.push('/');
   };
+  const router = useRouter();
 
   return (
     <Modal onClick={handleClickModal}>

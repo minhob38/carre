@@ -18,6 +18,7 @@ import { actions } from '@store/slices/authSlice';
 // import { actions as inputActions } from '@store/slices/inputSlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
+import DealerMatchedModal from '@modals/DealerMatched';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -106,6 +107,9 @@ const Test: NextPage = () => {
   const isInputWarningModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isInputWarningModal,
   );
+  const isDealerMatchedModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isDealerMatchedModal,
+  );
   const surveyToken = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
@@ -156,6 +160,7 @@ const Test: NextPage = () => {
   return (
     <>
       {isInputWarningModal && <InputWarning title="알맞은 값을 넣어주세요." />}
+      {isDealerMatchedModal && <DealerMatchedModal />}
       <Header title="나의 정보 입력" type="back" backPath="/auth/signup/1" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <Title>나의 상담 정보 입력</Title>

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import * as api from '@apis/api';
+import { actions as appActions } from './appSlice';
 
 interface IState {
   isTotalTermAgreement: boolean;
@@ -96,6 +97,8 @@ function* connectUserAndDealerSaga(action: PayloadAction<any>) {
     phoneNumber,
     dealerId,
   );
+  console.log(data);
+  yield put(appActions.showDealerMatchedModal());
 
   // const surveyToken = action.payload;
   // const tendencyData = yield api.analyzeUserTendency(surveyToken);
