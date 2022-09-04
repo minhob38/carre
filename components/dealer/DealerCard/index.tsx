@@ -70,6 +70,13 @@ const Chip = styled.div`
   border-radius: 4px;
 `;
 
+const Container = styled.div`
+  flex: 1;
+  /* display: flex;
+  flex: 1;
+  justify-content: space-between; */
+`;
+
 const INPUT_NAME = 'dealer';
 const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -107,7 +114,8 @@ const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
 
   const handleClick = () => {
     // dispatch(actions.findDealerAsync());
-    router.push('/auth/login');
+    // router.push('/auth/login');
+    router.push('/auth/signup/1');
   };
 
   return (
@@ -115,13 +123,13 @@ const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
       <ImageContainer>
         <Image src={src} alt={'dealer'} width="74px" />
       </ImageContainer>
-      <div>
+      <Container>
         <DescriptionContainer>
           <Description>{description}</Description>
-          <Image src={hyundaiCi} alt={'company'} width="49px" />
+          {/* <Image src={hyundaiCi} alt={'company'} width="49px" /> */}
         </DescriptionContainer>
         <ChipContainer>{Chips}</ChipContainer>
-      </div>
+      </Container>
       <input
         type="radio"
         name={INPUT_NAME}

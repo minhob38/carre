@@ -122,3 +122,24 @@ export const getUserRecommendation = async (recommendationId: string) => {
     console.log((err as TError).message);
   }
 };
+
+export const connectUserAndDealer = async (
+  surveyToken: string,
+  recommendId: string,
+  phoneNumber: string,
+  dealerId: string,
+) => {
+  try {
+    const response = await axios
+      .post<IResponse>(`/dealers/connect-user`, {
+        dealerId,
+        userSurveyToken: surveyToken,
+        userPhoneNumber: phoneNumber,
+        recommendToken: recommendId,
+      })
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};

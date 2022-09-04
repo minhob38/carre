@@ -20,9 +20,10 @@ import dealerReudcer from './slices/dealerSlice';
 import { dealerSaga } from './slices/dealerSlice';
 
 import authReducer from './slices/authSlice';
+import { authSaga } from './slices/authSlice';
 
 export function* rootSaga() {
-  yield all([appSaga(), surveySaga(), resultSaga(), dealerSaga()]);
+  yield all([appSaga(), authSaga(), surveySaga(), resultSaga(), dealerSaga()]);
 }
 const sagaMiddleware = createSagaMiddleware();
 const middleware: any = [sagaMiddleware];

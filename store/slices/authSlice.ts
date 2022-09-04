@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import * as api from '@apis/api';
 
 interface IState {
   isTotalTermAgreement: boolean;
   isInfoUseTermAgreement: boolean;
   isInfoTermAgreement: boolean;
   isUseTermAgreement: boolean;
+  phoneNumber: string;
 }
 
 const initialState: IState = {
@@ -12,6 +15,7 @@ const initialState: IState = {
   isInfoUseTermAgreement: false,
   isInfoTermAgreement: false,
   isUseTermAgreement: false,
+  phoneNumber: '',
 };
 
 const authSlice = createSlice({
@@ -72,8 +76,37 @@ const authSlice = createSlice({
         state.isTotalTermAgreement = false;
       }
     },
+    setPhoneNumber: (
+      state,
+      action: PayloadAction<React.ChangeEvent<HTMLInputElement>['target']>,
+    ) => {
+      const { value } = action.payload;
+      state.phoneNumber = value;
+    },
+    connectUserAndDealerAsync: (state, action: PayloadAction<any>) => {},
   },
 });
+
+function* connectUserAndDealerSaga(action: PayloadAction<any>) {
+  const { dealerId, phoneNumber, recommendId, surveyToken } = action.payload;
+
+  const data = yield api.connectUserAndDealer(
+    surveyToken,
+    recommendId,
+    phoneNumber,
+    dealerId,
+  );
+
+  // const surveyToken = action.payload;
+  // const tendencyData = yield api.analyzeUserTendency(surveyToken);
+  // const recomData = yield api.analyzeUserRecommendation(surveyToken);
+  // yield put(actions.connectUserAndDealerAsync({
+  // }));
+}
+
+export function* authSaga() {
+  yield takeLatest(actions.connectUserAndDealerAsync, connectUserAndDealerSaga);
+}
 
 export const actions = authSlice.actions;
 export default authSlice.reducer;

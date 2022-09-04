@@ -133,11 +133,7 @@ const Signup: NextPage = () => {
             </CheckboxContainer>
           </Scroll>
         </Box>
-        <NextButton
-          title="확인"
-          onClick={() => console.log('확인')}
-          isActive={isActive}
-        />
+        <NextButton title="확인" path="/auth/signup/2" isActive={isActive} />
       </Content>
     </>
   );

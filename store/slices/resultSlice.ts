@@ -6,12 +6,14 @@ import * as api from '@apis/api';
 interface IState {
   tendency: any;
   recoms: any;
+  recommendId: string | null;
 }
 
 /* slices */
 const initialState: IState = {
   tendency: null,
   recoms: null,
+  recommendId: null,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -39,6 +41,10 @@ const resultSlice = createSlice({
       const recoms = action.payload;
       state.recoms = recoms;
     },
+    saveRecommendationId: (state, action: PayloadAction<string>) => {
+      const recommendId = action.payload;
+      state.recommendId = recommendId;
+    },
   },
 });
 
@@ -59,6 +65,7 @@ function* getUserTendencySaga(action: PayloadAction<string>) {
 function* getUserRecomSaga(action: PayloadAction<string>) {
   const recommendationId = action.payload;
   const data = yield api.getUserRecommendation(recommendationId);
+  yield put(actions.saveRecommendationId(recommendationId));
   yield put(actions.saveUserRecom(data));
 }
 

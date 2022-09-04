@@ -14,8 +14,8 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
-import { actions } from '@store/slices/surveySlice';
-import { actions as inputActions } from '@store/slices/inputSlice';
+import { actions } from '@store/slices/authSlice';
+// import { actions as inputActions } from '@store/slices/inputSlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 
@@ -97,6 +97,8 @@ const Warning = styled.div`
   text-align: center;
 `;
 
+const reg = /[0-9]+/g;
+
 const Test: NextPage = () => {
   const router = useRouter();
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -107,97 +109,78 @@ const Test: NextPage = () => {
   const surveyToken = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
-  const budget: any = useTypedSelector((state) => {
-    const inputState = state.rootReducer.inputReducer;
-    return inputState.budget;
+  const phoneNumber: any = useTypedSelector((state) => {
+    return state.rootReducer.authReducer.phoneNumber;
   });
-  const input: any = useTypedSelector((state) => {
-    const inputState = state.rootReducer.inputReducer;
-    const {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      budget,
-      minBudgetValue,
-      maxBudgetValue,
-      passengerCount,
-      drivenDistanceInYear,
-    } = inputState;
 
-    return {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      userBudget: 10000 * Number(budget),
-      userBudgetMin: 10000 * Number(minBudgetValue),
-      userBudgetMax: 10000 * Number(maxBudgetValue),
-      passengerCount,
-      drivenDistanceInYear,
-    };
+  const dealerId: any = useTypedSelector((state) => {
+    return state.rootReducer.dealerReudcer.dealer;
   });
+
+  const recommendId: any = useTypedSelector((state) => {
+    return state.rootReducer.resultReducer.recommendId;
+  });
+  // const surveyToken: any = useTypedSelector((state) => {
+  //   return state.rootReducer.surveyReducer.reco;
+  // });
 
   useEffect(() => {
-    const MIN_BUDGET = 1000; // 1000만원
-    const MAX_BUDGET = 30000; // 3억원
-    const _budget = Number(budget);
-    if (_budget >= MIN_BUDGET && _budget <= MAX_BUDGET) {
+    const isValid = reg.test(phoneNumber);
+    if (isValid) {
       setIsActive(true);
-      return;
+    } else {
+      setIsActive(false);
     }
-
-    setIsActive(false);
-  }, [budget]);
+  }, [phoneNumber]);
 
   const handleButtonClick = () => {
     if (!surveyToken) {
       return alert('survey token does not exist');
     }
-    dispatch(actions.bindSurveyAsync({ surveyToken, input }));
-    router.push('/test/5');
+    dispatch(
+      actions.connectUserAndDealerAsync({
+        surveyToken,
+        recommendId,
+        dealerId,
+        phoneNumber,
+      }),
+    );
+    // dispatch(actions.bindSurveyAsync({ surveyToken, input }));
+    // router.push('/test/5');
   };
 
   const handleInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(inputActions.setBudget(ev.target));
+    dispatch(actions.setPhoneNumber(ev.target));
   };
 
   return (
     <>
       {isInputWarningModal && <InputWarning title="알맞은 값을 넣어주세요." />}
-      <Header title="나의 정보 입력" type="back" backPath="/test/2" />
+      <Header title="나의 정보 입력" type="back" backPath="/auth/signup/1" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
-        <Title>나의 구매 필수 조건 입력</Title>
-        <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>
-        <SubTitle>가격설정</SubTitle>
-        <SubDescription>차량의 가격을 직접 입력해요</SubDescription>
+        <Title>나의 상담 정보 입력</Title>
+        <Description>상담 가능한 전화번호를 입력해요</Description>
+        {/* <SubTitle>가격설정</SubTitle> */}
+        {/* <SubDescription>차량의 가격을 직접 입력해요</SubDescription> */}
         <InputContainer>
           <Input
-            placeholder="원하는 값을 입력해주세요."
-            type="number"
-            name="useBudget"
-            // value={!!budget ? budget : 'none'}
+            placeholder="전화번호를 입력해주세요. (- 생략)"
+            type="tel"
+            name="phoneNumber"
             onChange={handleInputChange}
-            pattern="[0-9]*"
+            pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}"
             inputMode="numeric"
           />
-          {!!budget && <Won>만원</Won>}
         </InputContainer>
-        {!!budget && !isActive && (
-          <Warning>1000만원 - 3억 사이의 값을 넣어주세요.</Warning>
+        {!!phoneNumber && !isActive && (
+          <Warning>전화번호 형식으로 넣어주세요.</Warning>
         )}
-        {/* <Budget /> */}
-        {!IS_HIDDEN && (
-          <>
-            <Manual>직접입력하기</Manual>
-            <ToggleContainer>
-              <Toggle />
-            </ToggleContainer>
-          </>
-        )}
-        <ProgressBar stage={2} />
+        {/* <ProgressBar stage={2} /> */}
         <NextButton
-          title="다음"
+          title="보내기"
           onClick={handleButtonClick}
           isActive={isActive}
+          // path={'/auth/signup/2'}
         />
       </Content>
     </>
