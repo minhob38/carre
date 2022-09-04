@@ -38,7 +38,7 @@ const Title = styled.div`
 `;
 
 const Description = styled.div`
-  margin: 0 0 32px ${margins.SIDE_MAIN_MARGIN};
+  margin: 0 0 20px ${margins.SIDE_MAIN_MARGIN};
   font: ${fonts.SUBTITLE_T1};
   color: ${colors.SECONDARY_300};
 `;
@@ -80,13 +80,13 @@ const YearContainer = styled.div``;
 const GenderContainer = styled.div``;
 
 const PurposeContainer = styled.div`
-  margin: 40px 0 0 0;
+  margin: 20px 0 0 0;
 `;
 
 const PersonDistanceContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 40px 0 0 0;
+  margin: 20px 0 0 0;
 `;
 
 const PersonContainer = styled.div`
