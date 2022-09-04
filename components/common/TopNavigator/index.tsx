@@ -6,7 +6,8 @@ import Image from '@components/common/Image';
 import logoImage from '@assets/images/logos/logo.png';
 import * as fonts from '@constants/fonts';
 import * as colors from '@constants/colors';
-
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
+import { actions } from '@store/slices/appSlice';
 interface IStyleProps {
   isCurrent: boolean;
 }
@@ -46,6 +47,19 @@ const Menu = styled.div`
   }};
 `;
 
+const NotService: React.FC = ({ children }) => {
+  const dispatch = useTypedDispatch();
+  return (
+    <div
+      onClick={() => {
+        dispatch(actions.showNotServiceModal());
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const TopNavigator: React.FC = () => {
   const router = useRouter();
   const pathname = router.pathname;
@@ -59,13 +73,19 @@ const TopNavigator: React.FC = () => {
           <Menu isCurrent={pathname === '/'}>홈</Menu>
         </Link>
         {/* <Link href={'/history'} passHref={true}> */}
-        <Menu isCurrent={pathname === '/history'}>히스토리</Menu>
+        <NotService>
+          <Menu isCurrent={pathname === '/history'}>히스토리</Menu>
+        </NotService>
         {/* </Link> */}
         {/* <Link href={'/bookmark'} passHref={true}> */}
-        <Menu isCurrent={pathname === '/bookmark'}>찜</Menu>
+        <NotService>
+          <Menu isCurrent={pathname === '/bookmark'}>찜</Menu>
+        </NotService>
         {/* </Link> */}
         {/* <Link href={'/my'} passHref={true}> */}
-        <Menu isCurrent={pathname === '/my'}>MY</Menu>
+        <NotService>
+          <Menu isCurrent={pathname === '/my'}>MY</Menu>
+        </NotService>
         {/* </Link> */}
       </MenuContainer>
     </Wrapper>

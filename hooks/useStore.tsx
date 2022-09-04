@@ -12,7 +12,7 @@ export const useInitialization = () => {
   const dispatch = useTypedDispatch();
 
   const initializeStore = () => {
-    dispatch(appActions.initialize());
+    // dispatch(appActions.initialize());
     dispatch(dealerActions.initialize());
     dispatch(inputActions.initialize());
     dispatch(resultActions.initialize());

@@ -4,6 +4,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 /* slices */
 const initialState = {
   isClicked: false,
+  isNotServiceModal: false,
   isInputWarningModal: false,
   isDealerMatchingModal: false,
   isDealerMatchedModal: false,
@@ -25,6 +26,12 @@ const appSlice = createSlice({
     },
     clickButton: (state, action: PayloadAction) => {
       state.isClicked = !state.isClicked;
+    },
+    showNotServiceModal: (state) => {
+      state.isNotServiceModal = true;
+    },
+    hideNotServiceModal: (state) => {
+      state.isNotServiceModal = false;
     },
     showInputWariningModal: (state) => {
       state.isInputWarningModal = true;

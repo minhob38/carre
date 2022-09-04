@@ -17,8 +17,9 @@ import cClassImage from '@assets/images/c-class.webp';
 import bmw3Series from '@assets/images/bmw-3-series.png';
 import kiaRay from '@assets/images/kia-ray.webp';
 import miniCooper from '@assets/images/mini-cooper.png';
-import { useInitialization } from '@hooks/useStore';
+import { useInitialization, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
+import NotServiceModal from '@modals/NotService.tsx';
 
 const Title = styled.div`
   font: ${fonts.TITLE_T2};
@@ -61,6 +62,9 @@ const SubContainer = styled.div`
 
 const Index: NextPage = () => {
   const initializeStore = useInitialization();
+  const isNotServiceModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isNotServiceModal,
+  );
 
   useEffect(() => {
     initializeStore();
@@ -68,6 +72,7 @@ const Index: NextPage = () => {
 
   return (
     <>
+      {isNotServiceModal && <NotServiceModal />}
       <TopNavigator />
       <Content top="105px" bottom="0">
         <Scroll direction="y" height="100%">
