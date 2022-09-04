@@ -122,7 +122,7 @@ const Test: NextPage = () => {
 
   return (
     <>
-      <Header title="차량 성향 테스트" type="close" closePath="/" />
+      <Header title="차량 성향 테스트" type="back" backPath="/test/5" />
       {/* <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}> */}
       <Content top={HEADER_HEIGHT} bottom={'0'}>
         <BarContainer>

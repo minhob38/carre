@@ -25,7 +25,7 @@ const ButtonContainer = styled.div`
 const Test: NextPage = () => {
   return (
     <>
-      <Header type="close" title="차량 구매 성향 테스트" backPath="/test" />
+      <Header type="back" title="차량 구매 성향 테스트" backPath="/" />
       <Content top={HEADER_HEIGHT} bottom="0">
         {/* TODO: 변수로 사용자 이름 넣기 */}
         <Title>

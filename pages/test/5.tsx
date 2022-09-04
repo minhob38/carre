@@ -48,7 +48,7 @@ const Test: NextPage = () => {
 
   return (
     <>
-      <Header title="차량 성향 테스트" type="close" closePath="/" />
+      <Header title="차량 성향 테스트" type="back" backPath="/test/3" />
       <Content top={HEADER_HEIGHT} bottom="0">
         <Container>
           <Title>차량 성향 테스트하기</Title>

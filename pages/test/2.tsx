@@ -216,7 +216,7 @@ const Test: NextPage = () => {
   return (
     <>
       {isInputWarningModal && <InputWarning />}
-      <Header title="나의 정보 입력" type="close" closePath="/" />
+      <Header title="나의 정보 입력" type="back" closePath="/" />
       <Content
         top={HEADER_HEIGHT}
         bottom={`calc(${NEXT_BUTTON_HEIGHT} + 50px)`}
