@@ -7,7 +7,6 @@ import {
   DEFAULT_YEAR,
   DEFAULT_PERSON,
   DEFAULT_DISTANCE,
-  UNIT_DISTANCE,
 } from '@constants/variables';
 
 interface IState {
@@ -34,7 +33,7 @@ const initialState: IState = {
   birthYear: DEFAULT_YEAR,
   gender: null,
   passengerCount: DEFAULT_PERSON,
-  drivenDistanceInYear: DEFAULT_DISTANCE * UNIT_DISTANCE,
+  drivenDistanceInYear: DEFAULT_DISTANCE,
   carUsagePurpose: null,
   budget: 0,
   /* budget range bar 안에 있는 ball의 초기 위치 */

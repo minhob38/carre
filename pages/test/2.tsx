@@ -19,11 +19,9 @@ import {
   MAX_YEAR,
   MIN_PERSON,
   MAX_PERSON,
-  MIN_DISTANCE_UNIT,
-  MAX_DISTANCE_UNIT,
-  UNIT_DISTANCE,
   genderLabels,
   purposeLabels,
+  DISTANCE,
 } from '@constants/variables';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/inputSlice';
@@ -195,11 +193,6 @@ const Test: NextPage = () => {
     persons.push(i);
   }
 
-  const distances: number[] = [];
-  for (let i = MIN_DISTANCE_UNIT; i < MAX_DISTANCE_UNIT; i++) {
-    distances.push(i * UNIT_DISTANCE);
-  }
-
   const YearOptions = years.map((year) => {
     return (
       <option key={uuid4()} value={year}>
@@ -216,7 +209,7 @@ const Test: NextPage = () => {
     );
   });
 
-  const DistanceOptions = distances.map((distance) => {
+  const DistanceOptions = DISTANCE.map((distance) => {
     return (
       <option key={uuid4()} value={distance}>
         {distance}

@@ -42,10 +42,20 @@ export const MAX_PERSON = 9;
 export const DEFAULT_PERSON = 1;
 
 /* 연주행거리 select 설정 */
-export const MIN_DISTANCE_UNIT = 1;
-export const MAX_DISTANCE_UNIT = 10;
-export const DEFAULT_DISTANCE = 2;
-export const UNIT_DISTANCE = 5000;
+export const DISTANCE = [
+  '모름',
+  5000,
+  10000,
+  15000,
+  20000,
+  25000,
+  30000,
+  35000,
+  40000,
+  45000,
+  50000,
+];
+export const DEFAULT_DISTANCE = 10000;
 
 /* 가격 설정 */
 export const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));
