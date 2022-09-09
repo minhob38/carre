@@ -87,7 +87,6 @@ const Result: NextPage = () => {
   // });
   const firstRankInfo = recommendCarInfoList[0];
   const secondRankInfo = recommendCarInfoList[1];
-  console.log(firstRankInfo, secondRankInfo);
 
   const minCarPage = 1;
   const maxCarPage = recommendCarInfoList.length;

@@ -16,6 +16,7 @@ import Budget from '@components/common/MinMaxBudget';
 import Toggle from '@components/common/Toggle';
 import useWindowDimensions from '@hooks/useWindowDimension';
 import ScoreCard from '@components/result/ScoreCard';
+import BudgetInput from '@components/common/BudgetInput';
 
 const Title = styled.div`
   margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
@@ -29,23 +30,18 @@ const Subtitle = styled.div`
   color: ${colors.SECONDARY_300};
 `;
 
-const Manual = styled.div`
-  display: flex;
+const InputContainer = styled.div`
   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  justify-content: flex-end;
-  align-items: center;
-  margin: 47px auto 12px auto;
-  font: ${fonts.BUTTON_3};
-  color: ${colors.SECONDARY_400};
-  text-decoration-line: underline;
+  margin: 0 auto;
 `;
 
 const ToggleContainer = styled.div`
-  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+  margin: 0 0 47px ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const StyleCheckBoxesContainer = styled.div`
-  margin: 16px 0 0 ${margins.SIDE_SUB_MARGIN};
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  margin: 0 auto;
 `;
 
 const NavigatorContainer = styled.div`
@@ -58,7 +54,7 @@ const NavigatorContainer = styled.div`
 `;
 
 const BudgetContainer = styled.div`
-  margin: 0 0 47px 0;
+  margin: 0 0 20px 0;
 `;
 
 const StyleContainer = styled.div`
@@ -76,7 +72,7 @@ const Result: NextPage = () => {
   const valueRef = useRef<HTMLDivElement>(null);
   const [isBudgetViewd, setIsBudgetViewd] = useState<boolean>(true);
   const [isStyleViewd, setIsStyleViewd] = useState<boolean>(false);
-  const [isValueViewd, setIsValueViewd] = useState<boolean>(false);
+  // const [isValueViewd, setIsValueViewd] = useState<boolean>(false);
 
   const handleDetectScroll = () => {
     const topOffset = 72 + 62; // header 및 nav 높이
@@ -87,8 +83,8 @@ const Result: NextPage = () => {
       budgetRef.current.getBoundingClientRect().top - topOffset;
     const stylePosition =
       styleRef.current.getBoundingClientRect().top - topOffset + 0; //styleRef.current.clientHeight / 2 <- 중간점 기반
-    const valuePosition =
-      valueRef.current.getBoundingClientRect().top - topOffset;
+    // const valuePosition =
+    //   valueRef.current.getBoundingClientRect().top - topOffset;
 
     if (budgetPosition < -10) {
       setIsBudgetViewd(false);
@@ -97,7 +93,7 @@ const Result: NextPage = () => {
     } else {
       setIsBudgetViewd(true);
       setIsStyleViewd(false);
-      setIsValueViewd(false);
+      // setIsValueViewd(false);
       return;
     }
 
@@ -108,19 +104,19 @@ const Result: NextPage = () => {
     } else {
       setIsBudgetViewd(false);
       setIsStyleViewd(true);
-      setIsValueViewd(false);
+      // setIsValueViewd(false);
       return;
     }
 
-    if (valuePosition < 0) {
-      setIsValueViewd(false);
-    } else if (valuePosition > bottomOffset) {
-      setIsValueViewd(false);
-    } else {
-      setIsBudgetViewd(false);
-      setIsStyleViewd(false);
-      setIsValueViewd(true);
-    }
+    // if (valuePosition < 0) {
+    //   setIsValueViewd(false);
+    // } else if (valuePosition > bottomOffset) {
+    //   setIsValueViewd(false);
+    // } else {
+    //   setIsBudgetViewd(false);
+    //   setIsStyleViewd(false);
+    //   setIsValueViewd(true);
+    // }
   };
 
   return (
@@ -128,9 +124,9 @@ const Result: NextPage = () => {
       <Header title="검사 결과 조절" type="close" closePath="/" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <NavigatorContainer>
-          <Chip title="가격 변경" type={isBudgetViewd ? 'yes' : 'no'} />
-          <Chip title="차량 스타일 변경" type={isStyleViewd ? 'yes' : 'no'} />
-          <Chip title="차량 가치 변경" type={isValueViewd ? 'yes' : 'no'} />
+          {/* <Chip title="가격 변경" type={isBudgetViewd ? 'yes' : 'no'} /> */}
+          {/* <Chip title="차량 스타일 변경" type={isStyleViewd ? 'yes' : 'no'} /> */}
+          {/* <Chip title="차량 가치 변경" type={isValueViewd ? 'yes' : 'no'} /> */}
         </NavigatorContainer>
         <Scroll
           direction="y"
@@ -140,13 +136,14 @@ const Result: NextPage = () => {
         >
           <BudgetContainer ref={budgetRef}>
             <Title>가격 변경</Title>
-            <Subtitle>가격의 스펙트럼을 변경할 수 있어요.</Subtitle>
-            <Budget />
-            <Manual>직접입력하기</Manual>
-            <ToggleContainer>
-              <Toggle />
-            </ToggleContainer>
+            <Subtitle>가격을 변경할 수 있어요.</Subtitle>
+            <InputContainer>
+              <BudgetInput />
+            </InputContainer>
           </BudgetContainer>
+          <ToggleContainer>
+            <Toggle />
+          </ToggleContainer>
           <StyleContainer ref={styleRef}>
             <Title>차량 스타일 변경</Title>
             <Subtitle>차량 스타일을 변경한 후 확인해보세요.</Subtitle>
@@ -154,11 +151,11 @@ const Result: NextPage = () => {
               <StyleCheckBoxes />
             </StyleCheckBoxesContainer>
           </StyleContainer>
-          <ValueContainer ref={valueRef}>
+          {/* <ValueContainer ref={valueRef}>
             <Title>차량 가치 변경</Title>
             <Subtitle>가치별 차량 정보를 알 수 있어요</Subtitle>
-            {/* <ScoreCard type="dynamic" /> */}
-          </ValueContainer>
+            <ScoreCard type="dynamic" />
+          </ValueContainer> */}
         </Scroll>
       </Content>
       <NextButton title="다음" path="/result" />

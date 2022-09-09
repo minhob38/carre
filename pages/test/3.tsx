@@ -18,6 +18,7 @@ import { actions } from '@store/slices/surveySlice';
 import { actions as inputActions } from '@store/slices/inputSlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
+import BudgetInput from '@components/common/BudgetInput';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -44,46 +45,12 @@ const SubDescription = styled.div`
 `;
 
 const ToggleContainer = styled.div`
-  margin: 30px 0 0 ${margins.SIDE_MAIN_MARGIN};
+  margin: 20px 0 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const InputContainer = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  height: 47px;
   margin: 0 auto;
-`;
-
-const Input = styled.input`
-  all: unset;
-  width: 100%;
-  height: 100%;
-  border-bottom: 2px solid ${colors.SECONDARY_200};
-  text-align: center;
-  &::placeholder {
-    font: ${fonts.BODY_REGULAR_1};
-    color: ${colors.SECONDARY_250};
-  }
-`;
-
-const Won = styled.div`
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translate(0, -50%);
-  font: ${fonts.BODY_REGULAR_1};
-  color: ${colors.SECONDARY_250};
-`;
-
-const Warning = styled.div`
-  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  margin: 20px auto 0 auto;
-  font: ${fonts.BODY_REGULAR_1};
-  color: ${colors.ERROR_RED};
-  text-align: center;
 `;
 
 const Test: NextPage = () => {
@@ -159,21 +126,8 @@ const Test: NextPage = () => {
         {/* <SubTitle>가격설정</SubTitle>
         <SubDescription>차량의 가격을 직접 입력해요</SubDescription> */}
         <InputContainer>
-          <Input
-            placeholder="원하는 값을 입력해주세요."
-            type="number"
-            name="useBudget"
-            // value={!!budget ? budget : 'none'}
-            onChange={handleInputChange}
-            pattern="[0-9]*"
-            inputMode="numeric"
-          />
-          {!!budget && <Won>만원</Won>}
+          <BudgetInput />
         </InputContainer>
-        {!!budget && !isActive && (
-          <Warning>1500만원 - 3억 사이의 값을 넣어주세요.</Warning>
-        )}
-        {/* <Budget /> */}
         <ToggleContainer>
           <Toggle />
         </ToggleContainer>
