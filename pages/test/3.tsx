@@ -165,10 +165,10 @@ const Test: NextPage = () => {
       {isInputWarningModal && <InputWarning title="알맞은 값을 넣어주세요." />}
       <Header title="나의 정보 입력" type="back" backPath="/test/2" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
-        <Title>나의 구매 필수 조건 입력</Title>
-        <Description>차량 구매에 필수적인 나의 정보를 입력해요</Description>
-        <SubTitle>가격설정</SubTitle>
-        <SubDescription>차량의 가격을 직접 입력해요</SubDescription>
+        <Title>예산 조건 입력</Title>
+        <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
+        {/* <SubTitle>가격설정</SubTitle>
+        <SubDescription>차량의 가격을 직접 입력해요</SubDescription> */}
         <InputContainer>
           <Input
             placeholder="원하는 값을 입력해주세요."
