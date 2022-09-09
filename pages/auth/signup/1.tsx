@@ -68,21 +68,17 @@ const Signup: NextPage = () => {
     (state) => state.rootReducer.appReducer.isInputWarningModal,
   );
 
-  const {
-    isTotalTermAgreement,
-    isInfoUseTermAgreement,
-    isInfoTermAgreement,
-    isUseTermAgreement,
-  } = authState;
+  const { isTotalTermAgreement, isInfoSaveTermAgreement, isInfoProvAgreement } =
+    authState;
 
   useEffect(() => {
-    if (isInfoUseTermAgreement && isInfoTermAgreement) {
+    if (isInfoSaveTermAgreement && isInfoProvAgreement) {
       setIsActive(true);
       return;
     }
 
     setIsActive(false);
-  }, [isInfoUseTermAgreement, isInfoTermAgreement]);
+  }, [isInfoSaveTermAgreement, isInfoProvAgreement]);
 
   return (
     <>
@@ -103,32 +99,21 @@ const Signup: NextPage = () => {
               />
               <Checbox
                 input={{ name: '', value: 'user' }}
-                title="[필수] 개인 정보 활용 동의"
-                description="개인 정보 활용 동의 보러가기"
-                link="https://invited-magic-684.notion.site/203af742a79e4b65bf68ccd884b7f632"
-                onChange={() => dispatch(actions.clickInfoUseTermAgreement())}
-                checked={isInfoUseTermAgreement}
+                title="[필수] 개인 정보 수집 동의"
+                description="개인 정보 수집 동의 보러가기"
+                link="https://invited-magic-684.notion.site/646d75216c184217bf0a7eef2ca06742"
+                onChange={() => dispatch(actions.clickInfoSaveTermAgreement())}
+                checked={isInfoSaveTermAgreement}
               />
               <Checbox
                 input={{ name: '', value: 'user' }}
-                title="[선택] 개인 정보 동의"
-                description="개인 정보 동의 보러가기"
+                title="[필수] 제3자 제공 동의"
+                description="제3자 제공 동의 보러가기"
                 link={
-                  'https://invited-magic-684.notion.site/646d75216c184217bf0a7eef2ca06742'
+                  'https://invited-magic-684.notion.site/92b92d8352b14f53a397f1cf603cc5b8'
                 }
-                onChange={() => dispatch(actions.clickInfoTermAgreement())}
-                checked={isInfoTermAgreement}
-              />
-              <Checbox
-                input={{
-                  name: '',
-                  value: 'user',
-                }}
-                title="[선택] 이용 약관 동의"
-                description="이용 약관 동의 보러가기"
-                link="https://invited-magic-684.notion.site/92b92d8352b14f53a397f1cf603cc5b8"
-                onChange={() => dispatch(actions.clickUseTermAgreement())}
-                checked={isUseTermAgreement}
+                onChange={() => dispatch(actions.clickInfoProvAgreement())}
+                checked={isInfoProvAgreement}
               />
             </CheckboxContainer>
           </Scroll>
@@ -140,3 +125,7 @@ const Signup: NextPage = () => {
 };
 
 export default Signup;
+
+// https://invited-magic-684.notion.site/203af742a79e4b65bf68ccd884b7f632
+// https://invited-magic-684.notion.site/646d75216c184217bf0a7eef2ca06742
+// https://invited-magic-684.notion.site/92b92d8352b14f53a397f1cf603cc5b8

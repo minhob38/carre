@@ -4,18 +4,17 @@ import * as api from '@apis/api';
 import { actions as appActions } from './appSlice';
 
 interface IState {
-  isTotalTermAgreement: boolean;
-  isInfoUseTermAgreement: boolean;
-  isInfoTermAgreement: boolean;
-  isUseTermAgreement: boolean;
+  isTotalTermAgreement: boolean; // 전체동의
+  isInfoSaveTermAgreement: boolean; // 개인정보 수집 동의
+  isInfoProvAgreement: boolean; // 3자 제공
+  // isUseTermAgreement: boolean;
   phoneNumber: string;
 }
 
 const initialState: IState = {
   isTotalTermAgreement: false,
-  isInfoUseTermAgreement: false,
-  isInfoTermAgreement: false,
-  isUseTermAgreement: false,
+  isInfoSaveTermAgreement: false,
+  isInfoProvAgreement: false,
   phoneNumber: '',
 };
 
@@ -31,47 +30,25 @@ const authSlice = createSlice({
     clickTotalAgreement: (state) => {
       if (state.isTotalTermAgreement) {
         state.isTotalTermAgreement = false;
-        state.isInfoUseTermAgreement = false;
-        state.isInfoTermAgreement = false;
-        state.isUseTermAgreement = false;
+        state.isInfoSaveTermAgreement = false;
+        state.isInfoProvAgreement = false;
       } else {
         state.isTotalTermAgreement = true;
-        state.isInfoUseTermAgreement = true;
-        state.isInfoTermAgreement = true;
-        state.isUseTermAgreement = true;
+        state.isInfoSaveTermAgreement = true;
+        state.isInfoProvAgreement = true;
       }
     },
-    clickInfoUseTermAgreement: (state) => {
-      state.isInfoUseTermAgreement = !state.isInfoUseTermAgreement;
-      if (
-        state.isInfoUseTermAgreement &&
-        state.isInfoTermAgreement &&
-        state.isUseTermAgreement
-      ) {
+    clickInfoSaveTermAgreement: (state) => {
+      state.isInfoSaveTermAgreement = !state.isInfoSaveTermAgreement;
+      if (state.isInfoSaveTermAgreement && state.isInfoProvAgreement) {
         state.isTotalTermAgreement = true;
       } else {
         state.isTotalTermAgreement = false;
       }
     },
-    clickInfoTermAgreement: (state) => {
-      state.isInfoTermAgreement = !state.isInfoTermAgreement;
-      if (
-        state.isInfoUseTermAgreement &&
-        state.isInfoTermAgreement &&
-        state.isUseTermAgreement
-      ) {
-        state.isTotalTermAgreement = true;
-      } else {
-        state.isTotalTermAgreement = false;
-      }
-    },
-    clickUseTermAgreement: (state) => {
-      state.isUseTermAgreement = !state.isUseTermAgreement;
-      if (
-        state.isInfoUseTermAgreement &&
-        state.isInfoTermAgreement &&
-        state.isUseTermAgreement
-      ) {
+    clickInfoProvAgreement: (state) => {
+      state.isInfoProvAgreement = !state.isInfoProvAgreement;
+      if (state.isInfoSaveTermAgreement && state.isInfoProvAgreement) {
         state.isTotalTermAgreement = true;
       } else {
         state.isTotalTermAgreement = false;
