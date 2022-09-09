@@ -86,6 +86,10 @@ const Dealer: NextPage = () => {
     return state.rootReducer.resultReducer.recoms;
   });
 
+  const carPage = useTypedSelector((state) => {
+    return state.rootReducer.resultReducer.carPage;
+  });
+
   const isDealerMatchingModal = useTypedSelector((state) => {
     return state.rootReducer.appReducer.isDealerMatchingModal;
   });
@@ -98,7 +102,7 @@ const Dealer: NextPage = () => {
   }
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
-  const bestRecommendCarInfo = recommendCarInfoList[0];
+  const bestRecommendCarInfo = recommendCarInfoList[carPage - 1];
   const {
     rankingInfoText,
     brandName,

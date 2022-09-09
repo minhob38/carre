@@ -16,10 +16,11 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
-import { useTypedSelector } from '@hooks/useStore';
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
+import { actions } from '@store/slices/resultSlice';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -65,7 +66,10 @@ const ArrowContainer = styled.div`
 `;
 
 const Result: NextPage = () => {
-  const [carPage, setCarPage] = useState<number>(1);
+  const dispatch = useTypedDispatch();
+  const carPage = useTypedSelector(
+    (state) => state.rootReducer.resultReducer.carPage,
+  );
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
   });
@@ -80,15 +84,14 @@ const Result: NextPage = () => {
 
   const handleLeftArrowClick = () => {
     if (carPage === minCarPage) return;
-    setCarPage(carPage - 1);
+    dispatch(actions.setCarPage(carPage - 1));
   };
 
   const handleRightArrowClick = () => {
     if (carPage === maxCarPage) return;
-    setCarPage(carPage + 1);
+    dispatch(actions.setCarPage(carPage + 1));
   };
 
-  console.log(carPage, minCarPage);
   return (
     <>
       <Header title="나의 추천 차량" type="back" backPath="/result" />

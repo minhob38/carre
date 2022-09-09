@@ -7,6 +7,7 @@ interface IState {
   tendency: any;
   recoms: any;
   recommendId: string | null;
+  carPage: number;
 }
 
 /* slices */
@@ -14,6 +15,7 @@ const initialState: IState = {
   tendency: null,
   recoms: null,
   recommendId: null,
+  carPage: 1,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -44,6 +46,10 @@ const resultSlice = createSlice({
     saveRecommendationId: (state, action: PayloadAction<string>) => {
       const recommendId = action.payload;
       state.recommendId = recommendId;
+    },
+    setCarPage: (state, action: PayloadAction<number>) => {
+      const carPage = action.payload;
+      state.carPage = carPage;
     },
   },
 });
