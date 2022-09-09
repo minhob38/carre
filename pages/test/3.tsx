@@ -43,19 +43,8 @@ const SubDescription = styled.div`
   color: ${colors.SECONDARY_300};
 `;
 
-const Manual = styled.div`
-  display: flex;
-  width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
-  justify-content: flex-end;
-  align-items: center;
-  margin: 51px auto 12px auto;
-  font: ${fonts.BUTTON_3};
-  color: ${colors.SECONDARY_400};
-  text-decoration-line: underline;
-`;
-
 const ToggleContainer = styled.div`
-  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+  margin: 30px 0 0 ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const InputContainer = styled.div`
@@ -185,14 +174,9 @@ const Test: NextPage = () => {
           <Warning>1000만원 - 3억 사이의 값을 넣어주세요.</Warning>
         )}
         {/* <Budget /> */}
-        {!IS_HIDDEN && (
-          <>
-            <Manual>직접입력하기</Manual>
-            <ToggleContainer>
-              <Toggle />
-            </ToggleContainer>
-          </>
-        )}
+        <ToggleContainer>
+          <Toggle />
+        </ToggleContainer>
         <ProgressBar stage={2} />
         <NextButton
           title="다음"

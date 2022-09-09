@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import Script from 'next/script';
 import styled from '@emotion/styled';
 import { wrapper } from '@store/index';
 import '@assets/styles/globals.css';
@@ -40,6 +41,24 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Component {...pageProps} />
       </ErrorBoundary>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
     </MobileWrapper>
   );
 }
