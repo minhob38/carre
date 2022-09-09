@@ -21,6 +21,7 @@ import { IS_HIDDEN } from '@constants/variables';
 import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { actions } from '@store/slices/resultSlice';
+import Comparison from '@components/result/Comparison';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -51,7 +52,7 @@ const EditButton = styled.div`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  width: 350px;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 60px;
   margin: 32px auto 19px auto;
   border-radius: 8px;
@@ -63,6 +64,11 @@ const EditButton = styled.div`
 const ArrowContainer = styled.div`
   margin: 25vh 15px 0 15px;
   visibility: ${(props: IStyleProps) => (props.isHidden ? 'hidden' : 'block')};
+`;
+
+const ComparisonContainer = styled.div`
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
+  margin: 50px auto 0 auto;
 `;
 
 const Result: NextPage = () => {
@@ -79,6 +85,10 @@ const Result: NextPage = () => {
   // const ResultCards = recommendCarInfoList.slice(0, 5).map((recom) => {
   //   return <ResultCard key={uuid4()} data={recom} />;
   // });
+  const firstRankInfo = recommendCarInfoList[0];
+  const secondRankInfo = recommendCarInfoList[1];
+  console.log(firstRankInfo, secondRankInfo);
+
   const minCarPage = 1;
   const maxCarPage = recommendCarInfoList.length;
 
@@ -130,11 +140,12 @@ const Result: NextPage = () => {
           </ResultCardContainer>
           {/* <Border /> */}
           {!IS_HIDDEN && <Attractions />}
-          {!IS_HIDDEN && (
-            <Link href="/result/2" passHref={true}>
-              <EditButton>검사 결과 조절해보기</EditButton>
-            </Link>
-          )}
+          <ComparisonContainer>
+            <Comparison first={firstRankInfo} second={secondRankInfo} />
+          </ComparisonContainer>
+          <Link href="/result/2" passHref={true}>
+            <EditButton>검사 결과 조절해보기</EditButton>
+          </Link>
         </Scroll>
       </Content>
       <DealerButton />

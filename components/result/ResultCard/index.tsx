@@ -132,7 +132,7 @@ const ResultCard: React.FC<any> = ({ data }) => {
   const imageSrc = carImagePath + carImageFileName;
   const rank = rankingInfoText.slice(0, -2);
   const sortedTrims = trims.slice().sort((a, b) => {
-    if (a.recommend && b.recommend) return -1;
+    if (a.recommend && !b.recommend) return -1;
     return 0;
   });
   const TrimChips = sortedTrims.map((trim) => {
@@ -149,7 +149,7 @@ const ResultCard: React.FC<any> = ({ data }) => {
 
   const options = trims.find((trim) => trim.recommend).optionList;
   const sortedOptions = options.slice().sort((a, b) => {
-    if (a.recommend && b.recommend) return -1;
+    if (a.recommend && !b.recommend) return -1;
     return 0;
   });
 
