@@ -14,8 +14,9 @@ import { insertCommaToNumber } from '@utils/helpers';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
-  width: 324px;
-  margin: 0 12px 0 0;
+  /* width: 100%; */
+  flex: 1;
+  /* margin: 0 12px 0 0; */
   padding: 16px 20px 21px 20px;
   border-radius: 8px;
   background-color: ${colors.SECONDARY_REAL_WHITE};
