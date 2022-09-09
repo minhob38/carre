@@ -135,7 +135,7 @@ const Dealer: NextPage = () => {
       {isDealerMatchedModal && <DealerMatchedModal />}
       <Header type="back" title="견적 파트너 추천 결과" backPath="/result/1" />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
-        <Title>{userTendencySentence}</Title>
+        <Title>{IS_HIDDEN ? '' : userTendencySentence}</Title>
         <CardContainer>
           <CarContainer>
             <RankCarNameContainer>
