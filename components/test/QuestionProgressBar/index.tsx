@@ -6,6 +6,7 @@ import * as margins from '@constants/margins';
 interface IProps {
   stage: number;
   total: number;
+  type: 'fill' | 'point';
 }
 
 const Bar = styled.div`
@@ -18,9 +19,19 @@ const Bar = styled.div`
 
 const CurrentStage = styled.div`
   position: absolute;
-  transform: ${(props: IProps) =>
-    `translate(calc(100% * ${props.stage - 1}), 0)`};
-  width: ${(props: IProps) => `calc(100% / ${props.total})`};
+  transform: ${(props: IProps) => {
+    if (props.type === 'point') {
+      return `translate(calc(100% * ${props.stage - 1}), 0)`;
+    }
+    return 'none';
+  }};
+  width: ${(props: IProps) => {
+    if (props.type === 'point') {
+      return `calc(100% / ${props.total})`;
+    }
+    return `calc(${props.stage} * 100% / ${props.total})`;
+  }};
+  width: ${(props: IProps) => `calc(${props.stage} * 100% / ${props.total})`};
   height: 7px;
   background-color: ${colors.PRIMARY_400};
   border-radius: 100px;
@@ -28,10 +39,10 @@ const CurrentStage = styled.div`
   z-index: 1;
 `;
 
-const QuestionProgressBar: React.FC<IProps> = ({ stage, total }) => {
+const QuestionProgressBar: React.FC<IProps> = ({ stage, total, type }) => {
   return (
     <Bar>
-      <CurrentStage stage={stage} total={total} />
+      <CurrentStage stage={stage} total={total} type={type} />
     </Bar>
   );
 };

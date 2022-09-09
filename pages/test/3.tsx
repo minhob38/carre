@@ -126,7 +126,7 @@ const Test: NextPage = () => {
   });
 
   useEffect(() => {
-    const MIN_BUDGET = 1000; // 1000만원
+    const MIN_BUDGET = 1500; // 1500만원
     const MAX_BUDGET = 30000; // 3억원
     const _budget = Number(budget);
     if (_budget >= MIN_BUDGET && _budget <= MAX_BUDGET) {
@@ -171,7 +171,7 @@ const Test: NextPage = () => {
           {!!budget && <Won>만원</Won>}
         </InputContainer>
         {!!budget && !isActive && (
-          <Warning>1000만원 - 3억 사이의 값을 넣어주세요.</Warning>
+          <Warning>1500만원 - 3억 사이의 값을 넣어주세요.</Warning>
         )}
         {/* <Budget /> */}
         <ToggleContainer>

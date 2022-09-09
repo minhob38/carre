@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
-import { DEALER_BUTTON_HEIGHT } from '@constants/size';
+import * as margins from '@constants/margins';
 import * as fonts from '@constants/fonts';
+import { DEALER_BUTTON_HEIGHT } from '@constants/size';
 import heartImage from '@assets/images/icons/heart.svg';
 
 const Wrapper = styled.div`
@@ -24,15 +25,16 @@ const Container = styled.div`
   position: relative;
   top: -12px;
   display: flex;
+  width: 100%;
 `;
 
 const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 272px;
+  width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 48px;
-  margin: 0 0 0 22px;
+  margin: 0 auto;
   border-radius: 8px;
   background-color: ${colors.SECONDARY_500};
 `;
@@ -51,7 +53,7 @@ const DealerButton: React.FC = () => {
   return (
     <Wrapper>
       <Container>
-        <Image src={heartImage} alt="heart" width="36px" height="36px" />
+        {/* <Image src={heartImage} alt="heart" width="36px" height="36px" /> */}
         <Link href={'/dealer'} passHref={true}>
           <Button>
             <Text1>나에게 맞는</Text1>
