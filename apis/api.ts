@@ -143,3 +143,14 @@ export const connectUserAndDealer = async (
     console.log((err as TError).message);
   }
 };
+
+export const getLadningRecommendation = async (aprUrl: string) => {
+  try {
+    const response = await axios
+      .get<IResponse>(`${aprUrl}`)
+      .then((res) => res.data);
+    return response.data;
+  } catch (err) {
+    console.log((err as TError).message);
+  }
+};

@@ -35,7 +35,7 @@ const resultSlice = createSlice({
       const tendency = action.payload;
       state.tendency = tendency;
     },
-
+    /* 설문을 통해 추천받은 차량*/
     getUserRecomAsync: (state, action: PayloadAction<any>) => {
       return;
     },
@@ -50,6 +50,10 @@ const resultSlice = createSlice({
     setCarPage: (state, action: PayloadAction<number>) => {
       const carPage = action.payload;
       state.carPage = carPage;
+    },
+    /* 랜딩페이지에서 추천받은 차량*/
+    getLandingRecomAsync: (state, action: PayloadAction<any>) => {
+      return;
     },
   },
 });
@@ -66,7 +70,7 @@ function* getUserTendencySaga(action: PayloadAction<string>) {
 }
 
 /**
- * 추천차량을 조회 api 호출
+ * 추천차량을 조회 api 호출 (설문기반)
  */
 function* getUserRecomSaga(action: PayloadAction<string>) {
   const recommendationId = action.payload;
@@ -75,9 +79,19 @@ function* getUserRecomSaga(action: PayloadAction<string>) {
   yield put(actions.saveUserRecom(data));
 }
 
+/**
+ * 추천차량을 조회 api 호출 (랜딩페이지 기반)
+ */
+function* getLadningRecomSaga(action: PayloadAction<string>) {
+  const apiUrl = action.payload;
+  const data = yield api.getLadningRecommendation(apiUrl);
+  yield put(actions.saveUserRecom(data));
+}
+
 export function* resultSaga() {
   yield takeLatest(actions.getUserTendencyAsync, getUserTendencySaga);
   yield takeLatest(actions.getUserRecomAsync, getUserRecomSaga);
+  yield takeLatest(actions.getLandingRecomAsync, getLadningRecomSaga);
 }
 
 export const actions = resultSlice.actions;

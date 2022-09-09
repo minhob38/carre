@@ -8,6 +8,9 @@ import logger from 'redux-logger';
 import appReducer from './slices/appSlice';
 import { appSaga } from './slices/appSlice';
 
+import recomReducer from './slices/recomSlice';
+import { recomSaga } from './slices/recomSlice';
+
 import inputReducer from './slices/inputSlice';
 
 import surveyReducer from './slices/surveySlice';
@@ -23,7 +26,14 @@ import authReducer from './slices/authSlice';
 import { authSaga } from './slices/authSlice';
 
 export function* rootSaga() {
-  yield all([appSaga(), authSaga(), surveySaga(), resultSaga(), dealerSaga()]);
+  yield all([
+    appSaga(),
+    authSaga(),
+    recomSaga(),
+    surveySaga(),
+    resultSaga(),
+    dealerSaga(),
+  ]);
 }
 const sagaMiddleware = createSagaMiddleware();
 const middleware: any = [sagaMiddleware];
@@ -36,6 +46,7 @@ if (process.env.NODE_ENV === 'development') {
 const rootReducer = combineReducers({
   appReducer,
   authReducer,
+  recomReducer,
   inputReducer,
   surveyReducer,
   resultReducer,

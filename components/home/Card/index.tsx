@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
-import casperImage from '@assets/images/casper.svg';
 
 interface IProps {
   title: string;
   src: any;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
 interface IStyleProps {
@@ -43,13 +43,13 @@ const ImageContainer = styled.div`
   /* margin: 0 16px 22px 0; */
 `;
 
-const Card: React.FC<IProps> = ({ title, src }) => {
+const Card: React.FC<IProps> = ({ title, src, onClick }) => {
   return (
     <>
-      <Wrapper>
+      <Wrapper onClick={onClick}>
         <CarName>{title}</CarName>
         <ImageContainer>
-          <Image src={src} alt="casper" width="205px" />
+          <Image src={src} alt={title} width="205px" />
         </ImageContainer>
       </Wrapper>
     </>

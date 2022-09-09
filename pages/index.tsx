@@ -13,11 +13,17 @@ import Card from '@components/home/Card';
 import Tag from '@components/home/Tag';
 import MbtiButton from '@components/home/MbtiButton';
 import Banner from '@components/home/Banner';
-import { useInitialization, useTypedSelector } from '@hooks/useStore';
+import {
+  useInitialization,
+  useTypedDispatch,
+  useTypedSelector,
+} from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 import NotServiceModal from '@modals/NotService.tsx';
 import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
+import { useRouter } from 'next/router';
+import { actions } from '@store/slices/recomSlice';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -73,7 +79,9 @@ const ArrowContainer = styled.div`
 
 const Index: NextPage = () => {
   const initializeStore = useInitialization();
+  const dispatch = useTypedDispatch();
   const [carPage, setCarPage] = useState<number>(1);
+  const router = useRouter();
   const isNotServiceModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isNotServiceModal,
   );
@@ -82,22 +90,27 @@ const Index: NextPage = () => {
     {
       title: '현대 아반떼',
       src: 'https://static.carre.kr/home_main/hyundae_avante.png',
+      api: 'https://api.carre.kr/api/v1/recommends/recom_main_1',
     },
     {
       title: '벤츠 C-Class',
       src: 'https://static.carre.kr/home_main/benz_c_class_ver4.png',
+      api: 'https://api.carre.kr/api/v1/recommends/recom_main_2',
     },
     {
       title: 'bmw 3 Series',
       src: 'https://static.carre.kr/home_main/bmw_3_serise_ver2.png',
+      api: 'https://api.carre.kr/api/v1/recommends/recom_main_3',
     },
     {
       title: '기아 레이',
       src: 'https://static.carre.kr/home_main/kia_ray_ver3.png',
+      api: 'https://api.carre.kr/api/v1/recommends/recom_main_4',
     },
     {
       title: '미니 쿠퍼',
       src: 'https://static.carre.kr/home_main/mini_cooper_ver2.png',
+      api: 'https://api.carre.kr/api/v1/recommends/recom_main_5',
     },
   ];
   const minCarPage = 1;
@@ -150,6 +163,11 @@ const Index: NextPage = () => {
               <Card
                 title={recommendCarInfoList[carPage - 1].title}
                 src={recommendCarInfoList[carPage - 1].src}
+                onClick={() => {
+                  const api = recommendCarInfoList[carPage - 1].api;
+                  router.push('/recommendation');
+                  dispatch(actions.getRecomAsync(api));
+                }}
               />
               {/* <Card
                 title="벤츠 C-Class"
