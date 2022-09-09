@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Scroll from '@components/common/Scroll';
 import Content from '@components/common/Content';
 import TopNavigator from '@components/common/TopNavigator';
+import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -15,6 +16,12 @@ import Banner from '@components/home/Banner';
 import { useInitialization, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 import NotServiceModal from '@modals/NotService.tsx';
+import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
+import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
+
+interface IStyleProps {
+  isHidden: boolean;
+}
 
 const Title = styled.div`
   font: ${fonts.TITLE_T2};
@@ -45,7 +52,11 @@ const BannerContainer = styled.div`
 
 const CardContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0 14px;
+  /* width: 100%; */
+  flex: 1;
 `;
 
 const SubContainer = styled.div`
@@ -55,15 +66,56 @@ const SubContainer = styled.div`
   margin: 20px auto 40px auto;
 `;
 
+const ArrowContainer = styled.div`
+  margin: 0 15px 0 15px;
+  visibility: ${(props: IStyleProps) => (props.isHidden ? 'hidden' : 'block')};
+`;
+
 const Index: NextPage = () => {
   const initializeStore = useInitialization();
+  const [carPage, setCarPage] = useState<number>(1);
   const isNotServiceModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isNotServiceModal,
   );
 
+  const recommendCarInfoList = [
+    {
+      title: '현대 아반떼',
+      src: 'https://static.carre.kr/home_main/hyundae_avante.png',
+    },
+    {
+      title: '벤츠 C-Class',
+      src: 'https://static.carre.kr/home_main/benz_c_class_ver4.png',
+    },
+    {
+      title: 'bmw 3 Series',
+      src: 'https://static.carre.kr/home_main/bmw_3_serise_ver2.png',
+    },
+    {
+      title: '기아 레이',
+      src: 'https://static.carre.kr/home_main/kia_ray_ver3.png',
+    },
+    {
+      title: '미니 쿠퍼',
+      src: 'https://static.carre.kr/home_main/mini_cooper_ver2.png',
+    },
+  ];
+  const minCarPage = 1;
+  const maxCarPage = recommendCarInfoList.length;
+
   useEffect(() => {
     initializeStore();
   }, [initializeStore]);
+
+  const handleLeftArrowClick = () => {
+    if (carPage === minCarPage) return;
+    setCarPage(carPage - 1);
+  };
+
+  const handleRightArrowClick = () => {
+    if (carPage === maxCarPage) return;
+    setCarPage(carPage + 1);
+  };
 
   return (
     <>
@@ -78,34 +130,56 @@ const Index: NextPage = () => {
                 ? ''
                 : 'MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!'}
             </Description>
-            <Scroll
+            {/* <Scroll
               direction="x"
               width={`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`}
               height="190px"
-            >
-              <CardContainer>
-                <Card
-                  title="현대 아반떼"
-                  src="https://static.carre.kr/home_main/hyundae_avante.png"
+            > */}
+            <CardContainer>
+              <ArrowContainer
+                isHidden={carPage === minCarPage}
+                onClick={handleLeftArrowClick}
+              >
+                <Image
+                  src={letArrowImage}
+                  alt="left-arrow"
+                  width="20px"
+                  height="20px"
                 />
-                <Card
-                  title="벤츠 C-Class"
-                  src="https://static.carre.kr/home_main/benz_c_class_ver4.png"
+              </ArrowContainer>
+              <Card
+                title={recommendCarInfoList[carPage - 1].title}
+                src={recommendCarInfoList[carPage - 1].src}
+              />
+              {/* <Card
+                title="벤츠 C-Class"
+                src="https://static.carre.kr/home_main/benz_c_class_ver4.png"
+              />
+              <Card
+                title="bmw 3 Series"
+                src="https://static.carre.kr/home_main/bmw_3_serise_ver2.png"
+              />
+              <Card
+                title="기아 레이"
+                src="https://static.carre.kr/home_main/kia_ray_ver3.png"
+              />
+              <Card
+                title="미니 쿠퍼"
+                src="https://static.carre.kr/home_main/mini_cooper_ver2.png"
+              /> */}
+              <ArrowContainer
+                isHidden={carPage === maxCarPage}
+                onClick={handleRightArrowClick}
+              >
+                <Image
+                  src={rightArrowImage}
+                  alt="right-arrow"
+                  width="20px"
+                  height="20px"
                 />
-                <Card
-                  title="bmw 3 Series"
-                  src="https://static.carre.kr/home_main/bmw_3_serise_ver2.png"
-                />
-                <Card
-                  title="기아 레이"
-                  src="https://static.carre.kr/home_main/kia_ray_ver3.png"
-                />
-                <Card
-                  title="미니 쿠퍼"
-                  src="https://static.carre.kr/home_main/mini_cooper_ver2.png"
-                />
-              </CardContainer>
-            </Scroll>
+              </ArrowContainer>
+            </CardContainer>
+            {/* </Scroll> */}
             <SubContainer>
               <TagContainer>
                 <Tag># 20대</Tag>
