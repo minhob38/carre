@@ -77,7 +77,7 @@ const Index: NextPage = () => {
       <Content top="105px" bottom="0">
         <Scroll direction="y" height="100%">
           <div>
-            <Title>20대 여성들이 많이 타는차</Title>
+            <Title>20대 여성들이 많이 찾는 차</Title>
             <Description>
               {IS_HIDDEN
                 ? ''
