@@ -25,8 +25,11 @@ const Loop = keyframes`
 `;
 
 const Wrapper = styled.div`
-  height: 32px;
-  max-width: ${(props: IStyleProps) => props.maxWidth};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 32px;
+  /* max-width: ${(props: IStyleProps) => props.maxWidth}; */
   min-width: 0;
   padding: 0 10px;
   border-radius: 4px;
@@ -50,10 +53,11 @@ const Wrapper = styled.div`
   }};
   font: ${fonts.BODY_REGULAR_2};
   overflow: hidden;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
-  line-height: 32px;
+  line-height: 32px; */
+  word-break: break-all;
 `;
 
 const Flow = styled.div`

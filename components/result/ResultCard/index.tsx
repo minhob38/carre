@@ -131,28 +131,35 @@ const ResultCard: React.FC<any> = ({ data }) => {
 
   const imageSrc = carImagePath + carImageFileName;
   const rank = rankingInfoText.slice(0, -2);
-
-  const TrimChips = trims.map((trim) => {
+  const sortedTrims = trims.slice().sort((a, b) => {
+    if (a.recommend && b.recommend) return -1;
+    return 0;
+  });
+  const TrimChips = sortedTrims.map((trim) => {
     const { trimName, recommend } = trim;
     return (
       <Chip
         key={uuid4()}
         type={recommend ? 'yes' : 'no'}
-        title={trimName}
+        title={trimName.toUpperCase()}
         maxWidth="100px"
       />
     );
   });
 
   const options = trims.find((trim) => trim.recommend).optionList;
+  const sortedOptions = options.slice().sort((a, b) => {
+    if (a.recommend && b.recommend) return -1;
+    return 0;
+  });
 
-  const OptionsChips = options.map((option) => {
+  const OptionsChips = sortedOptions.map((option) => {
     const { optionName, recommend } = option;
     return (
       <Chip
         key={uuid4()}
         type={recommend ? 'yes' : 'no'}
-        title={optionName}
+        title={optionName.toUpperCase()}
         maxWidth="100px"
       />
     );
