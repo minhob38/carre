@@ -39,6 +39,9 @@ const Test: NextPage = () => {
   const isServerErrorModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isServerErrorModal,
   );
+  const retry = useTypedSelector(
+    (state) => state.rootReducer.errorReducer.retry,
+  );
   const surveyToken = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
@@ -72,7 +75,7 @@ const Test: NextPage = () => {
       return alert('survey token does not exist');
     }
     dispatch(actions.bindSurveyAsync({ surveyToken, input }));
-  }, [dispatch, input, surveyToken]);
+  }, [dispatch, input, surveyToken, retry]);
 
   const handleButtonClick = () => router.push('/test/6');
 

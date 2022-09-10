@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import * as api from '@apis/api';
 import { actions as appActions } from './appSlice';
+import { actions as errorActions } from './errorSlice';
 
 interface IState {
   isTotalTermAgreement: boolean; // 전체동의
@@ -66,22 +67,26 @@ const authSlice = createSlice({
 });
 
 function* connectUserAndDealerSaga(action: PayloadAction<any>) {
-  const { dealerId, phoneNumber, recommendId, surveyToken } = action.payload;
+  try {
+    const { dealerId, phoneNumber, recommendId, surveyToken } = action.payload;
 
-  const data = yield api.connectUserAndDealer(
-    surveyToken,
-    recommendId,
-    phoneNumber,
-    dealerId,
-  );
-  console.log(data);
-  yield put(appActions.showDealerMatchedModal());
+    const data = yield api.connectUserAndDealer(
+      surveyToken,
+      recommendId,
+      phoneNumber,
+      dealerId,
+    );
+    yield put(errorActions.setNormal());
+    yield put(appActions.showDealerMatchedModal());
 
-  // const surveyToken = action.payload;
-  // const tendencyData = yield api.analyzeUserTendency(surveyToken);
-  // const recomData = yield api.analyzeUserRecommendation(surveyToken);
-  // yield put(actions.connectUserAndDealerAsync({
-  // }));
+    // const surveyToken = action.payload;
+    // const tendencyData = yield api.analyzeUserTendency(surveyToken);
+    // const recomData = yield api.analyzeUserRecommendation(surveyToken);
+    // yield put(actions.connectUserAndDealerAsync({
+    // }));
+  } catch (err) {
+    yield put(errorActions.setServerError());
+  }
 }
 
 export function* authSaga() {

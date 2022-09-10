@@ -18,6 +18,7 @@ import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/surveySlice';
 import { shallowEqual } from 'react-redux';
+import ServerErrorModal from '@modals/ServerErrorModal';
 
 const Description = styled.div`
   width: ${`calc(100% - ${margins.SIDE_SUB_MARGIN} - ${margins.SIDE_SUB_MARGIN})`};
@@ -56,6 +57,12 @@ const Test: NextPage = () => {
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(100);
   const dispatch = useTypedDispatch();
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
+  );
+  const retry = useTypedSelector(
+    (state) => state.rootReducer.errorReducer.retry,
+  );
   const surveyQuestions = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyQuestions,
   );
@@ -93,6 +100,7 @@ const Test: NextPage = () => {
     surveyQuestions,
     surveyToken,
     totalPage,
+    retry,
   ]);
 
   useEffect(() => {
@@ -130,6 +138,7 @@ const Test: NextPage = () => {
 
   return (
     <>
+      {isServerErrorModal && <ServerErrorModal />}
       <Header title="차량 성향 테스트" type="back" backPath="/test/5" />
       {/* <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}> */}
       <Content top={HEADER_HEIGHT} bottom={'0'}>

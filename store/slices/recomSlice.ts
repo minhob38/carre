@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { IInput } from '@type/input';
 import * as api from '@apis/api';
+import { actions as errorActions } from './errorSlice';
 
 interface IState {
   recoms: any;
@@ -49,9 +50,14 @@ const recomSlice = createSlice({
  * 추천차량을 조회 api 호출 (랜딩페이지 기반)
  */
 function* getRecomSaga(action: PayloadAction<string>) {
-  const apiUrl = action.payload;
-  const data = yield api.getLadningRecommendation(apiUrl);
-  yield put(actions.saveRecom(data));
+  try {
+    const apiUrl = action.payload;
+    const data = yield api.getLadningRecommendation(apiUrl);
+    yield put(errorActions.setNormal());
+    yield put(actions.saveRecom(data));
+  } catch (err) {
+    yield put(errorActions.setServerError());
+  }
 }
 
 export function* recomSaga() {

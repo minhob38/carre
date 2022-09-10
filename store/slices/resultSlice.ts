@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { IInput } from '@type/input';
 import * as api from '@apis/api';
+import { actions as errorActions } from './errorSlice';
 
 interface IState {
   tendency: any;
@@ -64,28 +65,43 @@ const resultSlice = createSlice({
  * 사용자 성향 조회 api 호출
  */
 function* getUserTendencySaga(action: PayloadAction<string>) {
-  const surveyToken = action.payload;
-  const data = yield api.getUserTendency(surveyToken);
-  yield put(actions.saveUserTendency(data));
+  try {
+    const surveyToken = action.payload;
+    const data = yield api.getUserTendency(surveyToken);
+    yield put(errorActions.setNormal());
+    yield put(actions.saveUserTendency(data));
+  } catch (err) {
+    yield put(errorActions.setServerError());
+  }
 }
 
 /**
  * 추천차량을 조회 api 호출 (설문기반)
  */
 function* getUserRecomSaga(action: PayloadAction<string>) {
-  const recommendationId = action.payload;
-  const data = yield api.getUserRecommendation(recommendationId);
-  yield put(actions.saveRecommendationId(recommendationId));
-  yield put(actions.saveUserRecom(data));
+  try {
+    const recommendationId = action.payload;
+    const data = yield api.getUserRecommendation(recommendationId);
+    yield put(errorActions.setNormal());
+    yield put(actions.saveRecommendationId(recommendationId));
+    yield put(actions.saveUserRecom(data));
+  } catch (err) {
+    yield put(errorActions.setServerError());
+  }
 }
 
 /**
  * 추천차량을 조회 api 호출 (랜딩페이지 기반)
  */
 function* getLadningRecomSaga(action: PayloadAction<string>) {
-  const apiUrl = action.payload;
-  const data = yield api.getLadningRecommendation(apiUrl);
-  yield put(actions.saveUserRecom(data));
+  try {
+    const apiUrl = action.payload;
+    const data = yield api.getLadningRecommendation(apiUrl);
+    yield put(errorActions.setNormal());
+    yield put(actions.saveUserRecom(data));
+  } catch (err) {
+    yield put(errorActions.setServerError());
+  }
 }
 
 export function* resultSaga() {

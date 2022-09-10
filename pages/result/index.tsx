@@ -15,6 +15,7 @@ import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 import { useEffect } from 'react';
 import { actions } from '@store/slices/surveySlice';
+import ServerErrorModal from '@modals/ServerErrorModal';
 
 const Title = styled.div`
   margin: 22px 0 0 ${margins.SIDE_MAIN_MARGIN};
@@ -61,6 +62,12 @@ const BUTTON_HEIGHT = '70px';
 
 const Result: NextPage = () => {
   const dispatch = useTypedDispatch();
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
+  );
+  const retry = useTypedSelector(
+    (state) => state.rootReducer.errorReducer.retry,
+  );
   const surveyToken = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
@@ -73,7 +80,7 @@ const Result: NextPage = () => {
       return alert('survey token does not exist');
     }
     dispatch(actions.analyzeSurveyAnswersAsync(surveyToken));
-  }, [dispatch, surveyToken]);
+  }, [dispatch, surveyToken, retry]);
 
   if (!tendency) return <Loading text="취향 결과를 불러오고 있습니다." />;
 
@@ -81,6 +88,7 @@ const Result: NextPage = () => {
 
   return (
     <>
+      {isServerErrorModal && <ServerErrorModal />}
       <Header title="나의 취향 결과" type="close" closePath="/" />
       <Content
         top={HEADER_HEIGHT}

@@ -90,29 +90,6 @@ const Test: NextPage = () => {
 
   const handleButtonClick = () => router.push('/test/5');
 
-  const input: any = useTypedSelector((state) => {
-    const inputState = state.rootReducer.inputReducer;
-    const {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      minBudgetValue,
-      maxBudgetValue,
-      passengerCount,
-      drivenDistanceInYear,
-    } = inputState;
-
-    return {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      userBudgetMin: 10000 * Number(minBudgetValue),
-      userBudgetMax: 10000 * Number(maxBudgetValue),
-      passengerCount,
-      drivenDistanceInYear,
-    };
-  });
-
   return (
     <>
       <Header title="나의 정보 입력" type="close" closePath="/" />

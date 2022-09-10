@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
-import { useState } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
@@ -66,7 +65,6 @@ const ArrowContainer = styled.div`
   margin: 25vh 0 0 0;
   padding: 0 15px;
   visibility: ${(props: IStyleProps) => (props.isHidden ? 'hidden' : 'block')};
-  background-color: red;
 `;
 
 const ComparisonContainer = styled.div`

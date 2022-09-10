@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -14,8 +14,6 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
-import { actions } from '@store/slices/surveySlice';
-import { actions as inputActions } from '@store/slices/inputSlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 import BudgetInput from '@components/common/BudgetInput';
@@ -57,7 +55,6 @@ const Test: NextPage = () => {
   const router = useRouter();
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const dispatch = useTypedDispatch();
   const isInputWarningModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isInputWarningModal,
   );
@@ -81,10 +78,7 @@ const Test: NextPage = () => {
     setIsActive(false);
   }, [budget]);
 
-  const handleButtonClick = () => {
-    router.push('/test/5');
-  };
-
+  const handleButtonClick = () => router.push('/test/5');
   const handleInputFocus = () => setIsInputFocused(true);
   const handleInputBlur = () => setIsInputFocused(false);
 

@@ -80,9 +80,9 @@ const surveySlice = createSlice({
 function* createSurveyTokenSaga(action) {
   try {
     const data = yield api.createSurveyToken();
+    yield put(errorActions.setNormal());
     const userSurveyToken = data.userSurveyToken;
     yield put(actions.saveSurveyToken(userSurveyToken));
-    yield put(errorActions.setNormal());
   } catch (err) {
     yield put(errorActions.setServerError());
   }
@@ -97,9 +97,10 @@ function* bindSurveySaga(
   try {
     const { surveyToken, input } = action.payload;
     yield api.bindSurvey(surveyToken, input);
+    yield put(errorActions.setNormal());
     yield put(actions.checkBindSurvey());
-  } catch {
-    put(errorActions.setServerError());
+  } catch (err) {
+    yield put(errorActions.setServerError());
   }
 }
 
@@ -107,9 +108,14 @@ function* bindSurveySaga(
  * 설문을 조회하는 api 호출
  */
 function* getSurveyQuestionsSaga(action: PayloadAction<string>) {
-  const surveyToken = action.payload;
-  const data = yield api.getSurveyQuestions(surveyToken);
-  yield put(actions.saveSurveyQuestions(data));
+  try {
+    const surveyToken = action.payload;
+    const data = yield api.getSurveyQuestions(surveyToken);
+    yield put(errorActions.setNormal());
+    yield put(actions.saveSurveyQuestions(data));
+  } catch (err) {
+    yield put(errorActions.setServerError());
+  }
 }
 
 /**
@@ -149,12 +155,17 @@ function* saveSurveyAnswersSaga(
  * 사용자성향/추천차량 계산 후, 사용자성향/추천차량 조회api 호출 (따로따로 dispatch하면, 추천차량 계산 전에 조회를 해서 데이터가 비어있음 : (
  */
 function* analyzeSurveyAnswersSaga(action: PayloadAction<string>) {
-  const surveyToken = action.payload;
-  const tendencyData = yield api.analyzeUserTendency(surveyToken);
-  const recomData = yield api.analyzeUserRecommendation(surveyToken);
-  yield put(resultActions.getUserTendencyAsync(surveyToken));
-  yield put(resultActions.getUserRecomAsync(recomData));
-  yield put(actions.checkSurveyAnswerAnalysis());
+  try {
+    const surveyToken = action.payload;
+    const tendencyData = yield api.analyzeUserTendency(surveyToken);
+    const recomData = yield api.analyzeUserRecommendation(surveyToken);
+    yield put(errorActions.setNormal());
+    yield put(resultActions.getUserTendencyAsync(surveyToken));
+    yield put(resultActions.getUserRecomAsync(recomData));
+    yield put(actions.checkSurveyAnswerAnalysis());
+  } catch (err) {
+    yield put(errorActions.setServerError());
+  }
 }
 
 export function* surveySaga() {

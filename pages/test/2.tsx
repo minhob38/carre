@@ -102,10 +102,6 @@ const PersonContainer = styled.div`
 const DistanceContainer = styled.div``;
 
 const Test: NextPage = () => {
-  console.log('render');
-  const isServerErrorModal = useTypedSelector(
-    (state) => state.rootReducer.appReducer.isServerErrorModal,
-  );
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isPersonClicked, setIsPersonClicked] = useState<boolean>(false);
   const [isDistanceClicked, setIDistanceClicked] = useState<boolean>(false);
@@ -114,6 +110,9 @@ const Test: NextPage = () => {
   const dispatch = useTypedDispatch();
   const isInputWarningModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isInputWarningModal,
+  );
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
   );
   const retry = useTypedSelector(
     (state) => state.rootReducer.errorReducer.retry,
