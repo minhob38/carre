@@ -9,6 +9,7 @@ import appReducer from './slices/appSlice';
 import { appSaga } from './slices/appSlice';
 
 import errorReducer from './slices/errorSlice';
+import { errorSaga } from './slices/errorSlice';
 
 import recomReducer from './slices/recomSlice';
 import { recomSaga } from './slices/recomSlice';
@@ -30,6 +31,7 @@ import { authSaga } from './slices/authSlice';
 export function* rootSaga() {
   yield all([
     appSaga(),
+    errorSaga(),
     authSaga(),
     recomSaga(),
     surveySaga(),

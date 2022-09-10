@@ -9,7 +9,7 @@ import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import Budget from '@components/common/PointBudget';
 import Toggle from '@components/common/Toggle';
-import InputWarning from '@modals/InputWarning';
+import InputWarning from '@modals/InputWarningModal';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -18,7 +18,8 @@ import { actions } from '@store/slices/authSlice';
 // import { actions as inputActions } from '@store/slices/inputSlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
-import DealerMatchedModal from '@modals/DealerMatched';
+import DealerMatchedModal from '@modals/DealerMatchedModal';
+import ServerErrorModal from '@modals/ServerErrorModal';
 
 const Title = styled.div`
   margin: 28px 0 4px ${margins.SIDE_MAIN_MARGIN};
@@ -105,6 +106,9 @@ const Test: NextPage = () => {
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
+  );
   const isInputWarningModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isInputWarningModal,
   );
@@ -125,9 +129,6 @@ const Test: NextPage = () => {
   const recommendId: any = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recommendId;
   });
-  // const surveyToken: any = useTypedSelector((state) => {
-  //   return state.rootReducer.surveyReducer.reco;
-  // });
 
   useEffect(() => {
     const isValid = reg.test(phoneNumber);
@@ -150,8 +151,6 @@ const Test: NextPage = () => {
         phoneNumber,
       }),
     );
-    // dispatch(actions.bindSurveyAsync({ surveyToken, input }));
-    // router.push('/test/5');
   };
 
   const handleInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -162,6 +161,7 @@ const Test: NextPage = () => {
 
   return (
     <>
+      {isServerErrorModal && <DealerMatchedModal />}
       {isInputWarningModal && <InputWarning title="알맞은 값을 넣어주세요." />}
       {isDealerMatchedModal && <DealerMatchedModal />}
       <Header title="나의 정보 입력" type="back" backPath="/auth/signup/1" />

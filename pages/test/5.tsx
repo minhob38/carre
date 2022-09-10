@@ -12,6 +12,7 @@ import { HEADER_HEIGHT } from '@constants/size';
 import { actions } from '@store/slices/surveySlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { useEffect } from 'react';
+import ServerErrorModal from '@modals/ServerErrorModal';
 
 const Title = styled.div`
   margin: 291px 0 0 0;
@@ -35,6 +36,9 @@ const Container = styled.div`
 const Test: NextPage = () => {
   const router = useRouter();
   const dispatch = useTypedDispatch();
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
+  );
   const surveyToken = useTypedSelector(
     (state) => state.rootReducer.surveyReducer.surveyToken,
   );
@@ -74,6 +78,7 @@ const Test: NextPage = () => {
 
   return (
     <>
+      {isServerErrorModal && <ServerErrorModal />}
       <Header title="차량 성향 테스트" type="back" backPath="/test/3" />
       <Content top={HEADER_HEIGHT} bottom="0">
         <Container>

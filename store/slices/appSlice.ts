@@ -8,6 +8,7 @@ const initialState = {
   isInputWarningModal: false,
   isDealerMatchingModal: false,
   isDealerMatchedModal: false,
+  isServerErrorModal: false,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -26,6 +27,12 @@ const appSlice = createSlice({
     },
     clickButton: (state, action: PayloadAction) => {
       state.isClicked = !state.isClicked;
+    },
+    showServerErrorModal: (state) => {
+      state.isServerErrorModal = true;
+    },
+    hideServerErrorModal: (state) => {
+      state.isServerErrorModal = false;
     },
     showNotServiceModal: (state) => {
       state.isNotServiceModal = true;

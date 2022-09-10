@@ -7,7 +7,7 @@ import Header from '@components/common/Header';
 import NextButton from '@components/common/NextButton';
 import Content from '@components/common/Content';
 import StyleCheckBoxes from '@components/common/StyleCheckBoxes';
-import InputWarning from '@modals/InputWarning';
+import InputWarning from '@modals/InputWarningModal';
 import Scroll from '@components/common/Scroll';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';

@@ -8,9 +8,8 @@ import * as ERRORS from '@constants/errors';
  */
 
 export const createSurveyToken = async () => {
-  // throw new Error('errrr');
   const response = await axios
-    .post<IResponse>('/user-surveys/create', {
+    .post<IResponse>('/1user-surveys/create', {
       surveyToken: 'svy_yA6e2ate403kY2Wb',
       userId: '123',
       userSurveyName: 'user servery name',

@@ -42,10 +42,6 @@ const DropDownContainer = styled.div`
 
 const Test: NextPage = () => {
   const router = useRouter();
-  const dispatch = useTypedDispatch();
-  const surveyToken = useTypedSelector(
-    (state) => state.rootReducer.surveyReducer.surveyToken,
-  );
 
   const Brands = brands.map((brand) => {
     return (
@@ -92,13 +88,7 @@ const Test: NextPage = () => {
     );
   });
 
-  const handleButtonClick = () => {
-    // if (!surveyToken) {
-    //   return alert('survey token does not exist');
-    // }
-    // dispatch(actions.bindSurveyAsync({ surveyToken, input }));
-    router.push('/test/5');
-  };
+  const handleButtonClick = () => router.push('/test/5');
 
   const input: any = useTypedSelector((state) => {
     const inputState = state.rootReducer.inputReducer;

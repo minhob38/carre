@@ -19,7 +19,7 @@ import {
   useTypedSelector,
 } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
-import NotServiceModal from '@modals/NotService.tsx';
+import NotServiceModal from '@modals/NotServiceModal';
 import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { useRouter } from 'next/router';

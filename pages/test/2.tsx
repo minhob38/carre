@@ -9,7 +9,8 @@ import NextButton from '@components/common/NextButton';
 import Header from '@components/common/Header';
 import Content from '@components/common/Content';
 import ProgressBar from '@components/test/ProgressBar';
-import InputWarning from '@modals/InputWarning';
+import InputWarning from '@modals/InputWarningModal';
+import ServerErrorModal from '@modals/ServerErrorModal';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
@@ -101,6 +102,10 @@ const PersonContainer = styled.div`
 const DistanceContainer = styled.div``;
 
 const Test: NextPage = () => {
+  console.log('render');
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
+  );
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isPersonClicked, setIsPersonClicked] = useState<boolean>(false);
   const [isDistanceClicked, setIDistanceClicked] = useState<boolean>(false);
@@ -109,6 +114,9 @@ const Test: NextPage = () => {
   const dispatch = useTypedDispatch();
   const isInputWarningModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isInputWarningModal,
+  );
+  const retry = useTypedSelector(
+    (state) => state.rootReducer.errorReducer.retry,
   );
   const birthYear = useTypedSelector(
     (state) => state.rootReducer.inputReducer.birthYear,
@@ -129,7 +137,7 @@ const Test: NextPage = () => {
 
   useEffect(() => {
     dispatch(surveyActions.createSurveyTokenAsync());
-  }, [dispatch]);
+  }, [dispatch, retry]);
 
   useEffect(() => {
     if (
@@ -219,6 +227,7 @@ const Test: NextPage = () => {
 
   return (
     <>
+      {isServerErrorModal && <ServerErrorModal />}
       {isInputWarningModal && (
         <InputWarning title="입력값을 모두 넣어주세요." />
       )}

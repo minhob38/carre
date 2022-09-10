@@ -22,7 +22,7 @@ import Checbox from '@components/auth/Checkbox';
 import { USE_TERM } from '@constants/terms';
 import { actions } from '@store/slices/authSlice';
 import { shallowEqual } from 'react-redux';
-import InputWarning from '@modals/InputWarning';
+import InputWarning from '@modals/InputWarningModal';
 
 const Title = styled.div`
   margin: 24px 0 33px 0;

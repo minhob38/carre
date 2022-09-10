@@ -82,8 +82,9 @@ function* createSurveyTokenSaga(action) {
     const data = yield api.createSurveyToken();
     const userSurveyToken = data.userSurveyToken;
     yield put(actions.saveSurveyToken(userSurveyToken));
+    yield put(errorActions.setNormal());
   } catch (err) {
-    console.log('@@@', err);
+    yield put(errorActions.setServerError());
   }
 }
 
@@ -93,9 +94,13 @@ function* createSurveyTokenSaga(action) {
 function* bindSurveySaga(
   action: PayloadAction<{ surveyToken: string; input: IInput }>,
 ) {
-  const { surveyToken, input } = action.payload;
-  yield api.bindSurvey(surveyToken, input);
-  yield put(actions.checkBindSurvey());
+  try {
+    const { surveyToken, input } = action.payload;
+    yield api.bindSurvey(surveyToken, input);
+    yield put(actions.checkBindSurvey());
+  } catch {
+    put(errorActions.setServerError());
+  }
 }
 
 /**
