@@ -8,6 +8,8 @@ import logger from 'redux-logger';
 import appReducer from './slices/appSlice';
 import { appSaga } from './slices/appSlice';
 
+import errorReducer from './slices/errorSlice';
+
 import recomReducer from './slices/recomSlice';
 import { recomSaga } from './slices/recomSlice';
 
@@ -45,6 +47,7 @@ if (process.env.NODE_ENV === 'development') {
 // combine으로 합치지 않아도 됩니다. (코드정리를 위해 rootReducer로 묶었습니다.)
 const rootReducer = combineReducers({
   appReducer,
+  errorReducer,
   authReducer,
   recomReducer,
   inputReducer,

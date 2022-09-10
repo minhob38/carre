@@ -3,6 +3,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { IInput } from '@type/input';
 import * as api from '@apis/api';
 import { actions as resultActions } from './resultSlice';
+import { actions as errorActions } from './errorSlice';
 
 interface IState {
   surveyToken: string | null;
@@ -77,9 +78,13 @@ const surveySlice = createSlice({
 
 /* sagas */
 function* createSurveyTokenSaga(action) {
-  const data = yield api.createSurveyToken();
-  const userSurveyToken = data.userSurveyToken;
-  yield put(actions.saveSurveyToken(userSurveyToken));
+  try {
+    const data = yield api.createSurveyToken();
+    const userSurveyToken = data.userSurveyToken;
+    yield put(actions.saveSurveyToken(userSurveyToken));
+  } catch (err) {
+    console.log('@@@', err);
+  }
 }
 
 /**
