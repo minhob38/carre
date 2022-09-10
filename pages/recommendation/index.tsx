@@ -61,7 +61,8 @@ const EditButton = styled.div`
 `;
 
 const ArrowContainer = styled.div`
-  margin: 25vh 15px 0 15px;
+  margin: 25vh 0 0 0;
+  padding: 0 15px;
   visibility: ${(props: IStyleProps) => (props.isHidden ? 'hidden' : 'block')};
 `;
 

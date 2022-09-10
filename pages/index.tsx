@@ -73,7 +73,7 @@ const SubContainer = styled.div`
 `;
 
 const ArrowContainer = styled.div`
-  margin: 0 15px 0 15px;
+  padding: 0 15px;
   visibility: ${(props: IStyleProps) => (props.isHidden ? 'hidden' : 'block')};
 `;
 
