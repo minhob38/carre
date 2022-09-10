@@ -125,7 +125,7 @@ const Result: NextPage = () => {
 
   return (
     <>
-      <Header title="검사 결과 조절" type="close" closePath="/" />
+      <Header title="검사 결과 조절" type="back" backPath="/result/1" />
       <Content top={HEADER_HEIGHT} bottom={NEXT_BUTTON_HEIGHT}>
         <NavigatorContainer>
           {/* <Chip title="가격 변경" type={isBudgetViewd ? 'yes' : 'no'} /> */}
