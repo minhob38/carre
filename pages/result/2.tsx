@@ -66,6 +66,7 @@ const ValueContainer = styled.div`
 `;
 
 const Result: NextPage = () => {
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
   const budgetRef = useRef<HTMLDivElement>(null);
   const styleRef = useRef<HTMLDivElement>(null);
@@ -119,6 +120,9 @@ const Result: NextPage = () => {
     // }
   };
 
+  const handleInputFocus = () => setIsInputFocused(true);
+  const handleInputBlur = () => setIsInputFocused(false);
+
   return (
     <>
       <Header title="검사 결과 조절" type="close" closePath="/" />
@@ -137,7 +141,7 @@ const Result: NextPage = () => {
           <BudgetContainer ref={budgetRef}>
             <Title>가격 변경</Title>
             <Subtitle>가격을 변경할 수 있어요.</Subtitle>
-            <InputContainer>
+            <InputContainer onFocus={handleInputFocus} onBlur={handleInputBlur}>
               <BudgetInput />
             </InputContainer>
           </BudgetContainer>
@@ -158,7 +162,7 @@ const Result: NextPage = () => {
           </ValueContainer> */}
         </Scroll>
       </Content>
-      <NextButton title="다음" path="/result" />
+      {!isInputFocused && <NextButton title="다음" path="/result" />}
     </>
   );
 };

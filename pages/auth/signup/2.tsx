@@ -102,6 +102,7 @@ const reg = /[0-9]+/g;
 
 const Test: NextPage = () => {
   const router = useRouter();
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const isInputWarningModal = useTypedSelector(
@@ -156,6 +157,8 @@ const Test: NextPage = () => {
   const handleInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.setPhoneNumber(ev.target));
   };
+  const handleInputFocus = () => setIsInputFocused(true);
+  const handleInputBlur = () => setIsInputFocused(false);
 
   return (
     <>
@@ -167,7 +170,7 @@ const Test: NextPage = () => {
         <Description>상담 가능한 전화번호를 입력해요</Description>
         {/* <SubTitle>가격설정</SubTitle> */}
         {/* <SubDescription>차량의 가격을 직접 입력해요</SubDescription> */}
-        <InputContainer>
+        <InputContainer onFocus={handleInputFocus} onBlur={handleInputBlur}>
           <Input
             placeholder="전화번호를 입력해주세요. (- 생략)"
             type="tel"
@@ -181,12 +184,14 @@ const Test: NextPage = () => {
           <Warning>전화번호 형식으로 넣어주세요.</Warning>
         )}
         {/* <ProgressBar stage={2} /> */}
-        <NextButton
-          title="보내기"
-          onClick={handleButtonClick}
-          isActive={isActive}
-          // path={'/auth/signup/2'}
-        />
+        {!isInputFocused && (
+          <NextButton
+            title="보내기"
+            onClick={handleButtonClick}
+            isActive={isActive}
+            // path={'/auth/signup/2'}
+          />
+        )}
       </Content>
     </>
   );

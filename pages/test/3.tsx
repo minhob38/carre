@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -55,6 +55,7 @@ const InputContainer = styled.div`
 
 const Test: NextPage = () => {
   const router = useRouter();
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const dispatch = useTypedDispatch();
   const isInputWarningModal = useTypedSelector(
@@ -112,9 +113,8 @@ const Test: NextPage = () => {
     router.push('/test/5');
   };
 
-  const handleInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(inputActions.setBudget(ev.target));
-  };
+  const handleInputFocus = () => setIsInputFocused(true);
+  const handleInputBlur = () => setIsInputFocused(false);
 
   return (
     <>
@@ -125,18 +125,22 @@ const Test: NextPage = () => {
         <Description>차량 구매에 필요한 나의 정보를 입력해요</Description>
         {/* <SubTitle>가격설정</SubTitle>
         <SubDescription>차량의 가격을 직접 입력해요</SubDescription> */}
-        <InputContainer>
+        <InputContainer onFocus={handleInputFocus} onBlur={handleInputBlur}>
           <BudgetInput />
         </InputContainer>
         <ToggleContainer>
           <Toggle />
         </ToggleContainer>
-        <ProgressBar stage={2} />
-        <NextButton
-          title="다음"
-          onClick={handleButtonClick}
-          isActive={isActive}
-        />
+        {!isInputFocused && (
+          <div>
+            <ProgressBar stage={2} />
+            <NextButton
+              title="다음"
+              onClick={handleButtonClick}
+              isActive={isActive}
+            />
+          </div>
+        )}
       </Content>
     </>
   );
