@@ -68,30 +68,6 @@ const Test: NextPage = () => {
     const inputState = state.rootReducer.inputReducer;
     return inputState.budget;
   });
-  const input: any = useTypedSelector((state) => {
-    const inputState = state.rootReducer.inputReducer;
-    const {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      budget,
-      minBudgetValue,
-      maxBudgetValue,
-      passengerCount,
-      drivenDistanceInYear,
-    } = inputState;
-
-    return {
-      birthYear,
-      gender,
-      carUsagePurpose,
-      userBudget: 10000 * Number(budget),
-      userBudgetMin: 10000 * Number(minBudgetValue),
-      userBudgetMax: 10000 * Number(maxBudgetValue),
-      passengerCount,
-      drivenDistanceInYear,
-    };
-  });
 
   useEffect(() => {
     const MIN_BUDGET = 1500; // 1500만원
@@ -106,10 +82,6 @@ const Test: NextPage = () => {
   }, [budget]);
 
   const handleButtonClick = () => {
-    if (!surveyToken) {
-      return alert('survey token does not exist');
-    }
-    dispatch(actions.bindSurveyAsync({ surveyToken, input }));
     router.push('/test/5');
   };
 

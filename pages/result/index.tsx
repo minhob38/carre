@@ -11,8 +11,10 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT } from '@constants/size';
-import { useTypedSelector } from '@hooks/useStore';
+import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
+import { useEffect } from 'react';
+import { actions } from '@store/slices/surveySlice';
 
 const Title = styled.div`
   margin: 22px 0 0 ${margins.SIDE_MAIN_MARGIN};
@@ -58,9 +60,21 @@ const BUTTON_POSTION = '78px';
 const BUTTON_HEIGHT = '70px';
 
 const Result: NextPage = () => {
+  const dispatch = useTypedDispatch();
+  const surveyToken = useTypedSelector(
+    (state) => state.rootReducer.surveyReducer.surveyToken,
+  );
   const tendency = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.tendency;
   });
+
+  useEffect(() => {
+    if (!surveyToken) {
+      return alert('survey token does not exist');
+    }
+    dispatch(actions.analyzeSurveyAnswersAsync(surveyToken));
+  }, [dispatch, surveyToken]);
+
   if (!tendency) return <Loading text="취향 결과를 불러오고 있습니다." />;
 
   const { userTendencySentence, userTendencyTitle } = tendency;

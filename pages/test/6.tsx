@@ -95,6 +95,13 @@ const Test: NextPage = () => {
     totalPage,
   ]);
 
+  useEffect(() => {
+    if (!surveyToken) {
+      return alert('survey token does not exist');
+    }
+    dispatch(actions.getSurveyQuestionsAsync(surveyToken));
+  }, [dispatch, surveyToken]);
+
   const handleImageClick = async () => {
     if (process.env.NODE_ENV === 'production') {
       await new Promise((resolve, reject) => {

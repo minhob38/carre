@@ -13,7 +13,6 @@ import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, NEXT_BUTTON_HEIGHT } from '@constants/size';
-import { actions } from '@store/slices/surveySlice';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 
 const Title = styled.div`
@@ -38,10 +37,6 @@ const StyleCheckBoxesContainer = styled.div`
 const Test: NextPage = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const router = useRouter();
-  const dispatch = useTypedDispatch();
-  const surveyToken = useTypedSelector(
-    (state) => state.rootReducer.surveyReducer.surveyToken,
-  );
   const isInputWarningModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isInputWarningModal,
   );
@@ -58,13 +53,7 @@ const Test: NextPage = () => {
     setIsActive(false);
   }, [styles]);
 
-  const handleButtonClick = () => {
-    if (!surveyToken) {
-      return alert('survey token does not exist');
-    }
-    dispatch(actions.analyzeSurveyAnswersAsync(surveyToken));
-    router.push('/result');
-  };
+  const handleButtonClick = () => router.push('/result');
 
   return (
     <>
