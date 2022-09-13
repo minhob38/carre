@@ -13,6 +13,7 @@ import Card from '@components/home/Card';
 import Tag from '@components/home/Tag';
 import MbtiButton from '@components/home/MbtiButton';
 import Banner from '@components/home/Banner';
+import Footer from '@components/common/Footer';
 import {
   useInitialization,
   useTypedDispatch,
@@ -23,6 +24,7 @@ import NotServiceModal from '@modals/NotServiceModal';
 import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { useRouter } from 'next/router';
+import { FOOTER_HEIGHT } from '@constants/size';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -133,7 +135,7 @@ const Index: NextPage = () => {
     <>
       {isNotServiceModal && <NotServiceModal />}
       <TopNavigator />
-      <Content top="105px" bottom="0">
+      <Content top="105px" bottom={FOOTER_HEIGHT}>
         <Scroll direction="y" height="100%">
           <div>
             <Title>20대 여성들이 많이 찾는 차</Title>
@@ -213,6 +215,7 @@ const Index: NextPage = () => {
             </BannerContainer>
           </div>
         </Scroll>
+        <Footer />
       </Content>
     </>
   );
