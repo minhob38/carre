@@ -72,8 +72,8 @@ const ServerErrorModal: React.FC = () => {
     <Modal onClick={handleClickModal}>
       <Box>
         서버와 통신 문제가 발생하였습니다.
-        <Button onClick={handleRetryClickButton}>홈 화면으로 돌아가기</Button>
-        <Button onClick={handleHomeClickButton}>다시 시도하기</Button>
+        <Button onClick={handleHomeClickButton}>홈 화면으로 돌아가기</Button>
+        <Button onClick={handleRetryClickButton}>다시 시도하기</Button>
       </Box>
     </Modal>
   );

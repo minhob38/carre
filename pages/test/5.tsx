@@ -72,7 +72,8 @@ const Test: NextPage = () => {
 
   useEffect(() => {
     if (!surveyToken) {
-      return alert('survey token does not exist');
+      dispatch(actions.createSurveyTokenAsync());
+      return;
     }
     dispatch(actions.bindSurveyAsync({ surveyToken, input }));
   }, [dispatch, input, surveyToken, retry]);

@@ -226,8 +226,8 @@ const Test: NextPage = () => {
 
   return (
     <>
-      {!isServerErrorModal && <ServerErrorModal />}
-      {!isInputWarningModal && (
+      {isServerErrorModal && <ServerErrorModal />}
+      {isInputWarningModal && (
         <InputWarning title="입력값을 모두 넣어주세요." />
       )}
       <Header title="나의 정보 입력" type="back" closePath="/" />

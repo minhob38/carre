@@ -70,7 +70,8 @@ const DealerMatchedModal: React.FC = () => {
   };
   const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     dispatch(actions.hideDealerMatchedModal());
-    router.push('/result/1');
+    // router.push('/result/1');
+    router.push('/');
   };
   const router = useRouter();
 
