@@ -23,7 +23,6 @@ import NotServiceModal from '@modals/NotServiceModal';
 import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { useRouter } from 'next/router';
-import { actions } from '@store/slices/recomSlice';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -165,8 +164,11 @@ const Index: NextPage = () => {
                 src={recommendCarInfoList[carPage - 1].src}
                 onClick={() => {
                   const api = recommendCarInfoList[carPage - 1].api;
-                  router.push('/recommendation');
-                  dispatch(actions.getRecomAsync(api));
+                  router.push({
+                    pathname: '/result/1',
+                    query: { is_survey: false, page: carPage - 1 },
+                  });
+                  // dispatch(actions.getRecomAsync(api));
                 }}
               />
               {/* <Card

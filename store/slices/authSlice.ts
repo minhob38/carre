@@ -69,21 +69,14 @@ const authSlice = createSlice({
 function* connectUserAndDealerSaga(action: PayloadAction<any>) {
   try {
     const { dealerId, phoneNumber, recommendId, surveyToken } = action.payload;
-
     const data = yield api.connectUserAndDealer(
-      surveyToken,
-      recommendId,
+      surveyToken || 'no_survey',
+      recommendId || 'recom_no_survey',
       phoneNumber,
       dealerId,
     );
     yield put(errorActions.setNormal());
     yield put(appActions.showDealerMatchedModal());
-
-    // const surveyToken = action.payload;
-    // const tendencyData = yield api.analyzeUserTendency(surveyToken);
-    // const recomData = yield api.analyzeUserRecommendation(surveyToken);
-    // yield put(actions.connectUserAndDealerAsync({
-    // }));
   } catch (err) {
     yield put(errorActions.setServerError());
   }

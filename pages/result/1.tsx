@@ -21,6 +21,8 @@ import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { actions } from '@store/slices/resultSlice';
 import Comparison from '@components/result/Comparison';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -80,6 +82,45 @@ const Result: NextPage = () => {
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
   });
+  const router = useRouter();
+  const { is_survey, page } = router.query;
+  const isSurvey = is_survey === 'false' ? false : true;
+
+  useEffect(() => {
+    const landingRecoms = [
+      {
+        title: '현대 아반떼',
+        src: 'https://static.carre.kr/home_main/hyundae_avante.png',
+        api: 'https://api.carre.kr/api/v1/recommends/recom_main_1',
+      },
+      {
+        title: '벤츠 C-Class',
+        src: 'https://static.carre.kr/home_main/benz_c_class_ver4.png',
+        api: 'https://api.carre.kr/api/v1/recommends/recom_main_2',
+      },
+      {
+        title: 'bmw 3 Series',
+        src: 'https://static.carre.kr/home_main/bmw_3_serise_ver2.png',
+        api: 'https://api.carre.kr/api/v1/recommends/recom_main_3',
+      },
+      {
+        title: '기아 레이',
+        src: 'https://static.carre.kr/home_main/kia_ray_ver3.png',
+        api: 'https://api.carre.kr/api/v1/recommends/recom_main_4',
+      },
+      {
+        title: '미니 쿠퍼',
+        src: 'https://static.carre.kr/home_main/mini_cooper_ver2.png',
+        api: 'https://api.carre.kr/api/v1/recommends/recom_main_5',
+      },
+    ];
+    console.log(recoms, isSurvey, landingRecoms[Number(page)]);
+    if (!recoms && !isSurvey && landingRecoms[Number(page)]) {
+      const api = landingRecoms[Number(page)].api;
+      dispatch(actions.getLandingRecomAsync(api));
+    }
+  }, [dispatch, page, recoms, isSurvey]);
+
   if (!recoms) return <Loading text={'추천차량을 불러오고 있습니다.'} />;
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
@@ -101,10 +142,14 @@ const Result: NextPage = () => {
     if (carPage === maxCarPage) return;
     dispatch(actions.setCarPage(carPage + 1));
   };
-
+  console.log(isSurvey, '#@13');
   return (
     <>
-      <Header title="나의 추천 차량" type="back" backPath="/result" />
+      <Header
+        title="나의 추천 차량"
+        type={isSurvey ? 'back' : 'close'}
+        backPath={isSurvey ? '/result' : '/'}
+      />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
         <Scroll direction="y" height="100%">
           <Title>{userTendencySentence}</Title>
@@ -140,12 +185,16 @@ const Result: NextPage = () => {
           </ResultCardContainer>
           {/* <Border /> */}
           {!IS_HIDDEN && <Attractions />}
-          <ComparisonContainer>
-            <Comparison first={firstRankInfo} second={secondRankInfo} />
-          </ComparisonContainer>
-          <Link href="/result/2" passHref={true}>
-            <EditButton>검사 결과 조절해보기</EditButton>
-          </Link>
+          {isSurvey && (
+            <ComparisonContainer>
+              <Comparison first={firstRankInfo} second={secondRankInfo} />
+            </ComparisonContainer>
+          )}
+          {!IS_HIDDEN && (
+            <Link href="/result/2" passHref={true}>
+              <EditButton>검사 결과 조절해보기</EditButton>
+            </Link>
+          )}
         </Scroll>
       </Content>
       <DealerButton />

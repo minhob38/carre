@@ -140,9 +140,9 @@ const Test: NextPage = () => {
   }, [phoneNumber]);
 
   const handleButtonClick = () => {
-    if (!surveyToken) {
-      return alert('survey token does not exist');
-    }
+    // if (!surveyToken) {
+    //   return alert('survey token does not exist');
+    // }
     dispatch(
       actions.connectUserAndDealerAsync({
         surveyToken,

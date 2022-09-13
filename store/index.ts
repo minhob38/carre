@@ -11,9 +11,6 @@ import { appSaga } from './slices/appSlice';
 import errorReducer from './slices/errorSlice';
 import { errorSaga } from './slices/errorSlice';
 
-import recomReducer from './slices/recomSlice';
-import { recomSaga } from './slices/recomSlice';
-
 import inputReducer from './slices/inputSlice';
 
 import surveyReducer from './slices/surveySlice';
@@ -33,7 +30,6 @@ export function* rootSaga() {
     appSaga(),
     errorSaga(),
     authSaga(),
-    recomSaga(),
     surveySaga(),
     resultSaga(),
     dealerSaga(),
@@ -51,7 +47,6 @@ const rootReducer = combineReducers({
   appReducer,
   errorReducer,
   authReducer,
-  recomReducer,
   inputReducer,
   surveyReducer,
   resultReducer,
