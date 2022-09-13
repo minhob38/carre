@@ -114,7 +114,7 @@ const Result: NextPage = () => {
         api: 'https://api.carre.kr/api/v1/recommends/recom_main_5',
       },
     ];
-    console.log(recoms, isSurvey, landingRecoms[Number(page)]);
+
     if (!recoms && !isSurvey && landingRecoms[Number(page)]) {
       const api = landingRecoms[Number(page)].api;
       dispatch(actions.getLandingRecomAsync(api));
@@ -142,7 +142,7 @@ const Result: NextPage = () => {
     if (carPage === maxCarPage) return;
     dispatch(actions.setCarPage(carPage + 1));
   };
-  console.log(isSurvey, '#@13');
+
   return (
     <>
       <Header

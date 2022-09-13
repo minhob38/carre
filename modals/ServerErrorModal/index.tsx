@@ -6,6 +6,7 @@ import * as fonts from '@constants/fonts';
 import { useTypedDispatch } from '@hooks/useStore';
 import { actions as appActions } from '@store/slices/appSlice';
 import { actions as errorActions } from '@store/slices/errorSlice';
+import { useRouter } from 'next/router';
 
 const Modal = styled.div`
   position: fixed;
@@ -24,10 +25,11 @@ const Modal = styled.div`
 const Box = styled.div`
   display: flex;
   flex-flow: column nowrap;
+  gap: 10px 0;
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 35px - 35px);
-  height: 150px;
+  /* height: 150px; */
   margin: 0 auto;
   padding: 25px 0 25px 0;
   border-radius: 4px;
@@ -50,20 +52,28 @@ const Button = styled.div`
 `;
 
 const ServerErrorModal: React.FC = () => {
+  const router = useRouter();
   const dispatch = useTypedDispatch();
   const handleClickModal: React.MouseEventHandler<HTMLDivElement> = (ev) => {
     if (ev.currentTarget !== ev.target) return;
   };
-  const handleClickButton: React.MouseEventHandler<HTMLDivElement> = (ev) => {
+  const handleRetryClickButton: React.MouseEventHandler<HTMLDivElement> = (
+    ev,
+  ) => {
     dispatch(appActions.hideServerErrorModal());
     dispatch(errorActions.retryError());
+  };
+  const handleHomeClickButton = () => {
+    dispatch(appActions.hideServerErrorModal());
+    router.push('/');
   };
 
   return (
     <Modal onClick={handleClickModal}>
       <Box>
         서버와 통신 문제가 발생하였습니다.
-        <Button onClick={handleClickButton}>다시 시도하기</Button>
+        <Button onClick={handleRetryClickButton}>홈 화면으로 돌아가기</Button>
+        <Button onClick={handleHomeClickButton}>다시 시도하기</Button>
       </Box>
     </Modal>
   );

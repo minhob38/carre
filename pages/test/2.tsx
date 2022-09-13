@@ -226,7 +226,7 @@ const Test: NextPage = () => {
 
   return (
     <>
-      {isServerErrorModal && <ServerErrorModal />}
+      {!isServerErrorModal && <ServerErrorModal />}
       {isInputWarningModal && (
         <InputWarning title="입력값을 모두 넣어주세요." />
       )}
