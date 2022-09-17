@@ -21,5 +21,6 @@ declare module '@type/input' {
     userBudgetMax: number;
     passengerCount: number;
     drivenDistanceInYear: number;
+    isWantSimilarPriceCar: boolean;
   }
 }

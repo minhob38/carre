@@ -56,6 +56,7 @@ const Test: NextPage = () => {
       maxBudgetValue,
       passengerCount,
       drivenDistanceInYear,
+      isWantSimilarPriceCar,
     } = inputState;
 
     return {
@@ -67,6 +68,7 @@ const Test: NextPage = () => {
       userBudgetMax: 10000 * Number(maxBudgetValue),
       passengerCount,
       drivenDistanceInYear,
+      isWantSimilarPriceCar,
     };
   });
 

@@ -25,7 +25,7 @@ const Title = styled.div`
 
 const Toggle: React.FC = () => {
   const similarBudget = useTypedSelector(
-    (state) => state.rootReducer.inputReducer.similarBudget,
+    (state) => state.rootReducer.inputReducer.isWantSimilarPriceCar,
   );
   const dispatch = useTypedDispatch();
   const handleChange = (ev) => {
@@ -42,7 +42,7 @@ const Toggle: React.FC = () => {
       />
       <Input
         type="checkbox"
-        name="similarBudget"
+        name="isWantSimilarPriceCar"
         value={`${similarBudget}`}
         onChange={handleChange}
       ></Input>

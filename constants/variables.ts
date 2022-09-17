@@ -43,19 +43,19 @@ export const DEFAULT_PERSON = 1;
 
 /* 연주행거리 select 설정 */
 export const DISTANCE = [
-  '모름',
-  5000,
-  10000,
-  15000,
-  20000,
-  25000,
-  30000,
-  35000,
-  40000,
-  45000,
-  50000,
+  { title: '모름', value: 'UNKNOWN' },
+  { title: 5000, value: 5000 },
+  { title: 10000, value: 10000 },
+  { title: 15000, value: 15000 },
+  { title: 20000, value: 20000 },
+  { title: 25000, value: 25000 },
+  { title: 30000, value: 30000 },
+  { title: 35000, value: 35000 },
+  { title: 40000, value: 40000 },
+  { title: 45000, value: 45000 },
+  { title: 50000, value: 50000 },
 ];
-export const DEFAULT_DISTANCE = 10000;
+export const DEFAULT_DISTANCE = { title: '모름', value: 'UNKNOWN' } as const;
 
 /* 가격 설정 */
 export const SIDE_MARGIN = parseInt(margins.SIDE_MAIN_MARGIN.slice(0, -2));

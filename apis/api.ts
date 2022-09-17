@@ -28,6 +28,7 @@ export const bindSurvey = async (surveyToken: string, input: IInput) => {
     userBudgetMax,
     passengerCount,
     drivenDistanceInYear,
+    isWantSimilarPriceCar,
   } = input;
   const response = await axios
     .post<IResponse>(`/user-surveys/${surveyToken}/binding-init-info`, {
@@ -40,6 +41,7 @@ export const bindSurvey = async (surveyToken: string, input: IInput) => {
       userBudget,
       passengerCount,
       drivenDistanceInYear,
+      isWantSimilarPriceCar,
     })
     .then((res) => res.data);
   return response.data;

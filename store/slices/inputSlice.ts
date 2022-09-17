@@ -12,7 +12,7 @@ import {
 interface IState {
   birthYear: number;
   passengerCount: number;
-  drivenDistanceInYear: number;
+  drivenDistanceInYear: number | 'UNKNOWN';
   gender: string | null;
   carUsagePurpose: string | null;
   budget: number;
@@ -25,7 +25,7 @@ interface IState {
   fuels: string[];
   categories: string[]; // category?
   styles: string[];
-  similarBudget: boolean;
+  isWantSimilarPriceCar: boolean;
   survey: Record<string, string>;
 }
 
@@ -33,7 +33,7 @@ const initialState: IState = {
   birthYear: DEFAULT_YEAR,
   gender: null,
   passengerCount: DEFAULT_PERSON,
-  drivenDistanceInYear: DEFAULT_DISTANCE,
+  drivenDistanceInYear: DEFAULT_DISTANCE.value,
   carUsagePurpose: null,
   budget: 0,
   /* budget range bar 안에 있는 ball의 초기 위치 */
@@ -46,7 +46,7 @@ const initialState: IState = {
   fuels: [],
   categories: [],
   styles: [],
-  similarBudget: false,
+  isWantSimilarPriceCar: false,
   survey: {},
 };
 

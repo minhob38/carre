@@ -218,8 +218,8 @@ const Test: NextPage = () => {
 
   const DistanceOptions = DISTANCE.map((distance) => {
     return (
-      <option key={uuid4()} value={distance}>
-        {distance}
+      <option key={uuid4()} value={distance.value}>
+        {distance.title}
       </option>
     );
   });
