@@ -54,6 +54,7 @@ const DescriptionContainer = styled.div`
 const Description = styled.div`
   font: ${fonts.SUBTITLE_T1};
   color: ${colors.SECONDARY_500};
+  white-space: pre;
 `;
 
 const ChipContainer = styled.div`

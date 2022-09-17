@@ -117,3 +117,10 @@ export const getLadningRecommendation = async (aprUrl: string) => {
     .then((res) => res.data);
   return response.data;
 };
+
+export const getBrandDealers = async (brandCode: string) => {
+  const response = await axios
+    .get<IResponse>(`/dealers?carBrandCode=${brandCode}`)
+    .then((res) => res.data);
+  return response.data;
+};

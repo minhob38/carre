@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
 import Header from '@components/common/Header';
@@ -16,13 +17,9 @@ import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
 import { IS_HIDDEN } from '@constants/variables';
-import { useTypedSelector } from '@hooks/useStore';
-import casperImage from '@assets/images/casper.svg';
+import { useTypedSelector, useTypedDispatch } from '@hooks/useStore';
 import rightArrorImage from '@assets/images/icons/small-black-right-arrow.svg';
-
-import dealer1Image from '@assets/images/temps/dealer-1.png';
-import dealer2Image from '@assets/images/temps/dealer-2.png';
-import dealer3Image from '@assets/images/temps/dealer-3.png';
+import { actions } from '@store/slices/dealerSlice';
 
 const Title = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
@@ -82,8 +79,12 @@ const dealers = [
 ];
 
 const Dealer: NextPage = () => {
+  const dispatch = useTypedDispatch();
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
+  });
+  const dealers = useTypedSelector((state) => {
+    return state.rootReducer.dealerReudcer.dealers;
   });
 
   const carPage = useTypedSelector((state) => {
@@ -97,8 +98,17 @@ const Dealer: NextPage = () => {
     return state.rootReducer.appReducer.isDealerMatchedModal;
   });
 
-  if (!recoms) {
-    return <Loading text={'추천차량을 불러오고 있습니다.'} />;
+  useEffect(() => {
+    if (!recoms) return;
+    dispatch(
+      actions.getBrandDealersAsync(
+        recoms.recommendCarInfoList[carPage - 1].brandCode,
+      ),
+    );
+  }, [dispatch, carPage, recoms]);
+
+  if (!recoms || !dealers) {
+    return <Loading text={'추천차량/딜러정보를 불러오고 있습니다.'} />;
   }
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
@@ -112,19 +122,27 @@ const Dealer: NextPage = () => {
     carTotalPrice,
     trimList: trims,
   } = bestRecommendCarInfo;
-
   const imageSrc = carImagePath + carImageFileName;
   const rank = rankingInfoText.slice(0, -2);
 
   const Dealers = dealers.map((dealer) => {
-    const { description, src, chips, value } = dealer;
+    const {
+      dealerToken,
+      promotionMainText,
+      promotionSubText,
+      feedbackMainText,
+      feedbackSubText,
+      imagePath,
+      imageFileName,
+    } = dealer;
+    const imageSrc = imagePath + imageFileName;
     return (
       <DealerCard
         key={uuid4()}
-        description={description}
-        src={src}
-        chips={chips}
-        value={value}
+        description={`${promotionMainText} \n${promotionSubText}`}
+        src={imageSrc}
+        chips={[feedbackMainText, feedbackSubText]}
+        value={dealerToken}
       />
     );
   });
@@ -142,7 +160,12 @@ const Dealer: NextPage = () => {
               <Rank>{rankingInfoText}</Rank>
               <CarName>{`${brandName} ${carModelName}`}</CarName>
             </RankCarNameContainer>
-            <Image src={imageSrc} alt={carModelName} width="201px" />
+            <Image
+              src={imageSrc}
+              alt={carModelName}
+              width="201px"
+              // errSrc="https://static.carre.kr/dealer/dealer_icon_1.png"
+            />
           </CarContainer>
           {!IS_HIDDEN && (
             <Image src={rightArrorImage} alt="right-arrow" width="20px" />
