@@ -3,10 +3,13 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import styled from '@emotion/styled';
-import { wrapper } from '@store/index';
+import { wrapper, store } from '@store/index';
 import '@assets/styles/globals.css';
 import * as colors from '@constants/colors';
 import { ErrorBoundary } from 'react-error-boundary';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+import Loading from '@animations/Loading';
 
 const MobileWrapper = styled.div`
   position: relative;
@@ -24,7 +27,13 @@ function ErrorFallback({ error, resetErrorBoundary }) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const persistor = persistStore(store);
+
   return (
+    // <PersistGate
+    //   persistor={persistor}
+    //   loading={<Loading text={'새로고침 ...'} />}
+    // >
     <MobileWrapper>
       <Head>
         <meta
@@ -60,6 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
     </MobileWrapper>
+    // </PersistGate>
   );
 }
 
