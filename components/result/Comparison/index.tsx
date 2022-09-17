@@ -162,6 +162,7 @@ const Comparison: React.FC<any> = ({ first, second }) => {
           />
           <ComparisonTextContainer>
             <ComparisonText>유류비</ComparisonText>
+            <ComparisonTextDescription>{'서울-부산'}</ComparisonTextDescription>
           </ComparisonTextContainer>
           <ComparisonScore
             isWin={isSecondFuelCostWin}
@@ -174,7 +175,7 @@ const Comparison: React.FC<any> = ({ first, second }) => {
             number={Math.min(firstAdditionalInfo.iqsPoint, 5)}
           />
           <ComparisonTextContainer>
-            <ComparisonText>{`신차품질 \n조사 IQS`}</ComparisonText>
+            <ComparisonText>{`신차품질 \n조사`}</ComparisonText>
           </ComparisonTextContainer>
           <ComparisonScore
             isWin={isSecondIqsPointWin}
@@ -187,7 +188,7 @@ const Comparison: React.FC<any> = ({ first, second }) => {
             number={Math.min(firstAdditionalInfo.ncapPoint, 5)}
           />
           <ComparisonTextContainer>
-            <ComparisonText>{`안전도 \n평가 NVAP`}</ComparisonText>
+            <ComparisonText>{`안전도 \n평가 NCAP`}</ComparisonText>
           </ComparisonTextContainer>
           <ComparisonScore
             isWin={isSecondNvapPointWin}
