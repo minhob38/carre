@@ -20,6 +20,7 @@ import { IS_HIDDEN } from '@constants/variables';
 import { useTypedSelector, useTypedDispatch } from '@hooks/useStore';
 import rightArrorImage from '@assets/images/icons/small-black-right-arrow.svg';
 import { actions } from '@store/slices/dealerSlice';
+import { useRouter } from 'next/router';
 
 const Title = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
@@ -79,6 +80,11 @@ const dealers = [
 ];
 
 const Dealer: NextPage = () => {
+  const router = useRouter();
+  const { is_survey, page } = router.query;
+  const query = router.asPath.replace('/dealer', '');
+  const isSurvey = is_survey === 'false' ? false : true;
+
   const dispatch = useTypedDispatch();
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
@@ -151,7 +157,11 @@ const Dealer: NextPage = () => {
     <>
       {isDealerMatchingModal && <DealerMatchingModal />}
       {isDealerMatchedModal && <DealerMatchedModal />}
-      <Header type="back" title="견적 파트너 추천 결과" backPath="/result/1" />
+      <Header
+        type="back"
+        title="견적 파트너 추천 결과"
+        backPath={isSurvey ? '/result/1' : `/result/1${query}`}
+      />
       <Content top={HEADER_HEIGHT} bottom={DEALER_BUTTON_HEIGHT}>
         <Title>{IS_HIDDEN ? '' : userTendencySentence}</Title>
         <CardContainer>
@@ -174,7 +184,7 @@ const Dealer: NextPage = () => {
         <Scroll direction="y" height="calc(100% - 249px)">
           <DealerCardContainer>{Dealers}</DealerCardContainer>
         </Scroll>
-        <DealerButton />
+        <DealerButton path="/dealer" />
       </Content>
     </>
   );

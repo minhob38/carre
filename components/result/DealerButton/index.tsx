@@ -8,6 +8,10 @@ import * as fonts from '@constants/fonts';
 import { DEALER_BUTTON_HEIGHT } from '@constants/size';
 import heartImage from '@assets/images/icons/heart.svg';
 
+interface IProps {
+  path: string;
+}
+
 const Wrapper = styled.div`
   position: fixed;
   bottom: 0;
@@ -49,12 +53,12 @@ const Text2 = styled(Text1)`
   color: ${colors.PRIMARY_400};
 `;
 
-const DealerButton: React.FC = () => {
+const DealerButton: React.FC<IProps> = ({ path }) => {
   return (
     <Wrapper>
       <Container>
         {/* <Image src={heartImage} alt="heart" width="36px" height="36px" /> */}
-        <Link href={'/dealer'} passHref={true}>
+        <Link href={path} passHref={true}>
           <Button>
             <Text1>나에게 맞는</Text1>
             <Text2> 딜러 찾기</Text2>

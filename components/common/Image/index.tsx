@@ -32,7 +32,7 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
   const [_height, _setHeight] = useState<number>(0);
   const [_width, _setWidth] = useState<number>(0);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [imageSrc, setImageSrc] = useState<any>(src);
+  // const [imageSrc, setImageSrc] = useState<any>(src);
 
   useEffect(() => {
     if (!wrapperRef.current) return;
@@ -55,7 +55,7 @@ const Image: React.FC<IProps> = ({ src, alt, width, height }) => {
       width={`${width ? width : `${_width}px`}`}
     >
       <NextImage
-        src={imageSrc}
+        src={src}
         alt={alt}
         layout="fill"
         priority={true}

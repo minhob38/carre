@@ -27,6 +27,7 @@ const Toggle: React.FC = () => {
   const similarBudget = useTypedSelector(
     (state) => state.rootReducer.inputReducer.isWantSimilarPriceCar,
   );
+
   const dispatch = useTypedDispatch();
   const handleChange = (ev) => {
     dispatch(actions.clickToggle(ev.target));

@@ -84,6 +84,8 @@ const Result: NextPage = () => {
   });
   const router = useRouter();
   const { is_survey, page } = router.query;
+  const query = router.asPath.replace('/result/1', '');
+
   const isSurvey = is_survey === 'false' ? false : true;
 
   useEffect(() => {
@@ -197,7 +199,7 @@ const Result: NextPage = () => {
           )}
         </Scroll>
       </Content>
-      <DealerButton />
+      <DealerButton path={`/dealer${query}`} />
     </>
   );
 };
