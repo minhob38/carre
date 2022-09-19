@@ -181,7 +181,7 @@ const Dealer: NextPage = () => {
             <Image src={rightArrorImage} alt="right-arrow" width="20px" />
           )}
         </CardContainer>
-        <Scroll direction="y" height="calc(100% - 249px)">
+        <Scroll direction="y" height="calc(100% - 170px)">
           <DealerCardContainer>{Dealers}</DealerCardContainer>
         </Scroll>
         <DealerButton path="/dealer" />
