@@ -68,12 +68,14 @@ const authSlice = createSlice({
 
 function* connectUserAndDealerSaga(action: PayloadAction<any>) {
   try {
-    const { dealerId, phoneNumber, recommendId, surveyToken } = action.payload;
+    const { dealerId, phoneNumber, recommendId, surveyToken, carFactorId } =
+      action.payload;
     const data = yield api.connectUserAndDealer(
       surveyToken || 'no_survey',
       recommendId || 'recom_no_survey',
       phoneNumber,
       dealerId,
+      carFactorId,
     );
     yield put(errorActions.setNormal());
     yield put(appActions.showDealerMatchedModal());

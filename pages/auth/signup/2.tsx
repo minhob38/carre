@@ -130,6 +130,16 @@ const Test: NextPage = () => {
     return state.rootReducer.resultReducer.recommendId;
   });
 
+  const currentCar = useTypedSelector((state) => {
+    const carPage = state.rootReducer.resultReducer.carPage;
+    const { recommendCarInfoList } = state.rootReducer.resultReducer.recoms;
+    return recommendCarInfoList[carPage - 1];
+  });
+
+  // const recommendId: any = useTypedSelector((state) => {
+  //   return state.rootReducer.resultReducer.;
+  // });
+
   useEffect(() => {
     const isValid = reg.test(phoneNumber);
     if (isValid) {
@@ -149,6 +159,7 @@ const Test: NextPage = () => {
         recommendId,
         dealerId,
         phoneNumber,
+        carFactorId: currentCar.carFactorId,
       }),
     );
   };

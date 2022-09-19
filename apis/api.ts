@@ -99,6 +99,7 @@ export const connectUserAndDealer = async (
   recommendId: string,
   phoneNumber: string,
   dealerId: string,
+  carFactorId: string,
 ) => {
   const response = await axios
     .post<IResponse>(`/dealers/connect-user`, {
@@ -106,6 +107,7 @@ export const connectUserAndDealer = async (
       userSurveyToken: surveyToken,
       userPhoneNumber: phoneNumber,
       recommendToken: recommendId,
+      carFactorId,
     })
     .then((res) => res.data);
   return response.data;
