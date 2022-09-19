@@ -71,8 +71,8 @@ function* connectUserAndDealerSaga(action: PayloadAction<any>) {
     const { dealerId, phoneNumber, recommendId, surveyToken, carFactorId } =
       action.payload;
     const data = yield api.connectUserAndDealer(
-      surveyToken || 'no_survey',
-      recommendId || 'recom_no_survey',
+      surveyToken || 'dummy_userSurveyToken',
+      recommendId || 'dummy_recommendToken',
       phoneNumber,
       dealerId,
       carFactorId,
