@@ -103,7 +103,7 @@ export const connectUserAndDealer = async (
 ) => {
   const response = await axios
     .post<IResponse>(`/dealers/connect-user`, {
-      dealerId,
+      dealerToken: dealerId,
       userSurveyToken: surveyToken,
       userPhoneNumber: phoneNumber,
       recommendToken: recommendId,

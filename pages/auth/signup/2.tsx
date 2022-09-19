@@ -132,6 +132,7 @@ const Test: NextPage = () => {
 
   const currentCar = useTypedSelector((state) => {
     const carPage = state.rootReducer.resultReducer.carPage;
+    if (!state.rootReducer.resultReducer.recoms) return null;
     const { recommendCarInfoList } = state.rootReducer.resultReducer.recoms;
     return recommendCarInfoList[carPage - 1];
   });
@@ -153,6 +154,8 @@ const Test: NextPage = () => {
     // if (!surveyToken) {
     //   return alert('survey token does not exist');
     // }
+    if (!currentCar) return;
+
     dispatch(
       actions.connectUserAndDealerAsync({
         surveyToken,
