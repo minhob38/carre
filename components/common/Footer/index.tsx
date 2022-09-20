@@ -1,43 +1,26 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
-import Image from '@components/common/Image';
 import * as colors from '@constants/colors';
 import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
-import backImage from '@assets/images/icons/back.svg';
-import closeImage from '@assets/images/icons/close.svg';
-import { FOOTER_HEIGHT, HEADER_HEIGHT } from '@constants/size';
-
-interface IProps {
-  title: string;
-  type: 'back' | 'close';
-  backPath?: string;
-  closePath?: string;
-}
+import { FOOTER_HEIGHT } from '@constants/size';
 
 const Wrapper = styled.div`
   position: fixed;
   bottom: 0;
   display: flex;
-  align-items: center;
+  flex-flow: column nowrap;
   width: 100%;
   height: ${FOOTER_HEIGHT};
 `;
 
-const Title = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: ${fonts.TITLE_T2};
-  color: ${colors.SECONDARY_500};
+const CompanyInfo = styled.div`
+  margin: 0 0 30px ${margins.SIDE_MAIN_MARGIN};
+  font: ${fonts.SUBTITLE_T2};
+  color: ${colors.SECONDARY_REAL_BLACK};
+  font-size: 12px;
+  white-space: pre;
 `;
-
-const ImageContainer = styled.div``;
 
 const TermConatiner = styled.div`
   display: flex;
@@ -58,6 +41,9 @@ const ALink = styled.a`
 const Footer: React.FC<any> = () => {
   return (
     <Wrapper>
+      <CompanyInfo>
+        {`(주) REMY 대표자 : 허장욱 \n인천광역시 연수구 송도미래로 30, D동 909 에이-10호 \n사업자번호 : 633-81-02087 \n이메일 chamadang2022@gmail.com`}
+      </CompanyInfo>
       <TermConatiner>
         <ALink
           href={
