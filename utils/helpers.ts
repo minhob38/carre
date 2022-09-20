@@ -3,11 +3,13 @@ export const convertNumberToWon = (number: number, isRaw = true): string => {
 
   if (isRaw) {
     if (numberStr.length < 5) {
-      return `${numberStr}원`;
+      return `${insertCommaToNumber(parseInt(numberStr))}원`;
     } else if (numberStr.length >= 5 && numberStr.length < 9) {
-      return `${numberStr.slice(0, -4)}만원`;
+      return `${insertCommaToNumber(parseInt(numberStr.slice(0, -4)))}만원`;
     } else if (numberStr.length >= 9 && numberStr.length < 13) {
-      return `${numberStr.slice(0, -8)}억 ${numberStr.slice(-8, -4)}만원`;
+      return `${insertCommaToNumber(
+        parseInt(numberStr.slice(0, -8)),
+      )}억 ${numberStr.slice(-8, -4)}만원`;
     }
   }
 

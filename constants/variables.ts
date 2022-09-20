@@ -44,16 +44,16 @@ export const DEFAULT_PERSON = 1;
 /* 연주행거리 select 설정 */
 export const DISTANCE = [
   { title: '모름', value: 'UNKNOWN' },
-  { title: 5000, value: 5000 },
-  { title: 10000, value: 10000 },
-  { title: 15000, value: 15000 },
-  { title: 20000, value: 20000 },
-  { title: 25000, value: 25000 },
-  { title: 30000, value: 30000 },
-  { title: 35000, value: 35000 },
-  { title: 40000, value: 40000 },
-  { title: 45000, value: 45000 },
-  { title: 50000, value: 50000 },
+  { title: '5,000 km', value: 5000 },
+  { title: '1,0000 km', value: 10000 },
+  { title: '15,000 km', value: 15000 },
+  { title: '20,000 km', value: 20000 },
+  { title: '25,000 km', value: 25000 },
+  { title: '30,000 km', value: 30000 },
+  { title: '35,000 km', value: 35000 },
+  { title: '40,000 km', value: 40000 },
+  { title: '45,000 km', value: 45000 },
+  { title: '50,000 km', value: 50000 },
 ];
 export const DEFAULT_DISTANCE = { title: '모름', value: 'UNKNOWN' } as const;
 
