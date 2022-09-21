@@ -55,6 +55,8 @@ const BannerContainer = styled.div`
   gap: 20px 0;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   margin: 0 auto 20px auto;
+  align-self: flex-end;
+  justify-self: flex-end;
 `;
 
 const CardContainer = styled.div`
@@ -76,6 +78,10 @@ const SubContainer = styled.div`
 const ArrowContainer = styled.div`
   padding: 0 15px;
   visibility: ${(props: IStyleProps) => (props.isHidden ? 'hidden' : 'block')};
+`;
+
+const Margin = styled.div`
+  flex: 1;
 `;
 
 const Index: NextPage = () => {
@@ -135,7 +141,7 @@ const Index: NextPage = () => {
     <>
       {isNotServiceModal && <NotServiceModal />}
       <TopNavigator />
-      <Content top="105px" bottom={FOOTER_HEIGHT}>
+      <Content top="105px" bottom={'0px'}>
         <Scroll direction="y" height="100%">
           <div>
             <Title>20대 여성들이 많이 찾는 차</Title>
@@ -214,8 +220,9 @@ const Index: NextPage = () => {
               {!IS_HIDDEN && <Banner type="dealer" />}
             </BannerContainer>
           </div>
+          <Margin />
+          <Footer />
         </Scroll>
-        <Footer />
       </Content>
     </>
   );

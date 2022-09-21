@@ -6,12 +6,12 @@ import * as margins from '@constants/margins';
 import { FOOTER_HEIGHT } from '@constants/size';
 
 const Wrapper = styled.div`
-  position: fixed;
+  position: absolute;
   bottom: 0;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  height: ${FOOTER_HEIGHT};
+  /* height: ${FOOTER_HEIGHT}; */
 `;
 
 const CompanyInfo = styled.div`
@@ -25,7 +25,7 @@ const CompanyInfo = styled.div`
 const TermConatiner = styled.div`
   display: flex;
   gap: 0 20px;
-  margin: 0 0 0 ${margins.SIDE_MAIN_MARGIN};
+  margin: 0 0 11px ${margins.SIDE_MAIN_MARGIN};
 `;
 
 const ALink = styled.a`
