@@ -6,8 +6,8 @@ import * as margins from '@constants/margins';
 import { FOOTER_HEIGHT } from '@constants/size';
 
 const Wrapper = styled.div`
-  position: absolute;
-  bottom: 0;
+  /* position: absolute; */
+  /* bottom: 0; */
   display: flex;
   flex-flow: column nowrap;
   width: 100%;

@@ -8,6 +8,7 @@ import * as fonts from '@constants/fonts';
 import * as colors from '@constants/colors';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
 import { actions } from '@store/slices/appSlice';
+import { IS_HIDDEN } from '@constants/variables';
 interface IStyleProps {
   isCurrent: boolean;
 }
@@ -73,19 +74,25 @@ const TopNavigator: React.FC = () => {
           <Menu isCurrent={pathname === '/'}>홈</Menu>
         </Link>
         {/* <Link href={'/history'} passHref={true}> */}
-        <NotService>
-          <Menu isCurrent={pathname === '/history'}>히스토리</Menu>
-        </NotService>
+        {!IS_HIDDEN && (
+          <NotService>
+            <Menu isCurrent={pathname === '/history'}>히스토리</Menu>
+          </NotService>
+        )}
         {/* </Link> */}
         {/* <Link href={'/bookmark'} passHref={true}> */}
-        <NotService>
-          <Menu isCurrent={pathname === '/bookmark'}>찜</Menu>
-        </NotService>
+        {!IS_HIDDEN && (
+          <NotService>
+            <Menu isCurrent={pathname === '/bookmark'}>찜</Menu>
+          </NotService>
+        )}
         {/* </Link> */}
         {/* <Link href={'/my'} passHref={true}> */}
-        <NotService>
-          <Menu isCurrent={pathname === '/my'}>MY</Menu>
-        </NotService>
+        {!IS_HIDDEN && (
+          <NotService>
+            <Menu isCurrent={pathname === '/my'}>MY</Menu>
+          </NotService>
+        )}
         {/* </Link> */}
       </MenuContainer>
     </Wrapper>
