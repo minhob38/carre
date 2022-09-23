@@ -131,10 +131,10 @@ const Test: NextPage = () => {
   });
 
   const currentCar = useTypedSelector((state) => {
-    const carPage = state.rootReducer.resultReducer.carPage;
+    const carRank = state.rootReducer.resultReducer.carRank;
     if (!state.rootReducer.resultReducer.recoms) return null;
     const { recommendCarInfoList } = state.rootReducer.resultReducer.recoms;
-    return recommendCarInfoList[carPage - 1];
+    return recommendCarInfoList[carRank - 1];
   });
 
   // const recommendId: any = useTypedSelector((state) => {
@@ -154,8 +154,9 @@ const Test: NextPage = () => {
     // if (!surveyToken) {
     //   return alert('survey token does not exist');
     // }
+    console.log(currentCar);
     if (!currentCar) return;
-
+    return;
     dispatch(
       actions.connectUserAndDealerAsync({
         surveyToken,

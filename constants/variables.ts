@@ -17,6 +17,34 @@ interface IInput {
 
 export const IS_HIDDEN = true;
 
+export const LandingRecommendations = [
+  {
+    title: '현대 아반떼',
+    src: 'https://static.carre.kr/home_main/hyundae_avante.png',
+    api: 'https://api.carre.kr/api/v1/recommends/recom_main_1',
+  },
+  {
+    title: '벤츠 C-Class',
+    src: 'https://static.carre.kr/home_main/benz_c_class_ver4.png',
+    api: 'https://api.carre.kr/api/v1/recommends/recom_main_2',
+  },
+  {
+    title: 'bmw 3 Series',
+    src: 'https://static.carre.kr/home_main/bmw_3_serise_ver2.png',
+    api: 'https://api.carre.kr/api/v1/recommends/recom_main_3',
+  },
+  {
+    title: '기아 레이',
+    src: 'https://static.carre.kr/home_main/kia_ray_ver3.png',
+    api: 'https://api.carre.kr/api/v1/recommends/recom_main_4',
+  },
+  {
+    title: '미니 쿠퍼',
+    src: 'https://static.carre.kr/home_main/mini_cooper_ver2.png',
+    api: 'https://api.carre.kr/api/v1/recommends/recom_main_5',
+  },
+];
+
 /* 성별 input 설정 */
 export const genderLabels: { title: string; value: string }[] = [
   { title: '여자', value: 'FEMALE' },

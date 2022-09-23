@@ -21,6 +21,8 @@ import { useTypedSelector, useTypedDispatch } from '@hooks/useStore';
 import rightArrorImage from '@assets/images/icons/small-black-right-arrow.svg';
 import { actions } from '@store/slices/dealerSlice';
 import { useRouter } from 'next/router';
+import ServerErrorModal from '@modals/ServerErrorModal';
+import InputWarningModal from '@modals/InputWarningModal';
 
 const Title = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
@@ -86,6 +88,12 @@ const Dealer: NextPage = () => {
   const isSurvey = is_survey === 'false' ? false : true;
 
   const dispatch = useTypedDispatch();
+  const isInputWarningModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isInputWarningModal,
+  );
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
+  );
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
   });
@@ -96,8 +104,8 @@ const Dealer: NextPage = () => {
     return state.rootReducer.dealerReudcer.dealer;
   });
 
-  const carPage = useTypedSelector((state) => {
-    return state.rootReducer.resultReducer.carPage;
+  const carRank = useTypedSelector((state) => {
+    return state.rootReducer.resultReducer.carRank;
   });
 
   const isDealerMatchingModal = useTypedSelector((state) => {
@@ -111,17 +119,17 @@ const Dealer: NextPage = () => {
     if (!recoms) return;
     dispatch(
       actions.getBrandDealersAsync(
-        recoms.recommendCarInfoList[carPage - 1].brandCode,
+        recoms.recommendCarInfoList[carRank - 1].brandCode,
       ),
     );
-  }, [dispatch, carPage, recoms]);
+  }, [dispatch, carRank, recoms]);
 
   if (!recoms || !dealers) {
     return <Loading text={'추천차량/딜러정보를 불러오고 있습니다.'} />;
   }
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
-  const bestRecommendCarInfo = recommendCarInfoList[carPage - 1];
+  const bestRecommendCarInfo = recommendCarInfoList[carRank - 1];
   const {
     rankingInfoText,
     brandName,
@@ -158,6 +166,10 @@ const Dealer: NextPage = () => {
 
   return (
     <>
+      {isServerErrorModal && <ServerErrorModal />}
+      {isInputWarningModal && (
+        <InputWarningModal title="딜러를 선택해주세요." />
+      )}
       {isDealerMatchingModal && <DealerMatchingModal />}
       {isDealerMatchedModal && <DealerMatchedModal />}
       <Header

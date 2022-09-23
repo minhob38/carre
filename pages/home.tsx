@@ -26,6 +26,8 @@ import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { useRouter } from 'next/router';
 import { FOOTER_HEIGHT } from '@constants/size';
+import { LandingRecommendations } from '@constants/variables';
+import { actions } from '@store/slices/resultSlice';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -88,43 +90,16 @@ const Margin = styled.div`
 const Home: NextPage = () => {
   const initializeStore = useInitialization();
   const dispatch = useTypedDispatch();
-  const [carPage, setCarPage] = useState<number>(1);
+  // const [carPage, setCarPage] = useState<number>(1);
   const router = useRouter();
   const isNotServiceModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isNotServiceModal,
   );
 
-  const recommendCarInfoList = [
-    {
-      title: '현대 아반떼',
-      src: 'https://static.carre.kr/home_main/hyundae_avante.png',
-      api: 'https://api.carre.kr/api/v1/recommends/recom_main_1',
-    },
-    {
-      title: '벤츠 C-Class',
-      src: 'https://static.carre.kr/home_main/benz_c_class_ver4.png',
-      api: 'https://api.carre.kr/api/v1/recommends/recom_main_2',
-    },
-    {
-      title: 'bmw 3 Series',
-      src: 'https://static.carre.kr/home_main/bmw_3_serise_ver2.png',
-      api: 'https://api.carre.kr/api/v1/recommends/recom_main_3',
-    },
-    {
-      title: '기아 레이',
-      src: 'https://static.carre.kr/home_main/kia_ray_ver3.png',
-      api: 'https://api.carre.kr/api/v1/recommends/recom_main_4',
-    },
-    {
-      title: '미니 쿠퍼',
-      src: 'https://static.carre.kr/home_main/mini_cooper_ver2.png',
-      api: 'https://api.carre.kr/api/v1/recommends/recom_main_5',
-    },
-  ];
   const minCarPage = 1;
-  const maxCarPage = recommendCarInfoList.length;
+  const maxCarPage = LandingRecommendations.length;
 
-  const Cards = recommendCarInfoList.map((item, index) => {
+  const Cards = LandingRecommendations.map((item, index) => {
     return (
       <Card
         key={uuid4()}
@@ -132,9 +107,10 @@ const Home: NextPage = () => {
         src={item.src}
         onClick={() => {
           const api = item.api;
+          dispatch(actions.setCarRank(index + 1));
           router.push({
             pathname: '/result/1',
-            query: { is_survey: false, page: index },
+            query: { is_survey: false },
           });
           // dispatch(actions.getRecomAsync(api));
         }}
@@ -142,19 +118,19 @@ const Home: NextPage = () => {
     );
   });
 
-  // useEffect(() => {
-  //   initializeStore();
-  // }, [initializeStore]);
+  useEffect(() => {
+    initializeStore();
+  }, [initializeStore]);
 
-  const handleLeftArrowClick = () => {
-    if (carPage === minCarPage) return;
-    setCarPage(carPage - 1);
-  };
+  // const handleLeftArrowClick = () => {
+  //   if (carPage === minCarPage) return;
+  //   setCarPage(carPage - 1);
+  // };
 
-  const handleRightArrowClick = () => {
-    if (carPage === maxCarPage) return;
-    setCarPage(carPage + 1);
-  };
+  // const handleRightArrowClick = () => {
+  //   if (carPage === maxCarPage) return;
+  //   setCarPage(carPage + 1);
+  // };
 
   return (
     <>

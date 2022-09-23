@@ -7,6 +7,8 @@ import * as margins from '@constants/margins';
 import * as fonts from '@constants/fonts';
 import { DEALER_BUTTON_HEIGHT } from '@constants/size';
 import heartImage from '@assets/images/icons/heart.svg';
+import { useTypedDispatch } from '@hooks/useStore';
+import { actions } from '@store/slices/appSlice';
 
 interface IProps extends IStyleProps {
   path: string;
@@ -59,6 +61,22 @@ const Text2 = styled(Text1)`
 `;
 
 const DealerButton: React.FC<IProps> = ({ path, isActive = true }) => {
+  const dispatch = useTypedDispatch();
+
+  if (!isActive) {
+    return (
+      <Wrapper onClick={() => dispatch(actions.showInputWariningModal())}>
+        <Container>
+          {/* <Image src={heartImage} alt="heart" width="36px" height="36px" /> */}
+          <Button isActive={isActive}>
+            <Text1>나에게 맞는</Text1>
+            <Text2> 딜러 찾기</Text2>
+          </Button>
+        </Container>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -66,7 +84,7 @@ const DealerButton: React.FC<IProps> = ({ path, isActive = true }) => {
         <Link href={path} passHref={true}>
           <Button isActive={isActive}>
             <Text1>나에게 맞는</Text1>
-            <Text2>딜러 찾기</Text2>
+            <Text2> 딜러 찾기</Text2>
           </Button>
         </Link>
       </Container>

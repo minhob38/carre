@@ -17,13 +17,15 @@ import * as fonts from '@constants/fonts';
 import * as margins from '@constants/margins';
 import { HEADER_HEIGHT, DEALER_BUTTON_HEIGHT } from '@constants/size';
 import { useTypedDispatch, useTypedSelector } from '@hooks/useStore';
-import { IS_HIDDEN } from '@constants/variables';
+import { IS_HIDDEN, LandingRecommendations } from '@constants/variables';
 import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { actions } from '@store/slices/resultSlice';
 import Comparison from '@components/result/Comparison';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import ServerErrorModal from '@modals/ServerErrorModal';
+import InputWarningModal from '@modals/InputWarningModal';
 
 interface IStyleProps {
   isHidden: boolean;
@@ -83,51 +85,29 @@ const ComparisonContainer = styled.div`
 const Result: NextPage = () => {
   const [clickedRank, setClickedRank] = useState<number | null>(null);
   const dispatch = useTypedDispatch();
-  const carPage = useTypedSelector(
-    (state) => state.rootReducer.resultReducer.carPage,
+  const isInputWarningModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isInputWarningModal,
+  );
+  const isServerErrorModal = useTypedSelector(
+    (state) => state.rootReducer.appReducer.isServerErrorModal,
+  );
+  const carRank = useTypedSelector(
+    (state) => state.rootReducer.resultReducer.carRank,
   );
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
   });
   const router = useRouter();
-  const { is_survey, page } = router.query;
+  const { is_survey } = router.query;
   const query = router.asPath.replace('/result/1', '');
   const isSurvey = is_survey === 'false' ? false : true;
 
   useEffect(() => {
-    const landingRecoms = [
-      {
-        title: '현대 아반떼',
-        src: 'https://static.carre.kr/home_main/hyundae_avante.png',
-        api: 'https://api.carre.kr/api/v1/recommends/recom_main_1',
-      },
-      {
-        title: '벤츠 C-Class',
-        src: 'https://static.carre.kr/home_main/benz_c_class_ver4.png',
-        api: 'https://api.carre.kr/api/v1/recommends/recom_main_2',
-      },
-      {
-        title: 'bmw 3 Series',
-        src: 'https://static.carre.kr/home_main/bmw_3_serise_ver2.png',
-        api: 'https://api.carre.kr/api/v1/recommends/recom_main_3',
-      },
-      {
-        title: '기아 레이',
-        src: 'https://static.carre.kr/home_main/kia_ray_ver3.png',
-        api: 'https://api.carre.kr/api/v1/recommends/recom_main_4',
-      },
-      {
-        title: '미니 쿠퍼',
-        src: 'https://static.carre.kr/home_main/mini_cooper_ver2.png',
-        api: 'https://api.carre.kr/api/v1/recommends/recom_main_5',
-      },
-    ];
-
-    if (!recoms && !isSurvey && landingRecoms[Number(page)]) {
-      const api = landingRecoms[Number(page)].api;
+    if (!recoms && !isSurvey) {
+      const api = LandingRecommendations[carRank - 1].api;
       dispatch(actions.getLandingRecomAsync(api));
     }
-  }, [dispatch, page, recoms, isSurvey]);
+  }, [dispatch, recoms, isSurvey, carRank]);
 
   if (!recoms) return <Loading text={'추천차량을 불러오고 있습니다.'} />;
 
@@ -159,18 +139,20 @@ const Result: NextPage = () => {
     );
   });
 
-  const handleLeftArrowClick = () => {
-    if (carPage === minCarPage) return;
-    dispatch(actions.setCarPage(carPage - 1));
-  };
+  // const handleLeftArrowClick = () => {
+  //   if (carPage === minCarPage) return;
+  //   dispatch(actions.setCarPage(carPage - 1));
+  // };
 
-  const handleRightArrowClick = () => {
-    if (carPage === maxCarPage) return;
-    dispatch(actions.setCarPage(carPage + 1));
-  };
+  // const handleRightArrowClick = () => {
+  //   if (carPage === maxCarPage) return;
+  //   dispatch(actions.setCarPage(carPage + 1));
+  // };
 
   return (
     <>
+      {isServerErrorModal && <ServerErrorModal />}
+      {isInputWarningModal && <InputWarningModal title="차를 선택해주세요." />}
       <Header
         title="나의 추천 차량"
         type={isSurvey ? 'back' : 'close'}

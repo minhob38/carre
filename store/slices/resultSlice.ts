@@ -8,7 +8,7 @@ interface IState {
   tendency: any;
   recoms: any;
   recommendId: string | null;
-  carPage: number;
+  carRank: number;
 }
 
 /* slices */
@@ -16,7 +16,7 @@ const initialState: IState = {
   tendency: null,
   recoms: null,
   recommendId: null,
-  carPage: 1,
+  carRank: 1,
 };
 
 // https://redux-toolkit.js.org/api/createSlice
@@ -48,9 +48,9 @@ const resultSlice = createSlice({
       const recommendId = action.payload;
       state.recommendId = recommendId;
     },
-    setCarPage: (state, action: PayloadAction<number>) => {
-      const carPage = action.payload;
-      state.carPage = carPage;
+    setCarRank: (state, action: PayloadAction<number>) => {
+      const carRank = action.payload;
+      state.carRank = carRank;
     },
     /* 랜딩페이지에서 추천받은 차량*/
     getLandingRecomAsync: (state, action: PayloadAction<any>) => {
