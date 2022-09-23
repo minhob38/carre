@@ -200,7 +200,7 @@ const Detail: NextPage<any> = () => {
         </Scroll>
         <Border />
       </Content>
-      <DealerButton path="/dealer" />
+      <DealerButton path="/dealer" isActive={false} />
     </>
   );
 };
