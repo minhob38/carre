@@ -104,8 +104,8 @@ const Dealer: NextPage = () => {
     return state.rootReducer.dealerReudcer.dealer;
   });
 
-  const carRank = useTypedSelector((state) => {
-    return state.rootReducer.resultReducer.carRank;
+  const carIndex = useTypedSelector((state) => {
+    return state.rootReducer.resultReducer.carIndex;
   });
 
   const isDealerMatchingModal = useTypedSelector((state) => {
@@ -119,17 +119,17 @@ const Dealer: NextPage = () => {
     if (!recoms) return;
     dispatch(
       actions.getBrandDealersAsync(
-        recoms.recommendCarInfoList[carRank - 1].brandCode,
+        recoms.recommendCarInfoList[carIndex - 1].brandCode,
       ),
     );
-  }, [dispatch, carRank, recoms]);
+  }, [dispatch, carIndex, recoms]);
 
   if (!recoms || !dealers) {
     return <Loading text={'추천차량/딜러정보를 불러오고 있습니다.'} />;
   }
 
   const { recommendCarInfoList, userTendencySentence } = recoms;
-  const bestRecommendCarInfo = recommendCarInfoList[carRank - 1];
+  const bestRecommendCarInfo = recommendCarInfoList[carIndex - 1];
   const {
     rankingInfoText,
     brandName,

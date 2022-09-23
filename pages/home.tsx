@@ -107,7 +107,7 @@ const Home: NextPage = () => {
         src={item.src}
         onClick={() => {
           const api = item.api;
-          dispatch(actions.setCarRank(index + 1));
+          dispatch(actions.setCarIndex(index + 1));
           router.push({
             pathname: '/result/1',
             query: { is_survey: false },

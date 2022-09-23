@@ -91,8 +91,8 @@ const Result: NextPage = () => {
   const isServerErrorModal = useTypedSelector(
     (state) => state.rootReducer.appReducer.isServerErrorModal,
   );
-  const carRank = useTypedSelector(
-    (state) => state.rootReducer.resultReducer.carRank,
+  const carIndex = useTypedSelector(
+    (state) => state.rootReducer.resultReducer.carIndex,
   );
   const recoms = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.recoms;
@@ -104,10 +104,10 @@ const Result: NextPage = () => {
 
   useEffect(() => {
     if (!recoms && !isSurvey) {
-      const api = LandingRecommendations[carRank - 1].api;
+      const api = LandingRecommendations[carIndex - 1].api;
       dispatch(actions.getLandingRecomAsync(api));
     }
-  }, [dispatch, recoms, isSurvey, carRank]);
+  }, [dispatch, recoms, isSurvey, carIndex]);
 
   if (!recoms) return <Loading text={'추천차량을 불러오고 있습니다.'} />;
 
@@ -128,6 +128,7 @@ const Result: NextPage = () => {
         data-rank={index + 1}
         onClick={(ev: any) => {
           setClickedRank(Number(ev.currentTarget.dataset['rank']));
+          dispatch(actions.setCarIndex(index + 1));
         }}
       >
         <ResultCard

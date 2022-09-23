@@ -131,10 +131,10 @@ const Test: NextPage = () => {
   });
 
   const currentCar = useTypedSelector((state) => {
-    const carRank = state.rootReducer.resultReducer.carRank;
+    const carIndex = state.rootReducer.resultReducer.carIndex;
     if (!state.rootReducer.resultReducer.recoms) return null;
     const { recommendCarInfoList } = state.rootReducer.resultReducer.recoms;
-    return recommendCarInfoList[carRank - 1];
+    return recommendCarInfoList[carIndex - 1];
   });
 
   // const recommendId: any = useTypedSelector((state) => {
