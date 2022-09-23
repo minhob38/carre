@@ -56,6 +56,7 @@ const Background = styled.div`
 
 const Circle = styled.div`
   position: absolute;
+  top: 0;
   width: 100vw;
   height: 100vw;
   border-radius: 50%;
@@ -142,7 +143,7 @@ const Result: NextPage = () => {
           <Background>
             <Circle />
             <Rectangle />
-            {IS_HIDDEN && <Title>{userTendencyTitle}</Title>}
+            <Title>{IS_HIDDEN ? '당신의 차는' : userTendencyTitle}</Title>
             <SubTitle>
               {IS_HIDDEN ? '' : '두마리 토끼를 잡으려는 당신!'}
             </SubTitle>
