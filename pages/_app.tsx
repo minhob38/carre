@@ -36,6 +36,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     // >
     <MobileWrapper>
       <Head>
+        <meta property="og:title" content="당신에게 어울리는 차량은?" />
+        <meta property="og:description" content="차량 추천을 합니다." />
+        <meta property="og:url" content="https://www.carre.kr" />
+        <meta property="og:image" content="public/favicon.ico" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1,  minimum-scale=1.0, user-scalable=no, shrink-to-fit=no"

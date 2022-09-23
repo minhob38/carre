@@ -23,7 +23,6 @@ import { actions } from '@store/slices/dealerSlice';
 import { useRouter } from 'next/router';
 import ServerErrorModal from '@modals/ServerErrorModal';
 import InputWarningModal from '@modals/InputWarningModal';
-import TopNavigator from '@components/common/TopNavigator';
 
 const Title = styled.div`
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
@@ -167,7 +166,6 @@ const Dealer: NextPage = () => {
 
   return (
     <>
-      <TopNavigator />
       {isServerErrorModal && <ServerErrorModal />}
       {isInputWarningModal && (
         <InputWarningModal title="딜러를 선택해주세요." />
