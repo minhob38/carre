@@ -92,6 +92,9 @@ const Dealer: NextPage = () => {
   const dealers = useTypedSelector((state) => {
     return state.rootReducer.dealerReudcer.dealers;
   });
+  const dealer = useTypedSelector((state) => {
+    return state.rootReducer.dealerReudcer.dealer;
+  });
 
   const carPage = useTypedSelector((state) => {
     return state.rootReducer.resultReducer.carPage;
@@ -184,7 +187,7 @@ const Dealer: NextPage = () => {
         <Scroll direction="y" height="calc(100% - 170px)">
           <DealerCardContainer>{Dealers}</DealerCardContainer>
         </Scroll>
-        <DealerButton path="/dealer" />
+        <DealerButton path="/auth/signup/1" isActive={!!dealer} />
       </Content>
     </>
   );

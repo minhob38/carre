@@ -116,7 +116,7 @@ const DealerCard: React.FC<IProps> = ({ description, chips, src, value }) => {
   const handleClick = () => {
     // dispatch(actions.findDealerAsync());
     // router.push('/auth/login');
-    router.push('/auth/signup/1');
+    // router.push('/auth/signup/1');
   };
 
   return (
