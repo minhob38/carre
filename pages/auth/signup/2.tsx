@@ -154,9 +154,9 @@ const Test: NextPage = () => {
     // if (!surveyToken) {
     //   return alert('survey token does not exist');
     // }
-    console.log(currentCar);
+
     if (!currentCar) return;
-    return;
+
     dispatch(
       actions.connectUserAndDealerAsync({
         surveyToken,

@@ -155,7 +155,7 @@ const Result: NextPage = () => {
             <Description>{userTendencySentence}</Description>
             <ScoreCard type="static" />
             <Margin />
-            <Link href="/result/1" passHref={true}>
+            <Link href="/result/1?is_survey=true" passHref={true}>
               <NextButton>내 취향의 차량 보기</NextButton>
             </Link>
           </Background>

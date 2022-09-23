@@ -233,7 +233,7 @@ const Test: NextPage = () => {
       <Header title="나의 정보 입력" type="back" closePath="/" />
       <Content
         top={HEADER_HEIGHT}
-        bottom={`calc(${NEXT_BUTTON_HEIGHT} + 50px)`}
+        bottom={`calc(${NEXT_BUTTON_HEIGHT} + 15px)`}
       >
         <Title>나의 정보 입력</Title>
         <Description>차량 구매에 필요한 나의 정보를 입력해요.</Description>
