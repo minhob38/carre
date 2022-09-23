@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
+import { v4 as uuid4 } from 'uuid';
 import styled from '@emotion/styled';
 import Scroll from '@components/common/Scroll';
 import Content from '@components/common/Content';
@@ -123,6 +124,24 @@ const Home: NextPage = () => {
   const minCarPage = 1;
   const maxCarPage = recommendCarInfoList.length;
 
+  const Cards = recommendCarInfoList.map((item, index) => {
+    return (
+      <Card
+        key={uuid4()}
+        title={item.title}
+        src={item.src}
+        onClick={() => {
+          const api = item.api;
+          router.push({
+            pathname: '/result/1',
+            query: { is_survey: false, page: index },
+          });
+          // dispatch(actions.getRecomAsync(api));
+        }}
+      />
+    );
+  });
+
   // useEffect(() => {
   //   initializeStore();
   // }, [initializeStore]);
@@ -150,13 +169,13 @@ const Home: NextPage = () => {
                 ? ''
                 : 'MBTI를 입력하면 나와 유사한 또래들이 타는 차를 보여드려요!'}
             </Description>
-            {/* <Scroll
+            <Scroll
               direction="x"
               width={`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`}
               height="190px"
-            > */}
-            <CardContainer>
-              <ArrowContainer
+            >
+              <CardContainer>
+                {/* <ArrowContainer
                 isHidden={carPage === minCarPage}
                 onClick={handleLeftArrowClick}
               >
@@ -178,24 +197,9 @@ const Home: NextPage = () => {
                   });
                   // dispatch(actions.getRecomAsync(api));
                 }}
-              />
-              {/* <Card
-                title="벤츠 C-Class"
-                src="https://static.carre.kr/home_main/benz_c_class_ver4.png"
-              />
-              <Card
-                title="bmw 3 Series"
-                src="https://static.carre.kr/home_main/bmw_3_serise_ver2.png"
-              />
-              <Card
-                title="기아 레이"
-                src="https://static.carre.kr/home_main/kia_ray_ver3.png"
-              />
-              <Card
-                title="미니 쿠퍼"
-                src="https://static.carre.kr/home_main/mini_cooper_ver2.png"
               /> */}
-              <ArrowContainer
+                {Cards}
+                {/* <ArrowContainer
                 isHidden={carPage === maxCarPage}
                 onClick={handleRightArrowClick}
               >
@@ -205,9 +209,9 @@ const Home: NextPage = () => {
                   width="20px"
                   height="20px"
                 />
-              </ArrowContainer>
-            </CardContainer>
-            {/* </Scroll> */}
+              </ArrowContainer> */}
+              </CardContainer>
+            </Scroll>
             <SubContainer>
               <TagContainer>
                 <Tag># 20대</Tag>

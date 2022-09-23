@@ -25,6 +25,7 @@ const Wrapper = styled.div`
   flex: 1;
   /* width: 314px; */
   height: 180px;
+  padding: 10px;
   border-radius: 8px;
   background: ${colors.WHITE1};
   box-shadow: 0px 2px 16px rgba(96, 100, 112, 0.12);
