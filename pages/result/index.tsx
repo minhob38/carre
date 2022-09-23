@@ -50,8 +50,10 @@ const Description = styled.div`
 
 const Background = styled.div`
   position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
   margin: 71px 0 0 0;
-  /* background-color: red; */
 `;
 
 const Circle = styled.div`
@@ -68,7 +70,7 @@ const Rectangle = styled.div`
   position: absolute;
   top: 50vw;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50vw);
   background: linear-gradient(
     180deg,
     #f7ca54 0%,
@@ -85,17 +87,20 @@ const NextButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 70px;
   margin: 0 auto 44px auto;
   border-radius: 8px;
   background-color: ${colors.SECONDARY_REAL_BLACK};
-  font: ${fonts.TITLE_T2};
+  font: ${fonts.TITLE_T1};
   color: ${colors.SECONDARY_REAL_WHITE};
 `;
 
 const Margin = styled.div`
   flex: 1;
+  /* flex-shrink: 0; */
+  min-height: 30px;
 `;
 
 const Result: NextPage = () => {
@@ -149,11 +154,11 @@ const Result: NextPage = () => {
             </SubTitle>
             <Description>{userTendencySentence}</Description>
             <ScoreCard type="static" />
+            <Margin />
+            <Link href="/result/1" passHref={true}>
+              <NextButton>내 취향의 차량 보기</NextButton>
+            </Link>
           </Background>
-          <Margin />
-          <Link href="/result/1" passHref={true}>
-            <NextButton>내 취향의 차량 보기</NextButton>
-          </Link>
         </Scroll>
       </Content>
     </>
