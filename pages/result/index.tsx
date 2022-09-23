@@ -17,48 +17,85 @@ import { useEffect } from 'react';
 import { actions } from '@store/slices/surveySlice';
 import ServerErrorModal from '@modals/ServerErrorModal';
 
+const BUTTON_POSTION = '44px';
+const BUTTON_HEIGHT = '70px';
+
 const Title = styled.div`
-  margin: 22px 0 0 ${margins.SIDE_MAIN_MARGIN};
-  font: ${fonts.TITLE_T1};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px 0 16px 0;
+  font: ${fonts.HEADLINE_H1};
   color: ${colors.SECONDARY_500};
 `;
 
 const SubTitle = styled.div`
-  margin: 4px 0 20px ${margins.SIDE_MAIN_MARGIN};
-  font: ${fonts.TITLE_T2};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: ${fonts.BODY_REGULAR_2};
   color: ${colors.SECONDARY_400};
 `;
 
 const Description = styled.div`
-  margin: 40px auto 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 52px - 52px);
+  margin: 0 0 49px 0;
+  font: ${fonts.BODY_REGULAR_2};
+  color: ${colors.SECONDARY_400};
   text-align: center;
-  font: ${fonts.TITLE_T2};
-  color: ${colors.SECONDARY_500};
   white-space: pre;
 `;
 
+const Background = styled.div`
+  position: relative;
+  margin: 71px 0 0 0;
+  /* background-color: red; */
+`;
+
+const Circle = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+  border-radius: 50%;
+  background-color: ${colors.PRIMARY_350};
+  z-index: -1;
+`;
+
+const Rectangle = styled.div`
+  position: absolute;
+  top: 50vw;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    #f7ca54 0%,
+    rgba(255, 255, 255, 0.94) 100%
+  );
+  z-index: -1;
+`;
+
 const NextButton = styled.div`
-  position: fixed;
+  /* position: fixed;
   left: 50%;
-  bottom: 78px;
-  transform: translate(-50%, 0);
+  bottom: ${BUTTON_POSTION};
+  transform: translate(-50%, 0); */
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${`calc(100% - ${margins.SIDE_MAIN_MARGIN} - ${margins.SIDE_MAIN_MARGIN})`};
   height: 70px;
+  margin: 0 auto 44px auto;
   border-radius: 8px;
   background-color: ${colors.SECONDARY_REAL_BLACK};
   font: ${fonts.TITLE_T2};
   color: ${colors.SECONDARY_REAL_WHITE};
 `;
 
-const BUTTON_POSTION = '78px';
-const BUTTON_HEIGHT = '70px';
+const Margin = styled.div`
+  flex: 1;
+`;
 
 const Result: NextPage = () => {
   const dispatch = useTypedDispatch();
@@ -94,21 +131,29 @@ const Result: NextPage = () => {
         top={HEADER_HEIGHT}
         bottom={'0'}
         // bottom={`(${BUTTON_HEIGHT} + ${BUTTON_POSTION})px`}
-        backgroudColor={colors.PRIMARY_400}
+        // backgroudColor={colors.PRIMARY_400}
       >
         <Scroll
           direction="y"
-          height={`calc(100% - ${BUTTON_HEIGHT} - ${BUTTON_POSTION} - 15px)`}
+          height="100%"
+          // height={`calc(100% - ${BUTTON_HEIGHT} - ${BUTTON_POSTION} - 15px)`}
         >
           {/* TODO: 변수로 사용자 이름 넣기 */}
-          {!IS_HIDDEN && <Title>{userTendencyTitle}</Title>}
-          <SubTitle>{IS_HIDDEN ? '' : '두마리 토끼를 잡으려는 당신!'}</SubTitle>
-          <ScoreCard type="static" />
-          <Description>{userTendencySentence}</Description>
+          <Background>
+            <Circle />
+            <Rectangle />
+            {IS_HIDDEN && <Title>{userTendencyTitle}</Title>}
+            <SubTitle>
+              {IS_HIDDEN ? '' : '두마리 토끼를 잡으려는 당신!'}
+            </SubTitle>
+            <Description>{userTendencySentence}</Description>
+            <ScoreCard type="static" />
+          </Background>
+          <Margin />
+          <Link href="/result/1" passHref={true}>
+            <NextButton>내 취향의 차량 보기</NextButton>
+          </Link>
         </Scroll>
-        <Link href="/result/1" passHref={true}>
-          <NextButton>내 취향의 차량 보기</NextButton>
-        </Link>
       </Content>
     </>
   );
