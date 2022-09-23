@@ -8,8 +8,12 @@ import * as fonts from '@constants/fonts';
 import { DEALER_BUTTON_HEIGHT } from '@constants/size';
 import heartImage from '@assets/images/icons/heart.svg';
 
-interface IProps {
+interface IProps extends IStyleProps {
   path: string;
+}
+
+interface IStyleProps {
+  isActive: boolean;
 }
 
 const Wrapper = styled.div`
@@ -40,7 +44,8 @@ const Button = styled.div`
   height: 48px;
   margin: 0 auto;
   border-radius: 8px;
-  background-color: ${colors.SECONDARY_500};
+  background-color: ${(props: IStyleProps) =>
+    props.isActive ? `${colors.SECONDARY_500}` : `${colors.SECONDARY_300}`};
 `;
 
 const Text1 = styled.div`
@@ -53,15 +58,15 @@ const Text2 = styled(Text1)`
   color: ${colors.PRIMARY_400};
 `;
 
-const DealerButton: React.FC<IProps> = ({ path }) => {
+const DealerButton: React.FC<IProps> = ({ path, isActive = true }) => {
   return (
     <Wrapper>
       <Container>
         {/* <Image src={heartImage} alt="heart" width="36px" height="36px" /> */}
         <Link href={path} passHref={true}>
-          <Button>
+          <Button isActive={isActive}>
             <Text1>나에게 맞는</Text1>
-            <Text2> 딜러 찾기</Text2>
+            <Text2>딜러 찾기</Text2>
           </Button>
         </Link>
       </Container>

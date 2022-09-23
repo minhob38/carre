@@ -12,6 +12,10 @@ import { useTypedSelector } from '@hooks/useStore';
 import { IS_HIDDEN } from '@constants/variables';
 import { insertCommaToNumber } from '@utils/helpers';
 
+interface IStyleProps {
+  isClicked: boolean;
+}
+
 const Wrapper = styled.div`
   flex-shrink: 0;
   /* width: 100%; */
@@ -21,6 +25,8 @@ const Wrapper = styled.div`
   border-radius: 8px;
   background-color: ${colors.SECONDARY_REAL_WHITE};
   box-shadow: 0px 4.43038px 9.72px rgba(96, 100, 112, 0.06);
+  border: ${(props: IStyleProps) =>
+    props.isClicked ? `2px solid ${colors.PRIMARY_400}` : `none`};
 `;
 
 const RankContainer = styled.div`
@@ -118,7 +124,7 @@ const Price = styled.div`
   color: ${colors.SECONDARY_400};
 `;
 
-const ResultCard: React.FC<any> = ({ data }) => {
+const ResultCard: React.FC<any> = ({ data, isClicked = false }) => {
   const {
     rankingInfoText,
     brandName,
@@ -167,7 +173,7 @@ const ResultCard: React.FC<any> = ({ data }) => {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper isClicked={isClicked}>
         <RankContainer>
           <Rank>{rankingInfoText}</Rank>
           <CarName>{`${brandName} ${carModelName}`}</CarName>

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next';
+import { useState } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { v4 as uuid4 } from 'uuid';
@@ -21,7 +22,7 @@ import rightArrowImage from '@assets/images/icons/big-gray-right-arrow.svg';
 import letArrowImage from '@assets/images/icons/big-gray-left-arrow.svg';
 import { actions } from '@store/slices/resultSlice';
 import Comparison from '@components/result/Comparison';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 interface IStyleProps {
@@ -41,6 +42,11 @@ const ResultCardContainer = styled.div`
   justify-content: center;
   width: calc(100% - 2 * ${margins.SIDE_MAIN_MARGIN});
   margin: 0 auto;
+`;
+
+const Gap = styled.div`
+  display: flex;
+  gap: 0 15px;
 `;
 
 const Border = styled.div`
@@ -75,6 +81,7 @@ const ComparisonContainer = styled.div`
 `;
 
 const Result: NextPage = () => {
+  const [clickedRank, setClickedRank] = useState<number | null>(null);
   const dispatch = useTypedDispatch();
   const carPage = useTypedSelector(
     (state) => state.rootReducer.resultReducer.carPage,
@@ -134,6 +141,24 @@ const Result: NextPage = () => {
   const minCarPage = 1;
   const maxCarPage = recommendCarInfoList.length;
 
+  const ResultCards = recommendCarInfoList.map((item, index) => {
+    return (
+      <div
+        key={uuid4()}
+        data-rank={index + 1}
+        onClick={(ev: any) => {
+          setClickedRank(Number(ev.currentTarget.dataset['rank']));
+        }}
+      >
+        <ResultCard
+          key={uuid4()}
+          data={item}
+          isClicked={index + 1 === clickedRank}
+        />
+      </div>
+    );
+  });
+
   const handleLeftArrowClick = () => {
     if (carPage === minCarPage) return;
     dispatch(actions.setCarPage(carPage - 1));
@@ -155,7 +180,7 @@ const Result: NextPage = () => {
         <Scroll direction="y" height="100%">
           <Title>{userTendencySentence}</Title>
           <ResultCardContainer>
-            <ArrowContainer
+            {/* <ArrowContainer
               isHidden={carPage === minCarPage}
               onClick={handleLeftArrowClick}
             >
@@ -165,13 +190,14 @@ const Result: NextPage = () => {
                 width="20px"
                 height="20px"
               />
-            </ArrowContainer>
-            {/* <Scroll direction="x" width="100%"> */}
-            <ResultCard
-              key={uuid4()}
-              data={recommendCarInfoList[carPage - 1]}
-            />
-            <ArrowContainer
+            </ArrowContainer> */}
+            <Scroll direction="x" width="100%">
+              <Gap>{ResultCards}</Gap>
+              {/* <ResultCard
+                key={uuid4()}
+                data={recommendCarInfoList[carPage - 1]}
+              /> */}
+              {/* <ArrowContainer
               isHidden={carPage === maxCarPage}
               onClick={handleRightArrowClick}
             >
@@ -181,8 +207,8 @@ const Result: NextPage = () => {
                 width="20px"
                 height="20px"
               />
-            </ArrowContainer>
-            {/* </Scroll> */}
+            </ArrowContainer> */}
+            </Scroll>
           </ResultCardContainer>
           {/* <Border /> */}
           {!IS_HIDDEN && <Attractions />}
@@ -198,7 +224,7 @@ const Result: NextPage = () => {
           )}
         </Scroll>
       </Content>
-      <DealerButton path={`/dealer${query}`} />
+      <DealerButton path={`/dealer${query}`} isActive={!!clickedRank} />
     </>
   );
 };
