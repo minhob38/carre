@@ -36,12 +36,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     // >
     <MobileWrapper>
       <Head>
-        <meta property="og:title" content="당신에게 어울리는 차량은?" />
-        <meta property="og:description" content="차량 추천을 합니다." />
+        <meta property="og:title" content="CARRE" />
+        <meta
+          property="og:description"
+          content="차고플 땐 카레, 첫차 살 땐 카레"
+        />
         <meta property="og:url" content="https://www.carre.kr" />
         <meta
           property="og:image"
-          content="https://user-images.githubusercontent.com/57255024/192044008-5e4efdd8-540d-4f0e-aaa5-ce1a597f7bd1.jpg"
+          content="https://user-images.githubusercontent.com/57255024/192136112-23b71170-6f9a-4f3b-bded-9e9ae561891d.png"
         />
         <meta
           name="viewport"
@@ -54,9 +57,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.5/variable/pretendardvariable.css"
         />
       </Head>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Component {...pageProps} />
-      </ErrorBoundary>
+      {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
+      <Component {...pageProps} />
+      {/* </ErrorBoundary> */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
